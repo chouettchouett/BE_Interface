@@ -115,7 +115,7 @@
                               <Component id="Citation_Recherche" min="-2" pref="228" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               <Component id="jScrollPane4" min="-2" pref="478" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -158,9 +158,9 @@
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Citation_Recherche" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -183,7 +183,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="&quot;je vais me suicider avec des yaourts p&#xe9;rim&#xe9;s.&quot;"/>
+                    <Property name="text" type="java.lang.String" value="&quot;je vais me suicider avec des yaourts p&#xe9;rim&#xe9;s.&quot;&#xa;&#x201c;Quand on est vivant on r&#xe9;pond au t&#xe9;l&#xe9;phone !&#x201d;"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -205,7 +205,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Ep?Saison?"/>
+                    <Property name="text" type="java.lang.String" value="Ep?Saison?&#xa;Ep?Saison?"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -227,7 +227,7 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Chandler"/>
+                    <Property name="text" type="java.lang.String" value="Chandler&#xa;Phoebe&#xa;"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -244,11 +244,11 @@
             </Component>
             <Component class="javax.swing.JTextField" name="Citation_Recherche">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="Blablobli"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Citation_RechercheActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Citation_RechercheKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JScrollBar" name="jScrollBar1">
@@ -312,7 +312,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                      <Component id="jLabel11" min="-2" pref="334" max="-2" attributes="0"/>
+                      <Component id="temporaire" min="-2" pref="334" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -323,7 +323,7 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jTabbedPane2" min="-2" pref="59" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jLabel11" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="temporaire" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="positif" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -369,7 +369,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="Recap6" pref="462" max="32767" attributes="0"/>
+                                  <Component id="Recap_Joey" pref="462" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -381,7 +381,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="Recap6" max="32767" attributes="0"/>
+                                  <Component id="Recap_Joey" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -389,7 +389,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap6">
+                    <Component class="javax.swing.JLabel" name="Recap_Joey">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -412,7 +412,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="Recap5" pref="462" max="32767" attributes="0"/>
+                                  <Component id="Recap_Rachel" pref="462" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -424,7 +424,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="Recap5" max="32767" attributes="0"/>
+                                  <Component id="Recap_Rachel" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -432,7 +432,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap5">
+                    <Component class="javax.swing.JLabel" name="Recap_Rachel">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -455,7 +455,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="Recap4" pref="462" max="32767" attributes="0"/>
+                                  <Component id="Recap_Chandler" pref="462" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -467,7 +467,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="Recap4" max="32767" attributes="0"/>
+                                  <Component id="Recap_Chandler" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -475,7 +475,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap4">
+                    <Component class="javax.swing.JLabel" name="Recap_Chandler">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -498,7 +498,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="Recap3" pref="462" max="32767" attributes="0"/>
+                                  <Component id="Recap_Phoebe" pref="462" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -510,7 +510,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="Recap3" max="32767" attributes="0"/>
+                                  <Component id="Recap_Phoebe" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -518,7 +518,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap3">
+                    <Component class="javax.swing.JLabel" name="Recap_Phoebe">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -541,7 +541,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="Recap2" pref="462" max="32767" attributes="0"/>
+                                  <Component id="Recap_Monica" pref="462" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -553,7 +553,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="Recap2" max="32767" attributes="0"/>
+                                  <Component id="Recap_Monica" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -561,7 +561,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap2">
+                    <Component class="javax.swing.JLabel" name="Recap_Monica">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -584,7 +584,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="Recap1" pref="462" max="32767" attributes="0"/>
+                                  <Component id="Recap_Ross" pref="462" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -596,7 +596,7 @@
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="Recap1" max="32767" attributes="0"/>
+                                  <Component id="Recap_Ross" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -604,7 +604,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap1">
+                    <Component class="javax.swing.JLabel" name="Recap_Ross">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -625,19 +625,19 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Recap" pref="472" max="32767" attributes="0"/>
+                              <Component id="Recap_Autre" pref="472" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Recap" alignment="0" pref="54" max="32767" attributes="0"/>
+                          <Component id="Recap_Autre" alignment="0" pref="54" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="Recap">
+                    <Component class="javax.swing.JLabel" name="Recap_Autre">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Recap de ce qu&apos;on as tir&#xe9; du personnage avec ces stats etc..."/>
                       </Properties>
@@ -781,7 +781,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel11">
+            <Component class="javax.swing.JLabel" name="temporaire">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Contenu des graph changeant en fonction du personnage"/>
               </Properties>

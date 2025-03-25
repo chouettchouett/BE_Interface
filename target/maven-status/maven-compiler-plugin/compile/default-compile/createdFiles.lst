@@ -1,3 +1,6 @@
-com\mycompany\cours_ihm_version_propre\Main.class
-com\mycompany\cours_ihm_version_propre\Vue.class
-com\mycompany\cours_ihm_version_propre\Vue$1.class
+controller\ImagePanel.class
+vue\VueStat.class
+vue\Vue$1.class
+vue\Vue$2.class
+main\Main.class
+vue\Vue.class

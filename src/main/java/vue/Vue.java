@@ -2,12 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Beans/Customizer.java to edit this template
  */
-package com.mycompany.cours_ihm_version_propre;
+package vue;
+
+import java.awt.event.KeyEvent;
 
 public class Vue extends javax.swing.JFrame {
 
-    private int etatbouton1 = 0;
-    private int etatbouton2 = 0;
+    public String nom_de_personnage_trouve = " rien trouve ";
+    public int numero_episode_trouve = 0;
+    public int numero_saison_trouve = 0;
+    public String contexte_trouve = " rien trouve ";;
+    public String emotion_transmise_trouve = " rien trouve ";;
     
     public Vue() {
         initComponents();
@@ -35,19 +40,19 @@ public class Vue extends javax.swing.JFrame {
         jPanel_Statistique = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel_Joey = new javax.swing.JPanel();
-        Recap6 = new javax.swing.JLabel();
+        Recap_Joey = new javax.swing.JLabel();
         jPanel_Rachel = new javax.swing.JPanel();
-        Recap5 = new javax.swing.JLabel();
+        Recap_Rachel = new javax.swing.JLabel();
         jPanel_Chandler = new javax.swing.JPanel();
-        Recap4 = new javax.swing.JLabel();
+        Recap_Chandler = new javax.swing.JLabel();
         jPanel_Phoebe = new javax.swing.JPanel();
-        Recap3 = new javax.swing.JLabel();
+        Recap_Phoebe = new javax.swing.JLabel();
         jPanel_Monica = new javax.swing.JPanel();
-        Recap2 = new javax.swing.JLabel();
+        Recap_Monica = new javax.swing.JLabel();
         jPanel_Ross = new javax.swing.JPanel();
-        Recap1 = new javax.swing.JLabel();
+        Recap_Ross = new javax.swing.JLabel();
         jPanel_Autre = new javax.swing.JPanel();
-        Recap = new javax.swing.JLabel();
+        Recap_Autre = new javax.swing.JLabel();
         positif = new javax.swing.JLabel();
         different = new javax.swing.JLabel();
         negatif = new javax.swing.JLabel();
@@ -57,7 +62,7 @@ public class Vue extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        temporaire = new javax.swing.JLabel();
         jPanel_Sentiment = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -89,7 +94,7 @@ public class Vue extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("\"je vais me suicider avec des yaourts périmés.\"");
+        jTextArea1.setText("\"je vais me suicider avec des yaourts périmés.\"\n“Quand on est vivant on répond au téléphone !”");
         jScrollPane1.setViewportView(jTextArea1);
 
         jScrollPane2.setHorizontalScrollBar(null);
@@ -97,7 +102,7 @@ public class Vue extends javax.swing.JFrame {
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("Ep?Saison?");
+        jTextArea2.setText("Ep?Saison?\nEp?Saison?");
         jScrollPane2.setViewportView(jTextArea2);
 
         jScrollPane3.setHorizontalScrollBar(null);
@@ -105,18 +110,22 @@ public class Vue extends javax.swing.JFrame {
         jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
-        jTextArea3.setText("Chandler");
+        jTextArea3.setText("Chandler\nPhoebe\n");
         jScrollPane3.setViewportView(jTextArea3);
 
         jLabel4.setText("ZONE A REVOIR/ FABRIQUER");
 
         jLabel5.setText("Recherchez votre citation favorite :");
 
-        Citation_Recherche.setEditable(false);
         Citation_Recherche.setText("Blablobli");
         Citation_Recherche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Citation_RechercheActionPerformed(evt);
+            }
+        });
+        Citation_Recherche.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Citation_RechercheKeyPressed(evt);
             }
         });
 
@@ -159,7 +168,7 @@ public class Vue extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Citation_Recherche, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_CitationLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(60, 60, 60)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -189,15 +198,15 @@ public class Vue extends javax.swing.JFrame {
                 .addGroup(jPanel_CitationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(Citation_Recherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGap(42, 42, 42))
         );
 
         jTabbedPane1.addTab("Citation", jPanel_Citation);
         jPanel_Citation.getAccessibleContext().setAccessibleName("Citation_");
 
-        Recap6.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Joey.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_JoeyLayout = new javax.swing.GroupLayout(jPanel_Joey);
         jPanel_Joey.setLayout(jPanel_JoeyLayout);
@@ -207,7 +216,7 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_JoeyLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(Recap6, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(Recap_Joey, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel_JoeyLayout.setVerticalGroup(
@@ -216,13 +225,13 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_JoeyLayout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(Recap6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Recap_Joey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(4, 4, 4)))
         );
 
         jTabbedPane2.addTab("Joey", jPanel_Joey);
 
-        Recap5.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Rachel.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_RachelLayout = new javax.swing.GroupLayout(jPanel_Rachel);
         jPanel_Rachel.setLayout(jPanel_RachelLayout);
@@ -232,7 +241,7 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_RachelLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(Recap5, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(Recap_Rachel, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel_RachelLayout.setVerticalGroup(
@@ -241,13 +250,13 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_RachelLayout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(Recap5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Recap_Rachel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(4, 4, 4)))
         );
 
         jTabbedPane2.addTab("Rachel", jPanel_Rachel);
 
-        Recap4.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Chandler.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_ChandlerLayout = new javax.swing.GroupLayout(jPanel_Chandler);
         jPanel_Chandler.setLayout(jPanel_ChandlerLayout);
@@ -257,7 +266,7 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_ChandlerLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(Recap4, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(Recap_Chandler, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel_ChandlerLayout.setVerticalGroup(
@@ -266,13 +275,13 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_ChandlerLayout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(Recap4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Recap_Chandler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(4, 4, 4)))
         );
 
         jTabbedPane2.addTab("Chandler", jPanel_Chandler);
 
-        Recap3.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Phoebe.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_PhoebeLayout = new javax.swing.GroupLayout(jPanel_Phoebe);
         jPanel_Phoebe.setLayout(jPanel_PhoebeLayout);
@@ -282,7 +291,7 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_PhoebeLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(Recap3, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(Recap_Phoebe, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel_PhoebeLayout.setVerticalGroup(
@@ -291,13 +300,13 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_PhoebeLayout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(Recap3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Recap_Phoebe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(4, 4, 4)))
         );
 
         jTabbedPane2.addTab("Phoebe", jPanel_Phoebe);
 
-        Recap2.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Monica.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_MonicaLayout = new javax.swing.GroupLayout(jPanel_Monica);
         jPanel_Monica.setLayout(jPanel_MonicaLayout);
@@ -307,7 +316,7 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_MonicaLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(Recap2, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(Recap_Monica, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel_MonicaLayout.setVerticalGroup(
@@ -316,13 +325,13 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_MonicaLayout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(Recap2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Recap_Monica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(4, 4, 4)))
         );
 
         jTabbedPane2.addTab("Monica", jPanel_Monica);
 
-        Recap1.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Ross.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_RossLayout = new javax.swing.GroupLayout(jPanel_Ross);
         jPanel_Ross.setLayout(jPanel_RossLayout);
@@ -332,7 +341,7 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_RossLayout.createSequentialGroup()
                     .addGap(11, 11, 11)
-                    .addComponent(Recap1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addComponent(Recap_Ross, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                     .addGap(11, 11, 11)))
         );
         jPanel_RossLayout.setVerticalGroup(
@@ -341,13 +350,13 @@ public class Vue extends javax.swing.JFrame {
             .addGroup(jPanel_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel_RossLayout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(Recap1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Recap_Ross, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(4, 4, 4)))
         );
 
         jTabbedPane2.addTab("Ross", jPanel_Ross);
 
-        Recap.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recap_Autre.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
 
         javax.swing.GroupLayout jPanel_AutreLayout = new javax.swing.GroupLayout(jPanel_Autre);
         jPanel_Autre.setLayout(jPanel_AutreLayout);
@@ -355,12 +364,12 @@ public class Vue extends javax.swing.JFrame {
             jPanel_AutreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AutreLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Recap, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                .addComponent(Recap_Autre, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel_AutreLayout.setVerticalGroup(
             jPanel_AutreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Recap, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+            .addComponent(Recap_Autre, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Autre", jPanel_Autre);
@@ -439,7 +448,7 @@ public class Vue extends javax.swing.JFrame {
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
-        jLabel11.setText("Contenu des graph changeant en fonction du personnage");
+        temporaire.setText("Contenu des graph changeant en fonction du personnage");
 
         javax.swing.GroupLayout jPanel_StatistiqueLayout = new javax.swing.GroupLayout(jPanel_Statistique);
         jPanel_Statistique.setLayout(jPanel_StatistiqueLayout);
@@ -466,7 +475,7 @@ public class Vue extends javax.swing.JFrame {
                 .addGap(66, 66, 66))
             .addGroup(jPanel_StatistiqueLayout.createSequentialGroup()
                 .addGap(123, 123, 123)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(temporaire, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_StatistiqueLayout.setVerticalGroup(
@@ -475,7 +484,7 @@ public class Vue extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(temporaire, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(positif)
@@ -610,24 +619,38 @@ public class Vue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Citation_RechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Citation_RechercheActionPerformed
-        // TODO add your handling code here:
+        String message = Citation_Recherche.getText();
+        // il faudra faire appel à des fonctions pour les trouver/remplacer les x_trouve
+        // appel fonctionRechercheCitation =>va set les trouver
+            if (!message.isEmpty()){
+                Reponse_citation.setText("'"+message + "' est une citation de " + nom_de_personnage_trouve +
+                        "\nQui ce retrouve à l'épisode "+ numero_episode_trouve + " Saison " + 
+                        numero_saison_trouve + "\nContexte : "+ contexte_trouve + 
+                        "\nEmotion transmise par la citation : " + emotion_transmise_trouve);
+        }
+        
     }//GEN-LAST:event_Citation_RechercheActionPerformed
+
+    private void Citation_RechercheKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Citation_RechercheKeyPressed
+        if( evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Citation_RechercheActionPerformed(null);
+        }
+    }//GEN-LAST:event_Citation_RechercheKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Citation_Recherche;
-    private javax.swing.JLabel Recap;
-    private javax.swing.JLabel Recap1;
-    private javax.swing.JLabel Recap2;
-    private javax.swing.JLabel Recap3;
-    private javax.swing.JLabel Recap4;
-    private javax.swing.JLabel Recap5;
-    private javax.swing.JLabel Recap6;
+    private javax.swing.JLabel Recap_Autre;
+    private javax.swing.JLabel Recap_Chandler;
+    private javax.swing.JLabel Recap_Joey;
+    private javax.swing.JLabel Recap_Monica;
+    private javax.swing.JLabel Recap_Phoebe;
+    private javax.swing.JLabel Recap_Rachel;
+    private javax.swing.JLabel Recap_Ross;
     private javax.swing.JTextArea Reponse_citation;
     private javax.swing.JLabel different;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -669,6 +692,7 @@ public class Vue extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JLabel negatif;
     private javax.swing.JLabel positif;
+    private javax.swing.JLabel temporaire;
     // End of variables declaration//GEN-END:variables
 
 }

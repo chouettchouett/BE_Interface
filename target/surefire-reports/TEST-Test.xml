@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Test" time="0.011" tests="0" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Test" time="0.013" tests="0" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\choue\AppData\Local\Temp\surefire12581900515250371802\surefirebooter-20250313141122383_3.jar C:\Users\choue\AppData\Local\Temp\surefire12581900515250371802 2025-03-13T14-11-22_064-jvmRun1 surefire-20250313141122383_1tmp surefire_0-20250313141122383_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\choue\AppData\Local\Temp\surefire15435110105985536468\surefirebooter-20250325184712167_3.jar C:\Users\choue\AppData\Local\Temp\surefire15435110105985536468 2025-03-25T18-47-11_922-jvmRun1 surefire-20250325184712167_1tmp surefire_0-20250325184712167_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\choue\Documents\NetBeansProjects\Pour_BE\target\test-classes;C:\Users\choue\Documents\NetBeansProjects\Pour_BE\target\classes;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\choue\AppData\Local\Temp\surefire12581900515250371802\surefirebooter-20250313141122383_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\choue\AppData\Local\Temp\surefire15435110105985536468\surefirebooter-20250325184712167_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>
@@ -51,7 +51,7 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\choue\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\choue\AppData\Local\Programs\Python\Python312\;C:\Users\choue\AppData\Local\Programs\Python\Launcher\;C:\Users\choue\AppData\Local\Microsoft\WindowsApps;C:\Users\choue\.dotnet\tools;c:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;c:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\choue\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\choue\AppData\Local\Programs\Python\Python312\;C:\Users\choue\AppData\Local\Programs\Python\Launcher\;C:\Users\choue\AppData\Local\Microsoft\WindowsApps;C:\Users\choue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\choue\.dotnet\tools;C:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\choue\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\choue\AppData\Local\Programs\Python\Python312\;C:\Users\choue\AppData\Local\Programs\Python\Launcher\;C:\Users\choue\AppData\Local\Microsoft\WindowsApps;C:\Users\choue\.dotnet\tools;c:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;c:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Git\cmd;C:\Users\choue\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\choue\AppData\Local\Programs\Python\Python312\;C:\Users\choue\AppData\Local\Programs\Python\Launcher\;C:\Users\choue\AppData\Local\Microsoft\WindowsApps;C:\Users\choue\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\choue\.dotnet\tools;C:\Users\choue\AppData\Local\Programs\cursor\resources\app\bin;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Oracle Corporation"/>
