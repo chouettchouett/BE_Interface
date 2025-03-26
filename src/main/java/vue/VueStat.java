@@ -1,23 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Beans/Customizer.java to edit this template
- */
 package vue;
 
-import java.awt.Image;
-
 public class VueStat extends javax.swing.JFrame {
-    // Attribut
-    private Image image;
 
-    // Dans ton constructeur VueStat()
+
     public VueStat() {
-        initComponents(); // crée ton jPanelImage, etc.
-        imagePanel1.setImage("/les_png/Evolution_negativité.png");
-        imagePanel2.setImage("/les_png/Evolution_positivité.png");
-        imagePanel3.setImage("/les_png/Evolution_sentiment.png");
-        imagePanel4.setImage("/les_png/Sentiment_exprimé.png");
-        imagePanel5.setImage("/les_png/Evolution_positivité.png");
+        initComponents(); 
+        Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
+        Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
+        Evol_sent_image.setImage("/les_png/Evolution_sentiment.png");
+        
+        Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler.png");
+        Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross.png");
+        Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey.png");
+        Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica.png");
+        Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel.png");
+        Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe.png");
+        
+        AnalyseLangagière.setImage("/les_png/Analyselangagière.png");
+        
+        sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
+        neg_nuage.setImage("/les_png/negative_wordcloud.png");
+        pos_nuage.setImage("/les_png/positive_wordcloud.png");
+
     }
 
 
@@ -26,42 +30,52 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel_Statistique = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel_Joey = new javax.swing.JPanel();
-        Recap_Joey = new javax.swing.JLabel();
-        jPanel_Rachel = new javax.swing.JPanel();
-        Recap_Rachel = new javax.swing.JLabel();
-        jPanel_Chandler = new javax.swing.JPanel();
-        Recap_Chandler = new javax.swing.JLabel();
-        jPanel_Phoebe = new javax.swing.JPanel();
-        Recap_Phoebe = new javax.swing.JLabel();
-        jPanel_Monica = new javax.swing.JPanel();
-        Recap_Monica = new javax.swing.JLabel();
-        jPanel_Ross = new javax.swing.JPanel();
-        Recap_Ross = new javax.swing.JLabel();
-        jPanel_Autre = new javax.swing.JPanel();
-        Recap_Autre = new javax.swing.JLabel();
-        positif = new javax.swing.JLabel();
-        different = new javax.swing.JLabel();
-        negatif = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        temporaire = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        imagePanel1 = new controller.ImagePanel();
-        imagePanel3 = new controller.ImagePanel();
-        imagePanel4 = new controller.ImagePanel();
-        imagePanel5 = new controller.ImagePanel();
+        Recherche = new javax.swing.JPanel();
+        Citation_Recherche = new javax.swing.JTextField();
+        jScrollBar1 = new javax.swing.JScrollBar();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        Analyse_Statistique = new javax.swing.JPanel();
+        AnalyseLangagière = new controller.ImagePanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
         Evolution_positivite = new javax.swing.JPanel();
-        imagePanel2 = new controller.ImagePanel();
+        Evol_pos_image = new controller.ImagePanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        Evolution_negativité = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        Evol_neg_image = new controller.ImagePanel();
+        jLabel11 = new javax.swing.JLabel();
+        Source = new javax.swing.JPanel();
+        sentiment_par_personnage_panel = new controller.ImagePanel();
+        neg_nuage = new controller.ImagePanel();
+        jLabel15 = new javax.swing.JLabel();
+        pos_nuage = new controller.ImagePanel();
+        Evolution_sentiment = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        Evol_sent_image = new controller.ImagePanel();
+        jLabel23 = new javax.swing.JLabel();
+        Sentiment_exprimé = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        Sentiment_exprimé_chandler = new controller.ImagePanel();
+        Sentiment_exprimé_ross = new controller.ImagePanel();
+        Sentiment_exprimé_joey = new controller.ImagePanel();
+        Sentiment_exprimé_monica = new controller.ImagePanel();
+        Sentiment_exprimé_rachel = new controller.ImagePanel();
+        Sentiment_exprimé_phoebe = new controller.ImagePanel();
+        Opinion = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(800, 650));
         getContentPane().setLayout(null);
@@ -74,396 +88,112 @@ public class VueStat extends javax.swing.JFrame {
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTabbedPane1.setName(""); // NOI18N
 
-        Recap_Joey.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
+        Recherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout jPanel_JoeyLayout = new javax.swing.GroupLayout(jPanel_Joey);
-        jPanel_Joey.setLayout(jPanel_JoeyLayout);
-        jPanel_JoeyLayout.setHorizontalGroup(
-            jPanel_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
-            .addGroup(jPanel_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_JoeyLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(Recap_Joey, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(11, 11, 11)))
+        Citation_Recherche.setText("Blablobli");
+
+        jLabel5.setText("JMenuDeroulant");
+
+        jLabel6.setText("Toute les options");
+        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel7.setText("Les détails de leur partie");
+
+        jLabel21.setText("Liens vers les différentes section géré de leur côté");
+
+        javax.swing.GroupLayout RechercheLayout = new javax.swing.GroupLayout(Recherche);
+        Recherche.setLayout(RechercheLayout);
+        RechercheLayout.setHorizontalGroup(
+            RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RechercheLayout.createSequentialGroup()
+                .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RechercheLayout.createSequentialGroup()
+                        .addContainerGap(159, Short.MAX_VALUE)
+                        .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RechercheLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Citation_Recherche, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(RechercheLayout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(153, 153, 153))
+                    .addGroup(RechercheLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
-        jPanel_JoeyLayout.setVerticalGroup(
-            jPanel_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_JoeyLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(Recap_Joey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(4, 4, 4)))
-        );
-
-        jTabbedPane2.addTab("Joey", jPanel_Joey);
-
-        Recap_Rachel.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
-
-        javax.swing.GroupLayout jPanel_RachelLayout = new javax.swing.GroupLayout(jPanel_Rachel);
-        jPanel_Rachel.setLayout(jPanel_RachelLayout);
-        jPanel_RachelLayout.setHorizontalGroup(
-            jPanel_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
-            .addGroup(jPanel_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_RachelLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(Recap_Rachel, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(11, 11, 11)))
-        );
-        jPanel_RachelLayout.setVerticalGroup(
-            jPanel_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_RachelLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(Recap_Rachel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(4, 4, 4)))
-        );
-
-        jTabbedPane2.addTab("Rachel", jPanel_Rachel);
-
-        Recap_Chandler.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
-
-        javax.swing.GroupLayout jPanel_ChandlerLayout = new javax.swing.GroupLayout(jPanel_Chandler);
-        jPanel_Chandler.setLayout(jPanel_ChandlerLayout);
-        jPanel_ChandlerLayout.setHorizontalGroup(
-            jPanel_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
-            .addGroup(jPanel_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_ChandlerLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(Recap_Chandler, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(11, 11, 11)))
-        );
-        jPanel_ChandlerLayout.setVerticalGroup(
-            jPanel_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_ChandlerLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(Recap_Chandler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(4, 4, 4)))
-        );
-
-        jTabbedPane2.addTab("Chandler", jPanel_Chandler);
-
-        Recap_Phoebe.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
-
-        javax.swing.GroupLayout jPanel_PhoebeLayout = new javax.swing.GroupLayout(jPanel_Phoebe);
-        jPanel_Phoebe.setLayout(jPanel_PhoebeLayout);
-        jPanel_PhoebeLayout.setHorizontalGroup(
-            jPanel_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
-            .addGroup(jPanel_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_PhoebeLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(Recap_Phoebe, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(11, 11, 11)))
-        );
-        jPanel_PhoebeLayout.setVerticalGroup(
-            jPanel_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_PhoebeLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(Recap_Phoebe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(4, 4, 4)))
-        );
-
-        jTabbedPane2.addTab("Phoebe", jPanel_Phoebe);
-
-        Recap_Monica.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
-
-        javax.swing.GroupLayout jPanel_MonicaLayout = new javax.swing.GroupLayout(jPanel_Monica);
-        jPanel_Monica.setLayout(jPanel_MonicaLayout);
-        jPanel_MonicaLayout.setHorizontalGroup(
-            jPanel_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
-            .addGroup(jPanel_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_MonicaLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(Recap_Monica, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(11, 11, 11)))
-        );
-        jPanel_MonicaLayout.setVerticalGroup(
-            jPanel_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_MonicaLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(Recap_Monica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(4, 4, 4)))
-        );
-
-        jTabbedPane2.addTab("Monica", jPanel_Monica);
-
-        Recap_Ross.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
-
-        javax.swing.GroupLayout jPanel_RossLayout = new javax.swing.GroupLayout(jPanel_Ross);
-        jPanel_Ross.setLayout(jPanel_RossLayout);
-        jPanel_RossLayout.setHorizontalGroup(
-            jPanel_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
-            .addGroup(jPanel_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_RossLayout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(Recap_Ross, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(11, 11, 11)))
-        );
-        jPanel_RossLayout.setVerticalGroup(
-            jPanel_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_RossLayout.createSequentialGroup()
-                    .addGap(4, 4, 4)
-                    .addComponent(Recap_Ross, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(4, 4, 4)))
-        );
-
-        jTabbedPane2.addTab("Ross", jPanel_Ross);
-
-        Recap_Autre.setText("Recap de ce qu'on as tiré du personnage avec ces stats etc...");
-
-        javax.swing.GroupLayout jPanel_AutreLayout = new javax.swing.GroupLayout(jPanel_Autre);
-        jPanel_Autre.setLayout(jPanel_AutreLayout);
-        jPanel_AutreLayout.setHorizontalGroup(
-            jPanel_AutreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_AutreLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Recap_Autre, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel_AutreLayout.setVerticalGroup(
-            jPanel_AutreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Recap_Autre, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Autre", jPanel_Autre);
-
-        jTabbedPane2.setSelectedComponent(jPanel_Joey);
-
-        positif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        positif.setText("Positif");
-
-        different.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        different.setText("Différent");
-
-        negatif.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        negatif.setText("Négatif");
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel9.setText("Ici des graph serait tracé");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel9)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel9)
+        RechercheLayout.setVerticalGroup(
+            RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RechercheLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addGap(191, 191, 191))
+            .addGroup(RechercheLayout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Citation_Recherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RechercheLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(RechercheLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel21)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane1.addTab("Recherche", Recherche);
 
-        jLabel8.setText("Ici des graph serait tracé");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout AnalyseLangagièreLayout = new javax.swing.GroupLayout(AnalyseLangagière);
+        AnalyseLangagière.setLayout(AnalyseLangagièreLayout);
+        AnalyseLangagièreLayout.setHorizontalGroup(
+            AnalyseLangagièreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 517, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel8)
-                .addContainerGap(171, Short.MAX_VALUE))
+        AnalyseLangagièreLayout.setVerticalGroup(
+            AnalyseLangagièreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 262, Short.MAX_VALUE)
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel10.setText("Ici des graph serait tracé");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18))
+        javax.swing.GroupLayout Analyse_StatistiqueLayout = new javax.swing.GroupLayout(Analyse_Statistique);
+        Analyse_Statistique.setLayout(Analyse_StatistiqueLayout);
+        Analyse_StatistiqueLayout.setHorizontalGroup(
+            Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel10)
-                .addContainerGap(170, Short.MAX_VALUE))
+        Analyse_StatistiqueLayout.setVerticalGroup(
+            Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
-        temporaire.setText("Contenu des graph changeant en fonction du personnage");
+        jTabbedPane1.addTab("Analyse Langagière", Analyse_Statistique);
+        Analyse_Statistique.getAccessibleContext().setAccessibleName("Statistique_");
 
-        javax.swing.GroupLayout jPanel_StatistiqueLayout = new javax.swing.GroupLayout(jPanel_Statistique);
-        jPanel_Statistique.setLayout(jPanel_StatistiqueLayout);
-        jPanel_StatistiqueLayout.setHorizontalGroup(
-            jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_StatistiqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatistiqueLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane2)
-                    .addGroup(jPanel_StatistiqueLayout.createSequentialGroup()
-                        .addComponent(positif)
-                        .addGap(151, 151, 151)
-                        .addComponent(different)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(negatif)))
-                .addGap(66, 66, 66))
-            .addGroup(jPanel_StatistiqueLayout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(temporaire, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        Evol_pos_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_pos_imageLayout = new javax.swing.GroupLayout(Evol_pos_image);
+        Evol_pos_image.setLayout(Evol_pos_imageLayout);
+        Evol_pos_imageLayout.setHorizontalGroup(
+            Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 714, Short.MAX_VALUE)
         );
-        jPanel_StatistiqueLayout.setVerticalGroup(
-            jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_StatistiqueLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(temporaire, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(positif)
-                    .addComponent(different)
-                    .addComponent(negatif))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Statistique", jPanel_Statistique);
-        jPanel_Statistique.getAccessibleContext().setAccessibleName("Statistique_");
-
-        imagePanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout imagePanel1Layout = new javax.swing.GroupLayout(imagePanel1);
-        imagePanel1.setLayout(imagePanel1Layout);
-        imagePanel1Layout.setHorizontalGroup(
-            imagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        imagePanel1Layout.setVerticalGroup(
-            imagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 214, Short.MAX_VALUE)
-        );
-
-        imagePanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout imagePanel3Layout = new javax.swing.GroupLayout(imagePanel3);
-        imagePanel3.setLayout(imagePanel3Layout);
-        imagePanel3Layout.setHorizontalGroup(
-            imagePanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
-        );
-        imagePanel3Layout.setVerticalGroup(
-            imagePanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-
-        imagePanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout imagePanel4Layout = new javax.swing.GroupLayout(imagePanel4);
-        imagePanel4.setLayout(imagePanel4Layout);
-        imagePanel4Layout.setHorizontalGroup(
-            imagePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 282, Short.MAX_VALUE)
-        );
-        imagePanel4Layout.setVerticalGroup(
-            imagePanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        imagePanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout imagePanel5Layout = new javax.swing.GroupLayout(imagePanel5);
-        imagePanel5.setLayout(imagePanel5Layout);
-        imagePanel5Layout.setHorizontalGroup(
-            imagePanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        imagePanel5Layout.setVerticalGroup(
-            imagePanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imagePanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imagePanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(imagePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imagePanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imagePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imagePanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imagePanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imagePanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
-        );
-
-        jTabbedPane1.addTab("tab2", jPanel4);
-
-        imagePanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout imagePanel2Layout = new javax.swing.GroupLayout(imagePanel2);
-        imagePanel2.setLayout(imagePanel2Layout);
-        imagePanel2Layout.setHorizontalGroup(
-            imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 739, Short.MAX_VALUE)
-        );
-        imagePanel2Layout.setVerticalGroup(
-            imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+        Evol_pos_imageLayout.setVerticalGroup(
+            Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
         );
 
         jLabel2.setText("Comme nous pouvons le voir. Au fil des saisons. Les personnages sont en général plus positif à la fin de la série.    ");
@@ -472,85 +202,469 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel4.setText(" Nous pouvons noter également les pic de joey saison6 et chandler saison8");
 
+        jLabel20.setText("Section détail explication de graph");
+
         javax.swing.GroupLayout Evolution_positiviteLayout = new javax.swing.GroupLayout(Evolution_positivite);
         Evolution_positivite.setLayout(Evolution_positiviteLayout);
         Evolution_positiviteLayout.setHorizontalGroup(
             Evolution_positiviteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Evolution_positiviteLayout.createSequentialGroup()
+                .addGroup(Evolution_positiviteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Evolution_positiviteLayout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Evolution_positiviteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Evol_pos_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Evolution_positiviteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Evolution_positiviteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Evolution_positiviteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(Evolution_positiviteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
+                    .addComponent(jLabel4)
                     .addGroup(Evolution_positiviteLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(Evolution_positiviteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(imagePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 55, Short.MAX_VALUE))
         );
         Evolution_positiviteLayout.setVerticalGroup(
             Evolution_positiviteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Evolution_positiviteLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imagePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addComponent(Evol_pos_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab3", Evolution_positivite);
+        jTabbedPane3.addTab("Evolution de la positivité", Evolution_positivite);
+
+        jLabel8.setText("N");
+
+        jLabel9.setText("N");
+
+        jLabel10.setText(" N");
+
+        Evol_neg_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_neg_imageLayout = new javax.swing.GroupLayout(Evol_neg_image);
+        Evol_neg_image.setLayout(Evol_neg_imageLayout);
+        Evol_neg_imageLayout.setHorizontalGroup(
+            Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 732, Short.MAX_VALUE)
+        );
+        Evol_neg_imageLayout.setVerticalGroup(
+            Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 329, Short.MAX_VALUE)
+        );
+
+        jLabel11.setText("Section détail explication de graph");
+
+        javax.swing.GroupLayout Evolution_negativitéLayout = new javax.swing.GroupLayout(Evolution_negativité);
+        Evolution_negativité.setLayout(Evolution_negativitéLayout);
+        Evolution_negativitéLayout.setHorizontalGroup(
+            Evolution_negativitéLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Evolution_negativitéLayout.createSequentialGroup()
+                .addGroup(Evolution_negativitéLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Evolution_negativitéLayout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Evolution_negativitéLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(Evolution_negativitéLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Evol_neg_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        Evolution_negativitéLayout.setVerticalGroup(
+            Evolution_negativitéLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Evolution_negativitéLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Evol_neg_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
+
+        sentiment_par_personnage_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout sentiment_par_personnage_panelLayout = new javax.swing.GroupLayout(sentiment_par_personnage_panel);
+        sentiment_par_personnage_panel.setLayout(sentiment_par_personnage_panelLayout);
+        sentiment_par_personnage_panelLayout.setHorizontalGroup(
+            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+        sentiment_par_personnage_panelLayout.setVerticalGroup(
+            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        neg_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout neg_nuageLayout = new javax.swing.GroupLayout(neg_nuage);
+        neg_nuage.setLayout(neg_nuageLayout);
+        neg_nuageLayout.setHorizontalGroup(
+            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+        neg_nuageLayout.setVerticalGroup(
+            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 206, Short.MAX_VALUE)
+        );
+
+        jLabel15.setText("Certaines sources utilisé pour l'analyse de sentiment");
+
+        pos_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout pos_nuageLayout = new javax.swing.GroupLayout(pos_nuage);
+        pos_nuage.setLayout(pos_nuageLayout);
+        pos_nuageLayout.setHorizontalGroup(
+            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        pos_nuageLayout.setVerticalGroup(
+            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout SourceLayout = new javax.swing.GroupLayout(Source);
+        Source.setLayout(SourceLayout);
+        SourceLayout.setHorizontalGroup(
+            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SourceLayout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SourceLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(neg_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(SourceLayout.createSequentialGroup()
+                        .addGap(388, 388, 388)
+                        .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+        );
+        SourceLayout.setVerticalGroup(
+            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SourceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addGap(22, 22, 22)
+                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Source", Source);
+
+        jLabel12.setText("Découper les graph de chaque personne et analyser");
+
+        jLabel13.setText("N");
+
+        jLabel14.setText(" N");
+
+        Evol_sent_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_sent_imageLayout = new javax.swing.GroupLayout(Evol_sent_image);
+        Evol_sent_image.setLayout(Evol_sent_imageLayout);
+        Evol_sent_imageLayout.setHorizontalGroup(
+            Evol_sent_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 754, Short.MAX_VALUE)
+        );
+        Evol_sent_imageLayout.setVerticalGroup(
+            Evol_sent_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 391, Short.MAX_VALUE)
+        );
+
+        jLabel23.setText("Section détail explication de graph");
+
+        javax.swing.GroupLayout Evolution_sentimentLayout = new javax.swing.GroupLayout(Evolution_sentiment);
+        Evolution_sentiment.setLayout(Evolution_sentimentLayout);
+        Evolution_sentimentLayout.setHorizontalGroup(
+            Evolution_sentimentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Evolution_sentimentLayout.createSequentialGroup()
+                .addGroup(Evolution_sentimentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Evolution_sentimentLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(Evolution_sentimentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)))
+                    .addGroup(Evolution_sentimentLayout.createSequentialGroup()
+                        .addGap(247, 247, 247)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Evolution_sentimentLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Evolution_sentimentLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(Evol_sent_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        Evolution_sentimentLayout.setVerticalGroup(
+            Evolution_sentimentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Evolution_sentimentLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel23)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addGap(14, 14, 14)
+                .addComponent(Evol_sent_image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Evolution des sentiments", Evolution_sentiment);
+
+        jLabel16.setText("3");
+
+        jLabel18.setText("3");
+
+        jLabel19.setText("Section détail explication de graph");
+
+        Sentiment_exprimé_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_chandlerLayout = new javax.swing.GroupLayout(Sentiment_exprimé_chandler);
+        Sentiment_exprimé_chandler.setLayout(Sentiment_exprimé_chandlerLayout);
+        Sentiment_exprimé_chandlerLayout.setHorizontalGroup(
+            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_chandlerLayout.setVerticalGroup(
+            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_rossLayout = new javax.swing.GroupLayout(Sentiment_exprimé_ross);
+        Sentiment_exprimé_ross.setLayout(Sentiment_exprimé_rossLayout);
+        Sentiment_exprimé_rossLayout.setHorizontalGroup(
+            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_rossLayout.setVerticalGroup(
+            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_joeyLayout = new javax.swing.GroupLayout(Sentiment_exprimé_joey);
+        Sentiment_exprimé_joey.setLayout(Sentiment_exprimé_joeyLayout);
+        Sentiment_exprimé_joeyLayout.setHorizontalGroup(
+            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 229, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_joeyLayout.setVerticalGroup(
+            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_monicaLayout = new javax.swing.GroupLayout(Sentiment_exprimé_monica);
+        Sentiment_exprimé_monica.setLayout(Sentiment_exprimé_monicaLayout);
+        Sentiment_exprimé_monicaLayout.setHorizontalGroup(
+            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_monicaLayout.setVerticalGroup(
+            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 193, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_rachelLayout = new javax.swing.GroupLayout(Sentiment_exprimé_rachel);
+        Sentiment_exprimé_rachel.setLayout(Sentiment_exprimé_rachelLayout);
+        Sentiment_exprimé_rachelLayout.setHorizontalGroup(
+            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_rachelLayout.setVerticalGroup(
+            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_phoebeLayout = new javax.swing.GroupLayout(Sentiment_exprimé_phoebe);
+        Sentiment_exprimé_phoebe.setLayout(Sentiment_exprimé_phoebeLayout);
+        Sentiment_exprimé_phoebeLayout.setHorizontalGroup(
+            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 229, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_phoebeLayout.setVerticalGroup(
+            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout Sentiment_expriméLayout = new javax.swing.GroupLayout(Sentiment_exprimé);
+        Sentiment_exprimé.setLayout(Sentiment_expriméLayout);
+        Sentiment_expriméLayout.setHorizontalGroup(
+            Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                .addGroup(Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                                .addComponent(Sentiment_exprimé_monica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(Sentiment_exprimé_rachel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Sentiment_exprimé_phoebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                                    .addComponent(Sentiment_exprimé_chandler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(22, 22, 22)
+                                    .addComponent(Sentiment_exprimé_ross, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(Sentiment_exprimé_joey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        Sentiment_expriméLayout.setVerticalGroup(
+            Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel19)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel16)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel18)
+                .addGap(12, 12, 12)
+                .addGroup(Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Sentiment_exprimé_joey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(Sentiment_expriméLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel17)
+                        .addGap(0, 178, Short.MAX_VALUE))
+                    .addComponent(Sentiment_exprimé_ross, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Sentiment_exprimé_chandler, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(Sentiment_expriméLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Sentiment_exprimé_monica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Sentiment_exprimé_phoebe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Sentiment_exprimé_rachel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane3.addTab("Sentiment Exprimé", Sentiment_exprimé);
+
+        jLabel24.setText("A réfléchir");
+
+        javax.swing.GroupLayout OpinionLayout = new javax.swing.GroupLayout(Opinion);
+        Opinion.setLayout(OpinionLayout);
+        OpinionLayout.setHorizontalGroup(
+            OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OpinionLayout.createSequentialGroup()
+                .addGap(248, 248, 248)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(391, Short.MAX_VALUE))
+        );
+        OpinionLayout.setVerticalGroup(
+            OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OpinionLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel24)
+                .addContainerGap(435, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Opinion", Opinion);
+
+        jTabbedPane1.addTab("Analyse de Sentiment", jTabbedPane3);
 
         getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(30, 40, 760, 540);
+        jTabbedPane1.setBounds(20, 30, 820, 580);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private controller.ImagePanel AnalyseLangagière;
+    private javax.swing.JPanel Analyse_Statistique;
+    private javax.swing.JTextField Citation_Recherche;
+    private controller.ImagePanel Evol_neg_image;
+    private controller.ImagePanel Evol_pos_image;
+    private controller.ImagePanel Evol_sent_image;
+    private controller.ImagePanel Evol_sent_image2;
+    private javax.swing.JPanel Evolution_negativité;
     private javax.swing.JPanel Evolution_positivite;
-    private javax.swing.JLabel Recap_Autre;
-    private javax.swing.JLabel Recap_Chandler;
-    private javax.swing.JLabel Recap_Joey;
-    private javax.swing.JLabel Recap_Monica;
-    private javax.swing.JLabel Recap_Phoebe;
-    private javax.swing.JLabel Recap_Rachel;
-    private javax.swing.JLabel Recap_Ross;
-    private javax.swing.JLabel different;
-    private controller.ImagePanel imagePanel1;
-    private controller.ImagePanel imagePanel2;
-    private controller.ImagePanel imagePanel3;
-    private controller.ImagePanel imagePanel4;
-    private controller.ImagePanel imagePanel5;
+    private javax.swing.JPanel Evolution_sentiment;
+    private javax.swing.JPanel Opinion;
+    private javax.swing.JPanel Recherche;
+    private javax.swing.JPanel Sentiment_exprimé;
+    private controller.ImagePanel Sentiment_exprimé_chandler;
+    private controller.ImagePanel Sentiment_exprimé_joey;
+    private controller.ImagePanel Sentiment_exprimé_monica;
+    private controller.ImagePanel Sentiment_exprimé_phoebe;
+    private controller.ImagePanel Sentiment_exprimé_rachel;
+    private controller.ImagePanel Sentiment_exprimé_ross;
+    private javax.swing.JPanel Source;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel_Autre;
-    private javax.swing.JPanel jPanel_Chandler;
-    private javax.swing.JPanel jPanel_Joey;
-    private javax.swing.JPanel jPanel_Monica;
-    private javax.swing.JPanel jPanel_Phoebe;
-    private javax.swing.JPanel jPanel_Rachel;
-    private javax.swing.JPanel jPanel_Ross;
-    private javax.swing.JPanel jPanel_Statistique;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JLabel negatif;
-    private javax.swing.JLabel positif;
-    private javax.swing.JLabel temporaire;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private controller.ImagePanel neg_nuage;
+    private controller.ImagePanel pos_nuage;
+    private controller.ImagePanel sentiment_par_personnage_panel;
     // End of variables declaration//GEN-END:variables
 
 }

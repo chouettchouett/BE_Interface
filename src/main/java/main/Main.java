@@ -15,6 +15,7 @@ public class Main {
 
             // Création de la fenêtre principale
             fenetre = new VueStat();
+            fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Afficher la fenêtre
             fenetre.setVisible(true);
