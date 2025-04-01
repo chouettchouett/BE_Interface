@@ -21,7 +21,15 @@ public class VueStat extends javax.swing.JFrame {
         sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
         neg_nuage.setImage("/les_png/negative_wordcloud.png");
         pos_nuage.setImage("/les_png/positive_wordcloud.png");
-
+        
+        motsCaracteristiques.setImage("/les_png/mots_caractéristiques.png");
+        
+        rechercheContenu.setColumns(30);
+        rechercheContenu.setBorder(new javax.swing.border.EmptyBorder(4, 4, 4, 4));
+        
+        controller.ControllerTypeRecherche controller = new controller.ControllerTypeRecherche(rechercheContenu);
+        choixTypeRecherche.setModel(controller.getComboBoxModel());
+        choixTypeRecherche.addActionListener(controller);
     }
 
 
@@ -30,13 +38,17 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        Recherche = new javax.swing.JPanel();
-        Citation_Recherche = new javax.swing.JTextField();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        panelPageRecherche = new javax.swing.JPanel();
+        panelRechercheEtIndication = new javax.swing.JPanel();
+        panelRecherche = new javax.swing.JPanel();
+        choixTypeRecherche = new javax.swing.JComboBox<>();
+        rechercheContenu = new style.CustomJTextField();
+        indicationRecherche = new javax.swing.JLabel();
+        panelInformationsEtResultat = new javax.swing.JPanel();
+        panelExample = new javax.swing.JPanel();
+        labelExample = new javax.swing.JLabel();
+        panelImageExample = new javax.swing.JPanel();
+        motsCaracteristiques = new controller.ImagePanel();
         Analyse_Statistique = new javax.swing.JPanel();
         AnalyseLangagière = new controller.ImagePanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -88,69 +100,53 @@ public class VueStat extends javax.swing.JFrame {
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTabbedPane1.setName(""); // NOI18N
 
-        Recherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelPageRecherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelPageRecherche.setLayout(new java.awt.BorderLayout());
 
-        Citation_Recherche.setText("Blablobli");
+        panelRechercheEtIndication.setLayout(new java.awt.BorderLayout());
 
-        jLabel5.setText("JMenuDeroulant");
+        choixTypeRecherche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelRecherche.add(choixTypeRecherche);
+        panelRecherche.add(rechercheContenu);
 
-        jLabel6.setText("Toute les options");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelRechercheEtIndication.add(panelRecherche, java.awt.BorderLayout.NORTH);
 
-        jLabel7.setText("Les détails de leur partie");
+        indicationRecherche.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        indicationRecherche.setText("En attende de recherche dans la barre ci-dessus... [IHM A CONTINUER]");
+        indicationRecherche.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelRechercheEtIndication.add(indicationRecherche, java.awt.BorderLayout.CENTER);
 
-        jLabel21.setText("Liens vers les différentes section géré de leur côté");
+        panelPageRecherche.add(panelRechercheEtIndication, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout RechercheLayout = new javax.swing.GroupLayout(Recherche);
-        Recherche.setLayout(RechercheLayout);
-        RechercheLayout.setHorizontalGroup(
-            RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RechercheLayout.createSequentialGroup()
-                .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RechercheLayout.createSequentialGroup()
-                        .addContainerGap(159, Short.MAX_VALUE)
-                        .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RechercheLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Citation_Recherche, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(RechercheLayout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(153, 153, 153))
-                    .addGroup(RechercheLayout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+        panelInformationsEtResultat.setLayout(new java.awt.BorderLayout());
+
+        panelExample.setLayout(new javax.swing.BoxLayout(panelExample, javax.swing.BoxLayout.Y_AXIS));
+
+        labelExample.setText("Exemple de statistiques trouvables par la recherche :");
+        panelExample.add(labelExample);
+
+        panelImageExample.setLayout(new javax.swing.BoxLayout(panelImageExample, javax.swing.BoxLayout.Y_AXIS));
+
+        javax.swing.GroupLayout motsCaracteristiquesLayout = new javax.swing.GroupLayout(motsCaracteristiques);
+        motsCaracteristiques.setLayout(motsCaracteristiquesLayout);
+        motsCaracteristiquesLayout.setHorizontalGroup(
+            motsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 812, Short.MAX_VALUE)
         );
-        RechercheLayout.setVerticalGroup(
-            RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RechercheLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                .addGap(191, 191, 191))
-            .addGroup(RechercheLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Citation_Recherche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGroup(RechercheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RechercheLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(RechercheLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8)
-                .addComponent(jLabel21)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        motsCaracteristiquesLayout.setVerticalGroup(
+            motsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 319, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Recherche", Recherche);
+        panelImageExample.add(motsCaracteristiques);
+
+        panelExample.add(panelImageExample);
+
+        panelInformationsEtResultat.add(panelExample, java.awt.BorderLayout.CENTER);
+
+        panelPageRecherche.add(panelInformationsEtResultat, java.awt.BorderLayout.SOUTH);
+
+        jTabbedPane1.addTab("Recherche", panelPageRecherche);
 
         javax.swing.GroupLayout AnalyseLangagièreLayout = new javax.swing.GroupLayout(AnalyseLangagière);
         AnalyseLangagière.setLayout(AnalyseLangagièreLayout);
@@ -618,16 +614,13 @@ public class VueStat extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private controller.ImagePanel AnalyseLangagière;
     private javax.swing.JPanel Analyse_Statistique;
-    private javax.swing.JTextField Citation_Recherche;
     private controller.ImagePanel Evol_neg_image;
     private controller.ImagePanel Evol_pos_image;
     private controller.ImagePanel Evol_sent_image;
-    private controller.ImagePanel Evol_sent_image2;
     private javax.swing.JPanel Evolution_negativité;
     private javax.swing.JPanel Evolution_positivite;
     private javax.swing.JPanel Evolution_sentiment;
     private javax.swing.JPanel Opinion;
-    private javax.swing.JPanel Recherche;
     private javax.swing.JPanel Sentiment_exprimé;
     private controller.ImagePanel Sentiment_exprimé_chandler;
     private controller.ImagePanel Sentiment_exprimé_joey;
@@ -636,6 +629,8 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel Sentiment_exprimé_rachel;
     private controller.ImagePanel Sentiment_exprimé_ross;
     private javax.swing.JPanel Source;
+    private javax.swing.JComboBox<String> choixTypeRecherche;
+    private javax.swing.JLabel indicationRecherche;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -649,21 +644,25 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JLabel labelExample;
+    private controller.ImagePanel motsCaracteristiques;
     private controller.ImagePanel neg_nuage;
+    private javax.swing.JPanel panelExample;
+    private javax.swing.JPanel panelImageExample;
+    private javax.swing.JPanel panelInformationsEtResultat;
+    private javax.swing.JPanel panelPageRecherche;
+    private javax.swing.JPanel panelRecherche;
+    private javax.swing.JPanel panelRechercheEtIndication;
     private controller.ImagePanel pos_nuage;
+    private style.CustomJTextField rechercheContenu;
     private controller.ImagePanel sentiment_par_personnage_panel;
     // End of variables declaration//GEN-END:variables
 
