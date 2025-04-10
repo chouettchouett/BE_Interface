@@ -93,86 +93,1882 @@
                     </Constraint>
                   </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JComboBox" name="choixTypeRecherche">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="4">
-                            <StringItem index="0" value="Item 1"/>
-                            <StringItem index="1" value="Item 2"/>
-                            <StringItem index="2" value="Item 3"/>
-                            <StringItem index="3" value="Item 4"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="style.CustomJTextField" name="rechercheContenu">
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Component class="javax.swing.JLabel" name="indicationRecherche">
-                  <Properties>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="En attende de recherche dans la barre ci-dessus... [IHM A CONTINUER]"/>
-                    <Property name="horizontalTextPosition" type="int" value="0"/>
-                  </Properties>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="Center"/>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="panelInformationsEtResultat">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="South"/>
-                </Constraint>
-              </Constraints>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-              <SubComponents>
-                <Container class="javax.swing.JPanel" name="panelExample">
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                      <BorderConstraints direction="Center"/>
-                    </Constraint>
-                  </Constraints>
-
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
                     <Property name="axis" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="labelExample">
+                    <Container class="javax.swing.JPanel" name="panelRechercheTitre">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="titre">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="24" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Recherche"/>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                <EmptyBorder bottom="20" left="20" right="20" top="20"/>
+                              </Border>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="panelRechercheButtons">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JComboBox" name="choixTypeRecherche">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="style.CustomJTextField" name="rechercheMot">
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="recherchePersonnage">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="rechercheSaison">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="rechercheEpisode">
+                          <Properties>
+                            <Property name="maximumRowCount" type="int" value="25"/>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="resultats">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="Center"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JTabbedPane" name="resultatSaison">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="SAISON"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="panelSaisonPresentation">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Pr&#xe9;sentation">
+                                <Property name="tabTitle" type="java.lang.String" value="Pr&#xe9;sentation"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="panelTitre">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="libelleSaison">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Saison 1"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel14">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel78">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel79">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel22">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Nombre de r&#xe9;pliques:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel106">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel80">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel107">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Personnages impliqu&#xe9;s (nb_persos):"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel108">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel82">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel111">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Top 10 des mots les plus r&#xe9;p&#xe9;t&#xe9;s:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel112">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="... (plus de d&#xe9;tails analyse langagi&#xe8;re)"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelSaisonRepartition">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="R&#xe9;partition de r&#xe9;pliques">
+                                <Property name="tabTitle" type="java.lang.String" value="R&#xe9;partition de r&#xe9;pliques"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="panelTitre2">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="libelleSaison2">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Saison 1"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel85">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel86">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel87">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel25">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Graphe de r&#xe9;partition de personnage dans l&apos;&#xe9;pisode:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel117">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="dd"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelSaisonDialogue">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Dialogue entre personnages">
+                                <Property name="tabTitle" type="java.lang.String" value="Dialogue entre personnages"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel89">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="libelleSaison3">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Saison 1"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel90">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel91">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel92">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel29">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Dialogue entre personnages:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel118">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="&lt;graphe&gt;"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JTabbedPane" name="resultatEpisode">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="EPISODE"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="panelEpisodePresentation">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Pr&#xe9;sentation">
+                                <Property name="tabTitle" type="java.lang.String" value="Pr&#xe9;sentation"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel6">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage5">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&#xc9;pisode 1 de la saison 1 : Monica Gets A Roomate"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel7">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel49">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel50">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel6">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Nombre de r&#xe9;pliques:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel73">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel51">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel74">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Personnages impliqu&#xe9;s (nb_persos):"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel75">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel62">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel78">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Top 10 des mots les plus r&#xe9;p&#xe9;t&#xe9;s:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel79">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="... (plus de d&#xe9;tails analyse langagi&#xe8;re)"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelEpisodeRepartition">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="R&#xe9;partition de r&#xe9;pliques">
+                                <Property name="tabTitle" type="java.lang.String" value="R&#xe9;partition de r&#xe9;pliques"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel15">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage6">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&#xc9;pisode 1 de la saison 1 : Monica Gets A Roomate"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel65">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel66">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel67">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel7">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Graphe de r&#xe9;partition de personnage dans l&apos;&#xe9;pisode:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel94">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="dd"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelEpisodeDialogue">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Dialogue entre personnages">
+                                <Property name="tabTitle" type="java.lang.String" value="Dialogue entre personnages"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel74">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage7">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&#xc9;pisode 1 de la saison 1 : Monica Gets A Roomate"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel75">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel76">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel77">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel21">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Dialogue entre personnages:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel105">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="&lt;graphe&gt;"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="resultSansRecherche">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Exemple de statistiques trouvables par la recherche :"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                            <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                          </Border>
+                        </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Default Cursor"/>
+                        </Property>
                       </Properties>
-                    </Component>
-                    <Container class="javax.swing.JPanel" name="panelImageExample">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="SANSRECHERCHE"/>
+                        </Constraint>
+                      </Constraints>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
                         <Property name="axis" type="int" value="1"/>
                       </Layout>
                       <SubComponents>
-                        <Container class="controller.ImagePanel" name="motsCaracteristiques">
+                        <Component class="javax.swing.JLabel" name="labelSansRechercheSentence">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="2"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Retrouvez via la recherche ci-dessus des statistiques d&#xe9;taill&#xe9;es sur des personnages typiques de la s&#xe9;rie, sur des r&#xe9;pliques, ...."/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="labelSansRechercheExemple">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="2"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Exemple :"/>
+                          </Properties>
+                        </Component>
+                        <Container class="controller.ImagePanel" name="imageMotsCaracteristiques">
 
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="812" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="732" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="319" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="311" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JTabbedPane" name="resultatPersonnage">
+                      <AccessibilityProperties>
+                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="tab"/>
+                      </AccessibilityProperties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="PERSONNAGE"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="panelPersonnageProfil">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Profil">
+                                <Property name="tabTitle" type="java.lang.String" value="Profil"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel4">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Joey Tribbiani"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel5">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="controller.ImagePanel" name="imagePersonnage">
+
+                                  <Layout>
+                                    <DimensionLayout dim="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <EmptySpace min="0" pref="309" max="32767" attributes="0"/>
+                                      </Group>
+                                    </DimensionLayout>
+                                    <DimensionLayout dim="1">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <EmptySpace min="0" pref="278" max="32767" attributes="0"/>
+                                      </Group>
+                                    </DimensionLayout>
+                                  </Layout>
+                                </Container>
+                                <Component class="javax.swing.Box$Filler" name="filler1">
+                                  <Properties>
+                                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 32767]"/>
+                                    </Property>
+                                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
+                                  </AuxValues>
+                                </Component>
+                                <Container class="javax.swing.JPanel" name="jPanel17">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel18">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel5">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Acteur:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel39">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Matt Leblanc"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel19">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel35">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Nationalit&#xe9;:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel40">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Am&#xe9;ricain"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel20">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel37">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Age:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel41">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="57 ans"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel21">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel38">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Date de naissance:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel42">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="25 juillet 1987 (Etats-Unis)"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel22">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel43">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Centre d&apos;int&#xea;rets et mots caract&#xe9;ristiques:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel44">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="audition, actor, movie, doin, tribbiani, fridge, worry, scene, heyhey, ball"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel23">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel45">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Mots fr&#xe9;quents:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel46">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="guy, time, listen, starts, entering, ya, gotta, wanna, pheebs, rach"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelPersonnageRepliqueFavorite">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="R&#xe9;plique favorite">
+                                <Property name="tabTitle" type="java.lang.String" value="R&#xe9;plique favorite"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel48">
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                <Property name="axis" type="int" value="1"/>
+                              </Layout>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="jLabel71">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color blue="99" green="99" red="99" type="rgb"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="R&#xe9;plique favorite:"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JLabel" name="jLabel72">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="&lt;liaison avec partie analyse langagi&#xe8;re + lien vers celle-ci : voir &lt;ici&gt; pour les autres r&#xe9;pliques&gt;"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                        <EmptyBorder/>
+                                      </Border>
+                                    </Property>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelPersonnageInteractions">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Interactions">
+                                <Property name="tabTitle" type="java.lang.String" value="Interactions"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel24">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage1">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Relation de Joey"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel25">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.Box$Filler" name="filler2">
+                                  <Properties>
+                                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 32767]"/>
+                                    </Property>
+                                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
+                                  </AuxValues>
+                                </Component>
+                                <Container class="javax.swing.JPanel" name="jPanel26">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel27">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel36">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Joey interagit le plus avec :"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel47">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Joey a interagit X fois avec Chandler"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel28">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel48">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Fr&#xe9;quence de mots (quantit&#xe9; et taux):"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel49">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel29">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel50">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Temps de parole par saison (nb r&#xe9;plique et nb mots) (+ taux) + courbe tendance de parole:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel51">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel30">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel52">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Taux de pr&#xe9;sence dans la sc&#xe8;ne:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel53">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel31">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel54">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Fr&#xe9;quence de r&#xe9;pliques (quantit&#xe9; et taux):"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel55">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JTabbedPane" name="resultatMot">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="MOT"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="panelMotUtilisation">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="Utilisation">
+                                <Property name="tabTitle" type="java.lang.String" value="Utilisation"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel44">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage3">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="3"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&quot;Hello&quot;"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel45">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Container class="javax.swing.JPanel" name="jPanel46">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel47">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel70">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Liste des r&#xe9;pliques contenant le mot &quot;Hello&quot;:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                                          <AuxValues>
+                                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                          </AuxValues>
+
+                                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JTable" name="jTable1">
+                                              <Properties>
+                                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                                  <Table columnCount="4" rowCount="4">
+                                                    <Column editable="false" title="R&#xe9;plique" type="java.lang.String">
+                                                      <Data value="&quot;Hello there !&quot;"/>
+                                                      <Data value="&quot;Hello&quot;"/>
+                                                      <Data value="null"/>
+                                                      <Data value="null"/>
+                                                    </Column>
+                                                    <Column editable="false" title="Personnage" type="java.lang.String">
+                                                      <Data value="Joey"/>
+                                                      <Data value="Ross"/>
+                                                      <Data value="null"/>
+                                                      <Data value="null"/>
+                                                    </Column>
+                                                    <Column editable="false" title="Saison" type="java.lang.Integer">
+                                                      <Data value="1"/>
+                                                      <Data value="1"/>
+                                                      <Data value="null"/>
+                                                      <Data value="null"/>
+                                                    </Column>
+                                                    <Column editable="false" title="&#xc9;pisode" type="java.lang.Integer">
+                                                      <Data value="1"/>
+                                                      <Data value="1"/>
+                                                      <Data value="null"/>
+                                                      <Data value="null"/>
+                                                    </Column>
+                                                  </Table>
+                                                </Property>
+                                                <Property name="rowHeight" type="int" value="25"/>
+                                                <Property name="showGrid" type="boolean" value="true"/>
+                                                <Property name="showVerticalLines" type="boolean" value="false"/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelMotRepartitionSerie">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="R&#xe9;partition dans la s&#xe9;rie">
+                                <Property name="tabTitle" type="java.lang.String" value="R&#xe9;partition dans la s&#xe9;rie"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel34">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage2">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="3"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&quot;Hello&quot;"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel35">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.Box$Filler" name="filler3">
+                                  <Properties>
+                                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 32767]"/>
+                                    </Property>
+                                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
+                                  </AuxValues>
+                                </Component>
+                                <Container class="javax.swing.JPanel" name="jPanel36">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel37">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel58">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Taux d&apos;utilisation globale:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel59">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Le mot &quot;Hello&quot; a &#xe9;t&#xe9; employ&#xe9; 310 fois, 1% de tous les mots de la s&#xe9;rie"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel38">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel60">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Taux d&apos;utilisation par r&#xe9;plique:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel61">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Le mot &quot;Hello&quot; se retrouve dans 298 r&#xe9;pliques diff&#xe9;rentes, soit dans 1% des r&#xe9;pliques de la s&#xe9;rie"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel39">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel62">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Personnage favori:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel63">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Chandler a dit 57 fois le mot"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="panelMotRepartitionSaisonEtEpisode">
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                              <JTabbedPaneConstraints tabName="R&#xe9;partition par saison et &#xe9;pisode">
+                                <Property name="tabTitle" type="java.lang.String" value="R&#xe9;partition par saison et &#xe9;pisode"/>
+                              </JTabbedPaneConstraints>
+                            </Constraint>
+                          </Constraints>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="jPanel54">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="North"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JLabel" name="nomPersonnage4">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Segoe UI" size="14" style="3"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&quot;Hello&quot;"/>
+                                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                                  </Properties>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="jPanel55">
+                              <Properties>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                    <EmptyBorder bottom="40" left="40" right="40" top="40"/>
+                                  </Border>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                  <BorderConstraints direction="Center"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.Box$Filler" name="filler5">
+                                  <Properties>
+                                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 32767]"/>
+                                    </Property>
+                                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                      <Dimension value="[50, 0]"/>
+                                    </Property>
+                                  </Properties>
+                                  <AuxValues>
+                                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
+                                  </AuxValues>
+                                </Component>
+                                <Container class="javax.swing.JPanel" name="jPanel56">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                    <Property name="axis" type="int" value="1"/>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="jPanel57">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel82">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Meilleur saison:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel83">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Le mot &quot;Hello&quot; a &#xe9;t&#xe9; employ&#xe9; 51 fois en saison 1 15% de toutes ses utilisations"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel58">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel84">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Taux d&apos;utilisation par r&#xe9;plique:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel85">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="Le mot &quot;Hello&quot; a &#xe9;t&#xe9; employ&#xe9; 11 fois dans l&apos;&#xe9;pisode 2 de la saison 5, 2% de son utilisation totale"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel59">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel86">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Graphique d&apos;utilisation par saison:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel87">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel60">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel88">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Graphique d&apos;utilisation par &#xe9;pisode (TOP 10 &#xe9;pisodes):"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel89">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="..."/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel61">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                                        <Property name="axis" type="int" value="1"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Component class="javax.swing.JLabel" name="jLabel90">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Utilisation pour un certain &#xe9;pisode:"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="jLabel91">
+                                          <Properties>
+                                            <Property name="text" type="java.lang.String" value="S&#xe9;lectionnez l&apos;&#xe9;pisode &lt;combobox&gt;"/>
+                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                                <EmptyBorder/>
+                                              </Border>
+                                            </Property>
+                                          </Properties>
+                                        </Component>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
