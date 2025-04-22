@@ -381,10 +381,6 @@ public class VueStat extends javax.swing.JFrame {
         Sentiment_exprimé_monica = new controller.ImagePanel();
         Sentiment_exprimé_phoebe = new controller.ImagePanel();
         Sentiment_exprimé_joey = new controller.ImagePanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
         Opinion = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(837, 626));
@@ -1529,7 +1525,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, 250));
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, 250));
 
         Sentiment_exprimé_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1574,19 +1570,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, 380, 250));
-
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane7.setViewportView(jTextArea5);
-
-        Sentiment_exprimé_panel.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1070, 380, 130));
-
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jScrollPane9.setViewportView(jTextArea7);
-
-        Sentiment_exprimé_panel.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 1070, 380, 130));
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 380, 250));
 
         Sentiment_exprimé.setViewportView(Sentiment_exprimé_panel);
 
@@ -1805,14 +1789,10 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea13;
     private javax.swing.JTextArea jTextArea14;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea7;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
     private javax.swing.JLabel libelleSaison;
