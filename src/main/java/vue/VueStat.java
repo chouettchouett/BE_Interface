@@ -8,31 +8,41 @@ public class VueStat extends javax.swing.JFrame {
 
     public VueStat() {
         initComponents(); 
-        // SECTION ANALYSE SENTIMENT
-        //tab 1 Evolution de la positivité
-        Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
-        //tab 2 Evolution de la négativité
-        Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
-        //tab 3 Evolution des sentiments
-        Evol_Sentiment_chandler.setImage("/les_png/Evolution_sentiment_Chandler.png");
-        Evol_Sentiment_ross.setImage("/les_png/Evolution_sentiment_Ross.png");
-        Evol_Sentiment_joey.setImage("/les_png/Evolution_sentiment_Joey.png");
-        Evol_Sentiment_monica.setImage("/les_png/Evolution_sentiment_Monica.png");
-        Evol_Sentiment_rachel.setImage("/les_png/Evolution_sentiment_Rachel.png");
-        Evol_Sentiment_phoebe.setImage("/les_png/Evolution_sentiment_Phoebe.png");
-        //tab 4 Sentiment_exprimé
-        Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
-        Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
-        Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
-        Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica_V2.png");
-        Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel_V2.png");
-        Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe_V2.png");
-        //tab 5 Source
-        sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
-        neg_nuage.setImage("/les_png/negative_wordcloud.png");
-        pos_nuage.setImage("/les_png/positive_wordcloud.png");
         //
-        // SECTION  ANALYSE LANGAGIERE
+        // SECTION ANALYSE SENTIMENT *******************************************************************
+        //
+        //tab 1 Evolution de la positivité
+            Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
+        //tab 2 Evolution de la négativité
+            Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
+        //tab 3 Evolution des sentiments
+            Evolution_Sentiment.getVerticalScrollBar().setUnitIncrement(16);
+            Evol_Sentiment_chandler.setImage("/les_png/Evolution_sentiment_Chandler.png");
+            TexteChandler.setCaretPosition(0);
+            Evol_Sentiment_ross.setImage("/les_png/Evolution_sentiment_Ross.png");
+            TexteRoss.setCaretPosition(0);
+            Evol_Sentiment_joey.setImage("/les_png/Evolution_sentiment_Joey.png");
+            TexteJoey.setCaretPosition(0);
+            Evol_Sentiment_monica.setImage("/les_png/Evolution_sentiment_Monica.png");
+            TexteMonica.setCaretPosition(0);
+            Evol_Sentiment_rachel.setImage("/les_png/Evolution_sentiment_Rachel.png");
+            TexteRachel.setCaretPosition(0);
+            Evol_Sentiment_phoebe.setImage("/les_png/Evolution_sentiment_Phoebe.png");
+            TextePhoebe.setCaretPosition(0);
+            TexteInterpretationGlobale.setCaretPosition(0);
+        //tab 4 Sentiment_exprimé
+            Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
+            Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
+            Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
+            Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica_V2.png");
+            Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel_V2.png");
+            Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe_V2.png");
+        //tab 5 Source
+            sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
+            neg_nuage.setImage("/les_png/negative_wordcloud.png");
+            pos_nuage.setImage("/les_png/positive_wordcloud.png");
+        //
+        // SECTION  ANALYSE LANGAGIERE ********************************************************************
         //
         AnalyseLangagière.setImage("/les_png/Analyselangagière.png");
         
@@ -53,6 +63,7 @@ public class VueStat extends javax.swing.JFrame {
         choixTypeRecherche.addActionListener((evt) -> {
             javax.swing.JComboBox combobox = (javax.swing.JComboBox) evt.getSource();
             String result = (String) combobox.getSelectedItem();
+            /*
             // à refaire plus propre
             switch (result) {
                 case "Recherche de mots" -> {
@@ -92,6 +103,37 @@ public class VueStat extends javax.swing.JFrame {
                 }
                     
             }
+*/
+            // Masquer tous les panneaux d'abord
+            recherchePersonnage.setVisible(false);
+            rechercheSaison.setVisible(false);
+            rechercheEpisode.setVisible(false);
+            rechercheMot.setVisible(false);
+
+            String cardName = ""; // Nom du panneau à afficher
+
+            switch (result) {
+                case "Recherche de mots" -> {
+                    rechercheMot.setVisible(true);
+                    cardName = "MOT";
+                }
+                case "Recherche de personnages" -> {
+                    recherchePersonnage.setVisible(true);
+                    cardName = "PERSONNAGE";
+                }
+                case "Recherche de saisons" -> {
+                    rechercheSaison.setVisible(true);
+                    cardName = "SAISON";
+                }
+                case "Recherche d'épisodes" -> {
+                    rechercheSaison.setVisible(true);
+                    rechercheEpisode.setVisible(true);
+                    cardName = "EPISODE";
+                }
+            }
+
+            ((java.awt.CardLayout) resultats.getLayout()).show(resultats, cardName);
+
         });
         
         recherchePersonnage.addActionListener((evt) -> {
@@ -301,6 +343,35 @@ public class VueStat extends javax.swing.JFrame {
         Evol_neg_image = new controller.ImagePanel();
         jScrollPane14 = new javax.swing.JScrollPane();
         jTextArea13 = new javax.swing.JTextArea();
+        Evolution_Sentiment = new javax.swing.JScrollPane();
+        Evolution_Sentiment_Panel = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        Evol_Sentiment_monica = new controller.ImagePanel();
+        ScrollMonicatext = new javax.swing.JScrollPane();
+        TexteMonica = new javax.swing.JTextArea();
+        Evol_Sentiment_ross = new controller.ImagePanel();
+        ScrollRosstext = new javax.swing.JScrollPane();
+        TexteRoss = new javax.swing.JTextArea();
+        Evol_Sentiment_rachel = new controller.ImagePanel();
+        ScrollRacheltext = new javax.swing.JScrollPane();
+        TexteRachel = new javax.swing.JTextArea();
+        Evol_Sentiment_phoebe = new controller.ImagePanel();
+        ScrollPhoebetext = new javax.swing.JScrollPane();
+        TextePhoebe = new javax.swing.JTextArea();
+        Evol_Sentiment_joey = new controller.ImagePanel();
+        ScrollJoeytext = new javax.swing.JScrollPane();
+        TexteJoey = new javax.swing.JTextArea();
+        Evol_Sentiment_chandler = new controller.ImagePanel();
+        ScrollChandlertext = new javax.swing.JScrollPane();
+        TexteChandler = new javax.swing.JTextArea();
+        ScrollInterpretationtext = new javax.swing.JScrollPane();
+        TexteInterpretationGlobale = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        Source = new javax.swing.JPanel();
+        sentiment_par_personnage_panel = new controller.ImagePanel();
+        neg_nuage = new controller.ImagePanel();
+        jLabel15 = new javax.swing.JLabel();
+        pos_nuage = new controller.ImagePanel();
         Sentiment_exprimé = new javax.swing.JScrollPane();
         Sentiment_exprimé_panel = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -314,36 +385,7 @@ public class VueStat extends javax.swing.JFrame {
         jTextArea5 = new javax.swing.JTextArea();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTextArea7 = new javax.swing.JTextArea();
-        Source = new javax.swing.JPanel();
-        sentiment_par_personnage_panel = new controller.ImagePanel();
-        neg_nuage = new controller.ImagePanel();
-        jLabel15 = new javax.swing.JLabel();
-        pos_nuage = new controller.ImagePanel();
         Opinion = new javax.swing.JPanel();
-        Evolution_Sentiment = new javax.swing.JScrollPane();
-        Sentiment_exprimé_panel1 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea8 = new javax.swing.JTextArea();
-        Evol_Sentiment_ross = new controller.ImagePanel();
-        Evol_Sentiment_rachel = new controller.ImagePanel();
-        Evol_Sentiment_monica = new controller.ImagePanel();
-        Evol_Sentiment_phoebe = new controller.ImagePanel();
-        Evol_Sentiment_joey = new controller.ImagePanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea9 = new javax.swing.JTextArea();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jTextArea10 = new javax.swing.JTextArea();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        jTextArea11 = new javax.swing.JTextArea();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jTextArea12 = new javax.swing.JTextArea();
-        Evol_Sentiment_chandler = new controller.ImagePanel();
-        jScrollPane16 = new javax.swing.JScrollPane();
-        jTextArea15 = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(837, 626));
         getContentPane().setLayout(null);
@@ -1203,6 +1245,242 @@ public class VueStat extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
 
+        Evolution_Sentiment_Panel.setMinimumSize(new java.awt.Dimension(808, 1400));
+        Evolution_Sentiment_Panel.setPreferredSize(new java.awt.Dimension(808, 1400));
+        Evolution_Sentiment_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Evolution_Sentiment_Panel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
+
+        Evol_Sentiment_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_Sentiment_monicaLayout = new javax.swing.GroupLayout(Evol_Sentiment_monica);
+        Evol_Sentiment_monica.setLayout(Evol_Sentiment_monicaLayout);
+        Evol_Sentiment_monicaLayout.setHorizontalGroup(
+            Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Evol_Sentiment_monicaLayout.setVerticalGroup(
+            Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Evolution_Sentiment_Panel.add(Evol_Sentiment_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 250));
+
+        TexteMonica.setEditable(false);
+        TexteMonica.setColumns(20);
+        TexteMonica.setRows(5);
+        TexteMonica.setText("Saison 2 : Amour bas : cause rupture Richard.\nSaison 3 : Recontre avec Chip Matthews, qu'elle connaissait déjà \n(donc pas de surprise).\nSaison 5 : Relation avec Chandler, bouscule toute ces émotions.\nSaison 8 : Elle se marie, elle as donc plus peur.\nSaison 9 : Apprends qu'elle ne peut pas avoir d'enfants, \nelle est stérile.");
+        ScrollMonicatext.setViewportView(TexteMonica);
+
+        Evolution_Sentiment_Panel.add(ScrollMonicatext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 380, 130));
+
+        Evol_Sentiment_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_Sentiment_rossLayout = new javax.swing.GroupLayout(Evol_Sentiment_ross);
+        Evol_Sentiment_ross.setLayout(Evol_Sentiment_rossLayout);
+        Evol_Sentiment_rossLayout.setHorizontalGroup(
+            Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Evol_Sentiment_rossLayout.setVerticalGroup(
+            Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Evolution_Sentiment_Panel.add(Evol_Sentiment_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 380, 250));
+
+        TexteRoss.setEditable(false);
+        TexteRoss.setColumns(20);
+        TexteRoss.setRows(5);
+        TexteRoss.setText("Début de série : Il prend confiance en lui parce qu'il apprend que \nRachel l'aime. Elle le lui avoue alors qu'elle est ivre.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 5 : Rupture avec Émilie.\nSaison 6 : Pic d'amour : plan à trois.\nSaison 7 : Apprend qu'il sort avec la même fille que joey.\nSaison 8 : Rupture avec mona, se remet avec Rachel.\nSaison 10 : Fini par être avec Rachel, même si il a cru que cela\n n'allait pas arriver.");
+        ScrollRosstext.setViewportView(TexteRoss);
+
+        Evolution_Sentiment_Panel.add(ScrollRosstext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 380, 130));
+
+        Evol_Sentiment_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_Sentiment_rachelLayout = new javax.swing.GroupLayout(Evol_Sentiment_rachel);
+        Evol_Sentiment_rachel.setLayout(Evol_Sentiment_rachelLayout);
+        Evol_Sentiment_rachelLayout.setHorizontalGroup(
+            Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Evol_Sentiment_rachelLayout.setVerticalGroup(
+            Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Evolution_Sentiment_Panel.add(Evol_Sentiment_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 818, 380, 250));
+
+        TexteRachel.setEditable(false);
+        TexteRachel.setColumns(20);
+        TexteRachel.setRows(5);
+        TexteRachel.setText("Saison 2 : Ce met en couple avec Ross.\nSaison 3 : Dispute avec Ross.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 6 : Mariage à Las Vegas.\nSaison 7 : Apprends qu'elle est enceinte (surprise), déprime \nqu'elle n'est pas marié et pas d'enfants à ces 30 ans. \n(baisse amour).\nSaison 8 : A accouché.\nSaison 9 : Mariage accidentel avec joey, Ross sort avec Charlie. \nAlors que ce qui était prévu c'était une de mande de mariage de\nRoss à Rachel.");
+        ScrollRacheltext.setViewportView(TexteRachel);
+
+        Evolution_Sentiment_Panel.add(ScrollRacheltext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1070, 380, 130));
+
+        Evol_Sentiment_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_Sentiment_phoebeLayout = new javax.swing.GroupLayout(Evol_Sentiment_phoebe);
+        Evol_Sentiment_phoebe.setLayout(Evol_Sentiment_phoebeLayout);
+        Evol_Sentiment_phoebeLayout.setHorizontalGroup(
+            Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Evol_Sentiment_phoebeLayout.setVerticalGroup(
+            Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Evolution_Sentiment_Panel.add(Evol_Sentiment_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 380, 250));
+
+        TextePhoebe.setEditable(false);
+        TextePhoebe.setColumns(20);
+        TextePhoebe.setRows(5);
+        TextePhoebe.setText("Début de série: Personnage triste à cause de la solitude.\nSaison 6 : Phoebe ne s'est pas sentie seul \n(problème du personnage) Parce à été hébergé par ces amies. \nLes pics de peur et de surprise sont induit sa santé avec \nl'infarctus qu'elle à eut. Mais également perdu son travail.\nSaison 9 : Surprise d'avoir trouver son \"âme soeur\"\n mais ce passe mal. \nElle fini par être triste sur la fin de la série à cause de leur rupture.\nEt ce retrouve seul à nouveau. \nParce que les autres sont en couple et délaisse Phoebe");
+        ScrollPhoebetext.setViewportView(TextePhoebe);
+
+        Evolution_Sentiment_Panel.add(ScrollPhoebetext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 380, 130));
+
+        Evol_Sentiment_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_Sentiment_joeyLayout = new javax.swing.GroupLayout(Evol_Sentiment_joey);
+        Evol_Sentiment_joey.setLayout(Evol_Sentiment_joeyLayout);
+        Evol_Sentiment_joeyLayout.setHorizontalGroup(
+            Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 376, Short.MAX_VALUE)
+        );
+        Evol_Sentiment_joeyLayout.setVerticalGroup(
+            Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Evolution_Sentiment_Panel.add(Evol_Sentiment_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 818, -1, 250));
+
+        TexteJoey.setEditable(false);
+        TexteJoey.setColumns(20);
+        TexteJoey.setRows(5);
+        TexteJoey.setText("Saison 2 : Sort très brièvement avec Erika,  (métier joey : acteur)\n  perd son rôle de docteur dans la série \"Les jours de notre vie\".\nSaison 3 : est amoureux de sa partenaire au théâtre. Mais il \n  apprend qu'elle est déjà avec le metteur en scène. \nSaison 4 : Ce fait cambrioler, Chandler accepte de passer \n  Thanksgiving avec Joey\nSaison 5 : Il obtient un rôle, mais la série est annulé\nSaison 6 : Tombe amoureux d'une danseuse. Mais ce n'est pas\n réciproque. Il perd également son assurance maladie (peur)\nSaison 7 : Joey subit à son tour un vrai chagrin d'amour,\n rejeté par Erin comme il rejetait ses conquêtes.\n Il reprend son rôle de docteur.\nSaison 8 : Demande accidentel en mariage à Rachel. Qui accepte.\n et commence à éprouver des sentiments à Rachel.\nSaison 10 : Echec de la relation. Déstabilisé par tout les\n changement autour de lui (les couples formé par ces amis).");
+        ScrollJoeytext.setViewportView(TexteJoey);
+
+        Evolution_Sentiment_Panel.add(ScrollJoeytext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 1070, 380, 130));
+
+        Evol_Sentiment_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Evol_Sentiment_chandlerLayout = new javax.swing.GroupLayout(Evol_Sentiment_chandler);
+        Evol_Sentiment_chandler.setLayout(Evol_Sentiment_chandlerLayout);
+        Evol_Sentiment_chandlerLayout.setHorizontalGroup(
+            Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Evol_Sentiment_chandlerLayout.setVerticalGroup(
+            Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Evolution_Sentiment_Panel.add(Evol_Sentiment_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 380, 250));
+
+        TexteChandler.setEditable(false);
+        TexteChandler.setColumns(20);
+        TexteChandler.setRows(5);
+        TexteChandler.setText("Saison 2 : Eddie son nouveau collocataire lui fait peur.\nSaison 4 : Se met en couple avec Kathy, \nil surpris qu'elle à déjà été en couple avec joey.\nSaison 5 : Il révèle à ces amis qu'il est en couple avec ces Monica.\nSaison 6 : Chandler apprend que Monica a réservé \nle Morgan Chase Museum pour leur mariage.\nSaison 7 : Le mariage comme à s'organiser \nil commence à avoir peur.\nSaison 8 : Il est marié.");
+        ScrollChandlertext.setViewportView(TexteChandler);
+
+        Evolution_Sentiment_Panel.add(ScrollChandlertext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 660, 380, 130));
+
+        TexteInterpretationGlobale.setColumns(20);
+        TexteInterpretationGlobale.setRows(5);
+        TexteInterpretationGlobale.setText("Tous les personnages présentent un taux de tristesse globalement élevé, ce qui suggère une stratégie scénaristique \nvisant à construire l’attachement émotionnel par la vulnérabilité.\nLes courbes de \"Love\" montent chez tous, On peut citer Joey, qui as plus de succès avec les femmes vers la fin de la série. \nMême si il n'as pas de relation stable\nL’évolution générale montre que la série démarre sur un terrain d’insécurité émotionnelle, \npuis tend vers un équilibre affectif plus marqué en fin de série, malgré les obstacles. \nLa surprise est souvent moins marquée mais sert d’outil comique régulier (surtout chez Joey et Chandler).\nLe spectateur est donc guidé par une oscillation entre stabilité affective et conflits émotionnels, \nassurant l’équilibre entre humour et profondeur.");
+        ScrollInterpretationtext.setViewportView(TexteInterpretationGlobale);
+
+        Evolution_Sentiment_Panel.add(ScrollInterpretationtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 1260, 690, 120));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Interprétation globale : Structure émotionnelle de la série");
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Evolution_Sentiment_Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 1230, 340, -1));
+
+        Evolution_Sentiment.setViewportView(Evolution_Sentiment_Panel);
+
+        jTabbedPane3.addTab("Evolution des sentiments", Evolution_Sentiment);
+
+        sentiment_par_personnage_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout sentiment_par_personnage_panelLayout = new javax.swing.GroupLayout(sentiment_par_personnage_panel);
+        sentiment_par_personnage_panel.setLayout(sentiment_par_personnage_panelLayout);
+        sentiment_par_personnage_panelLayout.setHorizontalGroup(
+            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+        sentiment_par_personnage_panelLayout.setVerticalGroup(
+            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+
+        neg_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout neg_nuageLayout = new javax.swing.GroupLayout(neg_nuage);
+        neg_nuage.setLayout(neg_nuageLayout);
+        neg_nuageLayout.setHorizontalGroup(
+            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 380, Short.MAX_VALUE)
+        );
+        neg_nuageLayout.setVerticalGroup(
+            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 206, Short.MAX_VALUE)
+        );
+
+        jLabel15.setText("Certaines sources utilisé pour l'analyse de sentiment");
+
+        pos_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout pos_nuageLayout = new javax.swing.GroupLayout(pos_nuage);
+        pos_nuage.setLayout(pos_nuageLayout);
+        pos_nuageLayout.setHorizontalGroup(
+            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        pos_nuageLayout.setVerticalGroup(
+            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout SourceLayout = new javax.swing.GroupLayout(Source);
+        Source.setLayout(SourceLayout);
+        SourceLayout.setHorizontalGroup(
+            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SourceLayout.createSequentialGroup()
+                .addGap(0, 23, Short.MAX_VALUE)
+                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SourceLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(neg_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(SourceLayout.createSequentialGroup()
+                        .addGap(388, 388, 388)
+                        .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+        );
+        SourceLayout.setVerticalGroup(
+            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SourceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addGap(22, 22, 22)
+                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Source", Source);
+
         Sentiment_exprimé_panel.setMinimumSize(new java.awt.Dimension(808, 1200));
         Sentiment_exprimé_panel.setPreferredSize(new java.awt.Dimension(808, 1200));
         Sentiment_exprimé_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1314,83 +1592,6 @@ public class VueStat extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Sentiment_exprimé", Sentiment_exprimé);
 
-        sentiment_par_personnage_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout sentiment_par_personnage_panelLayout = new javax.swing.GroupLayout(sentiment_par_personnage_panel);
-        sentiment_par_personnage_panel.setLayout(sentiment_par_personnage_panelLayout);
-        sentiment_par_personnage_panelLayout.setHorizontalGroup(
-            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-        sentiment_par_personnage_panelLayout.setVerticalGroup(
-            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
-
-        neg_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout neg_nuageLayout = new javax.swing.GroupLayout(neg_nuage);
-        neg_nuage.setLayout(neg_nuageLayout);
-        neg_nuageLayout.setHorizontalGroup(
-            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-        neg_nuageLayout.setVerticalGroup(
-            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
-        );
-
-        jLabel15.setText("Certaines sources utilisé pour l'analyse de sentiment");
-
-        pos_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout pos_nuageLayout = new javax.swing.GroupLayout(pos_nuage);
-        pos_nuage.setLayout(pos_nuageLayout);
-        pos_nuageLayout.setHorizontalGroup(
-            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
-        );
-        pos_nuageLayout.setVerticalGroup(
-            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout SourceLayout = new javax.swing.GroupLayout(Source);
-        Source.setLayout(SourceLayout);
-        SourceLayout.setHorizontalGroup(
-            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SourceLayout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
-                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SourceLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(neg_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(SourceLayout.createSequentialGroup()
-                        .addGap(388, 388, 388)
-                        .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-        );
-        SourceLayout.setVerticalGroup(
-            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SourceLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addGap(22, 22, 22)
-                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-
-        jTabbedPane3.addTab("Source", Source);
-
         javax.swing.GroupLayout OpinionLayout = new javax.swing.GroupLayout(Opinion);
         Opinion.setLayout(OpinionLayout);
         OpinionLayout.setHorizontalGroup(
@@ -1404,161 +1605,10 @@ public class VueStat extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Opinion", Opinion);
 
-        Sentiment_exprimé_panel1.setMinimumSize(new java.awt.Dimension(808, 1400));
-        Sentiment_exprimé_panel1.setPreferredSize(new java.awt.Dimension(808, 1400));
-        Sentiment_exprimé_panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Sentiment_exprimé_panel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("Saison 2 : Amour bas : cause rupture Richard.\nSaison 3 : Recontre avec Chip Matthews, qu'elle connaissait déjà \n(donc pas de surprise)\nSaison 5 : Relation avec Chandler, bouscule toute ces émotions.\nSaison 8 : Elle se marie, elle as donc plus peur.\nSaison 9 : Apprends qu'elle ne peut pas avoir d'enfants, \nelle est stérile");
-        jScrollPane4.setViewportView(jTextArea3);
-
-        Sentiment_exprimé_panel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 380, 130));
-
-        jTextArea8.setColumns(20);
-        jTextArea8.setRows(5);
-        jTextArea8.setText("Début de série : Il prend confiance en lui parce qu'il apprend que \nRachel l'aime. Elle le lui avoue alors qu'elle est ivre.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 5 : Rupture avec Émilie.\nSaison 6 : Pic d'amour : plan à trois.\nSaison 7 : Apprend qu'il sort avec la même fille que joey.\nSaison 8 : Rupture avec mona, se remet avec Rachel.");
-        jScrollPane5.setViewportView(jTextArea8);
-
-        Sentiment_exprimé_panel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 380, 130));
-
-        Evol_Sentiment_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Evol_Sentiment_rossLayout = new javax.swing.GroupLayout(Evol_Sentiment_ross);
-        Evol_Sentiment_ross.setLayout(Evol_Sentiment_rossLayout);
-        Evol_Sentiment_rossLayout.setHorizontalGroup(
-            Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_rossLayout.setVerticalGroup(
-            Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel1.add(Evol_Sentiment_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 380, 250));
-
-        Evol_Sentiment_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Evol_Sentiment_rachelLayout = new javax.swing.GroupLayout(Evol_Sentiment_rachel);
-        Evol_Sentiment_rachel.setLayout(Evol_Sentiment_rachelLayout);
-        Evol_Sentiment_rachelLayout.setHorizontalGroup(
-            Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_rachelLayout.setVerticalGroup(
-            Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel1.add(Evol_Sentiment_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 818, 380, 250));
-
-        Evol_Sentiment_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Evol_Sentiment_monicaLayout = new javax.swing.GroupLayout(Evol_Sentiment_monica);
-        Evol_Sentiment_monica.setLayout(Evol_Sentiment_monicaLayout);
-        Evol_Sentiment_monicaLayout.setHorizontalGroup(
-            Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_monicaLayout.setVerticalGroup(
-            Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel1.add(Evol_Sentiment_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 250));
-
-        Evol_Sentiment_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Evol_Sentiment_phoebeLayout = new javax.swing.GroupLayout(Evol_Sentiment_phoebe);
-        Evol_Sentiment_phoebe.setLayout(Evol_Sentiment_phoebeLayout);
-        Evol_Sentiment_phoebeLayout.setHorizontalGroup(
-            Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_phoebeLayout.setVerticalGroup(
-            Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel1.add(Evol_Sentiment_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 380, 250));
-
-        Evol_Sentiment_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Evol_Sentiment_joeyLayout = new javax.swing.GroupLayout(Evol_Sentiment_joey);
-        Evol_Sentiment_joey.setLayout(Evol_Sentiment_joeyLayout);
-        Evol_Sentiment_joeyLayout.setHorizontalGroup(
-            Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_joeyLayout.setVerticalGroup(
-            Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel1.add(Evol_Sentiment_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 818, -1, 250));
-
-        jTextArea9.setColumns(20);
-        jTextArea9.setRows(5);
-        jTextArea9.setText("Début de série: Personnage triste à cause de la solitude.\nSaison 6 : Phoebe ne s'est pas sentie seul (problème du personnage) \nParce à été hébergé par ces amies. Les pics de peur et de surprise sont\ninduit sa santé avec l'infarctus qu'elle à eut. \nMais également perdu son travail.\nSaison 9 : Surprise d'avoir trouver son \"âme soeur\" mais ce passe mal. \nElle fini par être triste sur la fin de la série à cause de leur rupture.\nEt ce retrouve seul à nouveau. \nParce que les autres sont en couple et délaisse Phoebe");
-        jScrollPane10.setViewportView(jTextArea9);
-
-        Sentiment_exprimé_panel1.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 380, 130));
-
-        jTextArea10.setColumns(20);
-        jTextArea10.setRows(5);
-        jScrollPane11.setViewportView(jTextArea10);
-
-        Sentiment_exprimé_panel1.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1070, 380, 130));
-
-        jTextArea11.setColumns(20);
-        jTextArea11.setRows(5);
-        jTextArea11.setText("Saison 2 : Eddie son nouveau collocataire lui fait peur.\nSaison 4 : Se met en couple avec Kathy, \nil surpris qu'elle à déjà été en couple avec joey.\nSaison 5 : Il révèle à ces amis qu'il est en couple avec ces Monica.\nSaison 6 : Chandler apprend que Monica a réservé \nle Morgan Chase Museum pour leur mariage.\nSaison 7 : Le mariage comme à s'organiser \nil commence à avoir peur.\nSaison 8 : Il est marié.");
-        jScrollPane12.setViewportView(jTextArea11);
-
-        Sentiment_exprimé_panel1.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 660, 380, 130));
-
-        jTextArea12.setColumns(20);
-        jTextArea12.setRows(5);
-        jScrollPane13.setViewportView(jTextArea12);
-
-        Sentiment_exprimé_panel1.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 1070, 380, 130));
-
-        Evol_Sentiment_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Evol_Sentiment_chandlerLayout = new javax.swing.GroupLayout(Evol_Sentiment_chandler);
-        Evol_Sentiment_chandler.setLayout(Evol_Sentiment_chandlerLayout);
-        Evol_Sentiment_chandlerLayout.setHorizontalGroup(
-            Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_chandlerLayout.setVerticalGroup(
-            Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel1.add(Evol_Sentiment_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 380, 250));
-
-        jTextArea15.setColumns(20);
-        jTextArea15.setRows(5);
-        jTextArea15.setText("Tous les personnages présentent un taux de tristesse globalement élevé, ce qui suggère une stratégie scénaristique visant à construire l’attachement émotionnel par la vulnérabilité.\nLes courbes de \"Love\" montent chez tous, On peut citer Joey, qui as plus de succès avec les femmes vers la fin de la série. Même si il n'as pas de relation stable\nL’évolution générale montre que la série démarre sur un terrain d’insécurité émotionnelle, puis tend vers un équilibre affectif plus marqué en fin de série, malgré les obstacles.\nLes graphiques démontre \nLa surprise est souvent moins marquée mais sert d’outil comique régulier (surtout chez Joey et Chandler).\nLe spectateur est donc guidé par une oscillation entre stabilité affective et conflits émotionnels, assurant l’équilibre entre humour et profondeur.");
-        jScrollPane16.setViewportView(jTextArea15);
-
-        Sentiment_exprimé_panel1.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1260, 790, 120));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Interprétation globale : Structure émotionnelle de la série");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Sentiment_exprimé_panel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 1230, 340, -1));
-
-        Evolution_Sentiment.setViewportView(Sentiment_exprimé_panel1);
-
-        jTabbedPane3.addTab("Evolution des sentiments", Evolution_Sentiment);
-
         SectionRecherche.addTab("Analyse de Sentiment", jTabbedPane3);
 
         getContentPane().add(SectionRecherche);
-        SectionRecherche.setBounds(10, 30, 820, 580);
+        SectionRecherche.setBounds(0, 30, 820, 580);
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1589,20 +1639,34 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel Evol_neg_image;
     private controller.ImagePanel Evol_pos_image;
     private javax.swing.JScrollPane Evolution_Sentiment;
+    private javax.swing.JPanel Evolution_Sentiment_Panel;
     private javax.swing.JPanel Evolution_negativité;
     private javax.swing.JPanel Evolution_positivite;
     private javax.swing.JPanel Opinion;
+    private javax.swing.JScrollPane ScrollChandlertext;
+    private javax.swing.JScrollPane ScrollInterpretationtext;
+    private javax.swing.JScrollPane ScrollJoeytext;
+    private javax.swing.JScrollPane ScrollMonicatext;
+    private javax.swing.JScrollPane ScrollPhoebetext;
+    private javax.swing.JScrollPane ScrollRacheltext;
+    private javax.swing.JScrollPane ScrollRosstext;
     private javax.swing.JTabbedPane SectionRecherche;
     private javax.swing.JScrollPane Sentiment_exprimé;
     private controller.ImagePanel Sentiment_exprimé_chandler;
     private controller.ImagePanel Sentiment_exprimé_joey;
     private controller.ImagePanel Sentiment_exprimé_monica;
     private javax.swing.JPanel Sentiment_exprimé_panel;
-    private javax.swing.JPanel Sentiment_exprimé_panel1;
     private controller.ImagePanel Sentiment_exprimé_phoebe;
     private controller.ImagePanel Sentiment_exprimé_rachel;
     private controller.ImagePanel Sentiment_exprimé_ross;
     private javax.swing.JPanel Source;
+    private javax.swing.JTextArea TexteChandler;
+    private javax.swing.JTextArea TexteInterpretationGlobale;
+    private javax.swing.JTextArea TexteJoey;
+    private javax.swing.JTextArea TexteMonica;
+    private javax.swing.JTextArea TextePhoebe;
+    private javax.swing.JTextArea TexteRachel;
+    private javax.swing.JTextArea TexteRoss;
     private javax.swing.JComboBox<String> choixTypeRecherche;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
@@ -1738,31 +1802,17 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel90;
     private javax.swing.JPanel jPanel91;
     private javax.swing.JPanel jPanel92;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
-    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea10;
-    private javax.swing.JTextArea jTextArea11;
-    private javax.swing.JTextArea jTextArea12;
     private javax.swing.JTextArea jTextArea13;
     private javax.swing.JTextArea jTextArea14;
-    private javax.swing.JTextArea jTextArea15;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextArea jTextArea8;
-    private javax.swing.JTextArea jTextArea9;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
     private javax.swing.JLabel libelleSaison;
