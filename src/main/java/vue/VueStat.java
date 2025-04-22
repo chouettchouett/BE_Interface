@@ -31,6 +31,7 @@ public class VueStat extends javax.swing.JFrame {
             TextePhoebe.setCaretPosition(0);
             TexteInterpretationGlobale.setCaretPosition(0);
         //tab 4 Sentiment_exprimé
+            Sentiment_exprime.getVerticalScrollBar().setUnitIncrement(16);
             Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
             Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
             Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
@@ -343,6 +344,17 @@ public class VueStat extends javax.swing.JFrame {
         Evol_neg_image = new controller.ImagePanel();
         jScrollPane14 = new javax.swing.JScrollPane();
         jTextArea13 = new javax.swing.JTextArea();
+        Sentiment_exprime = new javax.swing.JScrollPane();
+        Sentiment_exprimé_panel = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        Sentiment_exprimé_ross = new controller.ImagePanel();
+        Sentiment_exprimé_chandler = new controller.ImagePanel();
+        Sentiment_exprimé_rachel = new controller.ImagePanel();
+        Sentiment_exprimé_monica = new controller.ImagePanel();
+        Sentiment_exprimé_phoebe = new controller.ImagePanel();
+        Sentiment_exprimé_joey = new controller.ImagePanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         Evolution_Sentiment = new javax.swing.JScrollPane();
         Evolution_Sentiment_Panel = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -372,15 +384,6 @@ public class VueStat extends javax.swing.JFrame {
         neg_nuage = new controller.ImagePanel();
         jLabel15 = new javax.swing.JLabel();
         pos_nuage = new controller.ImagePanel();
-        Sentiment_exprimé = new javax.swing.JScrollPane();
-        Sentiment_exprimé_panel = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        Sentiment_exprimé_ross = new controller.ImagePanel();
-        Sentiment_exprimé_chandler = new controller.ImagePanel();
-        Sentiment_exprimé_rachel = new controller.ImagePanel();
-        Sentiment_exprimé_monica = new controller.ImagePanel();
-        Sentiment_exprimé_phoebe = new controller.ImagePanel();
-        Sentiment_exprimé_joey = new controller.ImagePanel();
         Opinion = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(837, 626));
@@ -1241,6 +1244,112 @@ public class VueStat extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
 
+        Sentiment_exprimé_panel.setMinimumSize(new java.awt.Dimension(808, 895));
+        Sentiment_exprimé_panel.setPreferredSize(new java.awt.Dimension(808, 895));
+        Sentiment_exprimé_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Sentiment_exprimé_panel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
+
+        Sentiment_exprimé_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_rossLayout = new javax.swing.GroupLayout(Sentiment_exprimé_ross);
+        Sentiment_exprimé_ross.setLayout(Sentiment_exprimé_rossLayout);
+        Sentiment_exprimé_rossLayout.setHorizontalGroup(
+            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_rossLayout.setVerticalGroup(
+            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 380, 250));
+
+        Sentiment_exprimé_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_chandlerLayout = new javax.swing.GroupLayout(Sentiment_exprimé_chandler);
+        Sentiment_exprimé_chandler.setLayout(Sentiment_exprimé_chandlerLayout);
+        Sentiment_exprimé_chandlerLayout.setHorizontalGroup(
+            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_chandlerLayout.setVerticalGroup(
+            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 380, 250));
+
+        Sentiment_exprimé_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_rachelLayout = new javax.swing.GroupLayout(Sentiment_exprimé_rachel);
+        Sentiment_exprimé_rachel.setLayout(Sentiment_exprimé_rachelLayout);
+        Sentiment_exprimé_rachelLayout.setHorizontalGroup(
+            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_rachelLayout.setVerticalGroup(
+            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 380, 250));
+
+        Sentiment_exprimé_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_monicaLayout = new javax.swing.GroupLayout(Sentiment_exprimé_monica);
+        Sentiment_exprimé_monica.setLayout(Sentiment_exprimé_monicaLayout);
+        Sentiment_exprimé_monicaLayout.setHorizontalGroup(
+            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_monicaLayout.setVerticalGroup(
+            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 380, 250));
+
+        Sentiment_exprimé_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_phoebeLayout = new javax.swing.GroupLayout(Sentiment_exprimé_phoebe);
+        Sentiment_exprimé_phoebe.setLayout(Sentiment_exprimé_phoebeLayout);
+        Sentiment_exprimé_phoebeLayout.setHorizontalGroup(
+            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_phoebeLayout.setVerticalGroup(
+            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 380, 250));
+
+        Sentiment_exprimé_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Sentiment_exprimé_joeyLayout = new javax.swing.GroupLayout(Sentiment_exprimé_joey);
+        Sentiment_exprimé_joey.setLayout(Sentiment_exprimé_joeyLayout);
+        Sentiment_exprimé_joeyLayout.setHorizontalGroup(
+            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Sentiment_exprimé_joeyLayout.setVerticalGroup(
+            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 380, 250));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        Sentiment_exprimé_panel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
+
+        Sentiment_exprime.setViewportView(Sentiment_exprimé_panel);
+
+        jTabbedPane3.addTab("Sentiment_exprimé", Sentiment_exprime);
+
         Evolution_Sentiment_Panel.setMinimumSize(new java.awt.Dimension(808, 1400));
         Evolution_Sentiment_Panel.setPreferredSize(new java.awt.Dimension(808, 1400));
         Evolution_Sentiment_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1477,105 +1586,6 @@ public class VueStat extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Source", Source);
 
-        Sentiment_exprimé_panel.setMinimumSize(new java.awt.Dimension(808, 1200));
-        Sentiment_exprimé_panel.setPreferredSize(new java.awt.Dimension(808, 1200));
-        Sentiment_exprimé_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Sentiment_exprimé_panel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
-
-        Sentiment_exprimé_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Sentiment_exprimé_rossLayout = new javax.swing.GroupLayout(Sentiment_exprimé_ross);
-        Sentiment_exprimé_ross.setLayout(Sentiment_exprimé_rossLayout);
-        Sentiment_exprimé_rossLayout.setHorizontalGroup(
-            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_rossLayout.setVerticalGroup(
-            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 380, 250));
-
-        Sentiment_exprimé_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Sentiment_exprimé_chandlerLayout = new javax.swing.GroupLayout(Sentiment_exprimé_chandler);
-        Sentiment_exprimé_chandler.setLayout(Sentiment_exprimé_chandlerLayout);
-        Sentiment_exprimé_chandlerLayout.setHorizontalGroup(
-            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_chandlerLayout.setVerticalGroup(
-            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 380, 250));
-
-        Sentiment_exprimé_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Sentiment_exprimé_rachelLayout = new javax.swing.GroupLayout(Sentiment_exprimé_rachel);
-        Sentiment_exprimé_rachel.setLayout(Sentiment_exprimé_rachelLayout);
-        Sentiment_exprimé_rachelLayout.setHorizontalGroup(
-            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_rachelLayout.setVerticalGroup(
-            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, 250));
-
-        Sentiment_exprimé_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Sentiment_exprimé_monicaLayout = new javax.swing.GroupLayout(Sentiment_exprimé_monica);
-        Sentiment_exprimé_monica.setLayout(Sentiment_exprimé_monicaLayout);
-        Sentiment_exprimé_monicaLayout.setHorizontalGroup(
-            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_monicaLayout.setVerticalGroup(
-            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 250));
-
-        Sentiment_exprimé_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Sentiment_exprimé_phoebeLayout = new javax.swing.GroupLayout(Sentiment_exprimé_phoebe);
-        Sentiment_exprimé_phoebe.setLayout(Sentiment_exprimé_phoebeLayout);
-        Sentiment_exprimé_phoebeLayout.setHorizontalGroup(
-            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_phoebeLayout.setVerticalGroup(
-            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 380, 250));
-
-        Sentiment_exprimé_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout Sentiment_exprimé_joeyLayout = new javax.swing.GroupLayout(Sentiment_exprimé_joey);
-        Sentiment_exprimé_joey.setLayout(Sentiment_exprimé_joeyLayout);
-        Sentiment_exprimé_joeyLayout.setHorizontalGroup(
-            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_joeyLayout.setVerticalGroup(
-            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
-
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 380, 250));
-
-        Sentiment_exprimé.setViewportView(Sentiment_exprimé_panel);
-
-        jTabbedPane3.addTab("Sentiment_exprimé", Sentiment_exprimé);
-
         javax.swing.GroupLayout OpinionLayout = new javax.swing.GroupLayout(Opinion);
         Opinion.setLayout(OpinionLayout);
         OpinionLayout.setHorizontalGroup(
@@ -1635,7 +1645,7 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScrollRacheltext;
     private javax.swing.JScrollPane ScrollRosstext;
     private javax.swing.JTabbedPane SectionRecherche;
-    private javax.swing.JScrollPane Sentiment_exprimé;
+    private javax.swing.JScrollPane Sentiment_exprime;
     private controller.ImagePanel Sentiment_exprimé_chandler;
     private controller.ImagePanel Sentiment_exprimé_joey;
     private controller.ImagePanel Sentiment_exprimé_monica;
@@ -1786,11 +1796,13 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel90;
     private javax.swing.JPanel jPanel91;
     private javax.swing.JPanel jPanel92;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea13;
     private javax.swing.JTextArea jTextArea14;
     private javax.swing.JLabel labelSansRechercheExemple;
