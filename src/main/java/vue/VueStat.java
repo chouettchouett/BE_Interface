@@ -13,9 +13,20 @@ public class VueStat extends javax.swing.JFrame {
         //
         //tab 1 Evolution de la positivité
             Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
+            TexteEvolpos.setCaretPosition(0);
         //tab 2 Evolution de la négativité
             Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
-        //tab 3 Evolution des sentiments
+            TexteEvolneg.setCaretPosition(0);
+        //tab 3 Sentiment_exprimé
+            Sentiment_exprime.getVerticalScrollBar().setUnitIncrement(16);
+            Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
+            Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
+            Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
+            Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica_V2.png");
+            Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel_V2.png");
+            Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe_V2.png");
+            TexteSentimentexprime.setCaretPosition(0);
+        //tab 4 Evolution des sentiments
             Evolution_Sentiment.getVerticalScrollBar().setUnitIncrement(16);
             Evol_Sentiment_chandler.setImage("/les_png/Evolution_sentiment_Chandler.png");
             TexteChandler.setCaretPosition(0);
@@ -30,14 +41,6 @@ public class VueStat extends javax.swing.JFrame {
             Evol_Sentiment_phoebe.setImage("/les_png/Evolution_sentiment_Phoebe.png");
             TextePhoebe.setCaretPosition(0);
             TexteInterpretationGlobale.setCaretPosition(0);
-        //tab 4 Sentiment_exprimé
-            Sentiment_exprime.getVerticalScrollBar().setUnitIncrement(16);
-            Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
-            Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
-            Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
-            Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica_V2.png");
-            Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel_V2.png");
-            Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe_V2.png");
         //tab 5 Source
             sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
             neg_nuage.setImage("/les_png/negative_wordcloud.png");
@@ -338,12 +341,12 @@ public class VueStat extends javax.swing.JFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         Evolution_positivite = new javax.swing.JPanel();
         Evol_pos_image = new controller.ImagePanel();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        jTextArea14 = new javax.swing.JTextArea();
+        ScrollEvolpos = new javax.swing.JScrollPane();
+        TexteEvolpos = new javax.swing.JTextArea();
         Evolution_negativité = new javax.swing.JPanel();
         Evol_neg_image = new controller.ImagePanel();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        jTextArea13 = new javax.swing.JTextArea();
+        ScrollEvolneg = new javax.swing.JScrollPane();
+        TexteEvolneg = new javax.swing.JTextArea();
         Sentiment_exprime = new javax.swing.JScrollPane();
         Sentiment_exprimé_panel = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -353,8 +356,8 @@ public class VueStat extends javax.swing.JFrame {
         Sentiment_exprimé_monica = new controller.ImagePanel();
         Sentiment_exprimé_phoebe = new controller.ImagePanel();
         Sentiment_exprimé_joey = new controller.ImagePanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ScrollSentimentexprime = new javax.swing.JScrollPane();
+        TexteSentimentexprime = new javax.swing.JTextArea();
         Evolution_Sentiment = new javax.swing.JScrollPane();
         Evolution_Sentiment_Panel = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -1209,12 +1212,12 @@ public class VueStat extends javax.swing.JFrame {
 
         Evolution_positivite.add(Evol_pos_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 360));
 
-        jTextArea14.setColumns(20);
-        jTextArea14.setRows(5);
-        jTextArea14.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions. Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, plus qu'à une logique progressive.");
-        jScrollPane15.setViewportView(jTextArea14);
+        TexteEvolpos.setColumns(20);
+        TexteEvolpos.setRows(5);
+        TexteEvolpos.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions. Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, plus qu'à une logique progressive.");
+        ScrollEvolpos.setViewportView(TexteEvolpos);
 
-        Evolution_positivite.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
+        Evolution_positivite.add(ScrollEvolpos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
 
         jTabbedPane3.addTab("Evolution de la positivité", Evolution_positivite);
 
@@ -1235,12 +1238,12 @@ public class VueStat extends javax.swing.JFrame {
 
         Evolution_negativité.add(Evol_neg_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 750, 350));
 
-        jTextArea13.setColumns(20);
-        jTextArea13.setRows(5);
-        jTextArea13.setText("La négativité varie fortement d’un personnage à l’autre, mais certains pics s’expliquent par des événements narratifs majeurs.\nSaison 2 : Phoebe connaît une baisse notable, probablement liée à la découverte de son frère et à la confrontation à sa propre histoire familiale. Monica, quant à elle, vit une rupture douloureuse avec Richard. Joey, qui obtient un rôle majeur, affiche un baisse de négativité — sa carrière décolle et sa vie amoureuse s’épanouit. \nSaison 4 : Rachel se montre plus négative — sa jalousie vis-à-vis du mariage de Ross avec Emily devient centrale.\nSaison 7 : nouvelle baisse chez Phoebe, alors que paradoxalement elle se rapproche de Mike — peut-être l’effet d’une réorientation affective plus sérieuse qui l’éloigne de sa posture excentrique.\nLes pics de négativité reflètent souvent des moments d’instabilité amoureuse ou familiale ou même relié au travail.");
-        jScrollPane14.setViewportView(jTextArea13);
+        TexteEvolneg.setColumns(20);
+        TexteEvolneg.setRows(5);
+        TexteEvolneg.setText("La négativité varie fortement d’un personnage à l’autre, mais certains pics s’expliquent par des événements narratifs majeurs.\nSaison 2 : Phoebe connaît une baisse notable, probablement liée à la découverte de son frère et à la confrontation à sa propre histoire familiale. Monica, quant à elle, vit une rupture douloureuse avec Richard. Joey, qui obtient un rôle majeur, affiche un baisse de négativité — sa carrière décolle et sa vie amoureuse s’épanouit. \nSaison 4 : Rachel se montre plus négative — sa jalousie vis-à-vis du mariage de Ross avec Emily devient centrale.\nSaison 7 : nouvelle baisse chez Phoebe, alors que paradoxalement elle se rapproche de Mike — peut-être l’effet d’une réorientation affective plus sérieuse qui l’éloigne de sa posture excentrique.\nLes pics de négativité reflètent souvent des moments d’instabilité amoureuse ou familiale ou même relié au travail.");
+        ScrollEvolneg.setViewportView(TexteEvolneg);
 
-        Evolution_negativité.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 750, 140));
+        Evolution_negativité.add(ScrollEvolneg, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 750, 140));
 
         jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
 
@@ -1339,12 +1342,12 @@ public class VueStat extends javax.swing.JFrame {
 
         Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 380, 250));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
-        jScrollPane1.setViewportView(jTextArea1);
+        TexteSentimentexprime.setColumns(20);
+        TexteSentimentexprime.setRows(5);
+        TexteSentimentexprime.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
+        ScrollSentimentexprime.setViewportView(TexteSentimentexprime);
 
-        Sentiment_exprimé_panel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
+        Sentiment_exprimé_panel.add(ScrollSentimentexprime, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
 
         Sentiment_exprime.setViewportView(Sentiment_exprimé_panel);
 
@@ -1638,12 +1641,15 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel Evolution_positivite;
     private javax.swing.JPanel Opinion;
     private javax.swing.JScrollPane ScrollChandlertext;
+    private javax.swing.JScrollPane ScrollEvolneg;
+    private javax.swing.JScrollPane ScrollEvolpos;
     private javax.swing.JScrollPane ScrollInterpretationtext;
     private javax.swing.JScrollPane ScrollJoeytext;
     private javax.swing.JScrollPane ScrollMonicatext;
     private javax.swing.JScrollPane ScrollPhoebetext;
     private javax.swing.JScrollPane ScrollRacheltext;
     private javax.swing.JScrollPane ScrollRosstext;
+    private javax.swing.JScrollPane ScrollSentimentexprime;
     private javax.swing.JTabbedPane SectionRecherche;
     private javax.swing.JScrollPane Sentiment_exprime;
     private controller.ImagePanel Sentiment_exprimé_chandler;
@@ -1655,12 +1661,15 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel Sentiment_exprimé_ross;
     private javax.swing.JPanel Source;
     private javax.swing.JTextArea TexteChandler;
+    private javax.swing.JTextArea TexteEvolneg;
+    private javax.swing.JTextArea TexteEvolpos;
     private javax.swing.JTextArea TexteInterpretationGlobale;
     private javax.swing.JTextArea TexteJoey;
     private javax.swing.JTextArea TexteMonica;
     private javax.swing.JTextArea TextePhoebe;
     private javax.swing.JTextArea TexteRachel;
     private javax.swing.JTextArea TexteRoss;
+    private javax.swing.JTextArea TexteSentimentexprime;
     private javax.swing.JComboBox<String> choixTypeRecherche;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
@@ -1796,15 +1805,9 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel90;
     private javax.swing.JPanel jPanel91;
     private javax.swing.JPanel jPanel92;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea13;
-    private javax.swing.JTextArea jTextArea14;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
     private javax.swing.JLabel libelleSaison;
