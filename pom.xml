@@ -18,5 +18,10 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE250</version>
         </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version> <!-- dernière version stable à ce jour -->
+        </dependency>
     </dependencies>
 </project>
