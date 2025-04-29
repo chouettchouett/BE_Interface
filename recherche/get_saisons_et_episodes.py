@@ -1,7 +1,7 @@
 import pandas as pd
 
 def get_saisons_et_episodes():
-    df = pd.read_csv("../Stats/friends_dialogues.csv", encoding='utf-8')
+    df = pd.read_csv("../Analyse_Sentiments/friends_dialogues_final.csv", encoding='utf-8')
 
     df = df[['season', 'episode']].drop_duplicates()
     # conversion en int pour la liste retournée (et optionnellement pour le tri)

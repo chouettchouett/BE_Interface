@@ -16,7 +16,7 @@ with open("advanced_stopwords.txt") as stopwords:
 
 stopwords_set.update({'chandler', 'ross', 'rachel', 'phoebe', 'joey', 'monica', 'hey', 'gonna', 'wanna', 'um', 'yknow', 'uh', 'umm', 'yeah', 'ii', 'huh', 'ooh', 'guys'})
 
-df = pd.read_csv("../Stats/friends_dialogues.csv", encoding='utf-8')
+df = pd.read_csv("../Analyse_Sentiments/friends_dialogues_final.csv", encoding='utf-8')
 
 main_characters = ['Chandler', 'Joey', 'Monica', 'Phoebe', 'Rachel', 'Ross']
 df = df[df["character"].isin(main_characters)]

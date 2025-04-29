@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 def recherche_par_mots(words: str, case_sensitive=False):
-    df = pd.read_csv("../Stats/friends_dialogues.csv", encoding='utf-8')
+    df = pd.read_csv("../Analyse_Sentiments/friends_dialogues_final.csv", encoding='utf-8')
 
     # compter le nombre de <words> dans chaque répliques
     df['word_count'] = df['line'].str.count(words, flags=0 if case_sensitive else re.IGNORECASE)
@@ -51,7 +51,6 @@ def recherche_par_mots(words: str, case_sensitive=False):
         "words_usage_ratio_by_line": words_usage_ratio_by_line, 
         "word_count_by_character": word_count_by_character.to_records(index=False).tolist(), 
         "word_count_by_season": word_count_by_season.to_records(index=False).tolist(),
-        "word_count_by_episode": word_count_by_episode.to_records(index=False).tolist(),
         "word_count_by_episode": word_count_by_episode.to_records(index=False).tolist(),
         "best_season_word_count": best_season_word_count.item(),
         "best_episode_word_count": best_episode_word_count.to_dict(),
