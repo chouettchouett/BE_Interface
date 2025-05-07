@@ -12,6 +12,12 @@ public class ImagePanel extends javax.swing.JPanel {
         image = icon.getImage();
         repaint(); // Force la redessination quand une image est chargée
     }
+    
+    public void setImageV2(String imagePath) {
+        ImageIcon icon = new ImageIcon(imagePath); 
+        image = icon.getImage();
+        repaint();
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

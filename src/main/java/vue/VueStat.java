@@ -7,9 +7,13 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
+import controller.*;
+import java.io.File;
+import java.net.URL;
+import javax.swing.*;
 
 public class VueStat extends javax.swing.JFrame {
-
+    private ControllerRecherche controller;
 
     public VueStat() {
         initComponents(); 
@@ -142,7 +146,9 @@ public class VueStat extends javax.swing.JFrame {
             }
 
             ((java.awt.CardLayout) resultats.getLayout()).show(resultats, cardName);
-
+        
+            this.controller = new ControllerRecherche();
+        
         });
         
         recherchePersonnage.addActionListener((evt) -> {
@@ -246,7 +252,7 @@ public class VueStat extends javax.swing.JFrame {
         resultatSaison = new javax.swing.JTabbedPane();
         panelSaisonPresentation = new javax.swing.JPanel();
         panelTitre = new javax.swing.JPanel();
-        libelleSaison = new javax.swing.JLabel();
+        labelSaison = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jPanel78 = new javax.swing.JPanel();
         jPanel79 = new javax.swing.JPanel();
@@ -260,7 +266,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel112 = new javax.swing.JLabel();
         panelSaisonRepartition = new javax.swing.JPanel();
         panelTitre2 = new javax.swing.JPanel();
-        libelleSaison2 = new javax.swing.JLabel();
+        labelSaison2 = new javax.swing.JLabel();
         jPanel85 = new javax.swing.JPanel();
         jPanel86 = new javax.swing.JPanel();
         jPanel87 = new javax.swing.JPanel();
@@ -268,7 +274,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel117 = new javax.swing.JLabel();
         panelSaisonDialogue = new javax.swing.JPanel();
         jPanel89 = new javax.swing.JPanel();
-        libelleSaison3 = new javax.swing.JLabel();
+        labelSaison3 = new javax.swing.JLabel();
         jPanel90 = new javax.swing.JPanel();
         jPanel91 = new javax.swing.JPanel();
         jPanel92 = new javax.swing.JPanel();
@@ -277,7 +283,7 @@ public class VueStat extends javax.swing.JFrame {
         resultatEpisode = new javax.swing.JTabbedPane();
         panelEpisodePresentation = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        nomPersonnage5 = new javax.swing.JLabel();
+        labelEpisode = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel49 = new javax.swing.JPanel();
         jPanel50 = new javax.swing.JPanel();
@@ -291,7 +297,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel79 = new javax.swing.JLabel();
         panelEpisodeRepartition = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        nomPersonnage6 = new javax.swing.JLabel();
+        labelEpisode2 = new javax.swing.JLabel();
         jPanel65 = new javax.swing.JPanel();
         jPanel66 = new javax.swing.JPanel();
         jPanel67 = new javax.swing.JPanel();
@@ -299,7 +305,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel94 = new javax.swing.JLabel();
         panelEpisodeDialogue = new javax.swing.JPanel();
         jPanel74 = new javax.swing.JPanel();
-        nomPersonnage7 = new javax.swing.JLabel();
+        labelEpisode3 = new javax.swing.JLabel();
         jPanel75 = new javax.swing.JPanel();
         jPanel76 = new javax.swing.JPanel();
         jPanel77 = new javax.swing.JPanel();
@@ -515,11 +521,26 @@ public class VueStat extends javax.swing.JFrame {
 
         rechercheSaison.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         rechercheSaison.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rechercheSaison.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rechercheSaisonMouseClicked(evt);
+            }
+        });
+        rechercheSaison.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rechercheSaisonActionPerformed(evt);
+            }
+        });
         panelRechercheButtons.add(rechercheSaison);
 
         rechercheEpisode.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         rechercheEpisode.setMaximumRowCount(25);
         rechercheEpisode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rechercheEpisode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rechercheEpisodeActionPerformed(evt);
+            }
+        });
         panelRechercheButtons.add(rechercheEpisode);
 
         panelRecherche.add(panelRechercheButtons);
@@ -528,12 +549,18 @@ public class VueStat extends javax.swing.JFrame {
 
         resultats.setLayout(new java.awt.CardLayout());
 
+        resultatSaison.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultatSaisonMouseClicked(evt);
+            }
+        });
+
         panelSaisonPresentation.setLayout(new java.awt.BorderLayout());
 
-        libelleSaison.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        libelleSaison.setText("Saison 1");
-        libelleSaison.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelTitre.add(libelleSaison);
+        labelSaison.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelSaison.setText("Saison 1");
+        labelSaison.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelTitre.add(labelSaison);
 
         panelSaisonPresentation.add(panelTitre, java.awt.BorderLayout.NORTH);
 
@@ -549,7 +576,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel22.setText("Nombre de répliques:");
         jPanel79.add(jLabel22);
 
-        jLabel106.setText("...");
+        jLabel106.setText("4768");
         jLabel106.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel79.add(jLabel106);
 
@@ -559,10 +586,10 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel107.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel107.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel107.setText("Personnages impliqués (nb_persos):");
+        jLabel107.setText("Personnages impliqués :");
         jPanel80.add(jLabel107);
 
-        jLabel108.setText("...");
+        jLabel108.setText("Monica, Joey, Chandler, Phoebe, Ross, Rachel");
         jLabel108.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel80.add(jLabel108);
 
@@ -575,7 +602,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel111.setText("Top 10 des mots les plus répétés:");
         jPanel82.add(jLabel111);
 
-        jLabel112.setText("... (plus de détails analyse langagière)");
+        jLabel112.setText("know, like, well, out, uh, hey, right, think, here, thats");
         jLabel112.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel82.add(jLabel112);
 
@@ -587,16 +614,26 @@ public class VueStat extends javax.swing.JFrame {
 
         resultatSaison.addTab("Présentation", panelSaisonPresentation);
 
+        panelSaisonRepartition.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelSaisonRepartitionMouseClicked(evt);
+            }
+        });
         panelSaisonRepartition.setLayout(new java.awt.BorderLayout());
 
-        libelleSaison2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        libelleSaison2.setText("Saison 1");
-        libelleSaison2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelTitre2.add(libelleSaison2);
+        labelSaison2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelSaison2.setText("Saison 1");
+        labelSaison2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelTitre2.add(labelSaison2);
 
         panelSaisonRepartition.add(panelTitre2, java.awt.BorderLayout.NORTH);
 
         jPanel85.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        jPanel85.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel85MouseClicked(evt);
+            }
+        });
         jPanel85.setLayout(new javax.swing.BoxLayout(jPanel85, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel86.setLayout(new javax.swing.BoxLayout(jPanel86, javax.swing.BoxLayout.Y_AXIS));
@@ -622,10 +659,10 @@ public class VueStat extends javax.swing.JFrame {
 
         panelSaisonDialogue.setLayout(new java.awt.BorderLayout());
 
-        libelleSaison3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        libelleSaison3.setText("Saison 1");
-        libelleSaison3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel89.add(libelleSaison3);
+        labelSaison3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelSaison3.setText("Saison 1");
+        labelSaison3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel89.add(labelSaison3);
 
         panelSaisonDialogue.add(jPanel89, java.awt.BorderLayout.NORTH);
 
@@ -655,12 +692,18 @@ public class VueStat extends javax.swing.JFrame {
 
         resultats.add(resultatSaison, "SAISON");
 
+        resultatEpisode.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultatEpisodeMouseClicked(evt);
+            }
+        });
+
         panelEpisodePresentation.setLayout(new java.awt.BorderLayout());
 
-        nomPersonnage5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nomPersonnage5.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
-        nomPersonnage5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel6.add(nomPersonnage5);
+        labelEpisode.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelEpisode.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
+        labelEpisode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel6.add(labelEpisode);
 
         panelEpisodePresentation.add(jPanel6, java.awt.BorderLayout.NORTH);
 
@@ -676,7 +719,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel6.setText("Nombre de répliques:");
         jPanel50.add(jLabel6);
 
-        jLabel73.setText("...");
+        jLabel73.setText("265");
         jLabel73.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel50.add(jLabel73);
 
@@ -686,10 +729,10 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel74.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel74.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel74.setText("Personnages impliqués (nb_persos):");
+        jLabel74.setText("Personnages impliqués :");
         jPanel51.add(jLabel74);
 
-        jLabel75.setText("...");
+        jLabel75.setText("Monica, Joey, Chandler, Phoede, Ross, Rachel");
         jLabel75.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel51.add(jLabel75);
 
@@ -702,7 +745,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel78.setText("Top 10 des mots les plus répétés:");
         jPanel62.add(jLabel78);
 
-        jLabel79.setText("... (plus de détails analyse langagière)");
+        jLabel79.setText("out, know, like, paul, right, well, if, guy, go, or");
         jLabel79.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel62.add(jLabel79);
 
@@ -716,10 +759,10 @@ public class VueStat extends javax.swing.JFrame {
 
         panelEpisodeRepartition.setLayout(new java.awt.BorderLayout());
 
-        nomPersonnage6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nomPersonnage6.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
-        nomPersonnage6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel15.add(nomPersonnage6);
+        labelEpisode2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelEpisode2.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
+        labelEpisode2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel15.add(labelEpisode2);
 
         panelEpisodeRepartition.add(jPanel15, java.awt.BorderLayout.NORTH);
 
@@ -749,10 +792,10 @@ public class VueStat extends javax.swing.JFrame {
 
         panelEpisodeDialogue.setLayout(new java.awt.BorderLayout());
 
-        nomPersonnage7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nomPersonnage7.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
-        nomPersonnage7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel74.add(nomPersonnage7);
+        labelEpisode3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelEpisode3.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
+        labelEpisode3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel74.add(labelEpisode3);
 
         panelEpisodeDialogue.add(jPanel74, java.awt.BorderLayout.NORTH);
 
@@ -1728,6 +1771,257 @@ public class VueStat extends javax.swing.JFrame {
     private void recherchePersonnageItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_recherchePersonnageItemStateChanged
         // Quand un personnage est choisit
     }//GEN-LAST:event_recherchePersonnageItemStateChanged
+    
+    
+    private void rechercheEpisodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheEpisodeActionPerformed
+        
+        try {
+            Object saisonObj = rechercheSaison.getSelectedItem();
+            Object episodeObj = rechercheEpisode.getSelectedItem();
+            
+            //Extraction du numéro de saison (format "S01")
+            String saisonStr = saisonObj.toString();
+            int saison = Integer.parseInt(saisonStr.substring(1));
+            
+            //Extraction du numéro d'épisode (format "S01E02 Titre")
+            String episodeStr = episodeObj.toString();
+            int episode = Integer.parseInt(episodeStr.substring(episodeStr.indexOf('E') + 1, 
+                                                              episodeStr.indexOf(' ')));
+            
+            labelEpisode.setText("Episode " + episode + " de la saison " + saison + " : " + episodeStr.substring(6));
+            labelEpisode2.setText("Episode " + episode + " de la saison " + saison + " : " + episodeStr.substring(6));
+            labelEpisode3.setText("Episode " + episode + " de la saison " + saison + " : " + episodeStr.substring(6));
+            
+            //Appel à la méthode du contrôleur
+            int nbRepliques = controller.getNombreRepliquesEpisode(saison, episode);
+            
+            //Personnages impliqués
+            String listeReconstruite = "";
+            List<String> personnages = controller.getPersonnagesEpisode(saison, episode);
+            for(String personnage : personnages){
+                listeReconstruite += personnage;
+                listeReconstruite += ", ";
+            }
+            listeReconstruite = listeReconstruite.substring(0, listeReconstruite.length() - 2);
+            
+            //top 10 mots (cette partie met plusieurs secondes à s'exécuter... à réfléchir)
+            String top10Mots = "";
+            List<String> mots = controller.getTopMotsEpisode(saison, episode);
+            for(String mot : mots){
+                top10Mots += mot;
+                top10Mots += ", ";
+            }
+            top10Mots = top10Mots.substring(0, top10Mots.length() - 2);
+                
+            //Affichage du résultat
+            jLabel73.setText("" + nbRepliques);
+            jLabel75.setText(listeReconstruite);
+            jLabel79.setText(top10Mots);
+            setGraphEpisodeRepartition();
+        } catch (Exception e) {
+            jLabel73.setText("Erreur: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_rechercheEpisodeActionPerformed
+
+    private void rechercheSaisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheSaisonActionPerformed
+        if(!rechercheEpisode.isVisible()){
+            try {
+                Object saisonObj = rechercheSaison.getSelectedItem();
+
+                //Extraction du numéro de saison (format "S01")
+                String saisonStr = saisonObj.toString();
+                int saison = Integer.parseInt(saisonStr.substring(1));
+                
+                labelSaison.setText("Saison " + saison);
+                labelSaison2.setText("Saison " + saison);
+                labelSaison3.setText("Saison " + saison);
+                
+                //Nombre de répliques
+                int nbRepliques = controller.getNombreRepliquesSaison(saison);
+                
+                //Personnages impliqués
+                String listePersonnagesImpliques = "";
+                List<String> personnages = controller.getPersonnagesSaison(saison);
+                for(String personnage : personnages){
+                    listePersonnagesImpliques += personnage;
+                    listePersonnagesImpliques += ", ";
+                }
+                listePersonnagesImpliques = listePersonnagesImpliques.substring(0, listePersonnagesImpliques.length() - 2);
+                
+                //top 10 mots (cette partie met plusieurs secondes à s'exécuter... à réfléchir)
+                String top10Mots = "";
+                List<String> mots = controller.getTopMotsSaison(saison);
+                for(String mot : mots){
+                    top10Mots += mot;
+                    top10Mots += ", ";
+                }
+                top10Mots = top10Mots.substring(0, top10Mots.length() - 2);
+                
+                //Affichage du résultat
+                jLabel106.setText("" + nbRepliques);
+                jLabel108.setText(listePersonnagesImpliques);
+                jLabel112.setText(top10Mots);
+                setGraphSaisonRepartition();
+            } catch (Exception e) {
+                jLabel106.setText("Erreur: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_rechercheSaisonActionPerformed
+
+    private void jPanel85MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel85MouseClicked
+        
+    }//GEN-LAST:event_jPanel85MouseClicked
+    private void setGraphSaisonRepartition(){
+        Object saisonObj = rechercheSaison.getSelectedItem();
+        String saisonStr = saisonObj.toString();
+        int saison = Integer.parseInt(saisonStr.substring(1));
+
+        //Chemin vers l'image png creee
+        String cheminImage = "src/main/resources/les_png/repliques_saison_" + saisonStr + ".png";
+
+        //Verifie si l'image existe déjà
+        File imageFile = new File(cheminImage);
+        if (!imageFile.exists()) {
+            // Crée le graphique uniquement si le fichier n'existe pas
+            controller.creerGrapheNombreDeRepliquesSaison(saison);
+        }
+
+        //Convertit le chemin 
+        String cheminPourRessource = "src/main/resources/les_png/repliques_saison_" + saisonStr + ".png";
+        System.out.println(cheminPourRessource);
+        //Crée et configure le panel image
+        controller.ImagePanel imagePanel = new controller.ImagePanel();
+        imagePanel.setImageV2(cheminPourRessource);
+
+        //Rafraîchit le panel contenant l’image
+        jPanel85.removeAll();
+        jPanel85.add(imagePanel);
+        jPanel85.revalidate();
+        jPanel85.repaint();
+    }
+    
+   private void setGraphEpisodeRepartition() {
+        //Récupère l'objet sélectionné dans le combo box de recherche de saison et épisode
+        Object saisonObj = rechercheSaison.getSelectedItem();
+        Object episodeObj = rechercheEpisode.getSelectedItem();
+
+        //Extraction du numéro de saison (format "S01")
+        String saisonStr = saisonObj.toString();
+        int saison = Integer.parseInt(saisonStr.substring(1)); // Extrait 1 depuis "S01"
+
+        //Extraction du code épisode (format "S01E02 Titre") → récupère "E02"
+        String episodeStrFull = episodeObj.toString();
+        String episodeCode = episodeStrFull.substring(episodeStrFull.indexOf('E'), episodeStrFull.indexOf(' ')); // "E02"
+        int episode = Integer.parseInt(episodeCode.substring(1)); // Extrait 2 depuis "E02"
+
+        //Construction du nom de fichier correct
+        String nomFichier = "repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
+        String cheminImage = "src/main/resources/les_png/" + nomFichier;
+
+        //Vérifie si l'image existe déjà
+        File imageFile = new File(cheminImage);
+        if (!imageFile.exists()) {
+            // Crée le graphique uniquement si le fichier n'existe pas
+            controller.creerGrapheNombreDeRepliquesEpisode(saison, episode);
+        }
+
+        //Convertit le chemin pour le classpath
+        String cheminPourRessource = "/les_png/" + nomFichier;
+
+        //Charge et affiche l’image
+        controller.ImagePanel imagePanel = new controller.ImagePanel();
+        imagePanel.setImage(cheminPourRessource);
+
+        jPanel65.removeAll();
+        jPanel65.add(imagePanel);
+        jPanel65.revalidate();
+        jPanel65.repaint();
+    }
+    
+    private void resultatSaisonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultatSaisonMouseClicked
+
+        //Récupère l'objet sélectionné dans le combo box de recherche de saison 
+        Object saisonObj = rechercheSaison.getSelectedItem();
+
+        //Extraction du numéro de saison (format "S01")
+        String saisonStr = saisonObj.toString();
+        int saison = Integer.parseInt(saisonStr.substring(1)); // Extrait 1 depuis "S01"
+
+       
+
+        String cheminImage = "src/main/resources/les_png/repliques_saison_" + saisonStr + ".png";
+
+        //Vérifie si l'image existe dans le système de fichiers (moins long)
+        File imageFile = new File(cheminImage);
+        if (!imageFile.exists()) {
+            //cree le graphique uniquement si le fichier n'existe pas
+            controller.creerGrapheNombreDeRepliquesSaison(saison);
+        }
+
+        //Chemin pour accéder à la ressource 
+        String cheminPourRessource = "/les_png/repliques_saison_" + saisonStr + ".png";
+
+        //Crée et configure le panel image
+        controller.ImagePanel imagePanel = new controller.ImagePanel();
+        imagePanel.setImage(cheminPourRessource);
+
+        //Rafraichit le panel
+        jPanel85.removeAll();
+        jPanel85.add(imagePanel);
+        jPanel85.revalidate();
+        jPanel85.repaint();
+
+    }//GEN-LAST:event_resultatSaisonMouseClicked
+
+    private void rechercheSaisonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rechercheSaisonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rechercheSaisonMouseClicked
+
+    private void panelSaisonRepartitionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSaisonRepartitionMouseClicked
+        
+    }//GEN-LAST:event_panelSaisonRepartitionMouseClicked
+
+    private void resultatEpisodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultatEpisodeMouseClicked
+ 
+        //Récupère l'objet sélectionné dans le combo box de recherche de saison et épisode
+        Object saisonObj = rechercheSaison.getSelectedItem();
+        Object episodeObj = rechercheEpisode.getSelectedItem();
+
+        //Extraction du numéro de saison (format "S01")
+        String saisonStr = saisonObj.toString();
+        int saison = Integer.parseInt(saisonStr.substring(1)); // Extrait 1 depuis "S01"
+
+        //Extraction du code épisode (format "S01E02 Titre") → récupère "E02"
+        String episodeStrFull = episodeObj.toString();
+        String episodeCode = episodeStrFull.substring(episodeStrFull.indexOf('E'), episodeStrFull.indexOf(' ')); // "E02"
+        int episode = Integer.parseInt(episodeCode.substring(1)); // Extrait 2 depuis "E02"
+
+  
+        String cheminImage = "src/main/resources/les_png/repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
+
+        //Vérifie si l'image existe dans le système de fichiers (moins long)
+        File imageFile = new File(cheminImage);
+        if (!imageFile.exists()) {
+            //cree le graphique uniquement si le fichier n'existe pas
+            controller.creerGrapheNombreDeRepliquesEpisode(saison, episode);
+        }
+
+        //Chemin pour accéder à la ressource 
+        String cheminPourRessource = "/les_png/repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
+
+        //Crée et configure le panel image
+        controller.ImagePanel imagePanel = new controller.ImagePanel();
+        imagePanel.setImage(cheminPourRessource);
+
+        //Rafraichit le panel
+        jPanel65.removeAll();
+        jPanel65.add(imagePanel);
+        jPanel65.revalidate();
+        jPanel65.repaint();
+    }//GEN-LAST:event_resultatEpisodeMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1906,21 +2200,21 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel92;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel labelDetailReplique;
+    private javax.swing.JLabel labelEpisode;
+    private javax.swing.JLabel labelEpisode2;
+    private javax.swing.JLabel labelEpisode3;
     private javax.swing.JLabel labelMotCourant1;
     private javax.swing.JLabel labelMotCourant2;
     private javax.swing.JLabel labelMotCourant3;
     private javax.swing.JLabel labelPersonnageReplique;
+    private javax.swing.JLabel labelSaison;
+    private javax.swing.JLabel labelSaison2;
+    private javax.swing.JLabel labelSaison3;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
-    private javax.swing.JLabel libelleSaison;
-    private javax.swing.JLabel libelleSaison2;
-    private javax.swing.JLabel libelleSaison3;
     private controller.ImagePanel neg_nuage;
     private javax.swing.JLabel nomPersonnage;
     private javax.swing.JLabel nomPersonnage1;
-    private javax.swing.JLabel nomPersonnage5;
-    private javax.swing.JLabel nomPersonnage6;
-    private javax.swing.JLabel nomPersonnage7;
     private javax.swing.JPanel panelDetailReplique;
     private javax.swing.JPanel panelEpisodeDialogue;
     private javax.swing.JPanel panelEpisodePresentation;
