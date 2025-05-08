@@ -8,15 +8,18 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import controller.*;
+import java.awt.event.ItemEvent;
 import java.io.File;
-import java.net.URL;
-import javax.swing.*;
+import javax.swing.DefaultComboBoxModel;
+import java.util.stream.Collectors;
 
 public class VueStat extends javax.swing.JFrame {
     private ControllerRecherche controller;
 
     public VueStat() {
+        controller = new ControllerRecherche();
         initComponents(); 
+        
         //
         // SECTION ANALYSE SENTIMENT *******************************************************************
         //
@@ -160,8 +163,8 @@ public class VueStat extends javax.swing.JFrame {
         });
         
         recherchePersonnage.setModel(dialog.getComboBoxModelPersonnage());
-        rechercheSaison.setModel(dialog.getComboBoxModelSaison());
-        rechercheEpisode.setModel(dialog.getComboBoxModelEpisode());
+        //rechercheSaison.setModel(dialog.getComboBoxModelSaison());
+        //rechercheEpisode.setModel(dialog.getComboBoxModelEpisode());
         
         ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "SANSRECHERCHE");
         
@@ -520,7 +523,17 @@ public class VueStat extends javax.swing.JFrame {
         panelRechercheButtons.add(recherchePersonnage);
 
         rechercheSaison.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        rechercheSaison.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rechercheSaison.setModel(new DefaultComboBoxModel<>(
+            controller.getSaisons()
+            .stream()
+            .map(s -> "S" + String.format("%02d", s.getNumeroSaison()))
+            .toArray(String[]::new)
+        ));
+        rechercheSaison.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rechercheSaisonItemStateChanged(evt);
+            }
+        });
         rechercheSaison.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rechercheSaisonMouseClicked(evt);
@@ -535,1227 +548,1242 @@ public class VueStat extends javax.swing.JFrame {
 
         rechercheEpisode.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         rechercheEpisode.setMaximumRowCount(25);
-        rechercheEpisode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        rechercheEpisode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rechercheEpisodeActionPerformed(evt);
-            }
-        });
-        panelRechercheButtons.add(rechercheEpisode);
+        rechercheEpisode.setModel(new DefaultComboBoxModel<>(
+            new ControllerRecherche()
+            .getEpisodesSaison(1) // 1 pour S01
+            .stream()
+            .map(e -> String.format("S%02dE%02d - %s", 
+                e.getNumeroSaison(), 
+                e.getNumeroEpisode(), 
+                e.getTitre()))
+        .filter(episodeStr -> episodeStr.startsWith("S01")) // <- valeur fixe
+        .toArray(String[]::new)
+    ));
+    rechercheEpisode.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            rechercheEpisodeItemStateChanged(evt);
+        }
+    });
+    rechercheEpisode.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            rechercheEpisodeActionPerformed(evt);
+        }
+    });
+    panelRechercheButtons.add(rechercheEpisode);
 
-        panelRecherche.add(panelRechercheButtons);
+    panelRecherche.add(panelRechercheButtons);
 
-        panelRechercheEtIndication.add(panelRecherche, java.awt.BorderLayout.NORTH);
+    panelRechercheEtIndication.add(panelRecherche, java.awt.BorderLayout.NORTH);
 
-        resultats.setLayout(new java.awt.CardLayout());
+    resultats.setLayout(new java.awt.CardLayout());
 
-        resultatSaison.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                resultatSaisonMouseClicked(evt);
-            }
-        });
+    resultatSaison.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            resultatSaisonMouseClicked(evt);
+        }
+    });
 
-        panelSaisonPresentation.setLayout(new java.awt.BorderLayout());
+    panelSaisonPresentation.setLayout(new java.awt.BorderLayout());
 
-        labelSaison.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelSaison.setText("Saison 1");
-        labelSaison.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelTitre.add(labelSaison);
+    labelSaison.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    labelSaison.setText("Saison 1");
+    labelSaison.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    panelTitre.add(labelSaison);
 
-        panelSaisonPresentation.add(panelTitre, java.awt.BorderLayout.NORTH);
+    panelSaisonPresentation.add(panelTitre, java.awt.BorderLayout.NORTH);
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel14.setLayout(new javax.swing.BoxLayout(jPanel14, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel14.setLayout(new javax.swing.BoxLayout(jPanel14, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel78.setLayout(new javax.swing.BoxLayout(jPanel78, javax.swing.BoxLayout.Y_AXIS));
+    jPanel78.setLayout(new javax.swing.BoxLayout(jPanel78, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel79.setLayout(new javax.swing.BoxLayout(jPanel79, javax.swing.BoxLayout.Y_AXIS));
+    jPanel79.setLayout(new javax.swing.BoxLayout(jPanel79, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel22.setText("Nombre de répliques:");
-        jPanel79.add(jLabel22);
+    jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel22.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel22.setText("Nombre de répliques:");
+    jPanel79.add(jLabel22);
 
-        jLabel106.setText("4768");
-        jLabel106.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel79.add(jLabel106);
+    jLabel106.setText("4768");
+    jLabel106.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel79.add(jLabel106);
 
-        jPanel78.add(jPanel79);
+    jPanel78.add(jPanel79);
 
-        jPanel80.setLayout(new javax.swing.BoxLayout(jPanel80, javax.swing.BoxLayout.Y_AXIS));
+    jPanel80.setLayout(new javax.swing.BoxLayout(jPanel80, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel107.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel107.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel107.setText("Personnages impliqués :");
-        jPanel80.add(jLabel107);
+    jLabel107.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel107.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel107.setText("Personnages impliqués :");
+    jPanel80.add(jLabel107);
 
-        jLabel108.setText("Monica, Joey, Chandler, Phoebe, Ross, Rachel");
-        jLabel108.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel80.add(jLabel108);
+    jLabel108.setText("Monica, Joey, Chandler, Phoebe, Ross, Rachel");
+    jLabel108.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel80.add(jLabel108);
 
-        jPanel78.add(jPanel80);
+    jPanel78.add(jPanel80);
 
-        jPanel82.setLayout(new javax.swing.BoxLayout(jPanel82, javax.swing.BoxLayout.Y_AXIS));
+    jPanel82.setLayout(new javax.swing.BoxLayout(jPanel82, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel111.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel111.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel111.setText("Top 10 des mots les plus répétés:");
-        jPanel82.add(jLabel111);
+    jLabel111.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel111.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel111.setText("Top 10 des mots les plus répétés:");
+    jPanel82.add(jLabel111);
 
-        jLabel112.setText("know, like, well, out, uh, hey, right, think, here, thats");
-        jLabel112.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel82.add(jLabel112);
+    jLabel112.setText("know, like, well, out, uh, hey, right, think, here, thats");
+    jLabel112.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel82.add(jLabel112);
 
-        jPanel78.add(jPanel82);
+    jPanel78.add(jPanel82);
 
-        jPanel14.add(jPanel78);
+    jPanel14.add(jPanel78);
 
-        panelSaisonPresentation.add(jPanel14, java.awt.BorderLayout.CENTER);
+    panelSaisonPresentation.add(jPanel14, java.awt.BorderLayout.CENTER);
 
-        resultatSaison.addTab("Présentation", panelSaisonPresentation);
+    resultatSaison.addTab("Présentation", panelSaisonPresentation);
 
-        panelSaisonRepartition.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelSaisonRepartitionMouseClicked(evt);
-            }
-        });
-        panelSaisonRepartition.setLayout(new java.awt.BorderLayout());
+    panelSaisonRepartition.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            panelSaisonRepartitionMouseClicked(evt);
+        }
+    });
+    panelSaisonRepartition.setLayout(new java.awt.BorderLayout());
 
-        labelSaison2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelSaison2.setText("Saison 1");
-        labelSaison2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelTitre2.add(labelSaison2);
+    labelSaison2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    labelSaison2.setText("Saison 1");
+    labelSaison2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    panelTitre2.add(labelSaison2);
 
-        panelSaisonRepartition.add(panelTitre2, java.awt.BorderLayout.NORTH);
+    panelSaisonRepartition.add(panelTitre2, java.awt.BorderLayout.NORTH);
 
-        jPanel85.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel85.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel85MouseClicked(evt);
-            }
-        });
-        jPanel85.setLayout(new javax.swing.BoxLayout(jPanel85, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel85.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel85.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jPanel85MouseClicked(evt);
+        }
+    });
+    jPanel85.setLayout(new javax.swing.BoxLayout(jPanel85, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel86.setLayout(new javax.swing.BoxLayout(jPanel86, javax.swing.BoxLayout.Y_AXIS));
+    jPanel86.setLayout(new javax.swing.BoxLayout(jPanel86, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel87.setLayout(new javax.swing.BoxLayout(jPanel87, javax.swing.BoxLayout.Y_AXIS));
+    jPanel87.setLayout(new javax.swing.BoxLayout(jPanel87, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel25.setText("Graphe de répartition de personnage dans l'épisode:");
-        jPanel87.add(jLabel25);
+    jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel25.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel25.setText("Graphe de répartition de personnage dans l'épisode:");
+    jPanel87.add(jLabel25);
 
-        jLabel117.setText("dd");
-        jLabel117.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel87.add(jLabel117);
+    jLabel117.setText("dd");
+    jLabel117.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel87.add(jLabel117);
 
-        jPanel86.add(jPanel87);
+    jPanel86.add(jPanel87);
 
-        jPanel85.add(jPanel86);
+    jPanel85.add(jPanel86);
 
-        panelSaisonRepartition.add(jPanel85, java.awt.BorderLayout.CENTER);
+    panelSaisonRepartition.add(jPanel85, java.awt.BorderLayout.CENTER);
 
-        resultatSaison.addTab("Répartition de répliques", panelSaisonRepartition);
+    resultatSaison.addTab("Répartition de répliques", panelSaisonRepartition);
 
-        panelSaisonDialogue.setLayout(new java.awt.BorderLayout());
+    panelSaisonDialogue.setLayout(new java.awt.BorderLayout());
 
-        labelSaison3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelSaison3.setText("Saison 1");
-        labelSaison3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel89.add(labelSaison3);
+    labelSaison3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    labelSaison3.setText("Saison 1");
+    labelSaison3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jPanel89.add(labelSaison3);
 
-        panelSaisonDialogue.add(jPanel89, java.awt.BorderLayout.NORTH);
+    panelSaisonDialogue.add(jPanel89, java.awt.BorderLayout.NORTH);
 
-        jPanel90.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel90.setLayout(new javax.swing.BoxLayout(jPanel90, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel90.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel90.setLayout(new javax.swing.BoxLayout(jPanel90, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel91.setLayout(new javax.swing.BoxLayout(jPanel91, javax.swing.BoxLayout.Y_AXIS));
+    jPanel91.setLayout(new javax.swing.BoxLayout(jPanel91, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel92.setLayout(new javax.swing.BoxLayout(jPanel92, javax.swing.BoxLayout.Y_AXIS));
+    jPanel92.setLayout(new javax.swing.BoxLayout(jPanel92, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel29.setText("Dialogue entre personnages:");
-        jPanel92.add(jLabel29);
+    jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel29.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel29.setText("Dialogue entre personnages:");
+    jPanel92.add(jLabel29);
 
-        jLabel118.setText("<graphe>");
-        jLabel118.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel92.add(jLabel118);
+    jLabel118.setText("<graphe>");
+    jLabel118.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel92.add(jLabel118);
 
-        jPanel91.add(jPanel92);
+    jPanel91.add(jPanel92);
 
-        jPanel90.add(jPanel91);
+    jPanel90.add(jPanel91);
 
-        panelSaisonDialogue.add(jPanel90, java.awt.BorderLayout.CENTER);
+    panelSaisonDialogue.add(jPanel90, java.awt.BorderLayout.CENTER);
 
-        resultatSaison.addTab("Dialogue entre personnages", panelSaisonDialogue);
+    resultatSaison.addTab("Dialogue entre personnages", panelSaisonDialogue);
 
-        resultats.add(resultatSaison, "SAISON");
+    resultats.add(resultatSaison, "SAISON");
 
-        resultatEpisode.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                resultatEpisodeMouseClicked(evt);
-            }
-        });
+    resultatEpisode.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            resultatEpisodeMouseClicked(evt);
+        }
+    });
 
-        panelEpisodePresentation.setLayout(new java.awt.BorderLayout());
+    panelEpisodePresentation.setLayout(new java.awt.BorderLayout());
 
-        labelEpisode.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelEpisode.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
-        labelEpisode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel6.add(labelEpisode);
+    labelEpisode.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    labelEpisode.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
+    labelEpisode.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jPanel6.add(labelEpisode);
 
-        panelEpisodePresentation.add(jPanel6, java.awt.BorderLayout.NORTH);
+    panelEpisodePresentation.add(jPanel6, java.awt.BorderLayout.NORTH);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel49.setLayout(new javax.swing.BoxLayout(jPanel49, javax.swing.BoxLayout.Y_AXIS));
+    jPanel49.setLayout(new javax.swing.BoxLayout(jPanel49, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel50.setLayout(new javax.swing.BoxLayout(jPanel50, javax.swing.BoxLayout.Y_AXIS));
+    jPanel50.setLayout(new javax.swing.BoxLayout(jPanel50, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("Nombre de répliques:");
-        jPanel50.add(jLabel6);
+    jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel6.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel6.setText("Nombre de répliques:");
+    jPanel50.add(jLabel6);
 
-        jLabel73.setText("265");
-        jLabel73.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel50.add(jLabel73);
+    jLabel73.setText("265");
+    jLabel73.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel50.add(jLabel73);
 
-        jPanel49.add(jPanel50);
+    jPanel49.add(jPanel50);
 
-        jPanel51.setLayout(new javax.swing.BoxLayout(jPanel51, javax.swing.BoxLayout.Y_AXIS));
+    jPanel51.setLayout(new javax.swing.BoxLayout(jPanel51, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel74.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel74.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel74.setText("Personnages impliqués :");
-        jPanel51.add(jLabel74);
+    jLabel74.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel74.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel74.setText("Personnages impliqués :");
+    jPanel51.add(jLabel74);
 
-        jLabel75.setText("Monica, Joey, Chandler, Phoede, Ross, Rachel");
-        jLabel75.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel51.add(jLabel75);
+    jLabel75.setText("Monica, Joey, Chandler, Phoede, Ross, Rachel");
+    jLabel75.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel51.add(jLabel75);
 
-        jPanel49.add(jPanel51);
+    jPanel49.add(jPanel51);
 
-        jPanel62.setLayout(new javax.swing.BoxLayout(jPanel62, javax.swing.BoxLayout.Y_AXIS));
+    jPanel62.setLayout(new javax.swing.BoxLayout(jPanel62, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel78.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel78.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel78.setText("Top 10 des mots les plus répétés:");
-        jPanel62.add(jLabel78);
+    jLabel78.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel78.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel78.setText("Top 10 des mots les plus répétés:");
+    jPanel62.add(jLabel78);
 
-        jLabel79.setText("out, know, like, paul, right, well, if, guy, go, or");
-        jLabel79.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel62.add(jLabel79);
+    jLabel79.setText("out, know, like, paul, right, well, if, guy, go, or");
+    jLabel79.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel62.add(jLabel79);
 
-        jPanel49.add(jPanel62);
+    jPanel49.add(jPanel62);
 
-        jPanel7.add(jPanel49);
+    jPanel7.add(jPanel49);
 
-        panelEpisodePresentation.add(jPanel7, java.awt.BorderLayout.CENTER);
+    panelEpisodePresentation.add(jPanel7, java.awt.BorderLayout.CENTER);
 
-        resultatEpisode.addTab("Présentation", panelEpisodePresentation);
+    resultatEpisode.addTab("Présentation", panelEpisodePresentation);
 
-        panelEpisodeRepartition.setLayout(new java.awt.BorderLayout());
+    panelEpisodeRepartition.setLayout(new java.awt.BorderLayout());
 
-        labelEpisode2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelEpisode2.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
-        labelEpisode2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel15.add(labelEpisode2);
+    labelEpisode2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    labelEpisode2.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
+    labelEpisode2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jPanel15.add(labelEpisode2);
 
-        panelEpisodeRepartition.add(jPanel15, java.awt.BorderLayout.NORTH);
+    panelEpisodeRepartition.add(jPanel15, java.awt.BorderLayout.NORTH);
 
-        jPanel65.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel65.setLayout(new javax.swing.BoxLayout(jPanel65, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel65.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel65.setLayout(new javax.swing.BoxLayout(jPanel65, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel66.setLayout(new javax.swing.BoxLayout(jPanel66, javax.swing.BoxLayout.Y_AXIS));
+    jPanel66.setLayout(new javax.swing.BoxLayout(jPanel66, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel67.setLayout(new javax.swing.BoxLayout(jPanel67, javax.swing.BoxLayout.Y_AXIS));
+    jPanel67.setLayout(new javax.swing.BoxLayout(jPanel67, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel7.setText("Graphe de répartition de personnage dans l'épisode:");
-        jPanel67.add(jLabel7);
+    jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel7.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel7.setText("Graphe de répartition de personnage dans l'épisode:");
+    jPanel67.add(jLabel7);
 
-        jLabel94.setText("dd");
-        jLabel94.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel67.add(jLabel94);
+    jLabel94.setText("dd");
+    jLabel94.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel67.add(jLabel94);
 
-        jPanel66.add(jPanel67);
+    jPanel66.add(jPanel67);
 
-        jPanel65.add(jPanel66);
+    jPanel65.add(jPanel66);
 
-        panelEpisodeRepartition.add(jPanel65, java.awt.BorderLayout.CENTER);
+    panelEpisodeRepartition.add(jPanel65, java.awt.BorderLayout.CENTER);
 
-        resultatEpisode.addTab("Répartition de répliques", panelEpisodeRepartition);
+    resultatEpisode.addTab("Répartition de répliques", panelEpisodeRepartition);
 
-        panelEpisodeDialogue.setLayout(new java.awt.BorderLayout());
+    panelEpisodeDialogue.setLayout(new java.awt.BorderLayout());
 
-        labelEpisode3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        labelEpisode3.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
-        labelEpisode3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel74.add(labelEpisode3);
+    labelEpisode3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    labelEpisode3.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
+    labelEpisode3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jPanel74.add(labelEpisode3);
 
-        panelEpisodeDialogue.add(jPanel74, java.awt.BorderLayout.NORTH);
+    panelEpisodeDialogue.add(jPanel74, java.awt.BorderLayout.NORTH);
 
-        jPanel75.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel75.setLayout(new javax.swing.BoxLayout(jPanel75, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel75.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel75.setLayout(new javax.swing.BoxLayout(jPanel75, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel76.setLayout(new javax.swing.BoxLayout(jPanel76, javax.swing.BoxLayout.Y_AXIS));
+    jPanel76.setLayout(new javax.swing.BoxLayout(jPanel76, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel77.setLayout(new javax.swing.BoxLayout(jPanel77, javax.swing.BoxLayout.Y_AXIS));
+    jPanel77.setLayout(new javax.swing.BoxLayout(jPanel77, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel21.setText("Dialogue entre personnages:");
-        jPanel77.add(jLabel21);
+    jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel21.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel21.setText("Dialogue entre personnages:");
+    jPanel77.add(jLabel21);
 
-        jLabel105.setText("<graphe>");
-        jLabel105.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel77.add(jLabel105);
+    jLabel105.setText("<graphe>");
+    jLabel105.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel77.add(jLabel105);
 
-        jPanel76.add(jPanel77);
+    jPanel76.add(jPanel77);
 
-        jPanel75.add(jPanel76);
+    jPanel75.add(jPanel76);
 
-        panelEpisodeDialogue.add(jPanel75, java.awt.BorderLayout.CENTER);
+    panelEpisodeDialogue.add(jPanel75, java.awt.BorderLayout.CENTER);
 
-        resultatEpisode.addTab("Dialogue entre personnages", panelEpisodeDialogue);
+    resultatEpisode.addTab("Dialogue entre personnages", panelEpisodeDialogue);
 
-        resultats.add(resultatEpisode, "EPISODE");
+    resultats.add(resultatEpisode, "EPISODE");
 
-        resultSansRecherche.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        resultSansRecherche.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        resultSansRecherche.setLayout(new javax.swing.BoxLayout(resultSansRecherche, javax.swing.BoxLayout.Y_AXIS));
+    resultSansRecherche.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    resultSansRecherche.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    resultSansRecherche.setLayout(new javax.swing.BoxLayout(resultSansRecherche, javax.swing.BoxLayout.Y_AXIS));
 
-        labelSansRechercheSentence.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        labelSansRechercheSentence.setText("Retrouvez via la recherche ci-dessus des statistiques détaillées sur des personnages typiques de la série, sur des répliques, ....");
-        resultSansRecherche.add(labelSansRechercheSentence);
+    labelSansRechercheSentence.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+    labelSansRechercheSentence.setText("Retrouvez via la recherche ci-dessus des statistiques détaillées sur des personnages typiques de la série, sur des répliques, ....");
+    resultSansRecherche.add(labelSansRechercheSentence);
 
-        labelSansRechercheExemple.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        labelSansRechercheExemple.setText("Exemple :");
-        resultSansRecherche.add(labelSansRechercheExemple);
+    labelSansRechercheExemple.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+    labelSansRechercheExemple.setText("Exemple :");
+    resultSansRecherche.add(labelSansRechercheExemple);
 
-        javax.swing.GroupLayout imageMotsCaracteristiquesLayout = new javax.swing.GroupLayout(imageMotsCaracteristiques);
-        imageMotsCaracteristiques.setLayout(imageMotsCaracteristiquesLayout);
-        imageMotsCaracteristiquesLayout.setHorizontalGroup(
-            imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
-        );
-        imageMotsCaracteristiquesLayout.setVerticalGroup(
-            imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 313, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout imageMotsCaracteristiquesLayout = new javax.swing.GroupLayout(imageMotsCaracteristiques);
+    imageMotsCaracteristiques.setLayout(imageMotsCaracteristiquesLayout);
+    imageMotsCaracteristiquesLayout.setHorizontalGroup(
+        imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 732, Short.MAX_VALUE)
+    );
+    imageMotsCaracteristiquesLayout.setVerticalGroup(
+        imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 313, Short.MAX_VALUE)
+    );
 
-        resultSansRecherche.add(imageMotsCaracteristiques);
+    resultSansRecherche.add(imageMotsCaracteristiques);
 
-        resultats.add(resultSansRecherche, "SANSRECHERCHE");
+    resultats.add(resultSansRecherche, "SANSRECHERCHE");
 
-        panelPersonnageProfil.setLayout(new java.awt.BorderLayout());
+    panelPersonnageProfil.setLayout(new java.awt.BorderLayout());
 
-        nomPersonnage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nomPersonnage.setText("Joey Tribbiani");
-        nomPersonnage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(nomPersonnage);
+    nomPersonnage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    nomPersonnage.setText("Joey Tribbiani");
+    nomPersonnage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jPanel4.add(nomPersonnage);
 
-        panelPersonnageProfil.add(jPanel4, java.awt.BorderLayout.NORTH);
+    panelPersonnageProfil.add(jPanel4, java.awt.BorderLayout.NORTH);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout imagePersonnageLayout = new javax.swing.GroupLayout(imagePersonnage);
-        imagePersonnage.setLayout(imagePersonnageLayout);
-        imagePersonnageLayout.setHorizontalGroup(
-            imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
-        );
-        imagePersonnageLayout.setVerticalGroup(
-            imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout imagePersonnageLayout = new javax.swing.GroupLayout(imagePersonnage);
+    imagePersonnage.setLayout(imagePersonnageLayout);
+    imagePersonnageLayout.setHorizontalGroup(
+        imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 305, Short.MAX_VALUE)
+    );
+    imagePersonnageLayout.setVerticalGroup(
+        imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 280, Short.MAX_VALUE)
+    );
 
-        jPanel5.add(imagePersonnage);
-        jPanel5.add(filler1);
+    jPanel5.add(imagePersonnage);
+    jPanel5.add(filler1);
 
-        jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.Y_AXIS));
+    jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.Y_AXIS));
+    jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Acteur:");
-        jPanel18.add(jLabel5);
+    jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel5.setText("Acteur:");
+    jPanel18.add(jLabel5);
 
-        jLabel39.setText("Matt Leblanc");
-        jLabel39.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel18.add(jLabel39);
+    jLabel39.setText("Matt Leblanc");
+    jLabel39.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel18.add(jLabel39);
 
-        jPanel17.add(jPanel18);
+    jPanel17.add(jPanel18);
 
-        jPanel19.setLayout(new javax.swing.BoxLayout(jPanel19, javax.swing.BoxLayout.Y_AXIS));
+    jPanel19.setLayout(new javax.swing.BoxLayout(jPanel19, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel35.setText("Nationalité:");
-        jPanel19.add(jLabel35);
+    jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel35.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel35.setText("Nationalité:");
+    jPanel19.add(jLabel35);
 
-        jLabel40.setText("Américain");
-        jLabel40.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel19.add(jLabel40);
+    jLabel40.setText("Américain");
+    jLabel40.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel19.add(jLabel40);
 
-        jPanel17.add(jPanel19);
+    jPanel17.add(jPanel19);
 
-        jPanel20.setLayout(new javax.swing.BoxLayout(jPanel20, javax.swing.BoxLayout.Y_AXIS));
+    jPanel20.setLayout(new javax.swing.BoxLayout(jPanel20, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel37.setText("Age:");
-        jPanel20.add(jLabel37);
+    jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel37.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel37.setText("Age:");
+    jPanel20.add(jLabel37);
 
-        jLabel41.setText("57 ans");
-        jLabel41.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel20.add(jLabel41);
+    jLabel41.setText("57 ans");
+    jLabel41.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel20.add(jLabel41);
 
-        jPanel17.add(jPanel20);
+    jPanel17.add(jPanel20);
 
-        jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.Y_AXIS));
+    jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel38.setText("Date de naissance:");
-        jPanel21.add(jLabel38);
+    jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel38.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel38.setText("Date de naissance:");
+    jPanel21.add(jLabel38);
 
-        jLabel42.setText("25 juillet 1987 (Etats-Unis)");
-        jLabel42.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel21.add(jLabel42);
+    jLabel42.setText("25 juillet 1987 (Etats-Unis)");
+    jLabel42.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel21.add(jLabel42);
 
-        jPanel17.add(jPanel21);
+    jPanel17.add(jPanel21);
 
-        jPanel22.setLayout(new javax.swing.BoxLayout(jPanel22, javax.swing.BoxLayout.Y_AXIS));
+    jPanel22.setLayout(new javax.swing.BoxLayout(jPanel22, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel43.setText("Centre d'intêrets et mots caractéristiques:");
-        jPanel22.add(jLabel43);
+    jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel43.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel43.setText("Centre d'intêrets et mots caractéristiques:");
+    jPanel22.add(jLabel43);
 
-        jLabel44.setText("audition, actor, movie, doin, tribbiani, fridge, worry, scene, heyhey, ball");
-        jLabel44.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel22.add(jLabel44);
+    jLabel44.setText("audition, actor, movie, doin, tribbiani, fridge, worry, scene, heyhey, ball");
+    jLabel44.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel22.add(jLabel44);
 
-        jPanel17.add(jPanel22);
+    jPanel17.add(jPanel22);
 
-        jPanel23.setLayout(new javax.swing.BoxLayout(jPanel23, javax.swing.BoxLayout.Y_AXIS));
+    jPanel23.setLayout(new javax.swing.BoxLayout(jPanel23, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel45.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel45.setText("Mots fréquents:");
-        jPanel23.add(jLabel45);
+    jLabel45.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel45.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel45.setText("Mots fréquents:");
+    jPanel23.add(jLabel45);
 
-        jLabel46.setText("guy, time, listen, starts, entering, ya, gotta, wanna, pheebs, rach");
-        jLabel46.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel23.add(jLabel46);
+    jLabel46.setText("guy, time, listen, starts, entering, ya, gotta, wanna, pheebs, rach");
+    jLabel46.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel23.add(jLabel46);
 
-        jPanel17.add(jPanel23);
+    jPanel17.add(jPanel23);
 
-        jPanel5.add(jPanel17);
+    jPanel5.add(jPanel17);
 
-        panelPersonnageProfil.add(jPanel5, java.awt.BorderLayout.CENTER);
+    panelPersonnageProfil.add(jPanel5, java.awt.BorderLayout.CENTER);
 
-        resultatPersonnage.addTab("Profil", panelPersonnageProfil);
+    resultatPersonnage.addTab("Profil", panelPersonnageProfil);
 
-        jPanel48.setLayout(new javax.swing.BoxLayout(jPanel48, javax.swing.BoxLayout.Y_AXIS));
+    jPanel48.setLayout(new javax.swing.BoxLayout(jPanel48, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel71.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel71.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel71.setText("Réplique favorite:");
-        jPanel48.add(jLabel71);
+    jLabel71.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel71.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel71.setText("Réplique favorite:");
+    jPanel48.add(jLabel71);
 
-        jLabel72.setText("<liaison avec partie analyse langagière + lien vers celle-ci : voir <ici> pour les autres répliques>");
-        jLabel72.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel48.add(jLabel72);
+    jLabel72.setText("<liaison avec partie analyse langagière + lien vers celle-ci : voir <ici> pour les autres répliques>");
+    jLabel72.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel48.add(jLabel72);
 
-        panelPersonnageRepliqueFavorite.add(jPanel48);
+    panelPersonnageRepliqueFavorite.add(jPanel48);
 
-        resultatPersonnage.addTab("Réplique favorite", panelPersonnageRepliqueFavorite);
+    resultatPersonnage.addTab("Réplique favorite", panelPersonnageRepliqueFavorite);
 
-        panelPersonnageInteractions.setLayout(new java.awt.BorderLayout());
+    panelPersonnageInteractions.setLayout(new java.awt.BorderLayout());
 
-        nomPersonnage1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nomPersonnage1.setText("Relation de Joey");
-        nomPersonnage1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel24.add(nomPersonnage1);
+    nomPersonnage1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    nomPersonnage1.setText("Relation de Joey");
+    nomPersonnage1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jPanel24.add(nomPersonnage1);
 
-        panelPersonnageInteractions.add(jPanel24, java.awt.BorderLayout.NORTH);
+    panelPersonnageInteractions.add(jPanel24, java.awt.BorderLayout.NORTH);
 
-        jPanel25.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel25.setLayout(new javax.swing.BoxLayout(jPanel25, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel25.add(filler2);
+    jPanel25.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    jPanel25.setLayout(new javax.swing.BoxLayout(jPanel25, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel25.add(filler2);
 
-        jPanel26.setLayout(new javax.swing.BoxLayout(jPanel26, javax.swing.BoxLayout.Y_AXIS));
+    jPanel26.setLayout(new javax.swing.BoxLayout(jPanel26, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel27.setLayout(new javax.swing.BoxLayout(jPanel27, javax.swing.BoxLayout.Y_AXIS));
+    jPanel27.setLayout(new javax.swing.BoxLayout(jPanel27, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel36.setText("Joey interagit le plus avec :");
-        jPanel27.add(jLabel36);
+    jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel36.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel36.setText("Joey interagit le plus avec :");
+    jPanel27.add(jLabel36);
 
-        jLabel47.setText("Joey a interagit X fois avec Chandler");
-        jLabel47.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel27.add(jLabel47);
+    jLabel47.setText("Joey a interagit X fois avec Chandler");
+    jLabel47.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel27.add(jLabel47);
 
-        jPanel26.add(jPanel27);
+    jPanel26.add(jPanel27);
 
-        jPanel28.setLayout(new javax.swing.BoxLayout(jPanel28, javax.swing.BoxLayout.Y_AXIS));
+    jPanel28.setLayout(new javax.swing.BoxLayout(jPanel28, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel48.setText("Fréquence de mots (quantité et taux):");
-        jPanel28.add(jLabel48);
+    jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel48.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel48.setText("Fréquence de mots (quantité et taux):");
+    jPanel28.add(jLabel48);
 
-        jLabel49.setText("...");
-        jLabel49.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel28.add(jLabel49);
+    jLabel49.setText("...");
+    jLabel49.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel28.add(jLabel49);
 
-        jPanel26.add(jPanel28);
+    jPanel26.add(jPanel28);
 
-        jPanel29.setLayout(new javax.swing.BoxLayout(jPanel29, javax.swing.BoxLayout.Y_AXIS));
+    jPanel29.setLayout(new javax.swing.BoxLayout(jPanel29, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel50.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel50.setText("Temps de parole par saison (nb réplique et nb mots) (+ taux) + courbe tendance de parole:");
-        jPanel29.add(jLabel50);
+    jLabel50.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel50.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel50.setText("Temps de parole par saison (nb réplique et nb mots) (+ taux) + courbe tendance de parole:");
+    jPanel29.add(jLabel50);
 
-        jLabel51.setText("...");
-        jLabel51.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel29.add(jLabel51);
+    jLabel51.setText("...");
+    jLabel51.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel29.add(jLabel51);
 
-        jPanel26.add(jPanel29);
+    jPanel26.add(jPanel29);
 
-        jPanel30.setLayout(new javax.swing.BoxLayout(jPanel30, javax.swing.BoxLayout.Y_AXIS));
+    jPanel30.setLayout(new javax.swing.BoxLayout(jPanel30, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel52.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel52.setText("Taux de présence dans la scène:");
-        jPanel30.add(jLabel52);
+    jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel52.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel52.setText("Taux de présence dans la scène:");
+    jPanel30.add(jLabel52);
 
-        jLabel53.setText("...");
-        jLabel53.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel30.add(jLabel53);
+    jLabel53.setText("...");
+    jLabel53.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel30.add(jLabel53);
 
-        jPanel26.add(jPanel30);
+    jPanel26.add(jPanel30);
 
-        jPanel31.setLayout(new javax.swing.BoxLayout(jPanel31, javax.swing.BoxLayout.Y_AXIS));
+    jPanel31.setLayout(new javax.swing.BoxLayout(jPanel31, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel54.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel54.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel54.setText("Fréquence de répliques (quantité et taux):");
-        jPanel31.add(jLabel54);
+    jLabel54.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+    jLabel54.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel54.setText("Fréquence de répliques (quantité et taux):");
+    jPanel31.add(jLabel54);
 
-        jLabel55.setText("...");
-        jLabel55.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel31.add(jLabel55);
+    jLabel55.setText("...");
+    jLabel55.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel31.add(jLabel55);
 
-        jPanel26.add(jPanel31);
+    jPanel26.add(jPanel31);
 
-        jPanel25.add(jPanel26);
+    jPanel25.add(jPanel26);
 
-        panelPersonnageInteractions.add(jPanel25, java.awt.BorderLayout.CENTER);
+    panelPersonnageInteractions.add(jPanel25, java.awt.BorderLayout.CENTER);
 
-        resultatPersonnage.addTab("Interactions", panelPersonnageInteractions);
+    resultatPersonnage.addTab("Interactions", panelPersonnageInteractions);
 
-        resultats.add(resultatPersonnage, "PERSONNAGE");
-        resultatPersonnage.getAccessibleContext().setAccessibleName("tab");
+    resultats.add(resultatPersonnage, "PERSONNAGE");
+    resultatPersonnage.getAccessibleContext().setAccessibleName("tab");
 
-        resultatMot.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    resultatMot.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        panelMotUtilisation.setLayout(new java.awt.BorderLayout());
+    panelMotUtilisation.setLayout(new java.awt.BorderLayout());
 
-        panelMotCourant1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+    panelMotCourant1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
 
-        labelMotCourant1.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
-        labelMotCourant1.setText("\"Hello\"");
-        labelMotCourant1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelMotCourant1.add(labelMotCourant1);
+    labelMotCourant1.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+    labelMotCourant1.setText("\"Hello\"");
+    labelMotCourant1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    panelMotCourant1.add(labelMotCourant1);
 
-        panelMotUtilisation.add(panelMotCourant1, java.awt.BorderLayout.NORTH);
+    panelMotUtilisation.add(panelMotCourant1, java.awt.BorderLayout.NORTH);
 
-        panelResultatMotUtilisation.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 20, 40));
-        panelResultatMotUtilisation.setLayout(new java.awt.BorderLayout());
+    panelResultatMotUtilisation.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 20, 40));
+    panelResultatMotUtilisation.setLayout(new java.awt.BorderLayout());
 
-        panelPersonnageReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        panelPersonnageReplique.setLayout(new javax.swing.BoxLayout(panelPersonnageReplique, javax.swing.BoxLayout.Y_AXIS));
+    panelPersonnageReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+    panelPersonnageReplique.setLayout(new javax.swing.BoxLayout(panelPersonnageReplique, javax.swing.BoxLayout.Y_AXIS));
 
-        labelPersonnageReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        labelPersonnageReplique.setForeground(new java.awt.Color(153, 153, 153));
-        labelPersonnageReplique.setText("Personnage ayant le plus utilisé cette réplique :");
-        panelPersonnageReplique.add(labelPersonnageReplique);
+    labelPersonnageReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    labelPersonnageReplique.setForeground(new java.awt.Color(153, 153, 153));
+    labelPersonnageReplique.setText("Personnage ayant le plus utilisé cette réplique :");
+    panelPersonnageReplique.add(labelPersonnageReplique);
 
-        valeurPersonnageReplique.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        valeurPersonnageReplique.setText("Chandler (57 occurences)");
-        valeurPersonnageReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        panelPersonnageReplique.add(valeurPersonnageReplique);
+    valeurPersonnageReplique.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+    valeurPersonnageReplique.setText("Chandler (57 occurences)");
+    valeurPersonnageReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    panelPersonnageReplique.add(valeurPersonnageReplique);
 
-        panelResultatMotUtilisation.add(panelPersonnageReplique, java.awt.BorderLayout.NORTH);
+    panelResultatMotUtilisation.add(panelPersonnageReplique, java.awt.BorderLayout.NORTH);
 
-        panelDetailReplique.setLayout(new java.awt.BorderLayout());
+    panelDetailReplique.setLayout(new java.awt.BorderLayout());
 
-        labelDetailReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        labelDetailReplique.setForeground(new java.awt.Color(153, 153, 153));
-        labelDetailReplique.setText("Détails des répliques :");
-        panelDetailReplique.add(labelDetailReplique, java.awt.BorderLayout.NORTH);
+    labelDetailReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    labelDetailReplique.setForeground(new java.awt.Color(153, 153, 153));
+    labelDetailReplique.setText("Détails des répliques :");
+    panelDetailReplique.add(labelDetailReplique, java.awt.BorderLayout.NORTH);
 
-        tableDetailReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        tableDetailReplique.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1)},
-                {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1)},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Réplique", "Personnage", "Saison", "Épisode"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+    tableDetailReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    tableDetailReplique.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1)},
+            {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1)},
+            {null, null, null, null},
+            {null, null, null, null}
+        },
+        new String [] {
+            "Réplique", "Personnage", "Saison", "Épisode"
+        }
+    ) {
+        Class[] types = new Class [] {
+            java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+        };
+        boolean[] canEdit = new boolean [] {
+            false, false, false, false
+        };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        public Class getColumnClass(int columnIndex) {
+            return types [columnIndex];
+        }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tableDetailReplique.setRowHeight(25);
-        tableDetailReplique.setShowGrid(true);
-        tableDetailReplique.setShowVerticalLines(false);
-        scrollPaneDetailReplique.setViewportView(tableDetailReplique);
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    tableDetailReplique.setRowHeight(25);
+    tableDetailReplique.setShowGrid(true);
+    tableDetailReplique.setShowVerticalLines(false);
+    scrollPaneDetailReplique.setViewportView(tableDetailReplique);
 
-        panelDetailReplique.add(scrollPaneDetailReplique, java.awt.BorderLayout.CENTER);
+    panelDetailReplique.add(scrollPaneDetailReplique, java.awt.BorderLayout.CENTER);
 
-        panelResultatMotUtilisation.add(panelDetailReplique, java.awt.BorderLayout.CENTER);
+    panelResultatMotUtilisation.add(panelDetailReplique, java.awt.BorderLayout.CENTER);
 
-        panelMotUtilisation.add(panelResultatMotUtilisation, java.awt.BorderLayout.CENTER);
+    panelMotUtilisation.add(panelResultatMotUtilisation, java.awt.BorderLayout.CENTER);
 
-        resultatMot.addTab("Personnage & Réplique", panelMotUtilisation);
+    resultatMot.addTab("Personnage & Réplique", panelMotUtilisation);
 
-        panelMotRepartitionSerie.setLayout(new java.awt.BorderLayout());
+    panelMotRepartitionSerie.setLayout(new java.awt.BorderLayout());
 
-        labelMotCourant2.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
-        labelMotCourant2.setText("\"Hello\"");
-        labelMotCourant2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelMotCourant2.add(labelMotCourant2);
+    labelMotCourant2.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+    labelMotCourant2.setText("\"Hello\"");
+    labelMotCourant2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    panelMotCourant2.add(labelMotCourant2);
 
-        panelMotRepartitionSerie.add(panelMotCourant2, java.awt.BorderLayout.NORTH);
+    panelMotRepartitionSerie.add(panelMotCourant2, java.awt.BorderLayout.NORTH);
 
-        jPanel35.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 20, 40));
-        jPanel35.setLayout(new javax.swing.BoxLayout(jPanel35, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel35.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 20, 40));
+    jPanel35.setLayout(new javax.swing.BoxLayout(jPanel35, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel36.setLayout(new java.awt.BorderLayout());
+    jPanel36.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+    jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel37.setLayout(new javax.swing.BoxLayout(jPanel37, javax.swing.BoxLayout.Y_AXIS));
+    jPanel37.setLayout(new javax.swing.BoxLayout(jPanel37, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel58.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel58.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel58.setText("Taux d'utilisation globale :");
-        jPanel37.add(jLabel58);
+    jLabel58.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel58.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel58.setText("Taux d'utilisation globale :");
+    jPanel37.add(jLabel58);
 
-        jLabel59.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel59.setText("Le mot \"Hello\" a été employé 310 fois, 1% de tous les mots de la série");
-        jLabel59.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel37.add(jLabel59);
+    jLabel59.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel59.setText("Le mot \"Hello\" a été employé 310 fois, 1% de tous les mots de la série");
+    jLabel59.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel37.add(jLabel59);
 
-        jPanel1.add(jPanel37);
+    jPanel1.add(jPanel37);
 
-        jPanel38.setLayout(new javax.swing.BoxLayout(jPanel38, javax.swing.BoxLayout.Y_AXIS));
+    jPanel38.setLayout(new javax.swing.BoxLayout(jPanel38, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel60.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel60.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel60.setText("Taux d'utilisation par réplique :");
-        jPanel38.add(jLabel60);
+    jLabel60.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel60.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel60.setText("Taux d'utilisation par réplique :");
+    jPanel38.add(jLabel60);
 
-        jLabel61.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel61.setText("Le mot \"Hello\" se retrouve dans 298 répliques différentes, soit dans 1% des répliques de la série");
-        jLabel61.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel38.add(jLabel61);
+    jLabel61.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel61.setText("Le mot \"Hello\" se retrouve dans 298 répliques différentes, soit dans 1% des répliques de la série");
+    jLabel61.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel38.add(jLabel61);
 
-        jPanel1.add(jPanel38);
+    jPanel1.add(jPanel38);
 
-        jPanel57.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        jPanel57.setLayout(new javax.swing.BoxLayout(jPanel57, javax.swing.BoxLayout.Y_AXIS));
+    jPanel57.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+    jPanel57.setLayout(new javax.swing.BoxLayout(jPanel57, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel82.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel82.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel82.setText("Meilleur saison :");
-        jPanel57.add(jLabel82);
+    jLabel82.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel82.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel82.setText("Meilleur saison :");
+    jPanel57.add(jLabel82);
 
-        jLabel83.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel83.setText("Le mot \"Hello\" a été employé 51 fois en saison 1 (15% de toutes ses utilisations) (voir graphique ci-dessous)");
-        jLabel83.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel57.add(jLabel83);
+    jLabel83.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel83.setText("Le mot \"Hello\" a été employé 51 fois en saison 1 (15% de toutes ses utilisations) (voir graphique ci-dessous)");
+    jLabel83.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel57.add(jLabel83);
 
-        jPanel1.add(jPanel57);
+    jPanel1.add(jPanel57);
 
-        jPanel36.add(jPanel1, java.awt.BorderLayout.NORTH);
+    jPanel36.add(jPanel1, java.awt.BorderLayout.NORTH);
 
-        jPanel39.setLayout(new java.awt.BorderLayout());
+    jPanel39.setLayout(new java.awt.BorderLayout());
 
-        jLabel63.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel63.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel63.setText("Tendance d'utilisation à travers les saison :");
-        jPanel39.add(jLabel63, java.awt.BorderLayout.NORTH);
+    jLabel63.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel63.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel63.setText("Tendance d'utilisation à travers les saison :");
+    jPanel39.add(jLabel63, java.awt.BorderLayout.NORTH);
 
-        jLabel64.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel64.setText("* Les mots prononcés en même temps par plusieurs personnage sont comptés une seule fois");
-        jLabel64.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel39.add(jLabel64, java.awt.BorderLayout.SOUTH);
+    jLabel64.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel64.setText("* Les mots prononcés en même temps par plusieurs personnage sont comptés une seule fois");
+    jLabel64.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel39.add(jLabel64, java.awt.BorderLayout.SOUTH);
 
-        jPanel36.add(jPanel39, java.awt.BorderLayout.CENTER);
+    jPanel36.add(jPanel39, java.awt.BorderLayout.CENTER);
 
-        jPanel35.add(jPanel36);
+    jPanel35.add(jPanel36);
 
-        panelMotRepartitionSerie.add(jPanel35, java.awt.BorderLayout.CENTER);
+    panelMotRepartitionSerie.add(jPanel35, java.awt.BorderLayout.CENTER);
 
-        resultatMot.addTab("Statistiques globales", panelMotRepartitionSerie);
+    resultatMot.addTab("Statistiques globales", panelMotRepartitionSerie);
 
-        panelMotRepartitionSaisonEtEpisode.setLayout(new java.awt.BorderLayout());
+    panelMotRepartitionSaisonEtEpisode.setLayout(new java.awt.BorderLayout());
 
-        labelMotCourant3.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
-        labelMotCourant3.setText("\"Hello\"");
-        labelMotCourant3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelMotCourant3.add(labelMotCourant3);
+    labelMotCourant3.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+    labelMotCourant3.setText("\"Hello\"");
+    labelMotCourant3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    panelMotCourant3.add(labelMotCourant3);
 
-        panelMotRepartitionSaisonEtEpisode.add(panelMotCourant3, java.awt.BorderLayout.NORTH);
+    panelMotRepartitionSaisonEtEpisode.add(panelMotCourant3, java.awt.BorderLayout.NORTH);
 
-        jPanel55.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 20, 40));
-        jPanel55.setLayout(new javax.swing.BoxLayout(jPanel55, javax.swing.BoxLayout.LINE_AXIS));
+    jPanel55.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 20, 40));
+    jPanel55.setLayout(new javax.swing.BoxLayout(jPanel55, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel56.setLayout(new java.awt.BorderLayout());
+    jPanel56.setLayout(new java.awt.BorderLayout());
 
-        jPanel63.setLayout(new java.awt.BorderLayout());
+    jPanel63.setLayout(new java.awt.BorderLayout());
 
-        jPanel9.setLayout(new java.awt.BorderLayout());
+    jPanel9.setLayout(new java.awt.BorderLayout());
 
-        jLabel92.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel92.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel92.setText("Utilisation pour un certain saison :");
-        jPanel9.add(jLabel92, java.awt.BorderLayout.NORTH);
+    jLabel92.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel92.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel92.setText("Utilisation pour un certain saison :");
+    jPanel9.add(jLabel92, java.awt.BorderLayout.NORTH);
 
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+    jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel93.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel93.setText("Sélectionnez la saison :");
-        jLabel93.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel3.add(jLabel93);
+    jLabel93.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel93.setText("Sélectionnez la saison :");
+    jLabel93.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel3.add(jLabel93);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox1);
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jPanel3.add(jComboBox1);
 
-        jPanel9.add(jPanel3, java.awt.BorderLayout.CENTER);
+    jPanel9.add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel63.add(jPanel9, java.awt.BorderLayout.NORTH);
+    jPanel63.add(jPanel9, java.awt.BorderLayout.NORTH);
 
-        jPanel56.add(jPanel63, java.awt.BorderLayout.CENTER);
+    jPanel56.add(jPanel63, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+    jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+    jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel61.setLayout(new javax.swing.BoxLayout(jPanel61, javax.swing.BoxLayout.Y_AXIS));
+    jPanel61.setLayout(new javax.swing.BoxLayout(jPanel61, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel90.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel90.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel90.setText("Utilisation pour un certain épisode:");
-        jPanel61.add(jLabel90);
+    jLabel90.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel90.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel90.setText("Utilisation pour un certain épisode:");
+    jPanel61.add(jLabel90);
 
-        jLabel91.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel91.setText("Sélectionnez l'épisode <combobox>");
-        jLabel91.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel61.add(jLabel91);
+    jLabel91.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel91.setText("Sélectionnez l'épisode <combobox>");
+    jLabel91.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel61.add(jLabel91);
 
-        jPanel2.add(jPanel61);
+    jPanel2.add(jPanel61);
 
-        jPanel58.setLayout(new javax.swing.BoxLayout(jPanel58, javax.swing.BoxLayout.Y_AXIS));
+    jPanel58.setLayout(new javax.swing.BoxLayout(jPanel58, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel84.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel84.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel84.setText("Meilleur épisode :");
-        jPanel58.add(jLabel84);
+    jLabel84.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+    jLabel84.setForeground(new java.awt.Color(153, 153, 153));
+    jLabel84.setText("Meilleur épisode :");
+    jPanel58.add(jLabel84);
 
-        jLabel85.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel85.setText("Le mot \"Hello\" a été employé 11 fois dans l'épisode 2 de la saison 5, 2% de son utilisation totale");
-        jLabel85.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel58.add(jLabel85);
+    jLabel85.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+    jLabel85.setText("Le mot \"Hello\" a été employé 11 fois dans l'épisode 2 de la saison 5, 2% de son utilisation totale");
+    jLabel85.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    jPanel58.add(jLabel85);
 
-        jPanel2.add(jPanel58);
+    jPanel2.add(jPanel58);
 
-        jPanel56.add(jPanel2, java.awt.BorderLayout.NORTH);
+    jPanel56.add(jPanel2, java.awt.BorderLayout.NORTH);
 
-        jPanel55.add(jPanel56);
+    jPanel55.add(jPanel56);
 
-        panelMotRepartitionSaisonEtEpisode.add(jPanel55, java.awt.BorderLayout.CENTER);
+    panelMotRepartitionSaisonEtEpisode.add(jPanel55, java.awt.BorderLayout.CENTER);
 
-        resultatMot.addTab("Analyse par épisode", panelMotRepartitionSaisonEtEpisode);
+    resultatMot.addTab("Analyse par épisode", panelMotRepartitionSaisonEtEpisode);
 
-        resultats.add(resultatMot, "MOT");
+    resultats.add(resultatMot, "MOT");
 
-        panelRechercheEtIndication.add(resultats, java.awt.BorderLayout.CENTER);
+    panelRechercheEtIndication.add(resultats, java.awt.BorderLayout.CENTER);
 
-        panelPageRecherche.add(panelRechercheEtIndication, java.awt.BorderLayout.CENTER);
+    panelPageRecherche.add(panelRechercheEtIndication, java.awt.BorderLayout.CENTER);
 
-        SectionRecherche.addTab("Recherche", panelPageRecherche);
+    SectionRecherche.addTab("Recherche", panelPageRecherche);
 
-        javax.swing.GroupLayout AnalyseLangagièreLayout = new javax.swing.GroupLayout(AnalyseLangagière);
-        AnalyseLangagière.setLayout(AnalyseLangagièreLayout);
-        AnalyseLangagièreLayout.setHorizontalGroup(
-            AnalyseLangagièreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 517, Short.MAX_VALUE)
-        );
-        AnalyseLangagièreLayout.setVerticalGroup(
-            AnalyseLangagièreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 262, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout AnalyseLangagièreLayout = new javax.swing.GroupLayout(AnalyseLangagière);
+    AnalyseLangagière.setLayout(AnalyseLangagièreLayout);
+    AnalyseLangagièreLayout.setHorizontalGroup(
+        AnalyseLangagièreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 517, Short.MAX_VALUE)
+    );
+    AnalyseLangagièreLayout.setVerticalGroup(
+        AnalyseLangagièreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 262, Short.MAX_VALUE)
+    );
 
-        javax.swing.GroupLayout Analyse_StatistiqueLayout = new javax.swing.GroupLayout(Analyse_Statistique);
-        Analyse_Statistique.setLayout(Analyse_StatistiqueLayout);
-        Analyse_StatistiqueLayout.setHorizontalGroup(
-            Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
-        );
-        Analyse_StatistiqueLayout.setVerticalGroup(
-            Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
-        );
+    javax.swing.GroupLayout Analyse_StatistiqueLayout = new javax.swing.GroupLayout(Analyse_Statistique);
+    Analyse_Statistique.setLayout(Analyse_StatistiqueLayout);
+    Analyse_StatistiqueLayout.setHorizontalGroup(
+        Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
+            .addGap(96, 96, 96)
+            .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(203, Short.MAX_VALUE))
+    );
+    Analyse_StatistiqueLayout.setVerticalGroup(
+        Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
+            .addGap(73, 73, 73)
+            .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(206, Short.MAX_VALUE))
+    );
 
-        SectionRecherche.addTab("Analyse Langagière", Analyse_Statistique);
-        Analyse_Statistique.getAccessibleContext().setAccessibleName("Statistique_");
+    SectionRecherche.addTab("Analyse Langagière", Analyse_Statistique);
+    Analyse_Statistique.getAccessibleContext().setAccessibleName("Statistique_");
 
-        Evolution_positivite.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    Evolution_positivite.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Evol_pos_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_pos_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_pos_imageLayout = new javax.swing.GroupLayout(Evol_pos_image);
-        Evol_pos_image.setLayout(Evol_pos_imageLayout);
-        Evol_pos_imageLayout.setHorizontalGroup(
-            Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
-        );
-        Evol_pos_imageLayout.setVerticalGroup(
-            Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_pos_imageLayout = new javax.swing.GroupLayout(Evol_pos_image);
+    Evol_pos_image.setLayout(Evol_pos_imageLayout);
+    Evol_pos_imageLayout.setHorizontalGroup(
+        Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 768, Short.MAX_VALUE)
+    );
+    Evol_pos_imageLayout.setVerticalGroup(
+        Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 358, Short.MAX_VALUE)
+    );
 
-        Evolution_positivite.add(Evol_pos_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 360));
+    Evolution_positivite.add(Evol_pos_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 360));
 
-        TexteEvolpos.setColumns(20);
-        TexteEvolpos.setRows(5);
-        TexteEvolpos.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions. Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, plus qu'à une logique progressive.");
-        ScrollEvolpos.setViewportView(TexteEvolpos);
+    TexteEvolpos.setColumns(20);
+    TexteEvolpos.setRows(5);
+    TexteEvolpos.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions. Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, plus qu'à une logique progressive.");
+    ScrollEvolpos.setViewportView(TexteEvolpos);
 
-        Evolution_positivite.add(ScrollEvolpos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
+    Evolution_positivite.add(ScrollEvolpos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
 
-        jTabbedPane3.addTab("Evolution de la positivité", Evolution_positivite);
+    jTabbedPane3.addTab("Evolution de la positivité", Evolution_positivite);
 
-        Evolution_negativité.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    Evolution_negativité.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Evol_neg_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_neg_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_neg_imageLayout = new javax.swing.GroupLayout(Evol_neg_image);
-        Evol_neg_image.setLayout(Evol_neg_imageLayout);
-        Evol_neg_imageLayout.setHorizontalGroup(
-            Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
-        );
-        Evol_neg_imageLayout.setVerticalGroup(
-            Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_neg_imageLayout = new javax.swing.GroupLayout(Evol_neg_image);
+    Evol_neg_image.setLayout(Evol_neg_imageLayout);
+    Evol_neg_imageLayout.setHorizontalGroup(
+        Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 748, Short.MAX_VALUE)
+    );
+    Evol_neg_imageLayout.setVerticalGroup(
+        Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 348, Short.MAX_VALUE)
+    );
 
-        Evolution_negativité.add(Evol_neg_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 750, 350));
+    Evolution_negativité.add(Evol_neg_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 750, 350));
 
-        TexteEvolneg.setColumns(20);
-        TexteEvolneg.setRows(5);
-        TexteEvolneg.setText("La négativité varie fortement d’un personnage à l’autre, mais certains pics s’expliquent par des événements narratifs majeurs.\nSaison 2 : Phoebe connaît une baisse notable, probablement liée à la découverte de son frère et à la confrontation à sa propre histoire familiale. Monica, quant à elle, vit une rupture douloureuse avec Richard. Joey, qui obtient un rôle majeur, affiche un baisse de négativité — sa carrière décolle et sa vie amoureuse s’épanouit. \nSaison 4 : Rachel se montre plus négative — sa jalousie vis-à-vis du mariage de Ross avec Emily devient centrale.\nSaison 7 : nouvelle baisse chez Phoebe, alors que paradoxalement elle se rapproche de Mike — peut-être l’effet d’une réorientation affective plus sérieuse qui l’éloigne de sa posture excentrique.\nLes pics de négativité reflètent souvent des moments d’instabilité amoureuse ou familiale ou même relié au travail.");
-        ScrollEvolneg.setViewportView(TexteEvolneg);
+    TexteEvolneg.setColumns(20);
+    TexteEvolneg.setRows(5);
+    TexteEvolneg.setText("La négativité varie fortement d’un personnage à l’autre, mais certains pics s’expliquent par des événements narratifs majeurs.\nSaison 2 : Phoebe connaît une baisse notable, probablement liée à la découverte de son frère et à la confrontation à sa propre histoire familiale. Monica, quant à elle, vit une rupture douloureuse avec Richard. Joey, qui obtient un rôle majeur, affiche un baisse de négativité — sa carrière décolle et sa vie amoureuse s’épanouit. \nSaison 4 : Rachel se montre plus négative — sa jalousie vis-à-vis du mariage de Ross avec Emily devient centrale.\nSaison 7 : nouvelle baisse chez Phoebe, alors que paradoxalement elle se rapproche de Mike — peut-être l’effet d’une réorientation affective plus sérieuse qui l’éloigne de sa posture excentrique.\nLes pics de négativité reflètent souvent des moments d’instabilité amoureuse ou familiale ou même relié au travail.");
+    ScrollEvolneg.setViewportView(TexteEvolneg);
 
-        Evolution_negativité.add(ScrollEvolneg, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 750, 140));
+    Evolution_negativité.add(ScrollEvolneg, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 750, 140));
 
-        jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
+    jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
 
-        Sentiment_exprimé_panel.setMinimumSize(new java.awt.Dimension(808, 895));
-        Sentiment_exprimé_panel.setPreferredSize(new java.awt.Dimension(808, 895));
-        Sentiment_exprimé_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Sentiment_exprimé_panel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
+    Sentiment_exprimé_panel.setMinimumSize(new java.awt.Dimension(808, 895));
+    Sentiment_exprimé_panel.setPreferredSize(new java.awt.Dimension(808, 895));
+    Sentiment_exprimé_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    Sentiment_exprimé_panel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
 
-        Sentiment_exprimé_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Sentiment_exprimé_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Sentiment_exprimé_rossLayout = new javax.swing.GroupLayout(Sentiment_exprimé_ross);
-        Sentiment_exprimé_ross.setLayout(Sentiment_exprimé_rossLayout);
-        Sentiment_exprimé_rossLayout.setHorizontalGroup(
-            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_rossLayout.setVerticalGroup(
-            Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Sentiment_exprimé_rossLayout = new javax.swing.GroupLayout(Sentiment_exprimé_ross);
+    Sentiment_exprimé_ross.setLayout(Sentiment_exprimé_rossLayout);
+    Sentiment_exprimé_rossLayout.setHorizontalGroup(
+        Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Sentiment_exprimé_rossLayout.setVerticalGroup(
+        Sentiment_exprimé_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 380, 250));
+    Sentiment_exprimé_panel.add(Sentiment_exprimé_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 380, 250));
 
-        Sentiment_exprimé_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Sentiment_exprimé_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Sentiment_exprimé_chandlerLayout = new javax.swing.GroupLayout(Sentiment_exprimé_chandler);
-        Sentiment_exprimé_chandler.setLayout(Sentiment_exprimé_chandlerLayout);
-        Sentiment_exprimé_chandlerLayout.setHorizontalGroup(
-            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_chandlerLayout.setVerticalGroup(
-            Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Sentiment_exprimé_chandlerLayout = new javax.swing.GroupLayout(Sentiment_exprimé_chandler);
+    Sentiment_exprimé_chandler.setLayout(Sentiment_exprimé_chandlerLayout);
+    Sentiment_exprimé_chandlerLayout.setHorizontalGroup(
+        Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Sentiment_exprimé_chandlerLayout.setVerticalGroup(
+        Sentiment_exprimé_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 380, 250));
+    Sentiment_exprimé_panel.add(Sentiment_exprimé_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 380, 250));
 
-        Sentiment_exprimé_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Sentiment_exprimé_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Sentiment_exprimé_rachelLayout = new javax.swing.GroupLayout(Sentiment_exprimé_rachel);
-        Sentiment_exprimé_rachel.setLayout(Sentiment_exprimé_rachelLayout);
-        Sentiment_exprimé_rachelLayout.setHorizontalGroup(
-            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_rachelLayout.setVerticalGroup(
-            Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Sentiment_exprimé_rachelLayout = new javax.swing.GroupLayout(Sentiment_exprimé_rachel);
+    Sentiment_exprimé_rachel.setLayout(Sentiment_exprimé_rachelLayout);
+    Sentiment_exprimé_rachelLayout.setHorizontalGroup(
+        Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Sentiment_exprimé_rachelLayout.setVerticalGroup(
+        Sentiment_exprimé_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 380, 250));
+    Sentiment_exprimé_panel.add(Sentiment_exprimé_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 380, 250));
 
-        Sentiment_exprimé_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Sentiment_exprimé_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Sentiment_exprimé_monicaLayout = new javax.swing.GroupLayout(Sentiment_exprimé_monica);
-        Sentiment_exprimé_monica.setLayout(Sentiment_exprimé_monicaLayout);
-        Sentiment_exprimé_monicaLayout.setHorizontalGroup(
-            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_monicaLayout.setVerticalGroup(
-            Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Sentiment_exprimé_monicaLayout = new javax.swing.GroupLayout(Sentiment_exprimé_monica);
+    Sentiment_exprimé_monica.setLayout(Sentiment_exprimé_monicaLayout);
+    Sentiment_exprimé_monicaLayout.setHorizontalGroup(
+        Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Sentiment_exprimé_monicaLayout.setVerticalGroup(
+        Sentiment_exprimé_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 380, 250));
+    Sentiment_exprimé_panel.add(Sentiment_exprimé_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 380, 250));
 
-        Sentiment_exprimé_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Sentiment_exprimé_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Sentiment_exprimé_phoebeLayout = new javax.swing.GroupLayout(Sentiment_exprimé_phoebe);
-        Sentiment_exprimé_phoebe.setLayout(Sentiment_exprimé_phoebeLayout);
-        Sentiment_exprimé_phoebeLayout.setHorizontalGroup(
-            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_phoebeLayout.setVerticalGroup(
-            Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Sentiment_exprimé_phoebeLayout = new javax.swing.GroupLayout(Sentiment_exprimé_phoebe);
+    Sentiment_exprimé_phoebe.setLayout(Sentiment_exprimé_phoebeLayout);
+    Sentiment_exprimé_phoebeLayout.setHorizontalGroup(
+        Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Sentiment_exprimé_phoebeLayout.setVerticalGroup(
+        Sentiment_exprimé_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 380, 250));
+    Sentiment_exprimé_panel.add(Sentiment_exprimé_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 380, 250));
 
-        Sentiment_exprimé_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Sentiment_exprimé_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Sentiment_exprimé_joeyLayout = new javax.swing.GroupLayout(Sentiment_exprimé_joey);
-        Sentiment_exprimé_joey.setLayout(Sentiment_exprimé_joeyLayout);
-        Sentiment_exprimé_joeyLayout.setHorizontalGroup(
-            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Sentiment_exprimé_joeyLayout.setVerticalGroup(
-            Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Sentiment_exprimé_joeyLayout = new javax.swing.GroupLayout(Sentiment_exprimé_joey);
+    Sentiment_exprimé_joey.setLayout(Sentiment_exprimé_joeyLayout);
+    Sentiment_exprimé_joeyLayout.setHorizontalGroup(
+        Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Sentiment_exprimé_joeyLayout.setVerticalGroup(
+        Sentiment_exprimé_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 380, 250));
+    Sentiment_exprimé_panel.add(Sentiment_exprimé_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 380, 250));
 
-        TexteSentimentexprime.setColumns(20);
-        TexteSentimentexprime.setRows(5);
-        TexteSentimentexprime.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
-        ScrollSentimentexprime.setViewportView(TexteSentimentexprime);
+    TexteSentimentexprime.setColumns(20);
+    TexteSentimentexprime.setRows(5);
+    TexteSentimentexprime.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
+    ScrollSentimentexprime.setViewportView(TexteSentimentexprime);
 
-        Sentiment_exprimé_panel.add(ScrollSentimentexprime, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
+    Sentiment_exprimé_panel.add(ScrollSentimentexprime, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
 
-        Sentiment_exprime.setViewportView(Sentiment_exprimé_panel);
+    Sentiment_exprime.setViewportView(Sentiment_exprimé_panel);
 
-        jTabbedPane3.addTab("Sentiment_exprimé", Sentiment_exprime);
+    jTabbedPane3.addTab("Sentiment_exprimé", Sentiment_exprime);
 
-        Evolution_Sentiment_Panel.setMinimumSize(new java.awt.Dimension(808, 1400));
-        Evolution_Sentiment_Panel.setPreferredSize(new java.awt.Dimension(808, 1400));
-        Evolution_Sentiment_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Evolution_Sentiment_Panel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
+    Evolution_Sentiment_Panel.setMinimumSize(new java.awt.Dimension(808, 1400));
+    Evolution_Sentiment_Panel.setPreferredSize(new java.awt.Dimension(808, 1400));
+    Evolution_Sentiment_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    Evolution_Sentiment_Panel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
 
-        Evol_Sentiment_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_Sentiment_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_Sentiment_monicaLayout = new javax.swing.GroupLayout(Evol_Sentiment_monica);
-        Evol_Sentiment_monica.setLayout(Evol_Sentiment_monicaLayout);
-        Evol_Sentiment_monicaLayout.setHorizontalGroup(
-            Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_monicaLayout.setVerticalGroup(
-            Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_Sentiment_monicaLayout = new javax.swing.GroupLayout(Evol_Sentiment_monica);
+    Evol_Sentiment_monica.setLayout(Evol_Sentiment_monicaLayout);
+    Evol_Sentiment_monicaLayout.setHorizontalGroup(
+        Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Evol_Sentiment_monicaLayout.setVerticalGroup(
+        Evol_Sentiment_monicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Evolution_Sentiment_Panel.add(Evol_Sentiment_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 250));
+    Evolution_Sentiment_Panel.add(Evol_Sentiment_monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 380, 250));
 
-        TexteMonica.setEditable(false);
-        TexteMonica.setColumns(20);
-        TexteMonica.setRows(5);
-        TexteMonica.setText("Saison 2 : Amour bas : cause rupture Richard.\nSaison 3 : Recontre avec Chip Matthews, qu'elle connaissait déjà \n(donc pas de surprise).\nSaison 5 : Relation avec Chandler, bouscule toute ces émotions.\nSaison 8 : Elle se marie, elle as donc plus peur.\nSaison 9 : Apprends qu'elle ne peut pas avoir d'enfants, \nelle est stérile.");
-        ScrollMonicatext.setViewportView(TexteMonica);
+    TexteMonica.setEditable(false);
+    TexteMonica.setColumns(20);
+    TexteMonica.setRows(5);
+    TexteMonica.setText("Saison 2 : Amour bas : cause rupture Richard.\nSaison 3 : Recontre avec Chip Matthews, qu'elle connaissait déjà \n(donc pas de surprise).\nSaison 5 : Relation avec Chandler, bouscule toute ces émotions.\nSaison 8 : Elle se marie, elle as donc plus peur.\nSaison 9 : Apprends qu'elle ne peut pas avoir d'enfants, \nelle est stérile.");
+    ScrollMonicatext.setViewportView(TexteMonica);
 
-        Evolution_Sentiment_Panel.add(ScrollMonicatext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 380, 130));
+    Evolution_Sentiment_Panel.add(ScrollMonicatext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 380, 130));
 
-        Evol_Sentiment_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_Sentiment_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_Sentiment_rossLayout = new javax.swing.GroupLayout(Evol_Sentiment_ross);
-        Evol_Sentiment_ross.setLayout(Evol_Sentiment_rossLayout);
-        Evol_Sentiment_rossLayout.setHorizontalGroup(
-            Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_rossLayout.setVerticalGroup(
-            Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_Sentiment_rossLayout = new javax.swing.GroupLayout(Evol_Sentiment_ross);
+    Evol_Sentiment_ross.setLayout(Evol_Sentiment_rossLayout);
+    Evol_Sentiment_rossLayout.setHorizontalGroup(
+        Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Evol_Sentiment_rossLayout.setVerticalGroup(
+        Evol_Sentiment_rossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Evolution_Sentiment_Panel.add(Evol_Sentiment_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 380, 250));
+    Evolution_Sentiment_Panel.add(Evol_Sentiment_ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 380, 250));
 
-        TexteRoss.setEditable(false);
-        TexteRoss.setColumns(20);
-        TexteRoss.setRows(5);
-        TexteRoss.setText("Début de série : Il prend confiance en lui parce qu'il apprend que \nRachel l'aime. Elle le lui avoue alors qu'elle est ivre.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 5 : Rupture avec Émilie.\nSaison 6 : Pic d'amour : plan à trois.\nSaison 7 : Apprend qu'il sort avec la même fille que joey.\nSaison 8 : Rupture avec mona, se remet avec Rachel.\nSaison 10 : Fini par être avec Rachel, même si il a cru que cela\n n'allait pas arriver.");
-        ScrollRosstext.setViewportView(TexteRoss);
+    TexteRoss.setEditable(false);
+    TexteRoss.setColumns(20);
+    TexteRoss.setRows(5);
+    TexteRoss.setText("Début de série : Il prend confiance en lui parce qu'il apprend que \nRachel l'aime. Elle le lui avoue alors qu'elle est ivre.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 5 : Rupture avec Émilie.\nSaison 6 : Pic d'amour : plan à trois.\nSaison 7 : Apprend qu'il sort avec la même fille que joey.\nSaison 8 : Rupture avec mona, se remet avec Rachel.\nSaison 10 : Fini par être avec Rachel, même si il a cru que cela\n n'allait pas arriver.");
+    ScrollRosstext.setViewportView(TexteRoss);
 
-        Evolution_Sentiment_Panel.add(ScrollRosstext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 380, 130));
+    Evolution_Sentiment_Panel.add(ScrollRosstext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, 380, 130));
 
-        Evol_Sentiment_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_Sentiment_rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_Sentiment_rachelLayout = new javax.swing.GroupLayout(Evol_Sentiment_rachel);
-        Evol_Sentiment_rachel.setLayout(Evol_Sentiment_rachelLayout);
-        Evol_Sentiment_rachelLayout.setHorizontalGroup(
-            Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_rachelLayout.setVerticalGroup(
-            Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_Sentiment_rachelLayout = new javax.swing.GroupLayout(Evol_Sentiment_rachel);
+    Evol_Sentiment_rachel.setLayout(Evol_Sentiment_rachelLayout);
+    Evol_Sentiment_rachelLayout.setHorizontalGroup(
+        Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Evol_Sentiment_rachelLayout.setVerticalGroup(
+        Evol_Sentiment_rachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Evolution_Sentiment_Panel.add(Evol_Sentiment_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 818, 380, 250));
+    Evolution_Sentiment_Panel.add(Evol_Sentiment_rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 818, 380, 250));
 
-        TexteRachel.setEditable(false);
-        TexteRachel.setColumns(20);
-        TexteRachel.setRows(5);
-        TexteRachel.setText("Saison 2 : Ce met en couple avec Ross.\nSaison 3 : Dispute avec Ross.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 6 : Mariage à Las Vegas.\nSaison 7 : Apprends qu'elle est enceinte (surprise), déprime \nqu'elle n'est pas marié et pas d'enfants à ces 30 ans. \n(baisse amour).\nSaison 8 : A accouché.\nSaison 9 : Mariage accidentel avec joey, Ross sort avec Charlie. \nAlors que ce qui était prévu c'était une de mande de mariage de\nRoss à Rachel.");
-        ScrollRacheltext.setViewportView(TexteRachel);
+    TexteRachel.setEditable(false);
+    TexteRachel.setColumns(20);
+    TexteRachel.setRows(5);
+    TexteRachel.setText("Saison 2 : Ce met en couple avec Ross.\nSaison 3 : Dispute avec Ross.\nSaison 4 : Rachel surprend Ross en venant à son mariage.\nSaison 6 : Mariage à Las Vegas.\nSaison 7 : Apprends qu'elle est enceinte (surprise), déprime \nqu'elle n'est pas marié et pas d'enfants à ces 30 ans. \n(baisse amour).\nSaison 8 : A accouché.\nSaison 9 : Mariage accidentel avec joey, Ross sort avec Charlie. \nAlors que ce qui était prévu c'était une de mande de mariage de\nRoss à Rachel.");
+    ScrollRacheltext.setViewportView(TexteRachel);
 
-        Evolution_Sentiment_Panel.add(ScrollRacheltext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1070, 380, 130));
+    Evolution_Sentiment_Panel.add(ScrollRacheltext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1070, 380, 130));
 
-        Evol_Sentiment_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_Sentiment_phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_Sentiment_phoebeLayout = new javax.swing.GroupLayout(Evol_Sentiment_phoebe);
-        Evol_Sentiment_phoebe.setLayout(Evol_Sentiment_phoebeLayout);
-        Evol_Sentiment_phoebeLayout.setHorizontalGroup(
-            Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_phoebeLayout.setVerticalGroup(
-            Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_Sentiment_phoebeLayout = new javax.swing.GroupLayout(Evol_Sentiment_phoebe);
+    Evol_Sentiment_phoebe.setLayout(Evol_Sentiment_phoebeLayout);
+    Evol_Sentiment_phoebeLayout.setHorizontalGroup(
+        Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Evol_Sentiment_phoebeLayout.setVerticalGroup(
+        Evol_Sentiment_phoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Evolution_Sentiment_Panel.add(Evol_Sentiment_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 380, 250));
+    Evolution_Sentiment_Panel.add(Evol_Sentiment_phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 380, 250));
 
-        TextePhoebe.setEditable(false);
-        TextePhoebe.setColumns(20);
-        TextePhoebe.setRows(5);
-        TextePhoebe.setText("Début de série: Personnage triste à cause de la solitude.\nSaison 6 : Phoebe ne s'est pas sentie seul \n(problème du personnage) Parce à été hébergé par ces amies. \nLes pics de peur et de surprise sont induit sa santé avec \nl'infarctus qu'elle à eut. Mais également perdu son travail.\nSaison 9 : Surprise d'avoir trouver son \"âme soeur\"\n mais ce passe mal. \nElle fini par être triste sur la fin de la série à cause de leur rupture.\nEt ce retrouve seul à nouveau. \nParce que les autres sont en couple et délaisse Phoebe");
-        ScrollPhoebetext.setViewportView(TextePhoebe);
+    TextePhoebe.setEditable(false);
+    TextePhoebe.setColumns(20);
+    TextePhoebe.setRows(5);
+    TextePhoebe.setText("Début de série: Personnage triste à cause de la solitude.\nSaison 6 : Phoebe ne s'est pas sentie seul \n(problème du personnage) Parce à été hébergé par ces amies. \nLes pics de peur et de surprise sont induit sa santé avec \nl'infarctus qu'elle à eut. Mais également perdu son travail.\nSaison 9 : Surprise d'avoir trouver son \"âme soeur\"\n mais ce passe mal. \nElle fini par être triste sur la fin de la série à cause de leur rupture.\nEt ce retrouve seul à nouveau. \nParce que les autres sont en couple et délaisse Phoebe");
+    ScrollPhoebetext.setViewportView(TextePhoebe);
 
-        Evolution_Sentiment_Panel.add(ScrollPhoebetext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 380, 130));
+    Evolution_Sentiment_Panel.add(ScrollPhoebetext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 380, 130));
 
-        Evol_Sentiment_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_Sentiment_joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_Sentiment_joeyLayout = new javax.swing.GroupLayout(Evol_Sentiment_joey);
-        Evol_Sentiment_joey.setLayout(Evol_Sentiment_joeyLayout);
-        Evol_Sentiment_joeyLayout.setHorizontalGroup(
-            Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_joeyLayout.setVerticalGroup(
-            Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_Sentiment_joeyLayout = new javax.swing.GroupLayout(Evol_Sentiment_joey);
+    Evol_Sentiment_joey.setLayout(Evol_Sentiment_joeyLayout);
+    Evol_Sentiment_joeyLayout.setHorizontalGroup(
+        Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 376, Short.MAX_VALUE)
+    );
+    Evol_Sentiment_joeyLayout.setVerticalGroup(
+        Evol_Sentiment_joeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Evolution_Sentiment_Panel.add(Evol_Sentiment_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 818, -1, 250));
+    Evolution_Sentiment_Panel.add(Evol_Sentiment_joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 818, -1, 250));
 
-        TexteJoey.setEditable(false);
-        TexteJoey.setColumns(20);
-        TexteJoey.setRows(5);
-        TexteJoey.setText("Saison 2 : Sort très brièvement avec Erika,  (métier joey : acteur)\n  perd son rôle de docteur dans la série \"Les jours de notre vie\".\nSaison 3 : est amoureux de sa partenaire au théâtre. Mais il \n  apprend qu'elle est déjà avec le metteur en scène. \nSaison 4 : Ce fait cambrioler, Chandler accepte de passer \n  Thanksgiving avec Joey\nSaison 5 : Il obtient un rôle, mais la série est annulé\nSaison 6 : Tombe amoureux d'une danseuse. Mais ce n'est pas\n réciproque. Il perd également son assurance maladie (peur)\nSaison 7 : Joey subit à son tour un vrai chagrin d'amour,\n rejeté par Erin comme il rejetait ses conquêtes.\n Il reprend son rôle de docteur.\nSaison 8 : Demande accidentel en mariage à Rachel. Qui accepte.\n et commence à éprouver des sentiments à Rachel.\nSaison 10 : Echec de la relation. Déstabilisé par tout les\n changement autour de lui (les couples formé par ces amis).");
-        ScrollJoeytext.setViewportView(TexteJoey);
+    TexteJoey.setEditable(false);
+    TexteJoey.setColumns(20);
+    TexteJoey.setRows(5);
+    TexteJoey.setText("Saison 2 : Sort très brièvement avec Erika,  (métier joey : acteur)\n  perd son rôle de docteur dans la série \"Les jours de notre vie\".\nSaison 3 : est amoureux de sa partenaire au théâtre. Mais il \n  apprend qu'elle est déjà avec le metteur en scène. \nSaison 4 : Ce fait cambrioler, Chandler accepte de passer \n  Thanksgiving avec Joey\nSaison 5 : Il obtient un rôle, mais la série est annulé\nSaison 6 : Tombe amoureux d'une danseuse. Mais ce n'est pas\n réciproque. Il perd également son assurance maladie (peur)\nSaison 7 : Joey subit à son tour un vrai chagrin d'amour,\n rejeté par Erin comme il rejetait ses conquêtes.\n Il reprend son rôle de docteur.\nSaison 8 : Demande accidentel en mariage à Rachel. Qui accepte.\n et commence à éprouver des sentiments à Rachel.\nSaison 10 : Echec de la relation. Déstabilisé par tout les\n changement autour de lui (les couples formé par ces amis).");
+    ScrollJoeytext.setViewportView(TexteJoey);
 
-        Evolution_Sentiment_Panel.add(ScrollJoeytext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 1070, 380, 130));
+    Evolution_Sentiment_Panel.add(ScrollJoeytext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 1070, 380, 130));
 
-        Evol_Sentiment_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evol_Sentiment_chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout Evol_Sentiment_chandlerLayout = new javax.swing.GroupLayout(Evol_Sentiment_chandler);
-        Evol_Sentiment_chandler.setLayout(Evol_Sentiment_chandlerLayout);
-        Evol_Sentiment_chandlerLayout.setHorizontalGroup(
-            Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
-        );
-        Evol_Sentiment_chandlerLayout.setVerticalGroup(
-            Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout Evol_Sentiment_chandlerLayout = new javax.swing.GroupLayout(Evol_Sentiment_chandler);
+    Evol_Sentiment_chandler.setLayout(Evol_Sentiment_chandlerLayout);
+    Evol_Sentiment_chandlerLayout.setHorizontalGroup(
+        Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 378, Short.MAX_VALUE)
+    );
+    Evol_Sentiment_chandlerLayout.setVerticalGroup(
+        Evol_Sentiment_chandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 248, Short.MAX_VALUE)
+    );
 
-        Evolution_Sentiment_Panel.add(Evol_Sentiment_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 380, 250));
+    Evolution_Sentiment_Panel.add(Evol_Sentiment_chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 380, 250));
 
-        TexteChandler.setEditable(false);
-        TexteChandler.setColumns(20);
-        TexteChandler.setRows(5);
-        TexteChandler.setText("Saison 2 : Eddie son nouveau collocataire lui fait peur.\nSaison 4 : Se met en couple avec Kathy, \nil surpris qu'elle à déjà été en couple avec joey.\nSaison 5 : Il révèle à ces amis qu'il est en couple avec ces Monica.\nSaison 6 : Chandler apprend que Monica a réservé \nle Morgan Chase Museum pour leur mariage.\nSaison 7 : Le mariage comme à s'organiser \nil commence à avoir peur.\nSaison 8 : Il est marié.");
-        ScrollChandlertext.setViewportView(TexteChandler);
+    TexteChandler.setEditable(false);
+    TexteChandler.setColumns(20);
+    TexteChandler.setRows(5);
+    TexteChandler.setText("Saison 2 : Eddie son nouveau collocataire lui fait peur.\nSaison 4 : Se met en couple avec Kathy, \nil surpris qu'elle à déjà été en couple avec joey.\nSaison 5 : Il révèle à ces amis qu'il est en couple avec ces Monica.\nSaison 6 : Chandler apprend que Monica a réservé \nle Morgan Chase Museum pour leur mariage.\nSaison 7 : Le mariage comme à s'organiser \nil commence à avoir peur.\nSaison 8 : Il est marié.");
+    ScrollChandlertext.setViewportView(TexteChandler);
 
-        Evolution_Sentiment_Panel.add(ScrollChandlertext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 660, 380, 130));
+    Evolution_Sentiment_Panel.add(ScrollChandlertext, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 660, 380, 130));
 
-        TexteInterpretationGlobale.setColumns(20);
-        TexteInterpretationGlobale.setRows(5);
-        TexteInterpretationGlobale.setText("Tous les personnages présentent un taux de tristesse globalement élevé, ce qui suggère une stratégie scénaristique \nvisant à construire l’attachement émotionnel par la vulnérabilité.\nLes courbes de \"Love\" montent chez tous, On peut citer Joey, qui as plus de succès avec les femmes vers la fin de la série. \nMême si il n'as pas de relation stable\nL’évolution générale montre que la série démarre sur un terrain d’insécurité émotionnelle, \npuis tend vers un équilibre affectif plus marqué en fin de série, malgré les obstacles. \nLa surprise est souvent moins marquée mais sert d’outil comique régulier (surtout chez Joey et Chandler).\nLe spectateur est donc guidé par une oscillation entre stabilité affective et conflits émotionnels, \nassurant l’équilibre entre humour et profondeur.");
-        ScrollInterpretationtext.setViewportView(TexteInterpretationGlobale);
+    TexteInterpretationGlobale.setColumns(20);
+    TexteInterpretationGlobale.setRows(5);
+    TexteInterpretationGlobale.setText("Tous les personnages présentent un taux de tristesse globalement élevé, ce qui suggère une stratégie scénaristique \nvisant à construire l’attachement émotionnel par la vulnérabilité.\nLes courbes de \"Love\" montent chez tous, On peut citer Joey, qui as plus de succès avec les femmes vers la fin de la série. \nMême si il n'as pas de relation stable\nL’évolution générale montre que la série démarre sur un terrain d’insécurité émotionnelle, \npuis tend vers un équilibre affectif plus marqué en fin de série, malgré les obstacles. \nLa surprise est souvent moins marquée mais sert d’outil comique régulier (surtout chez Joey et Chandler).\nLe spectateur est donc guidé par une oscillation entre stabilité affective et conflits émotionnels, \nassurant l’équilibre entre humour et profondeur.");
+    ScrollInterpretationtext.setViewportView(TexteInterpretationGlobale);
 
-        Evolution_Sentiment_Panel.add(ScrollInterpretationtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 1260, 690, 120));
+    Evolution_Sentiment_Panel.add(ScrollInterpretationtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 1260, 690, 120));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Interprétation globale : Structure émotionnelle de la série");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Evolution_Sentiment_Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 1230, 340, -1));
+    jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+    jLabel2.setText("Interprétation globale : Structure émotionnelle de la série");
+    jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    Evolution_Sentiment_Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 1230, 340, -1));
 
-        Evolution_Sentiment.setViewportView(Evolution_Sentiment_Panel);
+    Evolution_Sentiment.setViewportView(Evolution_Sentiment_Panel);
 
-        jTabbedPane3.addTab("Evolution des sentiments", Evolution_Sentiment);
+    jTabbedPane3.addTab("Evolution des sentiments", Evolution_Sentiment);
 
-        sentiment_par_personnage_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    sentiment_par_personnage_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout sentiment_par_personnage_panelLayout = new javax.swing.GroupLayout(sentiment_par_personnage_panel);
-        sentiment_par_personnage_panel.setLayout(sentiment_par_personnage_panelLayout);
-        sentiment_par_personnage_panelLayout.setHorizontalGroup(
-            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-        sentiment_par_personnage_panelLayout.setVerticalGroup(
-            sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout sentiment_par_personnage_panelLayout = new javax.swing.GroupLayout(sentiment_par_personnage_panel);
+    sentiment_par_personnage_panel.setLayout(sentiment_par_personnage_panelLayout);
+    sentiment_par_personnage_panelLayout.setHorizontalGroup(
+        sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 673, Short.MAX_VALUE)
+    );
+    sentiment_par_personnage_panelLayout.setVerticalGroup(
+        sentiment_par_personnage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 190, Short.MAX_VALUE)
+    );
 
-        neg_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    neg_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout neg_nuageLayout = new javax.swing.GroupLayout(neg_nuage);
-        neg_nuage.setLayout(neg_nuageLayout);
-        neg_nuageLayout.setHorizontalGroup(
-            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-        neg_nuageLayout.setVerticalGroup(
-            neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 206, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout neg_nuageLayout = new javax.swing.GroupLayout(neg_nuage);
+    neg_nuage.setLayout(neg_nuageLayout);
+    neg_nuageLayout.setHorizontalGroup(
+        neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 380, Short.MAX_VALUE)
+    );
+    neg_nuageLayout.setVerticalGroup(
+        neg_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 206, Short.MAX_VALUE)
+    );
 
-        jLabel15.setText("Certaines sources utilisé pour l'analyse de sentiment");
+    jLabel15.setText("Certaines sources utilisé pour l'analyse de sentiment");
 
-        pos_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    pos_nuage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        javax.swing.GroupLayout pos_nuageLayout = new javax.swing.GroupLayout(pos_nuage);
-        pos_nuage.setLayout(pos_nuageLayout);
-        pos_nuageLayout.setHorizontalGroup(
-            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
-        );
-        pos_nuageLayout.setVerticalGroup(
-            pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    javax.swing.GroupLayout pos_nuageLayout = new javax.swing.GroupLayout(pos_nuage);
+    pos_nuage.setLayout(pos_nuageLayout);
+    pos_nuageLayout.setHorizontalGroup(
+        pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 360, Short.MAX_VALUE)
+    );
+    pos_nuageLayout.setVerticalGroup(
+        pos_nuageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 0, Short.MAX_VALUE)
+    );
+
+    javax.swing.GroupLayout SourceLayout = new javax.swing.GroupLayout(Source);
+    Source.setLayout(SourceLayout);
+    SourceLayout.setHorizontalGroup(
+        SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(SourceLayout.createSequentialGroup()
+            .addGap(0, 23, Short.MAX_VALUE)
+            .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SourceLayout.createSequentialGroup()
+                    .addGap(88, 88, 88)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(neg_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(SourceLayout.createSequentialGroup()
+                    .addGap(388, 388, 388)
+                    .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(43, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
             .addGap(0, 0, Short.MAX_VALUE)
-        );
+            .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(47, 47, 47))
+    );
+    SourceLayout.setVerticalGroup(
+        SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(SourceLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabel15)
+            .addGap(22, 22, 22)
+            .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(56, Short.MAX_VALUE))
+    );
 
-        javax.swing.GroupLayout SourceLayout = new javax.swing.GroupLayout(Source);
-        Source.setLayout(SourceLayout);
-        SourceLayout.setHorizontalGroup(
-            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SourceLayout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
-                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SourceLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(neg_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(SourceLayout.createSequentialGroup()
-                        .addGap(388, 388, 388)
-                        .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-        );
-        SourceLayout.setVerticalGroup(
-            SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SourceLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addGap(22, 22, 22)
-                .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
+    jTabbedPane3.addTab("Source", Source);
 
-        jTabbedPane3.addTab("Source", Source);
+    javax.swing.GroupLayout OpinionLayout = new javax.swing.GroupLayout(Opinion);
+    Opinion.setLayout(OpinionLayout);
+    OpinionLayout.setHorizontalGroup(
+        OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 816, Short.MAX_VALUE)
+    );
+    OpinionLayout.setVerticalGroup(
+        OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 506, Short.MAX_VALUE)
+    );
 
-        javax.swing.GroupLayout OpinionLayout = new javax.swing.GroupLayout(Opinion);
-        Opinion.setLayout(OpinionLayout);
-        OpinionLayout.setHorizontalGroup(
-            OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 816, Short.MAX_VALUE)
-        );
-        OpinionLayout.setVerticalGroup(
-            OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
-        );
+    jTabbedPane3.addTab("Opinion", Opinion);
 
-        jTabbedPane3.addTab("Opinion", Opinion);
+    SectionRecherche.addTab("Analyse de Sentiment", jTabbedPane3);
 
-        SectionRecherche.addTab("Analyse de Sentiment", jTabbedPane3);
-
-        getContentPane().add(SectionRecherche);
-        SectionRecherche.setBounds(0, 30, 820, 580);
-        SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
+    getContentPane().add(SectionRecherche);
+    SectionRecherche.setBounds(0, 30, 820, 580);
+    SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
     private void rechercheMotKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rechercheMotKeyPressed
@@ -1772,7 +1800,16 @@ public class VueStat extends javax.swing.JFrame {
         // Quand un personnage est choisit
     }//GEN-LAST:event_recherchePersonnageItemStateChanged
     
-    
+    public static int extractNumber(String code) {
+        if (code == null || code.length() < 3) {
+            throw new IllegalArgumentException("format non valide: " + code);
+        }
+        try {
+            return Integer.parseInt(code.substring(1));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("format invalide avec le code code: " + code, e);
+        }
+    }
     private void rechercheEpisodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheEpisodeActionPerformed
         
         try {
@@ -1825,6 +1862,7 @@ public class VueStat extends javax.swing.JFrame {
         
     }//GEN-LAST:event_rechercheEpisodeActionPerformed
 
+    
     private void rechercheSaisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheSaisonActionPerformed
         if(!rechercheEpisode.isVisible()){
             try {
@@ -1929,11 +1967,11 @@ public class VueStat extends javax.swing.JFrame {
         }
 
         //Convertit le chemin pour le classpath
-        String cheminPourRessource = "/les_png/" + nomFichier;
+        String cheminPourRessource = "src/main/resources/les_png/" + nomFichier;
 
         //Charge et affiche l’image
         controller.ImagePanel imagePanel = new controller.ImagePanel();
-        imagePanel.setImage(cheminPourRessource);
+        imagePanel.setImageV2(cheminPourRessource);
 
         jPanel65.removeAll();
         jPanel65.add(imagePanel);
@@ -1985,7 +2023,6 @@ public class VueStat extends javax.swing.JFrame {
     }//GEN-LAST:event_panelSaisonRepartitionMouseClicked
 
     private void resultatEpisodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultatEpisodeMouseClicked
- 
         //Récupère l'objet sélectionné dans le combo box de recherche de saison et épisode
         Object saisonObj = rechercheSaison.getSelectedItem();
         Object episodeObj = rechercheEpisode.getSelectedItem();
@@ -2021,7 +2058,30 @@ public class VueStat extends javax.swing.JFrame {
         jPanel65.add(imagePanel);
         jPanel65.revalidate();
         jPanel65.repaint();
+        
     }//GEN-LAST:event_resultatEpisodeMouseClicked
+
+    
+    private void rechercheSaisonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rechercheSaisonItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String selectedSaison = (String) rechercheSaison.getSelectedItem();
+            int numSaison = Integer.parseInt(selectedSaison.replaceAll("[^0-9]", ""));
+
+            rechercheEpisode.setModel(new DefaultComboBoxModel<>(
+                controller.getEpisodesSaison(numSaison)
+                    .stream()
+                    .map(ep -> String.format("S%02dE%02d - %s", 
+                          ep.getNumeroSaison(), 
+                          ep.getNumeroEpisode(), 
+                          ep.getTitre()))
+                    .toArray(String[]::new)
+            ));
+        }
+    }//GEN-LAST:event_rechercheSaisonItemStateChanged
+
+    private void rechercheEpisodeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rechercheEpisodeItemStateChanged
+        
+    }//GEN-LAST:event_rechercheEpisodeItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
