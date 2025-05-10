@@ -5,19 +5,20 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author ember
  */
 public class Model {
-    private List<List<Integer>> data;
+    private Map<String, Object> data;
 
-    public void setData(List<List<Integer>> data) {
+    public void setData(Map<String, Object> data) {
         this.data = data;
     }
 
-    public List<List<Integer>> getData() {
+    public Map<String, Object> getData() {
         return data;
     }
 }
