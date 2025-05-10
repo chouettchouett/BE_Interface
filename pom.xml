@@ -14,6 +14,11 @@
     <name>Pour_Be</name>
     <dependencies>
         <dependency>
+            <groupId>net.sf.py4j</groupId>
+            <artifactId>py4j</artifactId>
+            <version>0.10.9.9</version>
+        </dependency>
+        <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE250</version>

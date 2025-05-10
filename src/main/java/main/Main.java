@@ -1,24 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package main;
 
-//import com.mycompany.cours_ihm_version_propre.Vue;
+import controller.AdapterFunctional;
+import controller.ControllerDialogRecherche;
+import model.Model;
 
-import vue.VueStat;
-import javax.swing.*;
+/**
+ *
+ * @author ember
+ */
 public class Main {
-
-    //private static Vue fenetre;
-    private static VueStat fenetre;
-
     public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(() -> {
-
-            // Création de la fenêtre principale
-            fenetre = new VueStat();
-            fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            // Afficher la fenêtre
-            fenetre.setVisible(true);
-        });
+        Model model = new Model();
+        AdapterFunctional adapter = new AdapterFunctional(model);
+        ControllerDialogRecherche dialog = new ControllerDialogRecherche(adapter);
+        
+        dialog.runUI();
     }
 }

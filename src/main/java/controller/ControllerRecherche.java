@@ -4,6 +4,9 @@
  */
 package controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import org.python.util.PythonInterpreter;
 import org.python.core.PyObject;
@@ -11,14 +14,90 @@ import java.util.List;
 import org.python.core.*;
 
 import model.Episode;
+import model.Model;
 import model.Personnage;
 import model.Saison;
+import py4j.GatewayServer;
 
 /**
  * Temporaire, quand la liaisons python-java sera implémenté on fera autrement
  * Les données sont seulement des données de tests
  */
 public class ControllerRecherche {
+    private final Model model;
+    private PythonProcessor python;
+    private static GatewayServer gateway;
+    Thread pythonThread;
+    Process pythonProcess;
+    
+    public ControllerRecherche(Model model) {
+        this.model = model;
+        //gateway = new GatewayServer(this);
+        //gateway.start(true);
+        
+        //launchPython();
+    }
+    
+    
+    public List<List<Integer>> test() {
+        System.out.println("[controller.test]");
+        List<List<Integer>> resultats = python.test();
+        model.setData(resultats);
+        return resultats;
+    }
+    
+    public void launchPython() {
+        String pythonScriptPath = "python\\gateway_server.py";
+
+        System.out.println("[before thread python run]");
+        pythonThread = new Thread(() -> {
+            try {
+                ProcessBuilder processBuilder = new ProcessBuilder("py", pythonScriptPath);
+                processBuilder.redirectErrorStream(true);
+                pythonProcess = processBuilder.start();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(pythonProcess.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+
+                int exitCode = pythonProcess.waitFor();
+                System.out.println("Script terminé avec code : " + exitCode);
+
+            } catch (IOException | InterruptedException e) {
+                //e.printStackTrace();
+            }
+        });
+
+        pythonThread.start(); // Lancer Python dans un thread séparé
+        System.out.println("[thread python run]");
+    }
+    
+    public void properlyCloseWindow() {
+        // Fermer Py4J gateway
+        if (gateway != null) {
+            System.out.println("Fermeture du gateway...");
+            gateway.shutdown();
+        }
+
+        // Tuer le processus Python
+        if (pythonProcess != null && pythonProcess.isAlive()) {
+            System.out.println("Destruction du process Python...");
+            pythonProcess.destroy();
+        }
+
+        // Arrêter le thread Python
+        if (pythonThread != null && pythonThread.isAlive()) {
+            System.out.println("Interruption du thread Python...");
+            pythonThread.interrupt();
+        }
+    }
+    
+    public void register(PythonProcessor p) {
+        System.out.println("[register]");
+        python = p;
+    }
    
     public List<Saison> getSaisons() {
         return List.of(new Saison(1), new Saison(2), new Saison(3), new Saison(4), new Saison(5),

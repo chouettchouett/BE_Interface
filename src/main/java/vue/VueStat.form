@@ -176,9 +176,6 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Verdana" size="12" style="0"/>
                             </Property>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                              <Connection code="new DefaultComboBoxModel&lt;&gt;(&#xa;    controller.getSaisons()&#xa;    .stream()&#xa;    .map(s -&gt; &quot;S&quot; + String.format(&quot;%02d&quot;, s.getNumeroSaison()))&#xa;    .toArray(String[]::new)&#xa;)" type="code"/>
-                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rechercheSaisonItemStateChanged"/>
@@ -195,9 +192,6 @@
                               <Font name="Verdana" size="12" style="0"/>
                             </Property>
                             <Property name="maximumRowCount" type="int" value="25"/>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                              <Connection code="new DefaultComboBoxModel&lt;&gt;(&#xd;&#xa;    new ControllerRecherche()&#xd;&#xa;        .getEpisodesSaison(1) // 1 pour S01&#xd;&#xa;        .stream()&#xd;&#xa;        .map(e -&gt; String.format(&quot;S%02dE%02d - %s&quot;, &#xd;&#xa;                e.getNumeroSaison(), &#xd;&#xa;                e.getNumeroEpisode(), &#xd;&#xa;                e.getTitre()))&#xd;&#xa;        .filter(episodeStr -&gt; episodeStr.startsWith(&quot;S01&quot;)) // &lt;- valeur fixe&#xd;&#xa;        .toArray(String[]::new)&#xd;&#xa;)" type="code"/>
-                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rechercheEpisodeItemStateChanged"/>
