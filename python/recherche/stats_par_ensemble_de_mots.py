@@ -1,8 +1,12 @@
 import pandas as pd
 import re
+import os
+
+chemin_csv = os.path.join(os.path.dirname(__file__), "..", "Analyse_Sentiments", "friends_dialogues_final.csv")
+chemin_csv = os.path.abspath(chemin_csv)
 
 def recherche_par_mots(words: str, case_sensitive=False):
-    df = pd.read_csv("../Analyse_Sentiments/friends_dialogues_final.csv", encoding='utf-8')
+    df = pd.read_csv(chemin_csv, encoding='utf-8')
 
     # compter le nombre de <words> dans chaque répliques
     df['word_count'] = df['line'].str.count(words, flags=0 if case_sensitive else re.IGNORECASE)
@@ -46,7 +50,7 @@ def recherche_par_mots(words: str, case_sensitive=False):
     # convertir les résultat en type python (interprétable par les modèles de la vue)
     return {
         "nb_word_used": int(total_word_used),
-        "lines_with_words": lines_with_words['line'].tolist(), 
+        "lines_with_words": lines_with_words[['line', 'character', 'season', 'episode']].values.tolist(), 
         "number_lines_with_words": int(nb_lines_with_words),
         "words_usage_ratio_by_line": words_usage_ratio_by_line, 
         "word_count_by_character": word_count_by_character.to_records(index=False).tolist(), 
@@ -56,5 +60,5 @@ def recherche_par_mots(words: str, case_sensitive=False):
         "best_episode_word_count": best_episode_word_count.to_dict(),
     }
 
-print(recherche_par_mots("I just feel like someone reached down"))
+#print(recherche_par_mots("I just feel like someone reached down"))
 #print(recherche_par_mots("Hello"))
