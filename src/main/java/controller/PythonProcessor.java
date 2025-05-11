@@ -4,12 +4,12 @@
  */
 package controller;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  *
  * @author ember
  */
 public interface PythonProcessor {
-    public Map<String, Object> rechercheMots(String mots);
+    public List<List<Integer>> test();
 }

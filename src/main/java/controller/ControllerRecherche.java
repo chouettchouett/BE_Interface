@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import org.python.util.PythonInterpreter;
 import org.python.core.PyObject;
 import java.util.List;
-import java.util.Map;
 import org.python.core.*;
 
 import model.Episode;
@@ -21,8 +20,8 @@ import model.Saison;
 import py4j.GatewayServer;
 
 /**
- *
- * @author ember
+ * Temporaire, quand la liaisons python-java sera implémenté on fera autrement
+ * Les données sont seulement des données de tests
  */
 public class ControllerRecherche {
     private final Model model;
@@ -33,21 +32,22 @@ public class ControllerRecherche {
     
     public ControllerRecherche(Model model) {
         this.model = model;
-        gateway = new GatewayServer(this);
-        gateway.start(true);
+        //gateway = new GatewayServer(this);
+        //gateway.start(true);
         
-        launchPython();
+        //launchPython();
     }
     
-    public Map<String, Object> rechercheMots(String mots) {
+    
+    public List<List<Integer>> test() {
         System.out.println("[controller.test]");
-        Map<String, Object> resultats = python.rechercheMots(mots);
+        List<List<Integer>> resultats = python.test();
         model.setData(resultats);
         return resultats;
     }
     
     public void launchPython() {
-        String pythonScriptPath = "python\\gateway_adapter_python_java.py";
+        String pythonScriptPath = "python\\gateway_server.py";
 
         System.out.println("[before thread python run]");
         pythonThread = new Thread(() -> {

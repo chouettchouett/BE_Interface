@@ -8,20 +8,9 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import controller.*;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.DefaultComboBoxModel;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.StackedBarRenderer;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.data.category.CategoryDataset;
 
 public class VueStat extends javax.swing.JFrame {
     private ControllerDialogRecherche dialog;
@@ -103,14 +92,12 @@ public class VueStat extends javax.swing.JFrame {
             rechercheSaison.setVisible(false);
             rechercheEpisode.setVisible(false);
             rechercheMot.setVisible(false);
-            rechercheMotButton.setVisible(false);
 
             String cardName = ""; // Nom du panneau à afficher
 
             switch (result) {
                 case "Recherche de mots" -> {
                     rechercheMot.setVisible(true);
-                    rechercheMotButton.setVisible(true);
                     cardName = "MOT";
                 }
                 case "Recherche de personnages" -> {
@@ -229,112 +216,21 @@ public class VueStat extends javax.swing.JFrame {
             .filter(episodeStr -> episodeStr.startsWith("S01")) // <- valeur fixe
             .toArray(String[]::new)
         ));
-        
-        tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
-        rechercheMotProgBar.setVisible(false);
     }
     
     public void showLoading(boolean loading) {
-        rechercheMotProgBar.setIndeterminate(loading);
-        rechercheMotProgBar.setVisible(loading);
-        rechercheMotButton.setEnabled(!loading);
+        //jProgressBar1.setIndeterminate(loading);
+        //jProgressBar1.setVisible(loading);
+        // btn set 
+    }
+    
+    public void refresh() {
+        System.out.println("refreshing");
     }
     
     public javax.swing.JLabel getJLabel2() {
-        return labelMotCourant1;
+        return jLabel2;
     }
-    
-    public javax.swing.JTable getTableDetailReplique() {
-        return tableDetailReplique;
-    }
-    
-    public javax.swing.JLabel getLabelMotCourant1() {
-        return labelMotCourant1;
-    }
-    
-    public javax.swing.JLabel getLabelMotCourant2() {
-        return labelMotCourant2;
-    }
-    
-    public javax.swing.JLabel getLabelMotCourant3() {
-        return labelMotCourant3;
-    }
-    
-    public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
-        int total = data.stream()
-            .mapToInt(row -> (Integer) row.get(1))
-            .sum();
-        
-        DefaultCategoryDataset percentLine = new DefaultCategoryDataset();
-        
-        for (List<Object> row : data) {
-            String name = (String) row.get(0);
-            Integer value = ((Integer) row.get(1));
-            percentLine.addValue(value, name, "");
-        }
-
-        JFreeChart chartPercentLine = ChartFactory.createStackedBarChart(
-            null, // titre
-            null,
-            null,
-            percentLine,
-            PlotOrientation.HORIZONTAL,
-            false, // légende
-            false,
-            false
-        );
-        
-        CategoryPlot plotPercent = chartPercentLine.getCategoryPlot();
-        // plotPercent.setInsets(new org.jfree.ui.RectangleInsets(0, 0, 0, 0));
-        plotPercent.setOutlineVisible(false);
-        plotPercent.getDomainAxis().setVisible(false);
-        plotPercent.getRangeAxis().setVisible(false);
-        plotPercent.setRangeGridlinesVisible(false);
-        
-        chartPercentLine.setBackgroundPaint(new Color(0, 0, 0, 0));
-        chartPercentLine.getPlot().setBackgroundPaint(new Color(0, 0, 0, 0));
-        
-        StackedBarRenderer renderer = new StackedBarRenderer();
-        
-        renderer.setDefaultToolTipGenerator(new StandardCategoryToolTipGenerator() {
-            @Override
-            public String generateToolTip(CategoryDataset dataset, int row, int column) {
-                String name = (String) dataset.getRowKey(row);
-                Number value = dataset.getValue(row, column);
-                return String.format("%s : %d utilisations", name, value.intValue());
-            }
-        });
-        renderer.setDefaultItemLabelFont(new Font("Verdana", Font.PLAIN, 9));
-            renderer.setDefaultItemLabelsVisible(true);
-            renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator() {
-                @Override
-                public String generateLabel(org.jfree.data.category.CategoryDataset dataset, int row, int column) {
-                    Number value = dataset.getValue(row, column);
-                    String name = dataset.getRowKey(row).toString();
-                    int val = value.intValue();
-                    double percent = total == 0 ? 0 : (100.0 * val / total);
-                    return String.format("%s\n(%d, %.1f%%)", name, val, percent);
-                }
-            });
-            
-        renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
-            ItemLabelAnchor.CENTER, TextAnchor.CENTER
-        ));
-
-        plotPercent.setRenderer(renderer);
-        
-        ChartPanel chartPanelPercent = new ChartPanel(chartPercentLine);
-        chartPanelPercent.setOpaque(false);
-        chartPanelPercent.setBackground(new Color(0, 0, 0, 0));
-
-        chartPanelPercent.setPreferredSize(new Dimension(300, 150));
-        panelPourcentageMotsPerso.removeAll();
-        panelPourcentageMotsPerso.add(chartPanelPercent, java.awt.BorderLayout.NORTH);
-        
-        panelPourcentageMotsPerso.revalidate();
-        panelPourcentageMotsPerso.repaint();
-    }
-    
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -349,8 +245,6 @@ public class VueStat extends javax.swing.JFrame {
         panelRechercheButtons = new javax.swing.JPanel();
         choixTypeRecherche = new javax.swing.JComboBox<>();
         rechercheMot = new style.CustomJTextField();
-        rechercheMotButton = new javax.swing.JButton();
-        rechercheMotProgBar = new javax.swing.JProgressBar();
         recherchePersonnage = new javax.swing.JComboBox<>();
         rechercheSaison = new javax.swing.JComboBox<>();
         rechercheEpisode = new javax.swing.JComboBox<>();
@@ -479,7 +373,7 @@ public class VueStat extends javax.swing.JFrame {
         panelResultatMotUtilisation = new javax.swing.JPanel();
         panelPersonnageReplique = new javax.swing.JPanel();
         labelPersonnageReplique = new javax.swing.JLabel();
-        panelPourcentageMotsPerso = new javax.swing.JPanel();
+        valeurPersonnageReplique = new javax.swing.JLabel();
         panelDetailReplique = new javax.swing.JPanel();
         labelDetailReplique = new javax.swing.JLabel();
         scrollPaneDetailReplique = new javax.swing.JScrollPane();
@@ -574,11 +468,6 @@ public class VueStat extends javax.swing.JFrame {
         Opinion = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(837, 626));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -620,15 +509,6 @@ public class VueStat extends javax.swing.JFrame {
             }
         });
         panelRechercheButtons.add(rechercheMot);
-
-        rechercheMotButton.setText("Rechercher");
-        rechercheMotButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rechercheMotButtonActionPerformed(evt);
-            }
-        });
-        panelRechercheButtons.add(rechercheMotButton);
-        panelRechercheButtons.add(rechercheMotProgBar);
 
         recherchePersonnage.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         recherchePersonnage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -973,7 +853,7 @@ public class VueStat extends javax.swing.JFrame {
         );
         imageMotsCaracteristiquesLayout.setVerticalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 313, Short.MAX_VALUE)
         );
 
         resultSansRecherche.add(imageMotsCaracteristiques);
@@ -996,11 +876,11 @@ public class VueStat extends javax.swing.JFrame {
         imagePersonnage.setLayout(imagePersonnageLayout);
         imagePersonnageLayout.setHorizontalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGap(0, 305, Short.MAX_VALUE)
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1217,11 +1097,13 @@ public class VueStat extends javax.swing.JFrame {
 
         labelPersonnageReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
         labelPersonnageReplique.setForeground(new java.awt.Color(153, 153, 153));
-        labelPersonnageReplique.setText("Graphique en barre du nombre et du pourcentage d'utilisation utilisation du mot pour chaque personnages :");
+        labelPersonnageReplique.setText("Personnage ayant le plus utilisé cette réplique :");
         panelPersonnageReplique.add(labelPersonnageReplique);
 
-        panelPourcentageMotsPerso.setLayout(new javax.swing.BoxLayout(panelPourcentageMotsPerso, javax.swing.BoxLayout.LINE_AXIS));
-        panelPersonnageReplique.add(panelPourcentageMotsPerso);
+        valeurPersonnageReplique.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        valeurPersonnageReplique.setText("Chandler (57 occurences)");
+        valeurPersonnageReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panelPersonnageReplique.add(valeurPersonnageReplique);
 
         panelResultatMotUtilisation.add(panelPersonnageReplique, java.awt.BorderLayout.NORTH);
 
@@ -2181,17 +2063,6 @@ public class VueStat extends javax.swing.JFrame {
         
     }//GEN-LAST:event_rechercheEpisodeItemStateChanged
 
-    private void rechercheMotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheMotButtonActionPerformed
-        if (dialog != null) {
-            dialog.onUserAction(rechercheMot.getText());
-        }
-    }//GEN-LAST:event_rechercheMotButtonActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        System.out.println("closee");
-        dialog.properlyCloseWindow();
-    }//GEN-LAST:event_formWindowClosing
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private controller.ImagePanel AnalyseLangagière;
@@ -2399,7 +2270,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel panelPersonnageProfil;
     private javax.swing.JPanel panelPersonnageReplique;
     private javax.swing.JPanel panelPersonnageRepliqueFavorite;
-    private javax.swing.JPanel panelPourcentageMotsPerso;
     private javax.swing.JPanel panelRecherche;
     private javax.swing.JPanel panelRechercheButtons;
     private javax.swing.JPanel panelRechercheEtIndication;
@@ -2413,8 +2283,6 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel pos_nuage;
     private javax.swing.JComboBox<String> rechercheEpisode;
     private style.CustomJTextField rechercheMot;
-    private javax.swing.JButton rechercheMotButton;
-    private javax.swing.JProgressBar rechercheMotProgBar;
     private javax.swing.JComboBox<String> recherchePersonnage;
     private javax.swing.JComboBox<String> rechercheSaison;
     private javax.swing.JPanel resultSansRecherche;
@@ -2427,6 +2295,7 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel sentiment_par_personnage_panel;
     private javax.swing.JTable tableDetailReplique;
     private javax.swing.JLabel titre;
+    private javax.swing.JLabel valeurPersonnageReplique;
     // End of variables declaration//GEN-END:variables
 
 }

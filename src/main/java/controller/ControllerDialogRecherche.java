@@ -2,15 +2,12 @@ package controller;
 
 import java.util.stream.Collectors;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import model.Episode;
 import model.Personnage;
 import model.Saison;
@@ -69,44 +66,30 @@ public class ControllerDialogRecherche {
     }
     
     
-    public void onUserAction(String mots) {
-        if (!mots.trim().isEmpty()) {
-            ui.showLoading(true);
+    public void onUserAction() {
+        ui.showLoading(true);
 
-            new SwingWorker<Map<String, Object>, Void>() {
-                @Override
-                protected Map<String, Object> doInBackground() {
-                    return adapter.rechercheMots(mots);
-                }
+        new SwingWorker<List<List<Integer>>, Void>() {
+            @Override
+            protected List<List<Integer>> doInBackground() {
+                return adapter.lancerChargement();
+            }
 
-                @Override
-                protected void done() {
-                    Map<String, Object> result;
-                    try {
-                        result = get();
-                        ui.showLoading(false);
-                        List<List<String>> row = (List<List<String>>) result.get("lines_with_words");
-                        DefaultTableModel modelTableau = (DefaultTableModel) ui.getTableDetailReplique().getModel();
-                        modelTableau.setRowCount(0);
-                        for (List<String> rowData : row) {
-                            modelTableau.addRow(rowData.toArray());
-                        }
-                        
-                        List<List<Object>> wordCountByCharacter = (List<List<Object>>) result.get("word_count_by_character");
-                        ui.generateGraphBarMotParPersonnage(wordCountByCharacter);
-                        Integer nbUtilisations = (Integer) result.get("nb_word_used");
-                        
-                        ui.getLabelMotCourant1().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
-                        ui.getLabelMotCourant2().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
-                        ui.getLabelMotCourant3().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ExecutionException ex) {
-                        Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            @Override
+            protected void done() {
+                List<List<Integer>> result;
+                try {
+                    result = get();
+                    ui.showLoading(false);
+                    ui.getJLabel2().setText(result.get(0).get(0).toString());
+                    ui.refresh();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExecutionException ex) {
+                    Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }.execute();
-        }
+            }
+        }.execute();
     }
     
     public void properlyCloseWindow() {
