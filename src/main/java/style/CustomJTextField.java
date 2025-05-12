@@ -63,7 +63,7 @@ public class CustomJTextField extends JTextField {
 
         final Graphics2D g1 = (Graphics2D) g;
         g1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g1.setColor(getDisabledTextColor());
+        g1.setColor(Color.LIGHT_GRAY);
         g1.drawString(placeholder, getInsets().left, g1.getFontMetrics().getMaxAscent() + getInsets().top);
     }
 
