@@ -280,13 +280,14 @@ public class VueStat extends javax.swing.JFrame {
 
     // Tab 2 : Relations par personnage
         Graphique_Relation.getVerticalScrollBar().setUnitIncrement(16);
+        TexteGraphiqueRel.setCaretPosition(0);
         Relation_Chandler.setImage("/les_png/Relation_Chandler.png");
         Relation_Monica.setImage("/les_png/Relation_Monica.png");
         Relation_Ross.setImage("/les_png/Relation_Ross.png");
         Relation_Rachel.setImage("/les_png/Relation_Rachel.png");
         Relation_Joey.setImage("/les_png/Relation_Joey.png");
         Relation_Phoebe.setImage("/les_png/Relation_Phoebe.png");
-
+        
     // Tab 3 : Mentions
         Relation_Mention.setImage("/les_png/Relation_Mention.png");
     }
@@ -791,8 +792,7 @@ public class VueStat extends javax.swing.JFrame {
         Relation = new javax.swing.JTabbedPane();
         Carte_Relation_Panel = new javax.swing.JPanel();
         Carte_Relation = new controller.ImagePanel();
-        ScrollCarte = new javax.swing.JScrollPane();
-        TexteCarte = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         Graphique_Relation = new javax.swing.JScrollPane();
         Graphique_Relation_panel = new javax.swing.JPanel();
         Relation_Ross = new controller.ImagePanel();
@@ -803,11 +803,17 @@ public class VueStat extends javax.swing.JFrame {
         Relation_Joey = new controller.ImagePanel();
         ScrollGraphiqueRel = new javax.swing.JScrollPane();
         TexteGraphiqueRel = new javax.swing.JTextArea();
+        RelRac = new javax.swing.JLabel();
+        RelPho = new javax.swing.JLabel();
+        RelMon = new javax.swing.JLabel();
+        RelJoe = new javax.swing.JLabel();
+        RelRos = new javax.swing.JLabel();
+        RelCha = new javax.swing.JLabel();
         SourceRelation = new javax.swing.JPanel();
         Relation_Mention = new controller.ImagePanel();
         jLabel16 = new javax.swing.JLabel();
 
-        setMinimumSize(new java.awt.Dimension(837, 626));
+        setMinimumSize(new java.awt.Dimension(845, 630));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -820,6 +826,7 @@ public class VueStat extends javax.swing.JFrame {
         getContentPane().add(labelTitre);
 
         SectionRecherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        SectionRecherche.setMinimumSize(new java.awt.Dimension(837, 580));
         SectionRecherche.setName(""); // NOI18N
 
         panelPageRecherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1210,11 +1217,11 @@ public class VueStat extends javax.swing.JFrame {
         imageMotsCaracteristiques.setLayout(imageMotsCaracteristiquesLayout);
         imageMotsCaracteristiquesLayout.setHorizontalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 749, Short.MAX_VALUE)
+            .addGap(0, 757, Short.MAX_VALUE)
         );
         imageMotsCaracteristiquesLayout.setVerticalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 313, Short.MAX_VALUE)
+            .addGap(0, 357, Short.MAX_VALUE)
         );
 
         resultSansRecherche.add(imageMotsCaracteristiques);
@@ -1237,11 +1244,11 @@ public class VueStat extends javax.swing.JFrame {
         imagePersonnage.setLayout(imagePersonnageLayout);
         imagePersonnageLayout.setHorizontalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
+            .addGap(0, 330, Short.MAX_VALUE)
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGap(0, 324, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1699,14 +1706,14 @@ public class VueStat extends javax.swing.JFrame {
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         Analyse_StatistiqueLayout.setVerticalGroup(
             Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         SectionRecherche.addTab("Analyse Langagière", Analyse_Statistique);
@@ -2074,7 +2081,7 @@ public class VueStat extends javax.swing.JFrame {
         SourceLayout.setHorizontalGroup(
             SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SourceLayout.createSequentialGroup()
-                .addGap(0, 32, Short.MAX_VALUE)
+                .addGap(0, 36, Short.MAX_VALUE)
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SourceLayout.createSequentialGroup()
                         .addGap(88, 88, 88)
@@ -2083,11 +2090,11 @@ public class VueStat extends javax.swing.JFrame {
                     .addGroup(SourceLayout.createSequentialGroup()
                         .addGap(388, 388, 388)
                         .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(SourceLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
                 .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SourceLayout.setVerticalGroup(
             SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2100,7 +2107,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         Analyse_Sentiment.addTab("Source", Source);
@@ -2115,25 +2122,23 @@ public class VueStat extends javax.swing.JFrame {
         Carte_Relation.setLayout(Carte_RelationLayout);
         Carte_RelationLayout.setHorizontalGroup(
             Carte_RelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGap(0, 808, Short.MAX_VALUE)
         );
         Carte_RelationLayout.setVerticalGroup(
             Carte_RelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 448, Short.MAX_VALUE)
         );
 
-        Carte_Relation_Panel.add(Carte_Relation, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 360));
+        Carte_Relation_Panel.add(Carte_Relation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 810, 450));
 
-        TexteCarte.setColumns(20);
-        TexteCarte.setRows(5);
-        ScrollCarte.setViewportView(TexteCarte);
-
-        Carte_Relation_Panel.add(ScrollCarte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
+        jLabel1.setText("Résultat Obtenu avec l'aide des graphiques de relation. Remanié dans une forme plus visuelle");
+        Carte_Relation_Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 510, -1));
 
         Relation.addTab("Carte des Relations", Carte_Relation_Panel);
 
-        Graphique_Relation_panel.setMinimumSize(new java.awt.Dimension(808, 895));
-        Graphique_Relation_panel.setPreferredSize(new java.awt.Dimension(808, 895));
+        Graphique_Relation_panel.setMinimumSize(new java.awt.Dimension(800, 950));
+        Graphique_Relation_panel.setName(""); // NOI18N
+        Graphique_Relation_panel.setPreferredSize(new java.awt.Dimension(800, 950));
         Graphique_Relation_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Relation_Ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -2149,7 +2154,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Graphique_Relation_panel.add(Relation_Ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 380, 250));
+        Graphique_Relation_panel.add(Relation_Ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 380, 250));
 
         Relation_Chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2164,7 +2169,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Graphique_Relation_panel.add(Relation_Chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 380, 250));
+        Graphique_Relation_panel.add(Relation_Chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 380, 250));
 
         Relation_Rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2179,7 +2184,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Graphique_Relation_panel.add(Relation_Rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 380, 250));
+        Graphique_Relation_panel.add(Relation_Rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 380, 250));
 
         Relation_Monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2194,7 +2199,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Graphique_Relation_panel.add(Relation_Monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 380, 250));
+        Graphique_Relation_panel.add(Relation_Monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 380, 250));
 
         Relation_Phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2209,7 +2214,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Graphique_Relation_panel.add(Relation_Phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 380, 250));
+        Graphique_Relation_panel.add(Relation_Phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 380, 250));
 
         Relation_Joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2224,14 +2229,33 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        Graphique_Relation_panel.add(Relation_Joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 380, 250));
+        Graphique_Relation_panel.add(Relation_Joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 690, 380, 250));
 
         TexteGraphiqueRel.setColumns(20);
+        TexteGraphiqueRel.setLineWrap(true);
         TexteGraphiqueRel.setRows(5);
-        TexteGraphiqueRel.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
+        TexteGraphiqueRel.setText("Dans Friends, on s’attend naturellement à ce que la majorité des dialogues reflète une ambiance amicale. \nLes affinités entre personnages se devinent souvent à travers le nombre d’échanges : on parle plus avec les personnes qu’on apprécie.\nC’est sur cette logique que reposent ces graphiques.\n\nLes phrases avec comme étiquette \"affection\" ou \"amoureux\" sont d’ailleurs bien corrélés à ces liens. \nMais ils ne traduisent pas toujours une relation amoureuse. Joey, par exemple, emploie fréquemment ces termes ; cela traduit plutôt un lien d’amitié fort, où il peut se confier sur des sujets comme ceux-ci. \nÀ l’inverse, une vraie relation amoureuse se remarque par une combinaison de \"conflits\" ou \"désaccords\" avec des marqueurs d’\"affection\".");
         ScrollGraphiqueRel.setViewportView(TexteGraphiqueRel);
 
-        Graphique_Relation_panel.add(ScrollGraphiqueRel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
+        Graphique_Relation_panel.add(ScrollGraphiqueRel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 780, 100));
+
+        RelRac.setText("Rachel");
+        Graphique_Relation_panel.add(RelRac, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 670, 50, -1));
+
+        RelPho.setText("Phoebe");
+        Graphique_Relation_panel.add(RelPho, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 50, -1));
+
+        RelMon.setText("Monica");
+        Graphique_Relation_panel.add(RelMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 50, -1));
+
+        RelJoe.setText("Joey");
+        Graphique_Relation_panel.add(RelJoe, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 670, 30, -1));
+
+        RelRos.setText("Ross");
+        Graphique_Relation_panel.add(RelRos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 50, -1));
+
+        RelCha.setText("Chandler");
+        Graphique_Relation_panel.add(RelCha, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 50, -1));
 
         Graphique_Relation.setViewportView(Graphique_Relation_panel);
 
@@ -2250,21 +2274,21 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 425, Short.MAX_VALUE)
         );
 
-        jLabel16.setText("Certaines sources utilisé pour l'analyse de sentiment");
+        jLabel16.setText("Source utilisé pour la fabrication des graphiques, sans compter les bases construites dans la section Analyse de Sentiment.");
 
         javax.swing.GroupLayout SourceRelationLayout = new javax.swing.GroupLayout(SourceRelation);
         SourceRelation.setLayout(SourceRelationLayout);
         SourceRelationLayout.setHorizontalGroup(
             SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SourceRelationLayout.createSequentialGroup()
-                .addGap(0, 89, Short.MAX_VALUE)
+                .addGap(0, 97, Short.MAX_VALUE)
                 .addGroup(SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(229, 229, 229))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
                         .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))))
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(70, 70, 70))))
         );
         SourceRelationLayout.setVerticalGroup(
             SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2273,7 +2297,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         Relation.addTab("Source", SourceRelation);
@@ -2743,6 +2767,12 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel Evolution_positivite;
     private javax.swing.JScrollPane Graphique_Relation;
     private javax.swing.JPanel Graphique_Relation_panel;
+    private javax.swing.JLabel RelCha;
+    private javax.swing.JLabel RelJoe;
+    private javax.swing.JLabel RelMon;
+    private javax.swing.JLabel RelPho;
+    private javax.swing.JLabel RelRac;
+    private javax.swing.JLabel RelRos;
     private javax.swing.JTabbedPane Relation;
     private controller.ImagePanel Relation_Chandler;
     private controller.ImagePanel Relation_Joey;
@@ -2751,7 +2781,6 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel Relation_Phoebe;
     private controller.ImagePanel Relation_Rachel;
     private controller.ImagePanel Relation_Ross;
-    private javax.swing.JScrollPane ScrollCarte;
     private javax.swing.JScrollPane ScrollChandlertext;
     private javax.swing.JScrollPane ScrollEvolneg;
     private javax.swing.JScrollPane ScrollEvolpos;
@@ -2774,7 +2803,6 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel Sentiment_exprimé_ross;
     private javax.swing.JPanel Source;
     private javax.swing.JPanel SourceRelation;
-    private javax.swing.JTextArea TexteCarte;
     private javax.swing.JTextArea TexteChandler;
     private javax.swing.JTextArea TexteEvolneg;
     private javax.swing.JTextArea TexteEvolpos;
@@ -2792,6 +2820,7 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel imageMotsCaracteristiques;
     private controller.ImagePanel imagePersonnage;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel107;
