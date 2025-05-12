@@ -623,10 +623,10 @@ public class VueStat extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Interface Friends");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 160, 20);
+        labelTitre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelTitre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/les_png/friends.png"))); // NOI18N
+        labelTitre.setText("Analyse des scripts de la série");
+        getContentPane().add(labelTitre);
 
         SectionRecherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         SectionRecherche.setName(""); // NOI18N
@@ -2090,7 +2090,6 @@ public class VueStat extends javax.swing.JFrame {
         SectionRecherche.addTab("Relation", Relation);
 
         getContentPane().add(SectionRecherche);
-        SectionRecherche.setBounds(0, 20, 820, 580);
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
