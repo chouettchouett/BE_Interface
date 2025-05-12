@@ -116,6 +116,8 @@ public class VueStat extends javax.swing.JFrame {
                 case "Recherche de personnages" -> {
                     recherchePersonnage.setVisible(true);
                     cardName = "PERSONNAGE";
+                    String personnageParDefaut = (String) recherchePersonnage.getSelectedItem();
+                    afficherInfosPersonnage(personnageParDefaut);
                 }
                 case "Recherche de saisons" -> {
                     rechercheSaison.setVisible(true);
@@ -132,10 +134,8 @@ public class VueStat extends javax.swing.JFrame {
         });
         
         recherchePersonnage.addActionListener((evt) -> {
-            javax.swing.JComboBox combobox = (javax.swing.JComboBox) evt.getSource();
-            String result = (String) combobox.getSelectedItem();
-            
-            List<String> rechercheResultat = dialog.recherchePersonnage(result);
+            String personnage = (String) recherchePersonnage.getSelectedItem();
+            afficherInfosPersonnage(personnage);
         });
         
         recherchePersonnage.setModel(dialog.getComboBoxModelPersonnage());
@@ -1884,6 +1884,58 @@ public class VueStat extends javax.swing.JFrame {
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
+    //NOAH
+    private void afficherInfosPersonnage(String nom) {
+        String lower = nom.toLowerCase();
+
+        switch (lower) {
+            case "joey" -> setProfil(
+                "Joey Tribbiani", "Matt LeBlanc", "Américain", "57 ans", "25 juillet 1967 (États-Unis)",
+                "audition, actor, fridge", "how you doin', guy, hey", "/les_png/Joey_photo_profile.png"
+            );
+            case "rachel" -> setProfil(
+                "Rachel Green", "Jennifer Aniston", "Américaine", "55 ans", "11 février 1969 (États-Unis)",
+                "A DEFINIR", "A DEFINIR", "/les_png/Rachel_photo_profile.png"
+            );
+            case "ross" -> setProfil(
+                "Ross Geller", "David Schwimmer", "Américain", "57 ans", "2 novembre 1966 (États-Unis)",
+                "paléontologie, dinosaures", "we were on a break, uh", "/les_png/Ross_photo_profile.webp"
+            );
+            case "phoebe" -> setProfil(
+                "Phoebe Buffay", "Lisa Kudrow", "Américaine", "61 ans", "30 juillet 1963 (États-Unis)",
+                "musique, excentricité", "smelly cat, weird", "/les_png/Phoebe_photo_profile.png"
+            );
+            case "monica" -> setProfil(
+                "Monica Geller", "Courteney Cox", "Américaine", "60 ans", "15 juin 1964 (États-Unis)",
+                "A definir", "clean, okay", "/les_png/Monica_photo_profile.png"
+            );
+            case "chandler" -> setProfil(
+                "Chandler Bing", "Matthew Perry", "Américain", "54 ans", "19 août 1969 – 28 octobre 2023",
+                "A DEFINIR", "A DEFINIR", "/les_png/Chandler_photo_profile.png"
+            );
+            default -> setProfil(
+                "Personnage inconnu", "-", "-", "-", "-", "-", "-", "/les_png/default.png"
+            );
+        }
+    }
+    
+    private void setProfil(String nomPerso, String acteur, String nationalite, String age,
+                       String naissance, String interets, String mots, String imagePath) {
+        nomPersonnage.setText(nomPerso);
+        nomPersonnage1.setText("Relations de " + nomPerso);
+        jLabel39.setText(acteur);
+        jLabel40.setText(nationalite);
+        jLabel41.setText(age);
+        jLabel42.setText(naissance);
+        jLabel44.setText(interets);
+        jLabel46.setText(mots);
+        imagePersonnage.setImage(imagePath);
+    }
+    //NOAH FIN
+    
+    
+    
+    
     private void rechercheMotKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rechercheMotKeyPressed
         if( evt.getKeyCode() == KeyEvent.VK_ENTER){
             rechercheMotActionPerformed(null);
