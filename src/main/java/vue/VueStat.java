@@ -249,6 +249,9 @@ public class VueStat extends javax.swing.JFrame {
         
         tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
         rechercheMotProgBar.setVisible(false);
+        
+        rechercheMot.setBackground(new Color(60,131,197));
+        rechercheMot.setForeground(Color.WHITE);
     }
     
     public void showLoading(boolean loading) {
@@ -355,7 +358,7 @@ public class VueStat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        labelTitre = new javax.swing.JLabel();
         SectionRecherche = new javax.swing.JTabbedPane();
         panelPageRecherche = new javax.swing.JPanel();
         panelRechercheEtIndication = new javax.swing.JPanel();
@@ -610,12 +613,11 @@ public class VueStat extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Interface Friends");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 160, 20);
+        labelTitre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelTitre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/les_png/friends.png"))); // NOI18N
+        labelTitre.setText("Analyse des scripts de la série");
+        getContentPane().add(labelTitre, java.awt.BorderLayout.NORTH);
 
         SectionRecherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         SectionRecherche.setName(""); // NOI18N
@@ -635,10 +637,12 @@ public class VueStat extends javax.swing.JFrame {
 
         panelRecherche.add(panelRechercheTitre);
 
+        choixTypeRecherche.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         choixTypeRecherche.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         choixTypeRecherche.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         panelRechercheButtons.add(choixTypeRecherche);
 
+        rechercheMot.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         rechercheMot.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         rechercheMot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -652,6 +656,7 @@ public class VueStat extends javax.swing.JFrame {
         });
         panelRechercheButtons.add(rechercheMot);
 
+        rechercheMotButton.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         rechercheMotButton.setText("Rechercher");
         rechercheMotButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,8 +664,11 @@ public class VueStat extends javax.swing.JFrame {
             }
         });
         panelRechercheButtons.add(rechercheMotButton);
+
+        rechercheMotProgBar.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         panelRechercheButtons.add(rechercheMotProgBar);
 
+        recherchePersonnage.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         recherchePersonnage.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         recherchePersonnage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         recherchePersonnage.addItemListener(new java.awt.event.ItemListener() {
@@ -670,6 +678,7 @@ public class VueStat extends javax.swing.JFrame {
         });
         panelRechercheButtons.add(recherchePersonnage);
 
+        rechercheSaison.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         rechercheSaison.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         rechercheSaison.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -688,6 +697,7 @@ public class VueStat extends javax.swing.JFrame {
         });
         panelRechercheButtons.add(rechercheSaison);
 
+        rechercheEpisode.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         rechercheEpisode.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         rechercheEpisode.setMaximumRowCount(25);
         rechercheEpisode.addItemListener(new java.awt.event.ItemListener() {
@@ -1000,11 +1010,11 @@ public class VueStat extends javax.swing.JFrame {
         imageMotsCaracteristiques.setLayout(imageMotsCaracteristiquesLayout);
         imageMotsCaracteristiquesLayout.setHorizontalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         imageMotsCaracteristiquesLayout.setVerticalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 313, Short.MAX_VALUE)
         );
 
         resultSansRecherche.add(imageMotsCaracteristiques);
@@ -1027,11 +1037,11 @@ public class VueStat extends javax.swing.JFrame {
         imagePersonnage.setLayout(imagePersonnageLayout);
         imagePersonnageLayout.setHorizontalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
+            .addGap(0, 326, Short.MAX_VALUE)
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1291,6 +1301,7 @@ public class VueStat extends javax.swing.JFrame {
             }
         });
         tableDetailReplique.setRowHeight(25);
+        tableDetailReplique.setSelectionBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         tableDetailReplique.setShowGrid(true);
         tableDetailReplique.setShowVerticalLines(false);
         scrollPaneDetailReplique.setViewportView(tableDetailReplique);
@@ -1488,14 +1499,14 @@ public class VueStat extends javax.swing.JFrame {
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
         Analyse_StatistiqueLayout.setVerticalGroup(
             Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         SectionRecherche.addTab("Analyse Langagière", Analyse_Statistique);
@@ -1862,7 +1873,7 @@ public class VueStat extends javax.swing.JFrame {
         SourceLayout.setHorizontalGroup(
             SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SourceLayout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
+                .addGap(0, 32, Short.MAX_VALUE)
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SourceLayout.createSequentialGroup()
                         .addGap(88, 88, 88)
@@ -1871,7 +1882,7 @@ public class VueStat extends javax.swing.JFrame {
                     .addGroup(SourceLayout.createSequentialGroup()
                         .addGap(388, 388, 388)
                         .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1888,7 +1899,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         Analyse_Sentiment.addTab("Source", Source);
@@ -2045,7 +2056,7 @@ public class VueStat extends javax.swing.JFrame {
         SourceRelationLayout.setHorizontalGroup(
             SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SourceRelationLayout.createSequentialGroup()
-                .addGap(0, 72, Short.MAX_VALUE)
+                .addGap(0, 89, Short.MAX_VALUE)
                 .addGroup(SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2061,15 +2072,14 @@ public class VueStat extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         Relation.addTab("Source", SourceRelation);
 
         SectionRecherche.addTab("Relation", Relation);
 
-        getContentPane().add(SectionRecherche);
-        SectionRecherche.setBounds(0, 30, 820, 580);
+        getContentPane().add(SectionRecherche, java.awt.BorderLayout.CENTER);
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
@@ -2504,7 +2514,6 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel imageMotsCaracteristiques;
     private controller.ImagePanel imagePersonnage;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel107;
@@ -2638,6 +2647,7 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel labelSaison3;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
+    private javax.swing.JLabel labelTitre;
     private controller.ImagePanel neg_nuage;
     private javax.swing.JLabel nomPersonnage;
     private javax.swing.JLabel nomPersonnage1;
