@@ -34,60 +34,8 @@ public class VueStat extends javax.swing.JFrame {
         this.dialog = dialog;
         initComponents();
         
-        // -------------------------------------------------------------
-        // -               SECTION ANALYSE SENTIMENT                           -
-        // -------------------------------------------------------------
-        
-        //tab 1 Evolution de la positivité
-            Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
-            TexteEvolpos.setCaretPosition(0);
-        //tab 2 Evolution de la négativité
-            Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
-            TexteEvolneg.setCaretPosition(0);
-        //tab 3 Sentiment_exprimé
-            Sentiment_exprime.getVerticalScrollBar().setUnitIncrement(16);
-            Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
-            Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
-            Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
-            Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica_V2.png");
-            Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel_V2.png");
-            Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe_V2.png");
-            TexteSentimentexprime.setCaretPosition(0);
-        //tab 4 Evolution des sentiments
-            Evolution_Sentiment.getVerticalScrollBar().setUnitIncrement(16);
-            Evol_Sentiment_chandler.setImage("/les_png/Evolution_sentiment_Chandler.png");
-            TexteChandler.setCaretPosition(0);
-            Evol_Sentiment_ross.setImage("/les_png/Evolution_sentiment_Ross.png");
-            TexteRoss.setCaretPosition(0);
-            Evol_Sentiment_joey.setImage("/les_png/Evolution_sentiment_Joey.png");
-            TexteJoey.setCaretPosition(0);
-            Evol_Sentiment_monica.setImage("/les_png/Evolution_sentiment_Monica.png");
-            TexteMonica.setCaretPosition(0);
-            Evol_Sentiment_rachel.setImage("/les_png/Evolution_sentiment_Rachel.png");
-            TexteRachel.setCaretPosition(0);
-            Evol_Sentiment_phoebe.setImage("/les_png/Evolution_sentiment_Phoebe.png");
-            TextePhoebe.setCaretPosition(0);
-            TexteInterpretationGlobale.setCaretPosition(0);
-        //tab 5 Source
-            sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
-            neg_nuage.setImage("/les_png/negative_wordcloud.png");
-            pos_nuage.setImage("/les_png/positive_wordcloud.png");
-            
-        // -------------------------------------------------------------
-        // -               SECTION RELATION                           -
-        // -------------------------------------------------------------
-        //tab1 Carte des relations
-        Carte_Relation.setImage("/les_png/Relation_Cartes.png");
-        //tab2 Graphique des relations
-        Graphique_Relation.getVerticalScrollBar().setUnitIncrement(16);
-        Relation_Chandler.setImage("/les_png/Relation_Chandler.png");
-        Relation_Monica.setImage("/les_png/Relation_Monica.png");
-        Relation_Ross.setImage("/les_png/Relation_Ross.png");
-        Relation_Rachel.setImage("/les_png/Relation_Rachel.png");
-        Relation_Joey.setImage("/les_png/Relation_Joey.png");
-        Relation_Phoebe.setImage("/les_png/Relation_Phoebe.png");
-        //tab 3 SourceRelation
-        Relation_Mention.setImage("/les_png/Relation_Mention.png");
+            initialiserAnalyseSentiment();
+            initialiserRelations();
         
         // -------------------------------------------------------------
         // -               SECTION ANALYSE LANGAGIERE                           -
@@ -250,6 +198,65 @@ public class VueStat extends javax.swing.JFrame {
         tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
         rechercheMotProgBar.setVisible(false);
     }
+    
+    private void initialiserAnalyseSentiment() {
+    // Tab 1 : Évolution positivité/négativité
+        Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
+        TexteEvolpos.setCaretPosition(0);
+
+        Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
+        TexteEvolneg.setCaretPosition(0);
+
+    // Tab 2 : Sentiment exprimé
+        Sentiment_exprime.getVerticalScrollBar().setUnitIncrement(16);
+        Sentiment_exprimé_chandler.setImage("/les_png/Sentiment_exprimé_Chandler_V2.png");
+        Sentiment_exprimé_ross.setImage("/les_png/Sentiment_exprimé_Ross_V2.png");
+        Sentiment_exprimé_joey.setImage("/les_png/Sentiment_exprimé_Joey_V2.png");
+        Sentiment_exprimé_monica.setImage("/les_png/Sentiment_exprimé_Monica_V2.png");
+        Sentiment_exprimé_rachel.setImage("/les_png/Sentiment_exprimé_Rachel_V2.png");
+        Sentiment_exprimé_phoebe.setImage("/les_png/Sentiment_exprimé_Phoebe_V2.png");
+        TexteSentimentexprime.setCaretPosition(0);
+
+    // Tab 3 : Évolution des sentiments
+        Evolution_Sentiment.getVerticalScrollBar().setUnitIncrement(16);
+        Evol_Sentiment_chandler.setImage("/les_png/Evolution_sentiment_Chandler.png");
+        TexteChandler.setCaretPosition(0);
+        Evol_Sentiment_ross.setImage("/les_png/Evolution_sentiment_Ross.png");
+        TexteRoss.setCaretPosition(0);
+        Evol_Sentiment_joey.setImage("/les_png/Evolution_sentiment_Joey.png");
+        TexteJoey.setCaretPosition(0);
+        Evol_Sentiment_monica.setImage("/les_png/Evolution_sentiment_Monica.png");
+        TexteMonica.setCaretPosition(0);
+        Evol_Sentiment_rachel.setImage("/les_png/Evolution_sentiment_Rachel.png");
+        TexteRachel.setCaretPosition(0);
+        Evol_Sentiment_phoebe.setImage("/les_png/Evolution_sentiment_Phoebe.png");
+        TextePhoebe.setCaretPosition(0);
+        TexteInterpretationGlobale.setCaretPosition(0);
+
+    // Tab 4 : Nuages & Sources
+        sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
+        neg_nuage.setImage("/les_png/negative_wordcloud.png");
+        pos_nuage.setImage("/les_png/positive_wordcloud.png");
+    }
+    
+    private void initialiserRelations() {
+    // Tab 1 : Carte des relations
+        Carte_Relation.setImage("/les_png/Relation_Cartes.png");
+
+    // Tab 2 : Relations par personnage
+        Graphique_Relation.getVerticalScrollBar().setUnitIncrement(16);
+        Relation_Chandler.setImage("/les_png/Relation_Chandler.png");
+        Relation_Monica.setImage("/les_png/Relation_Monica.png");
+        Relation_Ross.setImage("/les_png/Relation_Ross.png");
+        Relation_Rachel.setImage("/les_png/Relation_Rachel.png");
+        Relation_Joey.setImage("/les_png/Relation_Joey.png");
+        Relation_Phoebe.setImage("/les_png/Relation_Phoebe.png");
+
+    // Tab 3 : Mentions
+        Relation_Mention.setImage("/les_png/Relation_Mention.png");
+    }
+
+    
     
     public void showLoading(boolean loading) {
         rechercheMotProgBar.setIndeterminate(loading);
@@ -615,7 +622,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Interface Friends");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 160, 20);
+        jLabel1.setBounds(0, 0, 160, 20);
 
         SectionRecherche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         SectionRecherche.setName(""); // NOI18N
@@ -1513,10 +1520,10 @@ public class VueStat extends javax.swing.JFrame {
         );
         Evol_pos_imageLayout.setVerticalGroup(
             Evol_pos_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 348, Short.MAX_VALUE)
         );
 
-        Evolution_positivite.add(Evol_pos_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 360));
+        Evolution_positivite.add(Evol_pos_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 350));
 
         TexteEvolpos.setColumns(20);
         TexteEvolpos.setRows(5);
@@ -1530,19 +1537,20 @@ public class VueStat extends javax.swing.JFrame {
         Evolution_negativité.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Evol_neg_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Evol_neg_image.setPreferredSize(new java.awt.Dimension(770, 350));
 
         javax.swing.GroupLayout Evol_neg_imageLayout = new javax.swing.GroupLayout(Evol_neg_image);
         Evol_neg_image.setLayout(Evol_neg_imageLayout);
         Evol_neg_imageLayout.setHorizontalGroup(
             Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
         Evol_neg_imageLayout.setVerticalGroup(
             Evol_neg_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 348, Short.MAX_VALUE)
         );
 
-        Evolution_negativité.add(Evol_neg_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 750, 350));
+        Evolution_negativité.add(Evol_neg_image, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 350));
 
         TexteEvolneg.setColumns(20);
         TexteEvolneg.setRows(5);
@@ -2069,7 +2077,7 @@ public class VueStat extends javax.swing.JFrame {
         SectionRecherche.addTab("Relation", Relation);
 
         getContentPane().add(SectionRecherche);
-        SectionRecherche.setBounds(0, 30, 820, 580);
+        SectionRecherche.setBounds(0, 20, 820, 580);
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
