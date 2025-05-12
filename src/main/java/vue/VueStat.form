@@ -1792,7 +1792,7 @@
                                                 <Property name="text" type="java.lang.String" value="Taux d&apos;utilisation globale :"/>
                                               </Properties>
                                             </Component>
-                                            <Component class="javax.swing.JLabel" name="jLabel59">
+                                            <Component class="javax.swing.JLabel" name="labelTauxUtilisationMot">
                                               <Properties>
                                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                                   <Font name="Verdana" size="12" style="0"/>
@@ -1824,7 +1824,7 @@
                                                 <Property name="text" type="java.lang.String" value="Taux d&apos;utilisation par r&#xe9;plique :"/>
                                               </Properties>
                                             </Component>
-                                            <Component class="javax.swing.JLabel" name="jLabel61">
+                                            <Component class="javax.swing.JLabel" name="labelUtilisationMotParReplique">
                                               <Properties>
                                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                                   <Font name="Verdana" size="12" style="0"/>

@@ -109,73 +109,6 @@ public class VueStat extends javax.swing.JFrame {
         
         ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "SANSRECHERCHE");
         
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(11, "Tendance du mot", "1");
-        dataset.addValue(5, "Tendance du mot", "2");
-        dataset.addValue(7, "Tendance du mot", "3");
-        dataset.addValue(8, "Tendance du mot", "4");
-        dataset.addValue(3, "Tendance du mot", "5");
-        dataset.addValue(12, "Tendance du mot", "6");
-        dataset.addValue(12, "Tendance du mot", "7");
-        dataset.addValue(12, "Tendance du mot", "8");
-        dataset.addValue(12, "Tendance du mot", "9");
-        dataset.addValue(12, "Tendance du mot", "10");
-        dataset.addValue(11, "Tendance du mot", "11");
-        dataset.addValue(5, "Tendance du mot", "12");
-        dataset.addValue(7, "Tendance du mot", "13");
-        dataset.addValue(8, "Tendance du mot", "14");
-        dataset.addValue(3, "Tendance du mot", "15");
-        dataset.addValue(12, "Tendance du mot", "16");
-        dataset.addValue(12, "Tendance du mot", "17");
-        dataset.addValue(12, "Tendance du mot", "18");
-        dataset.addValue(12, "Tendance du mot", "19");
-        dataset.addValue(12, "Tendance du mot", "20");
-        dataset.addValue(12, "Tendance du mot", "21");
-        dataset.addValue(12, "Tendance du mot", "22");
-        dataset.addValue(12, "Tendance du mot", "23");
-        dataset.addValue(12, "Tendance du mot", "24");
-        dataset.addValue(12, "Tendance du mot", "25");
-
-        JFreeChart chart = ChartFactory.createLineChart(
-                "Tendance d'utilisation du mot",
-                "Episode",
-                "Utilisation du mot",
-                dataset
-        );
-
-        ChartPanel chartPanel = new ChartPanel(chart);
-        jPanel63.add(chartPanel, java.awt.BorderLayout.CENTER);
-        
-        
-        dataset = new DefaultCategoryDataset();
-        dataset.addValue(11, "Tendance du mot", "1");
-        dataset.addValue(20, "Tendance du mot", "2");
-        dataset.addValue(7, "Tendance du mot", "3");
-        dataset.addValue(8, "Tendance du mot", "4");
-        dataset.addValue(3, "Tendance du mot", "5");
-        dataset.addValue(12, "Tendance du mot", "6");
-
-        JFreeChart chart2 = ChartFactory.createLineChart(
-                "Tendance d'utilisation du mot dans les 6 saisons",
-                "Saison",
-                "Nombre d'utilisation",
-                dataset
-        );
-        
-        chart2.getTitle().setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 18));
-
-        CategoryPlot plot = (CategoryPlot) chart2.getPlot();
-        plot.getDomainAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // x
-        plot.getRangeAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // y
-
-        plot.getDomainAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
-        plot.getRangeAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
-
-        ChartPanel chartPanel2 = new ChartPanel(chart2);
-        jPanel39.add(chartPanel2, java.awt.BorderLayout.CENTER);
-        
-        //jProgressBar1.setVisible(false);
-        
         rechercheSaison.setModel(new DefaultComboBoxModel<>(
             dialog.getSaisons()
             .stream()
@@ -285,6 +218,75 @@ public class VueStat extends javax.swing.JFrame {
     
     public javax.swing.JLabel getLabelMotCourant3() {
         return labelMotCourant3;
+    }
+    
+    public javax.swing.JLabel getLabelUtilisationMotParReplique() {
+        return labelUtilisationMotParReplique;
+    }    
+    
+    public void generateGraphLineMotParEpisode(List<List<Object>> data) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (List<Object> row : data) {
+            String saison = (String) row.get(0);
+            String episode = (String) row.get(1);
+            Integer value = ((Integer) row.get(2));
+            if (saison.equals("S01"))
+                dataset.addValue(value, "Tendance mot", episode);
+        }
+        
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Tendance d'utilisation du mot par épisode",
+                "Episode",
+                "Utilisation du mot",
+                dataset
+        );
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        
+        chartPanel.setOpaque(false);
+        chartPanel.setBackground(new Color(0, 0, 0, 0));
+
+        jPanel63.removeAll();
+        jPanel63.add(chartPanel, java.awt.BorderLayout.CENTER);        
+        jPanel63.revalidate();
+        jPanel63.repaint();
+    }
+    
+    public void generateGraphLineMotParSaison(List<List<Object>> data) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (List<Object> row : data) {
+            String name = (String) row.get(0);
+            Integer value = ((Integer) row.get(1));
+            dataset.addValue(value, "Tendance mot", name);
+        }
+
+        JFreeChart chart2 = ChartFactory.createLineChart(
+                "Tendance d'utilisation du mot dans les 6 saisons",
+                "Saison",
+                "Nombre d'utilisation",
+                dataset
+        );
+        
+        chart2.getTitle().setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 18));
+
+        CategoryPlot plot = (CategoryPlot) chart2.getPlot();
+        plot.getDomainAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // x
+        plot.getRangeAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // y
+
+        plot.getDomainAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
+        plot.getRangeAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
+
+        ChartPanel chartPanel2 = new ChartPanel(chart2);
+        
+        chartPanel2.setOpaque(false);
+        chartPanel2.setBackground(new Color(0, 0, 0, 0));
+
+        // chartPanel2.setPreferredSize(new Dimension(300, 150));
+        jPanel39.removeAll();
+        jPanel39.add(chartPanel2, java.awt.BorderLayout.CENTER);
+        
+        jPanel39.revalidate();
+        jPanel39.repaint();
     }
     
     public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
@@ -518,10 +520,10 @@ public class VueStat extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel37 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
+        labelTauxUtilisationMot = new javax.swing.JLabel();
         jPanel38 = new javax.swing.JPanel();
         jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
+        labelUtilisationMotParReplique = new javax.swing.JLabel();
         jPanel57 = new javax.swing.JPanel();
         jLabel82 = new javax.swing.JLabel();
         jLabel83 = new javax.swing.JLabel();
@@ -1344,10 +1346,10 @@ public class VueStat extends javax.swing.JFrame {
         jLabel58.setText("Taux d'utilisation globale :");
         jPanel37.add(jLabel58);
 
-        jLabel59.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel59.setText("Le mot \"Hello\" a été employé 310 fois, 1% de tous les mots de la série");
-        jLabel59.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel37.add(jLabel59);
+        labelTauxUtilisationMot.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        labelTauxUtilisationMot.setText("Le mot \"Hello\" a été employé 310 fois, 1% de tous les mots de la série");
+        labelTauxUtilisationMot.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel37.add(labelTauxUtilisationMot);
 
         jPanel1.add(jPanel37);
 
@@ -1358,10 +1360,10 @@ public class VueStat extends javax.swing.JFrame {
         jLabel60.setText("Taux d'utilisation par réplique :");
         jPanel38.add(jLabel60);
 
-        jLabel61.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel61.setText("Le mot \"Hello\" se retrouve dans 298 répliques différentes, soit dans 1% des répliques de la série");
-        jLabel61.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel38.add(jLabel61);
+        labelUtilisationMotParReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        labelUtilisationMotParReplique.setText("Le mot \"Hello\" se retrouve dans 298 répliques différentes, soit dans 1% des répliques de la série");
+        labelUtilisationMotParReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel38.add(labelUtilisationMotParReplique);
 
         jPanel1.add(jPanel38);
 
@@ -2561,10 +2563,8 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel7;
@@ -2656,7 +2656,9 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel labelSaison3;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
+    private javax.swing.JLabel labelTauxUtilisationMot;
     private javax.swing.JLabel labelTitre;
+    private javax.swing.JLabel labelUtilisationMotParReplique;
     private controller.ImagePanel neg_nuage;
     private javax.swing.JLabel nomPersonnage;
     private javax.swing.JLabel nomPersonnage1;

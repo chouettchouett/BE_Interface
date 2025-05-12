@@ -112,6 +112,17 @@ public class ControllerDialogRecherche {
                         ui.getLabelMotCourant1().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
                         ui.getLabelMotCourant2().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
                         ui.getLabelMotCourant3().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
+                        
+                        Integer nbLinesContainsWords = (Integer) result.get("number_lines_with_words");
+                        Double percentLinesContainsWords = (Double) result.get("words_usage_ratio_by_line");
+                        
+                        ui.getLabelUtilisationMotParReplique().setText(nbLinesContainsWords + " répliques contienne ce mot (" + String.format("%.2f", percentLinesContainsWords*100) + "% des répliques)");
+                        
+                        List<List<Object>> wordCountBySeason = (List<List<Object>>) result.get("word_count_by_season");
+                        ui.generateGraphLineMotParSaison(wordCountBySeason);
+                        
+                        List<List<Object>> wordCountByEpisode = (List<List<Object>>) result.get("word_count_by_episode");
+                        ui.generateGraphLineMotParEpisode(wordCountByEpisode);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ExecutionException ex) {
