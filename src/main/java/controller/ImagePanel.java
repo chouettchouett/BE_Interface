@@ -2,10 +2,39 @@ package controller;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class ImagePanel extends javax.swing.JPanel {
     private Image image;
+    private ImagePopUp popUp = null;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public ImagePanel(){
+        addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e) && image != null) {
+                if (popUp != null) popUp.dispose();
+
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(ImagePanel.this);
+                int w = image.getWidth(ImagePanel.this);
+                int h = image.getHeight(ImagePanel.this);
+                if (w <= 0 || h <= 0) { w = 100; h = 100; }
+
+                Image scaled = image.getScaledInstance(w * 2, h * 2, Image.SCALE_SMOOTH);
+                popUp = new ImagePopUp(parentFrame, scaled);
+            }
+        }
+    });
+    }
+
 
     public void setImage(String imagePath) {
         ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));

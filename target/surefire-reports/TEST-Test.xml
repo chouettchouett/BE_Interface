@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Test" time="0.011" tests="0" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Test" time="0.014" tests="0" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\test-classes;C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\classes;C:\Users\choue\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE250\AbsoluteLayout-RELEASE250.jar;"/>
+    <property name="java.class.path" value="C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\test-classes;C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\classes;C:\Users\choue\.m2\repository\net\sf\py4j\py4j\0.10.9.9\py4j-0.10.9.9.jar;C:\Users\choue\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE250\AbsoluteLayout-RELEASE250.jar;C:\Users\choue\.m2\repository\org\jfree\jfreechart\1.5.3\jfreechart-1.5.3.jar;C:\Users\choue\.m2\repository\org\python\jython-standalone\2.7.3\jython-standalone-2.7.3.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\choue\AppData\Local\Temp\surefire7236578683915123581\surefirebooter-20250422153855616_3.jar C:\Users\choue\AppData\Local\Temp\surefire7236578683915123581 2025-04-22T15-38-55_373-jvmRun1 surefire-20250422153855616_1tmp surefire_0-20250422153855616_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\choue\AppData\Local\Temp\surefire13834515147969632329\surefirebooter-20250512151830895_3.jar C:\Users\choue\AppData\Local\Temp\surefire13834515147969632329 2025-05-12T15-18-30_471-jvmRun1 surefire-20250512151830895_1tmp surefire_0-20250512151830895_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\test-classes;C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\classes;C:\Users\choue\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE250\AbsoluteLayout-RELEASE250.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\test-classes;C:\Users\choue\Documents\NetBeansProjects\BE_Interface-main_v2\BE_Interface-main\target\classes;C:\Users\choue\.m2\repository\net\sf\py4j\py4j\0.10.9.9\py4j-0.10.9.9.jar;C:\Users\choue\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE250\AbsoluteLayout-RELEASE250.jar;C:\Users\choue\.m2\repository\org\jfree\jfreechart\1.5.3\jfreechart-1.5.3.jar;C:\Users\choue\.m2\repository\org\python\jython-standalone\2.7.3\jython-standalone-2.7.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\choue"/>
     <property name="user.language" value="fr"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\choue\AppData\Local\Temp\surefire7236578683915123581\surefirebooter-20250422153855616_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\choue\AppData\Local\Temp\surefire13834515147969632329\surefirebooter-20250512151830895_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>

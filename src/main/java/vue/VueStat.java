@@ -61,6 +61,22 @@ public class VueStat extends javax.swing.JFrame {
             sentiment_par_personnage_panel.setImage("/les_png/sentiment_par_personnage.png");
             neg_nuage.setImage("/les_png/negative_wordcloud.png");
             pos_nuage.setImage("/les_png/positive_wordcloud.png");
+            
+        // -------------------------------------------------------------
+        // -               SECTION RELATION                           -
+        // -------------------------------------------------------------
+        //tab1 Carte des relations
+        Carte_Relation.setImage("/les_png/Relation_Cartes.png");
+        //tab2 Graphique des relations
+        Graphique_Relation.getVerticalScrollBar().setUnitIncrement(16);
+        Relation_Chandler.setImage("/les_png/Relation_Chandler.png");
+        Relation_Monica.setImage("/les_png/Relation_Monica.png");
+        Relation_Ross.setImage("/les_png/Relation_Ross.png");
+        Relation_Rachel.setImage("/les_png/Relation_Rachel.png");
+        Relation_Joey.setImage("/les_png/Relation_Joey.png");
+        Relation_Phoebe.setImage("/les_png/Relation_Phoebe.png");
+        //tab 3 SourceRelation
+        Relation_Mention.setImage("/les_png/Relation_Mention.png");
         
         // -------------------------------------------------------------
         // -               SECTION ANALYSE LANGAGIERE                           -
@@ -416,7 +432,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel85 = new javax.swing.JLabel();
         Analyse_Statistique = new javax.swing.JPanel();
         AnalyseLangagière = new controller.ImagePanel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        Analyse_Sentiment = new javax.swing.JTabbedPane();
         Evolution_positivite = new javax.swing.JPanel();
         Evol_pos_image = new controller.ImagePanel();
         ScrollEvolpos = new javax.swing.JScrollPane();
@@ -427,7 +443,6 @@ public class VueStat extends javax.swing.JFrame {
         TexteEvolneg = new javax.swing.JTextArea();
         Sentiment_exprime = new javax.swing.JScrollPane();
         Sentiment_exprimé_panel = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
         Sentiment_exprimé_ross = new controller.ImagePanel();
         Sentiment_exprimé_chandler = new controller.ImagePanel();
         Sentiment_exprimé_rachel = new controller.ImagePanel();
@@ -438,7 +453,6 @@ public class VueStat extends javax.swing.JFrame {
         TexteSentimentexprime = new javax.swing.JTextArea();
         Evolution_Sentiment = new javax.swing.JScrollPane();
         Evolution_Sentiment_Panel = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
         Evol_Sentiment_monica = new controller.ImagePanel();
         ScrollMonicatext = new javax.swing.JScrollPane();
         TexteMonica = new javax.swing.JTextArea();
@@ -465,7 +479,24 @@ public class VueStat extends javax.swing.JFrame {
         neg_nuage = new controller.ImagePanel();
         jLabel15 = new javax.swing.JLabel();
         pos_nuage = new controller.ImagePanel();
-        Opinion = new javax.swing.JPanel();
+        Relation = new javax.swing.JTabbedPane();
+        Carte_Relation_Panel = new javax.swing.JPanel();
+        Carte_Relation = new controller.ImagePanel();
+        ScrollCarte = new javax.swing.JScrollPane();
+        TexteCarte = new javax.swing.JTextArea();
+        Graphique_Relation = new javax.swing.JScrollPane();
+        Graphique_Relation_panel = new javax.swing.JPanel();
+        Relation_Ross = new controller.ImagePanel();
+        Relation_Chandler = new controller.ImagePanel();
+        Relation_Rachel = new controller.ImagePanel();
+        Relation_Monica = new controller.ImagePanel();
+        Relation_Phoebe = new controller.ImagePanel();
+        Relation_Joey = new controller.ImagePanel();
+        ScrollGraphiqueRel = new javax.swing.JScrollPane();
+        TexteGraphiqueRel = new javax.swing.JTextArea();
+        SourceRelation = new javax.swing.JPanel();
+        Relation_Mention = new controller.ImagePanel();
+        jLabel16 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(837, 626));
         getContentPane().setLayout(null);
@@ -1371,12 +1402,12 @@ public class VueStat extends javax.swing.JFrame {
 
         TexteEvolpos.setColumns(20);
         TexteEvolpos.setRows(5);
-        TexteEvolpos.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions. Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, plus qu'à une logique progressive.");
+        TexteEvolpos.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         ScrollEvolpos.setViewportView(TexteEvolpos);
 
         Evolution_positivite.add(ScrollEvolpos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
 
-        jTabbedPane3.addTab("Evolution de la positivité", Evolution_positivite);
+        Analyse_Sentiment.addTab("Evolution de la positivité", Evolution_positivite);
 
         Evolution_negativité.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1397,17 +1428,16 @@ public class VueStat extends javax.swing.JFrame {
 
         TexteEvolneg.setColumns(20);
         TexteEvolneg.setRows(5);
-        TexteEvolneg.setText("La négativité varie fortement d’un personnage à l’autre, mais certains pics s’expliquent par des événements narratifs majeurs.\nSaison 2 : Phoebe connaît une baisse notable, probablement liée à la découverte de son frère et à la confrontation à sa propre histoire familiale. Monica, quant à elle, vit une rupture douloureuse avec Richard. Joey, qui obtient un rôle majeur, affiche un baisse de négativité — sa carrière décolle et sa vie amoureuse s’épanouit. \nSaison 4 : Rachel se montre plus négative — sa jalousie vis-à-vis du mariage de Ross avec Emily devient centrale.\nSaison 7 : nouvelle baisse chez Phoebe, alors que paradoxalement elle se rapproche de Mike — peut-être l’effet d’une réorientation affective plus sérieuse qui l’éloigne de sa posture excentrique.\nLes pics de négativité reflètent souvent des moments d’instabilité amoureuse ou familiale ou même relié au travail.");
+        TexteEvolneg.setText("La négativité varie fortement d’un personnage à l’autre, mais certains pics s’expliquent par des événements narratifs majeurs.\nSaison 2 : Phoebe connaît une baisse notable, probablement liée à la découverte de son frère et à la confrontation à sa\n               propre histoire familiale. Monica, quant à elle, vit une rupture douloureuse avec Richard. \n               Joey, qui obtient un rôle majeur, affiche un baisse de négativité — sa carrière décolle et sa vie amoureuse s’épanouit. \nSaison 4 : Rachel se montre plus négative — sa jalousie vis-à-vis du mariage de Ross avec Emily devient centrale.\nSaison 7 : nouvelle baisse chez Phoebe, alors que paradoxalement elle se rapproche de Mike — \n               peut-être l’effet d’une réorientation affective plus sérieuse qui l’éloigne de sa posture excentrique.\nLes pics de négativité reflètent souvent des moments d’instabilité amoureuse ou familiale ou même relié au travail.");
         ScrollEvolneg.setViewportView(TexteEvolneg);
 
         Evolution_negativité.add(ScrollEvolneg, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 750, 140));
 
-        jTabbedPane3.addTab("Evolution de la négativité", Evolution_negativité);
+        Analyse_Sentiment.addTab("Evolution de la négativité", Evolution_negativité);
 
         Sentiment_exprimé_panel.setMinimumSize(new java.awt.Dimension(808, 895));
         Sentiment_exprimé_panel.setPreferredSize(new java.awt.Dimension(808, 895));
         Sentiment_exprimé_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Sentiment_exprimé_panel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
 
         Sentiment_exprimé_ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1508,12 +1538,11 @@ public class VueStat extends javax.swing.JFrame {
 
         Sentiment_exprime.setViewportView(Sentiment_exprimé_panel);
 
-        jTabbedPane3.addTab("Sentiment_exprimé", Sentiment_exprime);
+        Analyse_Sentiment.addTab("Sentiment_exprimé", Sentiment_exprime);
 
         Evolution_Sentiment_Panel.setMinimumSize(new java.awt.Dimension(808, 1400));
         Evolution_Sentiment_Panel.setPreferredSize(new java.awt.Dimension(808, 1400));
         Evolution_Sentiment_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Evolution_Sentiment_Panel.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 115, 749, -1));
 
         Evol_Sentiment_monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1667,7 +1696,7 @@ public class VueStat extends javax.swing.JFrame {
 
         Evolution_Sentiment.setViewportView(Evolution_Sentiment_Panel);
 
-        jTabbedPane3.addTab("Evolution des sentiments", Evolution_Sentiment);
+        Analyse_Sentiment.addTab("Evolution des sentiments", Evolution_Sentiment);
 
         sentiment_par_personnage_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1744,22 +1773,182 @@ public class VueStat extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("Source", Source);
+        Analyse_Sentiment.addTab("Source", Source);
 
-        javax.swing.GroupLayout OpinionLayout = new javax.swing.GroupLayout(Opinion);
-        Opinion.setLayout(OpinionLayout);
-        OpinionLayout.setHorizontalGroup(
-            OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 816, Short.MAX_VALUE)
+        SectionRecherche.addTab("Analyse de Sentiment", Analyse_Sentiment);
+
+        Carte_Relation_Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Carte_Relation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Carte_RelationLayout = new javax.swing.GroupLayout(Carte_Relation);
+        Carte_Relation.setLayout(Carte_RelationLayout);
+        Carte_RelationLayout.setHorizontalGroup(
+            Carte_RelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
-        OpinionLayout.setVerticalGroup(
-            OpinionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 506, Short.MAX_VALUE)
+        Carte_RelationLayout.setVerticalGroup(
+            Carte_RelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Opinion", Opinion);
+        Carte_Relation_Panel.add(Carte_Relation, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 770, 360));
 
-        SectionRecherche.addTab("Analyse de Sentiment", jTabbedPane3);
+        TexteCarte.setColumns(20);
+        TexteCarte.setRows(5);
+        ScrollCarte.setViewportView(TexteCarte);
+
+        Carte_Relation_Panel.add(ScrollCarte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 770, 120));
+
+        Relation.addTab("Carte des Relations", Carte_Relation_Panel);
+
+        Graphique_Relation_panel.setMinimumSize(new java.awt.Dimension(808, 895));
+        Graphique_Relation_panel.setPreferredSize(new java.awt.Dimension(808, 895));
+        Graphique_Relation_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Relation_Ross.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_RossLayout = new javax.swing.GroupLayout(Relation_Ross);
+        Relation_Ross.setLayout(Relation_RossLayout);
+        Relation_RossLayout.setHorizontalGroup(
+            Relation_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Relation_RossLayout.setVerticalGroup(
+            Relation_RossLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Graphique_Relation_panel.add(Relation_Ross, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 380, 250));
+
+        Relation_Chandler.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_ChandlerLayout = new javax.swing.GroupLayout(Relation_Chandler);
+        Relation_Chandler.setLayout(Relation_ChandlerLayout);
+        Relation_ChandlerLayout.setHorizontalGroup(
+            Relation_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Relation_ChandlerLayout.setVerticalGroup(
+            Relation_ChandlerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Graphique_Relation_panel.add(Relation_Chandler, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 380, 250));
+
+        Relation_Rachel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_RachelLayout = new javax.swing.GroupLayout(Relation_Rachel);
+        Relation_Rachel.setLayout(Relation_RachelLayout);
+        Relation_RachelLayout.setHorizontalGroup(
+            Relation_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Relation_RachelLayout.setVerticalGroup(
+            Relation_RachelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Graphique_Relation_panel.add(Relation_Rachel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 380, 250));
+
+        Relation_Monica.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_MonicaLayout = new javax.swing.GroupLayout(Relation_Monica);
+        Relation_Monica.setLayout(Relation_MonicaLayout);
+        Relation_MonicaLayout.setHorizontalGroup(
+            Relation_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Relation_MonicaLayout.setVerticalGroup(
+            Relation_MonicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Graphique_Relation_panel.add(Relation_Monica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 380, 250));
+
+        Relation_Phoebe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_PhoebeLayout = new javax.swing.GroupLayout(Relation_Phoebe);
+        Relation_Phoebe.setLayout(Relation_PhoebeLayout);
+        Relation_PhoebeLayout.setHorizontalGroup(
+            Relation_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Relation_PhoebeLayout.setVerticalGroup(
+            Relation_PhoebeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Graphique_Relation_panel.add(Relation_Phoebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 380, 250));
+
+        Relation_Joey.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_JoeyLayout = new javax.swing.GroupLayout(Relation_Joey);
+        Relation_Joey.setLayout(Relation_JoeyLayout);
+        Relation_JoeyLayout.setHorizontalGroup(
+            Relation_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+        Relation_JoeyLayout.setVerticalGroup(
+            Relation_JoeyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+        );
+
+        Graphique_Relation_panel.add(Relation_Joey, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, 380, 250));
+
+        TexteGraphiqueRel.setColumns(20);
+        TexteGraphiqueRel.setRows(5);
+        TexteGraphiqueRel.setText("Ces graphiques comptabilisent les émotions exprimées phrase par phrase dans la série, du début à la fin. \nIls montrent uniquement la fréquence d’apparition des sentiments dans les dialogues.\nOn remarque que la joie et la colère sont très largement dominantes.\nCe sont les émotions les plus souvent exprimées par les personnages, \nce qui reflète le ton humoristique et parfois conflictuel de Friends.\nCependant, ce type d’analyse ne permet pas de rendre compte de la complexité émotionnelle ou des sentiments plus profonds, \ncomme la tristesse ou l’amour, qui peuvent être présents de manière plus subtile ou moins verbalisée. \nPour avoir des analyses plus fines des sentiments profonds. Voir page \"Evolution des sentiments\".");
+        ScrollGraphiqueRel.setViewportView(TexteGraphiqueRel);
+
+        Graphique_Relation_panel.add(ScrollGraphiqueRel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 730, -1));
+
+        Graphique_Relation.setViewportView(Graphique_Relation_panel);
+
+        Relation.addTab("Graphique_Relation", Graphique_Relation);
+
+        Relation_Mention.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout Relation_MentionLayout = new javax.swing.GroupLayout(Relation_Mention);
+        Relation_Mention.setLayout(Relation_MentionLayout);
+        Relation_MentionLayout.setHorizontalGroup(
+            Relation_MentionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 695, Short.MAX_VALUE)
+        );
+        Relation_MentionLayout.setVerticalGroup(
+            Relation_MentionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+
+        jLabel16.setText("Certaines sources utilisé pour l'analyse de sentiment");
+
+        javax.swing.GroupLayout SourceRelationLayout = new javax.swing.GroupLayout(SourceRelation);
+        SourceRelation.setLayout(SourceRelationLayout);
+        SourceRelationLayout.setHorizontalGroup(
+            SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SourceRelationLayout.createSequentialGroup()
+                .addGap(0, 72, Short.MAX_VALUE)
+                .addGroup(SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(229, 229, 229))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
+                        .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))))
+        );
+        SourceRelationLayout.setVerticalGroup(
+            SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SourceRelationLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        Relation.addTab("Source", SourceRelation);
+
+        SectionRecherche.addTab("Relation", Relation);
 
         getContentPane().add(SectionRecherche);
         SectionRecherche.setBounds(0, 30, 820, 580);
@@ -2066,7 +2255,10 @@ public class VueStat extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private controller.ImagePanel AnalyseLangagière;
+    private javax.swing.JTabbedPane Analyse_Sentiment;
     private javax.swing.JPanel Analyse_Statistique;
+    private controller.ImagePanel Carte_Relation;
+    private javax.swing.JPanel Carte_Relation_Panel;
     private controller.ImagePanel Evol_Sentiment_chandler;
     private controller.ImagePanel Evol_Sentiment_joey;
     private controller.ImagePanel Evol_Sentiment_monica;
@@ -2079,10 +2271,21 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel Evolution_Sentiment_Panel;
     private javax.swing.JPanel Evolution_negativité;
     private javax.swing.JPanel Evolution_positivite;
-    private javax.swing.JPanel Opinion;
+    private javax.swing.JScrollPane Graphique_Relation;
+    private javax.swing.JPanel Graphique_Relation_panel;
+    private javax.swing.JTabbedPane Relation;
+    private controller.ImagePanel Relation_Chandler;
+    private controller.ImagePanel Relation_Joey;
+    private controller.ImagePanel Relation_Mention;
+    private controller.ImagePanel Relation_Monica;
+    private controller.ImagePanel Relation_Phoebe;
+    private controller.ImagePanel Relation_Rachel;
+    private controller.ImagePanel Relation_Ross;
+    private javax.swing.JScrollPane ScrollCarte;
     private javax.swing.JScrollPane ScrollChandlertext;
     private javax.swing.JScrollPane ScrollEvolneg;
     private javax.swing.JScrollPane ScrollEvolpos;
+    private javax.swing.JScrollPane ScrollGraphiqueRel;
     private javax.swing.JScrollPane ScrollInterpretationtext;
     private javax.swing.JScrollPane ScrollJoeytext;
     private javax.swing.JScrollPane ScrollMonicatext;
@@ -2100,9 +2303,12 @@ public class VueStat extends javax.swing.JFrame {
     private controller.ImagePanel Sentiment_exprimé_rachel;
     private controller.ImagePanel Sentiment_exprimé_ross;
     private javax.swing.JPanel Source;
+    private javax.swing.JPanel SourceRelation;
+    private javax.swing.JTextArea TexteCarte;
     private javax.swing.JTextArea TexteChandler;
     private javax.swing.JTextArea TexteEvolneg;
     private javax.swing.JTextArea TexteEvolpos;
+    private javax.swing.JTextArea TexteGraphiqueRel;
     private javax.swing.JTextArea TexteInterpretationGlobale;
     private javax.swing.JTextArea TexteJoey;
     private javax.swing.JTextArea TexteMonica;
@@ -2126,8 +2332,7 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -2238,7 +2443,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel90;
     private javax.swing.JPanel jPanel91;
     private javax.swing.JPanel jPanel92;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel labelDetailReplique;
     private javax.swing.JLabel labelEpisode;
     private javax.swing.JLabel labelEpisode2;
