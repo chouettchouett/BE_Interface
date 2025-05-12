@@ -8,6 +8,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import controller.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -34,14 +35,20 @@ public class VueStat extends javax.swing.JFrame {
         this.dialog = dialog;
         initComponents();
         
-            initialiserAnalyseSentiment();
-            initialiserRelations();
+        initialiserAnalyseSentiment();
+        initialiserRelations();
+        initialiserAnalyseLangagiere();
+        initialiserRechercheUI();
+        initialiserComportementRecherche();
+        initialiserComboBoxRecherche();
+        initialiserStyleRechercheMot();
         
+        /*
         // -------------------------------------------------------------
         // -               SECTION ANALYSE LANGAGIERE                           -
         // -------------------------------------------------------------
         AnalyseLangagière.setImage("/les_png/Analyselangagière.png");
-        
+               
         // -------------------------------------------------------------
         // -               SECTION RECHERCHE                           -
         // -------------------------------------------------------------
@@ -133,13 +140,105 @@ public class VueStat extends javax.swing.JFrame {
         
         rechercheMot.setBackground(new Color(60,131,197));
         rechercheMot.setForeground(Color.WHITE);
+        */
     }
     
+    private void initialiserAnalyseLangagiere() {
+        AnalyseLangagière.setImage("/les_png/Analyselangagière.png");
+    }
+
+    private void initialiserRechercheUI() {
+        imageMotsCaracteristiques.setImage("/les_png/mots_caractéristiques.png");
+        imagePersonnage.setImage("/les_png/Joey_Test.png");
+
+        recherchePersonnage.setVisible(false);
+        rechercheSaison.setVisible(false);
+        rechercheEpisode.setVisible(false);
+        rechercheMotButton.setVisible(false);
+
+        rechercheMot.setColumns(10);
+        rechercheMot.setBorder(new javax.swing.border.EmptyBorder(4, 4, 4, 4));
+        rechercheMot.setPlaceholder("Recherche de mots");
+
+        ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "SANSRECHERCHE");
+
+        tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
+        rechercheMotProgBar.setVisible(false);
+    }
+
+    private void initialiserComportementRecherche() {
+        choixTypeRecherche.setModel(dialog.getComboBoxModelTypeRecherche());
+        choixTypeRecherche.addActionListener(evt -> {
+            String result = (String) ((javax.swing.JComboBox<?>) evt.getSource()).getSelectedItem();
+
+            // Cacher tous les composants par défaut
+            recherchePersonnage.setVisible(false);
+            rechercheSaison.setVisible(false);
+            rechercheEpisode.setVisible(false);
+            rechercheMot.setVisible(false);
+            rechercheMotButton.setVisible(false);
+
+            String cardName = switch (result) {
+                case "Recherche de mots" -> {
+                    rechercheMot.setVisible(true);
+                    rechercheMotButton.setVisible(true);
+                    yield "MOT";
+                }
+                case "Recherche de personnages" -> {
+                    recherchePersonnage.setVisible(true);
+                    afficherInfosPersonnage((String) recherchePersonnage.getSelectedItem());
+                    yield "PERSONNAGE";
+                }
+                case "Recherche de saisons" -> {
+                    rechercheSaison.setVisible(true);
+                    yield "SAISON";
+                }
+                case "Recherche d'épisodes" -> {
+                    rechercheSaison.setVisible(true);
+                    rechercheEpisode.setVisible(true);
+                    yield "EPISODE";
+                }
+                default -> "SANSRECHERCHE";
+            };
+
+            ((java.awt.CardLayout) resultats.getLayout()).show(resultats, cardName);
+        });
+
+        recherchePersonnage.addActionListener(evt -> {
+            String personnage = (String) recherchePersonnage.getSelectedItem();
+            afficherInfosPersonnage(personnage);
+        });
+    }
+
+    private void initialiserComboBoxRecherche() {
+        recherchePersonnage.setModel(dialog.getComboBoxModelPersonnage());
+
+        rechercheSaison.setModel(new DefaultComboBoxModel<>(
+            dialog.getSaisons().stream()
+                .map(s -> String.format("S%02d", s.getNumeroSaison()))
+                .toArray(String[]::new)
+        ));
+
+        rechercheEpisode.setModel(new DefaultComboBoxModel<>(
+            dialog.getEpisodesSaison(1).stream() // Saison 1 par défaut
+                .map(e -> String.format("S%02dE%02d - %s",
+                        e.getNumeroSaison(),
+                        e.getNumeroEpisode(),
+                        e.getTitre()))
+                .filter(ep -> ep.startsWith("S01"))
+                .toArray(String[]::new)
+        ));
+    }
+
+    private void initialiserStyleRechercheMot() {
+        rechercheMot.setBackground(new Color(60, 131, 197));
+        rechercheMot.setForeground(Color.WHITE);
+    }
+   
     private void initialiserAnalyseSentiment() {
     // Tab 1 : Évolution positivité/négativité
         Evol_pos_image.setImage("/les_png/Evolution_positivité.png");
         TexteEvolpos.setCaretPosition(0);
-
         Evol_neg_image.setImage("/les_png/Evolution_negativité.png");
         TexteEvolneg.setCaretPosition(0);
 
@@ -288,7 +387,7 @@ public class VueStat extends javax.swing.JFrame {
         jPanel39.revalidate();
         jPanel39.repaint();
     }
-    
+    /*
     public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
         int total = data.stream()
             .mapToInt(row -> (Integer) row.get(1))
@@ -363,6 +462,98 @@ public class VueStat extends javax.swing.JFrame {
         panelPourcentageMotsPerso.revalidate();
         panelPourcentageMotsPerso.repaint();
     }
+    */
+
+    public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
+        DefaultCategoryDataset dataset = construireDataset(data);
+        int total = calculerTotal(data);
+
+        JFreeChart chart = creerBarChartEmpile(dataset);
+        configurerPlot(chart.getCategoryPlot());
+        configurerRenderer(chart.getCategoryPlot(), dataset, total);
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        configurerChartPanel(chartPanel);
+
+        afficherDansPanelPourcentage(chartPanel);
+    }
+
+    private DefaultCategoryDataset construireDataset(List<List<Object>> data) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (List<Object> row : data) {
+            String name = (String) row.get(0);
+            Integer value = (Integer) row.get(1);
+            dataset.addValue(value, name, "");
+        }
+        return dataset;
+    }
+
+    private int calculerTotal(List<List<Object>> data) {
+        return data.stream()
+                   .mapToInt(row -> (Integer) row.get(1))
+                   .sum();
+    }
+
+    private JFreeChart creerBarChartEmpile(DefaultCategoryDataset dataset) {
+        JFreeChart chart = ChartFactory.createStackedBarChart(
+            null, null, null, dataset,
+            PlotOrientation.HORIZONTAL,
+            false, false, false
+        );
+        chart.setBackgroundPaint(new Color(0, 0, 0, 0));
+        chart.getPlot().setBackgroundPaint(new Color(0, 0, 0, 0));
+        return chart;
+    }
+
+    private void configurerPlot(CategoryPlot plot) {
+        plot.setOutlineVisible(false);
+        plot.getDomainAxis().setVisible(false);
+        plot.getRangeAxis().setVisible(false);
+        plot.setRangeGridlinesVisible(false);
+    }
+
+    private void configurerRenderer(CategoryPlot plot, CategoryDataset dataset, int total) {
+        StackedBarRenderer renderer = new StackedBarRenderer();
+
+        renderer.setDefaultToolTipGenerator((ds, row, col) -> {
+            String name = dataset.getRowKey(row).toString();
+            Number value = dataset.getValue(row, col);
+            return String.format("%s : %d utilisations", name, value.intValue());
+        });
+
+        renderer.setDefaultItemLabelFont(new Font("Verdana", Font.PLAIN, 9));
+                renderer.setDefaultItemLabelsVisible(true);
+                renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator() {
+                    @Override
+                    public String generateLabel(org.jfree.data.category.CategoryDataset dataset, int row, int column) {
+                        Number value = dataset.getValue(row, column);
+                        String name = dataset.getRowKey(row).toString();
+                        int val = value.intValue();
+                        double percent = total == 0 ? 0 : (100.0 * val / total);
+                        return String.format("%s\n(%d, %.1f%%)", name, val, percent);
+                    }
+                });
+
+        renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
+            ItemLabelAnchor.CENTER, TextAnchor.CENTER
+        ));
+
+        plot.setRenderer(renderer);
+    }
+
+    private void configurerChartPanel(ChartPanel panel) {
+        panel.setOpaque(false);
+        panel.setBackground(new Color(0, 0, 0, 0));
+        panel.setPreferredSize(new Dimension(300, 150));
+    }
+
+    private void afficherDansPanelPourcentage(ChartPanel panel) {
+        panelPourcentageMotsPerso.removeAll();
+        panelPourcentageMotsPerso.add(panel, BorderLayout.NORTH);
+        panelPourcentageMotsPerso.revalidate();
+        panelPourcentageMotsPerso.repaint();
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -2172,7 +2363,18 @@ public class VueStat extends javax.swing.JFrame {
         }
     }
     private void rechercheEpisodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheEpisodeActionPerformed
-        
+        try {
+            int saison = extraireNumeroSaison();
+            int episode = extraireNumeroEpisode();
+
+            afficherTitresEpisodes(saison, episode);
+            afficherInfosEpisode(saison, episode);
+
+            setGraphEpisodeRepartition();
+        } catch (Exception e) {
+            jLabel73.setText("Erreur: " + e.getMessage());
+        }
+        /*
         try {
             Object saisonObj = rechercheSaison.getSelectedItem();
             Object episodeObj = rechercheEpisode.getSelectedItem();
@@ -2220,11 +2422,57 @@ public class VueStat extends javax.swing.JFrame {
             jLabel73.setText("Erreur: " + e.getMessage());
             e.printStackTrace();
         }
-        
+        */
     }//GEN-LAST:event_rechercheEpisodeActionPerformed
 
+    private int extraireNumeroSaison() {
+        Object saisonObj = rechercheSaison.getSelectedItem();
+        String saisonStr = saisonObj.toString(); // Format attendu "S01"
+        return Integer.parseInt(saisonStr.substring(1));
+    }
+
+    private int extraireNumeroEpisode() {
+        Object episodeObj = rechercheEpisode.getSelectedItem();
+        String episodeStr = episodeObj.toString(); // Format attendu "S01E02 - Titre"
+        return Integer.parseInt(episodeStr.substring(episodeStr.indexOf('E') + 1, episodeStr.indexOf(' ')));
+    }
+
+    private void afficherTitresEpisodes(int saison, int episode) {
+        Object episodeObj = rechercheEpisode.getSelectedItem();
+        String episodeStr = episodeObj.toString();
+        String titre = episodeStr.substring(6); // À partir de l'espace après "SxxExx"
+
+        String affichage = "Episode " + episode + " de la saison " + saison + " : " + titre;
+        labelEpisode.setText(affichage);
+        labelEpisode2.setText(affichage);
+        labelEpisode3.setText(affichage);
+    }
+
+    private void afficherInfosEpisode(int saison, int episode) {
+        int nbRepliques = dialog.getNombreRepliquesEpisode(saison, episode);
+        List<String> personnages = dialog.getPersonnagesEpisode(saison, episode);
+        List<String> mots = dialog.getTopMotsEpisode(saison, episode);
+
+        jLabel73.setText(String.valueOf(nbRepliques));
+        jLabel75.setText(String.join(", ", personnages));
+        jLabel79.setText(String.join(", ", mots));
+    }
+
     
-    private void rechercheSaisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheSaisonActionPerformed
+    private void rechercheSaisonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        /*
+        if (!rechercheEpisode.isVisible()) {
+            try {
+                int saison = extraireNumeroSaison();
+                afficherTitresSaison(saison);
+                afficherInfosSaison(saison);
+                setGraphSaisonRepartition();
+            } catch (Exception e) {
+                jLabel106.setText("Erreur: " + e.getMessage());
+            }
+        }
+        */
+        
         if(!rechercheEpisode.isVisible()){
             try {
                 Object saisonObj = rechercheSaison.getSelectedItem();
@@ -2268,8 +2516,28 @@ public class VueStat extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-    }//GEN-LAST:event_rechercheSaisonActionPerformed
+    }                                               
 
+    private void afficherTitresSaison(int saison) {
+        String affichage = "Saison " + saison;
+        labelSaison.setText(affichage);
+        labelSaison2.setText(affichage);
+        labelSaison3.setText(affichage);
+    }
+
+    private void afficherInfosSaison(int saison) {
+        int nbRepliques = dialog.getNombreRepliquesSaison(saison);
+        List<String> personnages = dialog.getPersonnagesSaison(saison);
+        List<String> mots = dialog.getTopMotsSaison(saison);
+
+        jLabel106.setText(String.valueOf(nbRepliques));
+        jLabel108.setText(joinAvecVirgules(personnages));
+        jLabel112.setText(joinAvecVirgules(mots));
+    }
+
+    private String joinAvecVirgules(List<String> liste) {
+        return String.join(", ", liste);
+    }
     private void jPanel85MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel85MouseClicked
         
     }//GEN-LAST:event_jPanel85MouseClicked
