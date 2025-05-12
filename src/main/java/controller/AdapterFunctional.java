@@ -5,6 +5,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import model.Episode;
 import model.Model;
@@ -22,8 +23,8 @@ public class AdapterFunctional {
         this.domainController = new ControllerRecherche(model);
     }
 
-    public List<List<Integer>> lancerChargement() {
-        return domainController.test();
+    public Map<String, Object> rechercheMots(String mots) {
+        return domainController.rechercheMots(mots);
     }
     
     public void properlyCloseWindow() {
