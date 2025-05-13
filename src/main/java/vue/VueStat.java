@@ -8,6 +8,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import controller.*;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,17 +16,20 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.CategoryDataset;
 
 public class VueStat extends javax.swing.JFrame {
     private ControllerDialogRecherche dialog;
+    List<List<Object>> dataStoredForEpisodeStats;
     
     public void setDialog(ControllerDialogRecherche dialog) {
         this.dialog = dialog;
@@ -167,6 +171,8 @@ public class VueStat extends javax.swing.JFrame {
 
         tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
         rechercheMotProgBar.setVisible(false);
+        
+        generateGraphLineRepliqueParPersoParSaison();        
     }
 
     private void initialiserComportementRecherche() {
@@ -229,6 +235,12 @@ public class VueStat extends javax.swing.JFrame {
                         e.getNumeroEpisode(),
                         e.getTitre()))
                 .filter(ep -> ep.startsWith("S01"))
+                .toArray(String[]::new)
+        ));
+        
+        comboBoxSaison.setModel(new DefaultComboBoxModel<>(
+            dialog.getSaisons().stream()
+                .map(s -> String.format("S%02d", s.getNumeroSaison()))
                 .toArray(String[]::new)
         ));
     }
@@ -327,13 +339,135 @@ public class VueStat extends javax.swing.JFrame {
         return labelUtilisationMotParReplique;
     }    
     
-    public void generateGraphLineMotParEpisode(List<List<Object>> data) {
+    public javax.swing.JLabel getBestEpisode() {
+        return bestEpisode;
+    }
+    
+    public javax.swing.JLabel getBestSeason() {
+        return bestSeason;
+    }
+    
+    public void generateGraphLineRepliqueParPersoParSaison() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        /*for (List<Object> row : data) {
+            String name = (String) row.get(0);
+            Integer value = ((Integer) row.get(1));
+            dataset.addValue(value, "Tendance de parole", name);
+        }*/
+        
+        dataset.addValue(640, "Tendance Personnage courant (Joey)", "S01");
+        dataset.addValue(622, "Tendance Personnage courant (Joey)", "S02");
+        dataset.addValue(775, "Tendance Personnage courant (Joey)", "S03");
+        dataset.addValue(837, "Tendance Personnage courant (Joey)", "S04");
+        dataset.addValue(932, "Tendance Personnage courant (Joey)", "S05");
+        dataset.addValue(909, "Tendance Personnage courant (Joey)", "S06");
+        dataset.addValue(948, "Tendance Personnage courant (Joey)", "S07");
+        dataset.addValue(911, "Tendance Personnage courant (Joey)", "S08");
+        dataset.addValue(875, "Tendance Personnage courant (Joey)", "S09");
+        dataset.addValue(733, "Tendance Personnage courant (Joey)", "S10");
+        
+        dataset.addValue(817, "Tendance Chandler", "S01");
+        dataset.addValue(658, "Tendance Chandler", "S02");
+        dataset.addValue(825, "Tendance Chandler", "S03");
+        dataset.addValue(929, "Tendance Chandler", "S04");
+        dataset.addValue(941, "Tendance Chandler", "S05");
+        dataset.addValue(1037, "Tendance Chandler", "S06");
+        dataset.addValue(855, "Tendance Chandler", "S07");
+        dataset.addValue(676, "Tendance Chandler", "S08");
+        dataset.addValue(925, "Tendance Chandler", "S09");
+        dataset.addValue(687, "Tendance Chandler", "S10");
+
+        dataset.addValue(872, "Tendance Monica", "S01");
+        dataset.addValue(651, "Tendance Monica", "S02");
+        dataset.addValue(847, "Tendance Monica", "S03");
+        dataset.addValue(789, "Tendance Monica", "S04");
+        dataset.addValue(898, "Tendance Monica", "S05");
+        dataset.addValue(901, "Tendance Monica", "S06");
+        dataset.addValue(912, "Tendance Monica", "S07");
+        dataset.addValue(812, "Tendance Monica", "S08");
+        dataset.addValue(910, "Tendance Monica", "S09");
+        dataset.addValue(686, "Tendance Monica", "S10");
+
+        dataset.addValue(637, "Tendance Phoebe", "S01");
+        dataset.addValue(536, "Tendance Phoebe", "S02");
+        dataset.addValue(793, "Tendance Phoebe", "S03");
+        dataset.addValue(700, "Tendance Phoebe", "S04");
+        dataset.addValue(813, "Tendance Phoebe", "S05");
+        dataset.addValue(787, "Tendance Phoebe", "S06");
+        dataset.addValue(811, "Tendance Phoebe", "S07");
+        dataset.addValue(771, "Tendance Phoebe", "S08");
+        dataset.addValue(807, "Tendance Phoebe", "S09");
+        dataset.addValue(690, "Tendance Phoebe", "S10");
+
+        dataset.addValue(850, "Tendance Rachel", "S01");
+        dataset.addValue(645, "Tendance Rachel", "S02");
+        dataset.addValue(925, "Tendance Rachel", "S03");
+        dataset.addValue(937, "Tendance Rachel", "S04");
+        dataset.addValue(906, "Tendance Rachel", "S05");
+        dataset.addValue(993, "Tendance Rachel", "S06");
+        dataset.addValue(1098, "Tendance Rachel", "S07");
+        dataset.addValue(1083, "Tendance Rachel", "S08");
+        dataset.addValue(910, "Tendance Rachel", "S09");
+        dataset.addValue(771, "Tendance Rachel", "S10");
+
+        dataset.addValue(952, "Tendance Ross", "S01");
+        dataset.addValue(831, "Tendance Ross", "S02");
+        dataset.addValue(1075, "Tendance Ross", "S03");
+        dataset.addValue(836, "Tendance Ross", "S04");
+        dataset.addValue(870, "Tendance Ross", "S05");
+        dataset.addValue(913, "Tendance Ross", "S06");
+        dataset.addValue(839, "Tendance Ross", "S07");
+        dataset.addValue(983, "Tendance Ross", "S08");
+        dataset.addValue(899, "Tendance Ross", "S09");
+        dataset.addValue(865, "Tendance Ross", "S10");
+
+        
+        JFreeChart chart2 = ChartFactory.createLineChart(
+                "Tendance de parole du personnage par rapport aux autres",
+                "Saison",
+                "Nombre de répliques",
+                dataset
+        );
+        
+        chart2.getTitle().setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 18));
+
+        CategoryPlot plot = (CategoryPlot) chart2.getPlot();
+        plot.getDomainAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // x
+        plot.getRangeAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // y
+        LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
+
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f)); // plus épaisse
+        renderer.setSeriesStroke(1, new BasicStroke(0.5f));
+        renderer.setSeriesStroke(2, new BasicStroke(0.5f));
+        renderer.setSeriesStroke(3, new BasicStroke(0.5f));
+        renderer.setSeriesStroke(4, new BasicStroke(0.5f));
+        renderer.setSeriesStroke(5, new BasicStroke(0.5f));
+        
+        plot.setRenderer(renderer);
+        plot.getDomainAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
+        plot.getRangeAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
+
+        ChartPanel chartPanel2 = new ChartPanel(chart2);
+        
+        chartPanel2.setOpaque(false);
+        chartPanel2.setBackground(new Color(0, 0, 0, 0));
+
+        chartPanel2.setPreferredSize(new Dimension(150, 300));
+        jPanel23.removeAll();
+        jPanel23.add(chartPanel2);
+        
+        jPanel23.revalidate();
+        jPanel23.repaint();
+    }
+    
+    public void generateGraphLineMotParEpisode(List<List<Object>> data, String season) {
+        dataStoredForEpisodeStats = data;
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (List<Object> row : data) {
             String saison = (String) row.get(0);
             String episode = (String) row.get(1);
             Integer value = ((Integer) row.get(2));
-            if (saison.equals("S01"))
+            if (saison.equals(season))
                 dataset.addValue(value, "Tendance mot", episode);
         }
         
@@ -349,10 +483,10 @@ public class VueStat extends javax.swing.JFrame {
         chartPanel.setOpaque(false);
         chartPanel.setBackground(new Color(0, 0, 0, 0));
 
-        jPanel63.removeAll();
-        jPanel63.add(chartPanel, java.awt.BorderLayout.CENTER);        
-        jPanel63.revalidate();
-        jPanel63.repaint();
+        jPanel16.removeAll();
+        jPanel16.add(chartPanel, java.awt.BorderLayout.CENTER);        
+        jPanel16.revalidate();
+        jPanel16.repaint();
     }
     
     public void generateGraphLineMotParSaison(List<List<Object>> data) {
@@ -385,11 +519,11 @@ public class VueStat extends javax.swing.JFrame {
         chartPanel2.setBackground(new Color(0, 0, 0, 0));
 
         // chartPanel2.setPreferredSize(new Dimension(300, 150));
-        jPanel39.removeAll();
-        jPanel39.add(chartPanel2, java.awt.BorderLayout.CENTER);
+        jPanel13.removeAll();
+        jPanel13.add(chartPanel2);
         
-        jPanel39.revalidate();
-        jPanel39.repaint();
+        jPanel13.revalidate();
+        jPanel13.repaint();
     }
     /*
     public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
@@ -656,23 +790,26 @@ public class VueStat extends javax.swing.JFrame {
         labelDetailReplique = new javax.swing.JLabel();
         scrollPaneDetailReplique = new javax.swing.JScrollPane();
         tableDetailReplique = new javax.swing.JTable();
+        jPanel64 = new javax.swing.JPanel();
+        jLabel76 = new javax.swing.JLabel();
+        jPanel24 = new javax.swing.JPanel();
+        jLabel83 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         panelMotRepartitionSerie = new javax.swing.JPanel();
         panelMotCourant2 = new javax.swing.JPanel();
         labelMotCourant2 = new javax.swing.JLabel();
         jPanel35 = new javax.swing.JPanel();
         jPanel36 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel37 = new javax.swing.JPanel();
-        jLabel58 = new javax.swing.JLabel();
-        labelTauxUtilisationMot = new javax.swing.JLabel();
         jPanel38 = new javax.swing.JPanel();
         jLabel60 = new javax.swing.JLabel();
         labelUtilisationMotParReplique = new javax.swing.JLabel();
         jPanel57 = new javax.swing.JPanel();
         jLabel82 = new javax.swing.JLabel();
-        jLabel83 = new javax.swing.JLabel();
+        bestSeason = new javax.swing.JLabel();
         jPanel39 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
         jLabel64 = new javax.swing.JLabel();
         panelMotRepartitionSaisonEtEpisode = new javax.swing.JPanel();
         panelMotCourant3 = new javax.swing.JPanel();
@@ -684,14 +821,13 @@ public class VueStat extends javax.swing.JFrame {
         jLabel92 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel93 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxSaison = new javax.swing.JComboBox<>();
+        jPanel16 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel61 = new javax.swing.JPanel();
-        jLabel90 = new javax.swing.JLabel();
-        jLabel91 = new javax.swing.JLabel();
         jPanel58 = new javax.swing.JPanel();
         jLabel84 = new javax.swing.JLabel();
-        jLabel85 = new javax.swing.JLabel();
+        bestEpisode = new javax.swing.JLabel();
         resultatPersonnage = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         panelPersonnageProfil = new javax.swing.JPanel();
@@ -713,6 +849,7 @@ public class VueStat extends javax.swing.JFrame {
         jPanel21 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
+        panelPersonnageRepliqueFavorite = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         imageMotPref = new controller.ImagePanel();
@@ -720,32 +857,28 @@ public class VueStat extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         imageMotCaracteristique = new controller.ImagePanel();
         jLabel100 = new javax.swing.JLabel();
-        panelPersonnageRepliqueFavorite = new javax.swing.JPanel();
         jPanel48 = new javax.swing.JPanel();
         jLabel71 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
         jLabel72 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel8 = new javax.swing.JPanel();
         jPanel47 = new javax.swing.JPanel();
         nomPersonnage2 = new javax.swing.JLabel();
         jPanel52 = new javax.swing.JPanel();
         jPanel53 = new javax.swing.JPanel();
-        jPanel54 = new javax.swing.JPanel();
-        jLabel77 = new javax.swing.JLabel();
-        jLabel80 = new javax.swing.JLabel();
         jPanel59 = new javax.swing.JPanel();
         jLabel81 = new javax.swing.JLabel();
         jLabel86 = new javax.swing.JLabel();
         jPanel60 = new javax.swing.JPanel();
         jLabel87 = new javax.swing.JLabel();
-        jLabel88 = new javax.swing.JLabel();
-        jPanel64 = new javax.swing.JPanel();
-        jLabel89 = new javax.swing.JLabel();
-        jLabel95 = new javax.swing.JLabel();
-        jPanel68 = new javax.swing.JPanel();
-        jLabel96 = new javax.swing.JLabel();
-        jLabel97 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
         jPanel69 = new javax.swing.JPanel();
+        jPanel54 = new javax.swing.JPanel();
+        jLabel77 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel70 = new javax.swing.JPanel();
         jLabel99 = new javax.swing.JLabel();
         imageMentions = new controller.ImagePanel();
@@ -1278,20 +1411,20 @@ public class VueStat extends javax.swing.JFrame {
         tableDetailReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         tableDetailReplique.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1)},
-                {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1)},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1), null},
+                {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1), null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Réplique", "Personnage", "Saison", "Épisode"
+                "Réplique", "Personnage", "Saison", "Épisode", "Emotion (*)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1312,6 +1445,32 @@ public class VueStat extends javax.swing.JFrame {
 
         panelResultatMotUtilisation.add(panelDetailReplique, java.awt.BorderLayout.CENTER);
 
+        jLabel76.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel76.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel76.setText("* Étude approfondie des émotions :");
+        jPanel64.add(jLabel76);
+
+        jLabel83.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel83.setText("Voir");
+        jLabel83.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel24.add(jLabel83);
+
+        jButton3.setBackground(new java.awt.Color(242, 242, 242));
+        jButton3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton3.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jButton3.setText("analyse des sentiments > sentiments exprimés");
+        jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel24.add(jButton3);
+
+        jPanel64.add(jPanel24);
+
+        panelResultatMotUtilisation.add(jPanel64, java.awt.BorderLayout.PAGE_END);
+
         panelMotUtilisation.add(panelResultatMotUtilisation, java.awt.BorderLayout.CENTER);
 
         resultatMot.addTab("Personnage & Réplique", panelMotUtilisation);
@@ -1331,20 +1490,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel36.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
-
-        jPanel37.setLayout(new javax.swing.BoxLayout(jPanel37, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel58.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel58.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel58.setText("Taux d'utilisation globale :");
-        jPanel37.add(jLabel58);
-
-        labelTauxUtilisationMot.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        labelTauxUtilisationMot.setText("Le mot \"Hello\" a été employé 310 fois, 1% de tous les mots de la série");
-        labelTauxUtilisationMot.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel37.add(labelTauxUtilisationMot);
-
-        jPanel1.add(jPanel37);
 
         jPanel38.setLayout(new javax.swing.BoxLayout(jPanel38, javax.swing.BoxLayout.Y_AXIS));
 
@@ -1368,10 +1513,10 @@ public class VueStat extends javax.swing.JFrame {
         jLabel82.setText("Meilleur saison :");
         jPanel57.add(jLabel82);
 
-        jLabel83.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel83.setText("Le mot \"Hello\" a été employé 51 fois en saison 1 (15% de toutes ses utilisations) (voir graphique ci-dessous)");
-        jLabel83.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel57.add(jLabel83);
+        bestSeason.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        bestSeason.setText("Le mot \"Hello\" a été employé 51 fois en saison 1 (15% de toutes ses utilisations) (voir graphique ci-dessous)");
+        bestSeason.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel57.add(bestSeason);
 
         jPanel1.add(jPanel57);
 
@@ -1383,6 +1528,9 @@ public class VueStat extends javax.swing.JFrame {
         jLabel63.setForeground(new java.awt.Color(153, 153, 153));
         jLabel63.setText("Tendance d'utilisation à travers les saison :");
         jPanel39.add(jLabel63, java.awt.BorderLayout.NORTH);
+
+        jPanel13.setLayout(new javax.swing.BoxLayout(jPanel13, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel39.add(jPanel13, java.awt.BorderLayout.CENTER);
 
         jLabel64.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel64.setText("* Les mots prononcés en même temps par plusieurs personnage sont comptés une seule fois");
@@ -1427,12 +1575,20 @@ public class VueStat extends javax.swing.JFrame {
         jLabel93.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel3.add(jLabel93);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox1);
+        comboBoxSaison.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxSaison.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSaisonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(comboBoxSaison);
 
         jPanel9.add(jPanel3, java.awt.BorderLayout.CENTER);
 
         jPanel63.add(jPanel9, java.awt.BorderLayout.NORTH);
+
+        jPanel16.setLayout(new javax.swing.BoxLayout(jPanel16, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel63.add(jPanel16, java.awt.BorderLayout.CENTER);
 
         jPanel56.add(jPanel63, java.awt.BorderLayout.CENTER);
 
@@ -1440,17 +1596,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel61.setLayout(new javax.swing.BoxLayout(jPanel61, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel90.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        jLabel90.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel90.setText("Utilisation pour un certain épisode:");
-        jPanel61.add(jLabel90);
-
-        jLabel91.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel91.setText("Sélectionnez l'épisode <combobox>");
-        jLabel91.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel61.add(jLabel91);
-
         jPanel2.add(jPanel61);
 
         jPanel58.setLayout(new javax.swing.BoxLayout(jPanel58, javax.swing.BoxLayout.Y_AXIS));
@@ -1460,10 +1605,10 @@ public class VueStat extends javax.swing.JFrame {
         jLabel84.setText("Meilleur épisode :");
         jPanel58.add(jLabel84);
 
-        jLabel85.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel85.setText("Le mot \"Hello\" a été employé 11 fois dans l'épisode 2 de la saison 5, 2% de son utilisation totale");
-        jLabel85.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel58.add(jLabel85);
+        bestEpisode.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        bestEpisode.setText("Le mot \"Hello\" a été employé 11 fois dans l'épisode 2 de la saison 5, 2% de son utilisation totale");
+        bestEpisode.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel58.add(bestEpisode);
 
         jPanel2.add(jPanel58);
 
@@ -1499,7 +1644,7 @@ public class VueStat extends javax.swing.JFrame {
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 830, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1563,6 +1708,10 @@ public class VueStat extends javax.swing.JFrame {
 
         panelPersonnageProfil.add(jPanel5, java.awt.BorderLayout.CENTER);
 
+        jScrollPane2.setViewportView(panelPersonnageProfil);
+
+        resultatPersonnage.addTab("Profil", jScrollPane2);
+
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.X_AXIS));
 
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1609,26 +1758,37 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel12.add(jPanel10);
 
-        panelPersonnageProfil.add(jPanel12, java.awt.BorderLayout.SOUTH);
+        panelPersonnageRepliqueFavorite.add(jPanel12);
 
-        jScrollPane2.setViewportView(panelPersonnageProfil);
+        jPanel48.setLayout(new javax.swing.BoxLayout(jPanel48, javax.swing.BoxLayout.LINE_AXIS));
 
-        resultatPersonnage.addTab("Profil", jScrollPane2);
-
-        jPanel48.setLayout(new javax.swing.BoxLayout(jPanel48, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel71.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel71.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         jLabel71.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel71.setText("Réplique favorite:");
+        jLabel71.setText("Réplique favorite et analyse langagière approfondi du personnage :");
         jPanel48.add(jLabel71);
 
-        jLabel72.setText("<liaison avec partie analyse langagière + lien vers celle-ci : voir <ici> pour les autres répliques>");
+        jLabel72.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel72.setText("Voir");
         jLabel72.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel48.add(jLabel72);
+        jPanel22.add(jLabel72);
+
+        jButton1.setBackground(new java.awt.Color(242, 242, 242));
+        jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton1.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jButton1.setText("partie analyse langagière");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel22.add(jButton1);
+
+        jPanel48.add(jPanel22);
 
         panelPersonnageRepliqueFavorite.add(jPanel48);
 
-        resultatPersonnage.addTab("Réplique favorite", panelPersonnageRepliqueFavorite);
+        resultatPersonnage.addTab("Profil de langage", panelPersonnageRepliqueFavorite);
 
         jPanel8.setLayout(new java.awt.BorderLayout());
 
@@ -1644,19 +1804,6 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel53.setLayout(new javax.swing.BoxLayout(jPanel53, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel54.setLayout(new javax.swing.BoxLayout(jPanel54, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel77.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel77.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel77.setText("Joey interagit le plus avec :");
-        jPanel54.add(jLabel77);
-
-        jLabel80.setText("Joey a interagit X fois avec Chandler");
-        jLabel80.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel54.add(jLabel80);
-
-        jPanel53.add(jPanel54);
-
         jPanel59.setLayout(new javax.swing.BoxLayout(jPanel59, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel81.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1664,7 +1811,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel81.setText("Fréquence de mots (quantité et taux):");
         jPanel59.add(jLabel81);
 
-        jLabel86.setText("...");
+        jLabel86.setText("102874 mots (22% des 6 personnages principaux)");
         jLabel86.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel59.add(jLabel86);
 
@@ -1674,43 +1821,41 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel87.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel87.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel87.setText("Temps de parole par saison (nb réplique et nb mots) (+ taux) + courbe tendance de parole:");
+        jLabel87.setText("Tendance de temps de parole :");
         jPanel60.add(jLabel87);
 
-        jLabel88.setText("...");
-        jLabel88.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel60.add(jLabel88);
+        jPanel23.setLayout(new java.awt.BorderLayout());
+        jPanel60.add(jPanel23);
 
         jPanel53.add(jPanel60);
 
-        jPanel64.setLayout(new javax.swing.BoxLayout(jPanel64, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel89.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel89.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel89.setText("Taux de présence dans la scène:");
-        jPanel64.add(jLabel89);
-
-        jLabel95.setText("...");
-        jLabel95.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel64.add(jLabel95);
-
-        jPanel53.add(jPanel64);
-
-        jPanel68.setLayout(new javax.swing.BoxLayout(jPanel68, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel96.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel96.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel96.setText("Fréquence de répliques (quantité et taux):");
-        jPanel68.add(jLabel96);
-
-        jLabel97.setText("...");
-        jLabel97.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel68.add(jLabel97);
-
-        jPanel53.add(jPanel68);
-
         jPanel69.setLayout(new javax.swing.BoxLayout(jPanel69, javax.swing.BoxLayout.Y_AXIS));
         jPanel53.add(jPanel69);
+
+        jPanel54.setLayout(new javax.swing.BoxLayout(jPanel54, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel77.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel77.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel77.setText("Joey interagit le plus avec :");
+        jPanel54.add(jLabel77);
+
+        jLabel80.setText("Joey a interagit 306 fois avec Ross (meilleur ami)");
+        jLabel80.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel54.add(jLabel80);
+
+        jButton2.setBackground(new java.awt.Color(242, 242, 242));
+        jButton2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton2.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jButton2.setText("Analyse plus détaillée : voir partie analyse relation");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel54.add(jButton2);
+
+        jPanel53.add(jPanel54);
 
         jPanel70.setLayout(new javax.swing.BoxLayout(jPanel70, javax.swing.BoxLayout.Y_AXIS));
 
@@ -1723,11 +1868,11 @@ public class VueStat extends javax.swing.JFrame {
         imageMentions.setLayout(imageMentionsLayout);
         imageMentionsLayout.setHorizontalGroup(
             imageMentionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
+            .addGap(0, 807, Short.MAX_VALUE)
         );
         imageMentionsLayout.setVerticalGroup(
             imageMentionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 644, Short.MAX_VALUE)
+            .addGap(0, 662, Short.MAX_VALUE)
         );
 
         jPanel70.add(imageMentions);
@@ -2813,6 +2958,24 @@ public class VueStat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rechercheMotButtonActionPerformed
 
+    private void comboBoxSaisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSaisonActionPerformed
+        JComboBox<String> combo = (JComboBox<String>) evt.getSource();
+        generateGraphLineMotParEpisode(dataStoredForEpisodeStats, combo.getSelectedItem().toString());
+    }//GEN-LAST:event_comboBoxSaisonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SectionRecherche.setSelectedComponent(Analyse_Statistique);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SectionRecherche.setSelectedComponent(Relation);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        SectionRecherche.setSelectedComponent(Analyse_Sentiment);
+        Analyse_Sentiment.setSelectedComponent(Sentiment_exprime);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private controller.ImagePanel AnalyseLangagière;
@@ -2881,14 +3044,19 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JTextArea TexteRachel;
     private javax.swing.JTextArea TexteRoss;
     private javax.swing.JTextArea TexteSentimentexprime;
+    private javax.swing.JLabel bestEpisode;
+    private javax.swing.JLabel bestSeason;
     private javax.swing.JComboBox<String> choixTypeRecherche;
+    private javax.swing.JComboBox<String> comboBoxSaison;
     private javax.swing.Box.Filler filler1;
     private controller.ImagePanel imageMentions;
     private controller.ImagePanel imageMotCaracteristique;
     private controller.ImagePanel imageMotPref;
     private controller.ImagePanel imageMotsCaracteristiques;
     private controller.ImagePanel imagePersonnage;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
@@ -2915,7 +3083,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel63;
@@ -2926,6 +3093,7 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
@@ -2934,36 +3102,32 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
-    private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
-    private javax.swing.JLabel jLabel95;
-    private javax.swing.JLabel jLabel96;
-    private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
-    private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
@@ -2990,7 +3154,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
     private javax.swing.JPanel jPanel67;
-    private javax.swing.JPanel jPanel68;
     private javax.swing.JPanel jPanel69;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel70;
@@ -3026,7 +3189,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel labelSaison3;
     private javax.swing.JLabel labelSansRechercheExemple;
     private javax.swing.JLabel labelSansRechercheSentence;
-    private javax.swing.JLabel labelTauxUtilisationMot;
     private javax.swing.JLabel labelTitre;
     private javax.swing.JLabel labelUtilisationMotParReplique;
     private controller.ImagePanel neg_nuage;
