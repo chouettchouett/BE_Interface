@@ -21,6 +21,7 @@ import model.Episode;
 import model.Personnage;
 import model.Saison;
 import vue.VueStat;
+import model.CsvUtils;
 
 /**
  *
@@ -30,6 +31,9 @@ import vue.VueStat;
 public class ControllerDialogRecherche {
     private final AdapterFunctional adapter;
     private VueStat ui;
+    private CsvUtils csvUtils = CsvUtils.getInstance();
+
+
     
     private final DefaultComboBoxModel<String> comboBoxModelTypeRecherche;
     private final DefaultComboBoxModel<String> comboBoxModelPersonnage;
@@ -222,8 +226,11 @@ public class ControllerDialogRecherche {
     }
     
     public List<String> getTopMotsEpisode(int saison, int episode) {
-        return adapter.getTopMotsEpisode(saison, episode);
+        String saisonStr = String.format("S%02d", saison);
+        String episodeStr = String.format("E%02d", episode);
+        return csvUtils.getEpisodeStats(saisonStr, episodeStr);
     }
+
     
     public int getNombreRepliquesSaison(int saison) {
         return adapter.getNombreRepliquesSaison(saison);
@@ -234,7 +241,9 @@ public class ControllerDialogRecherche {
     }
     
     public List<String> getTopMotsSaison(int saison) {
-        return adapter.getTopMotsSaison(saison);
+        String saisonStr = String.format("S%02d", saison);
+        return csvUtils.getSaisonStats(saisonStr);
+
     }
     
     public void creerGrapheNombreDeRepliquesSaison(int saison) {
