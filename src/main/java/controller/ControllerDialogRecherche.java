@@ -106,42 +106,21 @@ public class ControllerDialogRecherche {
                         result = get();
                         ui.showLoading(false);
                         List<List<String>> row = (List<List<String>>) result.get("lines_with_words");
-                        /*DefaultTableModel modelTableau = (DefaultTableModel) ui.getTableDetailReplique().getModel();
+                        DefaultTableModel modelTableau = (DefaultTableModel) ui.getTableDetailReplique().getModel();
                         modelTableau.setRowCount(0);
                         for (List<String> rowData : row) {
                             modelTableau.addRow(rowData.toArray());
-                        }*/
-                        
-                        // Ton tableau d’émotions possibles
-                        List<String> emotions = Arrays.asList("joy", "sadness", "anger", "fear", "surprise", "love");
-                        Random random = new Random();
-
-                        // Supposons que row est ta liste de lignes (chaque ligne = List<String>)
-                        DefaultTableModel modelTableau = (DefaultTableModel) ui.getTableDetailReplique().getModel();
-                        modelTableau.setRowCount(0);
-
-                        // Ajouter une colonne si elle n'existe pas déjà (à faire selon ton cas)
-                        if (modelTableau.getColumnCount() < row.get(0).size() + 1) {
-                            modelTableau.addColumn("Random Emotion");
-                        }
-
-                        // Remplir le tableau avec une émotion aléatoire en plus
-                        for (List<String> rowData : row) {
-                            List<String> newRow = new ArrayList<>(rowData);
-                            String randomEmotion = emotions.get(random.nextInt(emotions.size()));
-                            newRow.add(randomEmotion);
-                            modelTableau.addRow(newRow.toArray());
                         }
                         
                         List<List<Object>> wordCountByCharacter = (List<List<Object>>) result.get("word_count_by_character");
                         ui.generateGraphBarMotParPersonnage(wordCountByCharacter);
-                        Integer nbUtilisations = (Integer) result.get("nb_word_used");
+                        Integer nbUtilisations = ((Double) result.get("nb_word_used")).intValue();
                         
                         ui.getLabelMotCourant1().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
                         ui.getLabelMotCourant2().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
                         ui.getLabelMotCourant3().setText("\"" + mots + "\" (" + nbUtilisations + " utilisations)");
                         
-                        Integer nbLinesContainsWords = (Integer) result.get("number_lines_with_words");
+                        Integer nbLinesContainsWords = ((Double) result.get("number_lines_with_words")).intValue();
                         Double percentLinesContainsWords = (Double) result.get("words_usage_ratio_by_line");
                         
                         ui.getLabelUtilisationMotParReplique().setText(nbLinesContainsWords + " répliques contienne ce mot (" + String.format("%.2f", percentLinesContainsWords*100) + "% des répliques)");
@@ -159,6 +138,40 @@ public class ControllerDialogRecherche {
                         
                         List<List<Object>> wordCountByEpisode = (List<List<Object>>) result.get("word_count_by_episode");
                         ui.generateGraphLineMotParEpisode(wordCountByEpisode, "S01");
+                        
+                        /*System.out.println("Nb utilisations du mot : " + data.get("nb_word_used"));
+                        System.out.println("Nombre de lignes contenant le mot : " + data.get("number_lines_with_words"));
+                        System.out.println("Ratio d’usage par réplique : " + data.get("words_usage_ratio_by_line"));
+
+                        List<List<String>> lignes = (List<List<String>>) data.get("lines_with_words");
+                        System.out.println("Extrait de répliques :");
+                        for (int i = 0; i < Math.min(3, lignes.size()); i++) {
+                            System.out.println("  - " + lignes.get(i));
+                        }
+
+                        List<List<Object>> parPerso = (List<List<Object>>) data.get("word_count_by_character");
+                        System.out.println("Stats par personnage :");
+                        for (int i = 0; i < Math.min(3, parPerso.size()); i++) {
+                            System.out.println("  - " + parPerso.get(i));
+                        }
+
+                        List<List<Object>> wordCountByEpisode = (List<List<Object>>) data.get("word_count_by_episode");
+                        System.out.println("word_count_by_episode");
+                        for (int i = 0; i < Math.min(3, parPerso.size()); i++) {
+                            System.out.println("  - " + wordCountByEpisode.get(i));
+                        }
+
+                        List<List<Object>> wordCountBySeason = (List<List<Object>>) data.get("word_count_by_season");
+                        System.out.println("word_count_by_season");
+                        for (int i = 0; i < Math.min(3, parPerso.size()); i++) {
+                            System.out.println("  - " + wordCountBySeason.get(i));
+                        }
+
+                        String bestSeason = (String) data.get("best_season_word_count");
+                        System.out.println(bestSeason);
+
+                        Map<String, Integer> bestEpisode = (Map<String, Integer>) data.get("best_episode_word_count");
+                        System.out.println("Best season-ep" + bestEpisode.get("season") + bestEpisode.get("episode"));*/
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ExecutionException ex) {

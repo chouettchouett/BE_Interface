@@ -1,3 +1,12 @@
+# ANCIENNE VERSION : tout a été transféré dans etude_mots_idf.ipynb
+
+# Premières recherche sur les mots préférés et caractéristiques
+# Protocole naïf : 
+# préféré = suppression d'une liste de 1300 stop words puis calcul de la meilleure fréquence
+# caractéristique = suppression des X (=300) mots les plus fréquents de 5 personnages et affichage des mots restants pour le dernier
+#                   résultats assez concluant (on retrouve la paléontologie pour Ross, les auditions pour Joey) mais pas 100% fiable
+#                   => je me suis donc tourné vers les TF-IDF (voir etude_mots_idf.ipynb)
+
 import pandas as pd
 from collections import Counter
 import re
@@ -5,8 +14,7 @@ import matplotlib.pyplot as plt
 # import nltk
 # from nltk.corpus import stopwords
 
-# nltk.download('stopwords')
-# stopwords peu fourni
+# nltk.download('stopwords') # stopwords peu fourni
 # je garde si plus tard on revient sur ça pour eviter les sources externes
 # stopwords_set = set(stopwords.words("english"))
 

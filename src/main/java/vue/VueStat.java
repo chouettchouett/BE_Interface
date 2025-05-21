@@ -17,6 +17,7 @@ import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
@@ -46,105 +47,6 @@ public class VueStat extends javax.swing.JFrame {
         initialiserComportementRecherche();
         initialiserComboBoxRecherche();
         initialiserStyleRechercheMot();
-        
-        /*
-        // -------------------------------------------------------------
-        // -               SECTION ANALYSE LANGAGIERE                           -
-        // -------------------------------------------------------------
-        AnalyseLangagière.setImage("/les_png/Analyselangagière.png");
-               
-        // -------------------------------------------------------------
-        // -               SECTION RECHERCHE                           -
-        // -------------------------------------------------------------
-        imageMotsCaracteristiques.setImage("/les_png/mots_caractéristiques.png");
-        
-        imagePersonnage.setImage("/les_png/Joey_Test.png");
-        
-        recherchePersonnage.setVisible(false);
-        rechercheSaison.setVisible(false);
-        rechercheEpisode.setVisible(false);
-        rechercheMotButton.setVisible(false);
-        
-        rechercheMot.setColumns(10);
-        rechercheMot.setBorder(new javax.swing.border.EmptyBorder(4, 4, 4, 4));
-        rechercheMot.setPlaceholder("Recherche de mots");
-        
-        choixTypeRecherche.setModel(dialog.getComboBoxModelTypeRecherche());
-        choixTypeRecherche.addActionListener((evt) -> {
-            javax.swing.JComboBox combobox = (javax.swing.JComboBox) evt.getSource();
-            String result = (String) combobox.getSelectedItem();
-            
-            // Masquer tous les panneaux d'abord
-            recherchePersonnage.setVisible(false);
-            rechercheSaison.setVisible(false);
-            rechercheEpisode.setVisible(false);
-            rechercheMot.setVisible(false);
-            rechercheMotButton.setVisible(false);
-
-            String cardName = ""; // Nom du panneau à afficher
-
-            switch (result) {
-                case "Recherche de mots" -> {
-                    rechercheMot.setVisible(true);
-                    rechercheMotButton.setVisible(true);
-                    cardName = "MOT";
-                }
-                case "Recherche de personnages" -> {
-                    recherchePersonnage.setVisible(true);
-                    cardName = "PERSONNAGE";
-                    String personnageParDefaut = (String) recherchePersonnage.getSelectedItem();
-                    afficherInfosPersonnage(personnageParDefaut);
-                }
-                case "Recherche de saisons" -> {
-                    rechercheSaison.setVisible(true);
-                    cardName = "SAISON";
-                }
-                case "Recherche d'épisodes" -> {
-                    rechercheSaison.setVisible(true);
-                    rechercheEpisode.setVisible(true);
-                    cardName = "EPISODE";
-                }
-            }
-
-            ((java.awt.CardLayout) resultats.getLayout()).show(resultats, cardName);
-        });
-        
-        recherchePersonnage.addActionListener((evt) -> {
-            String personnage = (String) recherchePersonnage.getSelectedItem();
-            afficherInfosPersonnage(personnage);
-        });
-        
-        recherchePersonnage.setModel(dialog.getComboBoxModelPersonnage());
-        //rechercheSaison.setModel(dialog.getComboBoxModelSaison());
-        //rechercheEpisode.setModel(dialog.getComboBoxModelEpisode());
-        
-        ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "SANSRECHERCHE");
-        
-        rechercheSaison.setModel(new DefaultComboBoxModel<>(
-            dialog.getSaisons()
-            .stream()
-            .map(s -> "S" + String.format("%02d", s.getNumeroSaison()))
-            .toArray(String[]::new)
-        ));
-        
-        rechercheEpisode.setModel(new DefaultComboBoxModel<>(
-            dialog
-            .getEpisodesSaison(1) // 1 pour S01
-            .stream()
-            .map(e -> String.format("S%02dE%02d - %s", 
-                e.getNumeroSaison(), 
-                e.getNumeroEpisode(), 
-                e.getTitre()))
-            .filter(episodeStr -> episodeStr.startsWith("S01")) // <- valeur fixe
-            .toArray(String[]::new)
-        ));
-        
-        tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
-        rechercheMotProgBar.setVisible(false);
-        
-        rechercheMot.setBackground(new Color(60,131,197));
-        rechercheMot.setForeground(Color.WHITE);
-        */
     }
     
     private void initialiserAnalyseLangagiere() {
@@ -154,10 +56,14 @@ public class VueStat extends javax.swing.JFrame {
     private void initialiserRechercheUI() {
         imageMotsCaracteristiques.setImage("/les_png/mots_caractéristiques.png");
         imagePersonnage.setImage("/les_png/Joey_Test.png");
-        imageMentions.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_joey.png");
-        imageMotCaracteristique.setImage("/les_png/mots_caracteristiques_par_personnages/mots_caracteristique_joey.png");
-        imageMotPref.setImage("/les_png/mots_preferes_par_personnage/mots_preferes_joey.png");
-
+        imageMentions1.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_monica.png");
+        imageMotCaracteristique.setImage("/les_png/mots_caracteristiques_par_personnages/mots_caracteristique_monica.png");
+        imageMotPref.setImage("/les_png/mots_preferes_par_personnage/mots_preferes_monica.png");
+        miseEnAvantPersonnageImage.setImage("/les_png/recherche_personnage/graphe_tendance_mise_en_avant_monica_par_scenariste.png");
+        
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
+        
         recherchePersonnage.setVisible(false);
         rechercheSaison.setVisible(false);
         rechercheEpisode.setVisible(false);
@@ -170,9 +76,7 @@ public class VueStat extends javax.swing.JFrame {
         ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "SANSRECHERCHE");
 
         tableDetailReplique.getColumnModel().getColumn(0).setPreferredWidth(300);
-        rechercheMotProgBar.setVisible(false);
-        
-        generateGraphLineRepliqueParPersoParSaison();        
+        rechercheMotProgBar.setVisible(false);       
     }
 
     private void initialiserComportementRecherche() {
@@ -347,126 +251,13 @@ public class VueStat extends javax.swing.JFrame {
         return bestSeason;
     }
     
-    public void generateGraphLineRepliqueParPersoParSaison() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        /*for (List<Object> row : data) {
-            String name = (String) row.get(0);
-            Integer value = ((Integer) row.get(1));
-            dataset.addValue(value, "Tendance de parole", name);
-        }*/
-        
-        dataset.addValue(640, "Tendance Personnage courant (Joey)", "S01");
-        dataset.addValue(622, "Tendance Personnage courant (Joey)", "S02");
-        dataset.addValue(775, "Tendance Personnage courant (Joey)", "S03");
-        dataset.addValue(837, "Tendance Personnage courant (Joey)", "S04");
-        dataset.addValue(932, "Tendance Personnage courant (Joey)", "S05");
-        dataset.addValue(909, "Tendance Personnage courant (Joey)", "S06");
-        dataset.addValue(948, "Tendance Personnage courant (Joey)", "S07");
-        dataset.addValue(911, "Tendance Personnage courant (Joey)", "S08");
-        dataset.addValue(875, "Tendance Personnage courant (Joey)", "S09");
-        dataset.addValue(733, "Tendance Personnage courant (Joey)", "S10");
-        
-        dataset.addValue(817, "Tendance Chandler", "S01");
-        dataset.addValue(658, "Tendance Chandler", "S02");
-        dataset.addValue(825, "Tendance Chandler", "S03");
-        dataset.addValue(929, "Tendance Chandler", "S04");
-        dataset.addValue(941, "Tendance Chandler", "S05");
-        dataset.addValue(1037, "Tendance Chandler", "S06");
-        dataset.addValue(855, "Tendance Chandler", "S07");
-        dataset.addValue(676, "Tendance Chandler", "S08");
-        dataset.addValue(925, "Tendance Chandler", "S09");
-        dataset.addValue(687, "Tendance Chandler", "S10");
-
-        dataset.addValue(872, "Tendance Monica", "S01");
-        dataset.addValue(651, "Tendance Monica", "S02");
-        dataset.addValue(847, "Tendance Monica", "S03");
-        dataset.addValue(789, "Tendance Monica", "S04");
-        dataset.addValue(898, "Tendance Monica", "S05");
-        dataset.addValue(901, "Tendance Monica", "S06");
-        dataset.addValue(912, "Tendance Monica", "S07");
-        dataset.addValue(812, "Tendance Monica", "S08");
-        dataset.addValue(910, "Tendance Monica", "S09");
-        dataset.addValue(686, "Tendance Monica", "S10");
-
-        dataset.addValue(637, "Tendance Phoebe", "S01");
-        dataset.addValue(536, "Tendance Phoebe", "S02");
-        dataset.addValue(793, "Tendance Phoebe", "S03");
-        dataset.addValue(700, "Tendance Phoebe", "S04");
-        dataset.addValue(813, "Tendance Phoebe", "S05");
-        dataset.addValue(787, "Tendance Phoebe", "S06");
-        dataset.addValue(811, "Tendance Phoebe", "S07");
-        dataset.addValue(771, "Tendance Phoebe", "S08");
-        dataset.addValue(807, "Tendance Phoebe", "S09");
-        dataset.addValue(690, "Tendance Phoebe", "S10");
-
-        dataset.addValue(850, "Tendance Rachel", "S01");
-        dataset.addValue(645, "Tendance Rachel", "S02");
-        dataset.addValue(925, "Tendance Rachel", "S03");
-        dataset.addValue(937, "Tendance Rachel", "S04");
-        dataset.addValue(906, "Tendance Rachel", "S05");
-        dataset.addValue(993, "Tendance Rachel", "S06");
-        dataset.addValue(1098, "Tendance Rachel", "S07");
-        dataset.addValue(1083, "Tendance Rachel", "S08");
-        dataset.addValue(910, "Tendance Rachel", "S09");
-        dataset.addValue(771, "Tendance Rachel", "S10");
-
-        dataset.addValue(952, "Tendance Ross", "S01");
-        dataset.addValue(831, "Tendance Ross", "S02");
-        dataset.addValue(1075, "Tendance Ross", "S03");
-        dataset.addValue(836, "Tendance Ross", "S04");
-        dataset.addValue(870, "Tendance Ross", "S05");
-        dataset.addValue(913, "Tendance Ross", "S06");
-        dataset.addValue(839, "Tendance Ross", "S07");
-        dataset.addValue(983, "Tendance Ross", "S08");
-        dataset.addValue(899, "Tendance Ross", "S09");
-        dataset.addValue(865, "Tendance Ross", "S10");
-
-        
-        JFreeChart chart2 = ChartFactory.createLineChart(
-                "Tendance de parole du personnage par rapport aux autres",
-                "Saison",
-                "Nombre de répliques",
-                dataset
-        );
-        
-        chart2.getTitle().setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 18));
-
-        CategoryPlot plot = (CategoryPlot) chart2.getPlot();
-        plot.getDomainAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // x
-        plot.getRangeAxis().setLabelFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // y
-        LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
-
-        renderer.setSeriesStroke(0, new BasicStroke(2.0f)); // plus épaisse
-        renderer.setSeriesStroke(1, new BasicStroke(0.5f));
-        renderer.setSeriesStroke(2, new BasicStroke(0.5f));
-        renderer.setSeriesStroke(3, new BasicStroke(0.5f));
-        renderer.setSeriesStroke(4, new BasicStroke(0.5f));
-        renderer.setSeriesStroke(5, new BasicStroke(0.5f));
-        
-        plot.setRenderer(renderer);
-        plot.getDomainAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
-        plot.getRangeAxis().setTickLabelFont(new java.awt.Font("Verdana", java.awt.Font.PLAIN, 12));
-
-        ChartPanel chartPanel2 = new ChartPanel(chart2);
-        
-        chartPanel2.setOpaque(false);
-        chartPanel2.setBackground(new Color(0, 0, 0, 0));
-
-        chartPanel2.setPreferredSize(new Dimension(150, 300));
-        jPanel23.removeAll();
-        jPanel23.add(chartPanel2);
-        
-        jPanel23.revalidate();
-        jPanel23.repaint();
-    }
-    
     public void generateGraphLineMotParEpisode(List<List<Object>> data, String season) {
         dataStoredForEpisodeStats = data;
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (List<Object> row : data) {
             String saison = (String) row.get(0);
             String episode = (String) row.get(1);
-            Integer value = ((Integer) row.get(2));
+            Integer value = ((Double) row.get(2)).intValue();
             if (saison.equals(season))
                 dataset.addValue(value, "Tendance mot", episode);
         }
@@ -493,7 +284,7 @@ public class VueStat extends javax.swing.JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (List<Object> row : data) {
             String name = (String) row.get(0);
-            Integer value = ((Integer) row.get(1));
+            Integer value = ((Double) row.get(1)).intValue();
             dataset.addValue(value, "Tendance mot", name);
         }
 
@@ -620,7 +411,7 @@ public class VueStat extends javax.swing.JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (List<Object> row : data) {
             String name = (String) row.get(0);
-            Integer value = (Integer) row.get(1);
+            int value = ((Double) row.get(1)).intValue();
             dataset.addValue(value, name, "");
         }
         return dataset;
@@ -628,7 +419,7 @@ public class VueStat extends javax.swing.JFrame {
 
     private int calculerTotal(List<List<Object>> data) {
         return data.stream()
-                   .mapToInt(row -> (Integer) row.get(1))
+                   .mapToInt(row -> ((Double) row.get(1)).intValue())
                    .sum();
     }
 
@@ -691,7 +482,6 @@ public class VueStat extends javax.swing.JFrame {
         panelPourcentageMotsPerso.revalidate();
         panelPourcentageMotsPerso.repaint();
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -869,19 +659,46 @@ public class VueStat extends javax.swing.JFrame {
         jPanel52 = new javax.swing.JPanel();
         jPanel53 = new javax.swing.JPanel();
         jPanel59 = new javax.swing.JPanel();
-        jLabel81 = new javax.swing.JLabel();
-        jLabel86 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel60 = new javax.swing.JPanel();
-        jLabel87 = new javax.swing.JLabel();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel69 = new javax.swing.JPanel();
-        jPanel54 = new javax.swing.JPanel();
-        jLabel77 = new javax.swing.JLabel();
-        jLabel80 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        miseEnAvantPersonnageScroll = new javax.swing.JScrollPane();
+        miseEnAvantPersonnageTexte = new javax.swing.JTextArea();
+        miseEnAvantPersonnageImage = new controller.ImagePanel();
+        miseEnAvantPersonnageScroll1 = new javax.swing.JScrollPane();
+        miseEnAvantPersonnageTexte1 = new javax.swing.JTextArea();
         jPanel70 = new javax.swing.JPanel();
-        jLabel99 = new javax.swing.JLabel();
-        imageMentions = new controller.ImagePanel();
+        imageMentions0 = new controller.ImagePanel();
+        imageMentions1 = new controller.ImagePanel();
+        centraliteScrollS2 = new javax.swing.JScrollPane();
+        centraliteTexteS2 = new javax.swing.JTextArea();
+        imageMentions2 = new controller.ImagePanel();
+        centraliteScrollS3 = new javax.swing.JScrollPane();
+        centraliteTexteS3 = new javax.swing.JTextArea();
+        imageMentions3 = new controller.ImagePanel();
+        imageMentions4 = new controller.ImagePanel();
+        imageMentions5 = new controller.ImagePanel();
+        imageMentions6 = new controller.ImagePanel();
+        imageMentions7 = new controller.ImagePanel();
+        imageMentions8 = new controller.ImagePanel();
+        imageMentions9 = new controller.ImagePanel();
+        jButton6 = new javax.swing.JButton();
+        centraliteScrollS1 = new javax.swing.JScrollPane();
+        centraliteTexteS1 = new javax.swing.JTextArea();
+        centraliteScrollS6 = new javax.swing.JScrollPane();
+        centraliteTexteS6 = new javax.swing.JTextArea();
+        centraliteScrollS4 = new javax.swing.JScrollPane();
+        centraliteTexteS4 = new javax.swing.JTextArea();
+        centraliteScrollS5 = new javax.swing.JScrollPane();
+        centraliteTexteS5 = new javax.swing.JTextArea();
+        centraliteScrollS8 = new javax.swing.JScrollPane();
+        centraliteTexteS8 = new javax.swing.JTextArea();
+        centraliteScrollS10 = new javax.swing.JScrollPane();
+        centraliteTexteS10 = new javax.swing.JTextArea();
+        centraliteScrollS9 = new javax.swing.JScrollPane();
+        centraliteTexteS9 = new javax.swing.JTextArea();
+        centraliteScrollS7 = new javax.swing.JScrollPane();
+        centraliteTexteS7 = new javax.swing.JTextArea();
         Analyse_Statistique = new javax.swing.JPanel();
         AnalyseLangagière = new controller.ImagePanel();
         Analyse_Sentiment = new javax.swing.JTabbedPane();
@@ -1361,11 +1178,11 @@ public class VueStat extends javax.swing.JFrame {
         imageMotsCaracteristiques.setLayout(imageMotsCaracteristiquesLayout);
         imageMotsCaracteristiquesLayout.setHorizontalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         imageMotsCaracteristiquesLayout.setVerticalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 863, Short.MAX_VALUE)
+            .addGap(0, 2075, Short.MAX_VALUE)
         );
 
         resultSansRecherche.add(imageMotsCaracteristiques);
@@ -1411,20 +1228,20 @@ public class VueStat extends javax.swing.JFrame {
         tableDetailReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         tableDetailReplique.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1), null},
-                {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1), null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1)},
+                {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1)},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Réplique", "Personnage", "Saison", "Épisode", "Emotion (*)"
+                "Réplique", "Personnage", "Saison", "Épisode"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1499,7 +1316,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel38.add(jLabel60);
 
         labelUtilisationMotParReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        labelUtilisationMotParReplique.setText("Le mot \"Hello\" se retrouve dans 298 répliques différentes, soit dans 1% des répliques de la série");
         labelUtilisationMotParReplique.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel38.add(labelUtilisationMotParReplique);
 
@@ -1514,7 +1330,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel57.add(jLabel82);
 
         bestSeason.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        bestSeason.setText("Le mot \"Hello\" a été employé 51 fois en saison 1 (15% de toutes ses utilisations) (voir graphique ci-dessous)");
         bestSeason.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel57.add(bestSeason);
 
@@ -1543,7 +1358,7 @@ public class VueStat extends javax.swing.JFrame {
 
         panelMotRepartitionSerie.add(jPanel35, java.awt.BorderLayout.CENTER);
 
-        resultatMot.addTab("Statistiques globales", panelMotRepartitionSerie);
+        resultatMot.addTab("Analyse par saison", panelMotRepartitionSerie);
 
         panelMotRepartitionSaisonEtEpisode.setLayout(new java.awt.BorderLayout());
 
@@ -1606,7 +1421,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel58.add(jLabel84);
 
         bestEpisode.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        bestEpisode.setText("Le mot \"Hello\" a été employé 11 fois dans l'épisode 2 de la saison 5, 2% de son utilisation totale");
         bestEpisode.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel58.add(bestEpisode);
 
@@ -1640,11 +1454,11 @@ public class VueStat extends javax.swing.JFrame {
         imagePersonnage.setLayout(imagePersonnageLayout);
         imagePersonnageLayout.setHorizontalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addGap(0, 608, Short.MAX_VALUE)
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
+            .addGap(0, 2042, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1799,85 +1613,293 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel8.add(jPanel47, java.awt.BorderLayout.NORTH);
 
-        jPanel52.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        jPanel52.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel52.setLayout(new javax.swing.BoxLayout(jPanel52, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel53.setLayout(new javax.swing.BoxLayout(jPanel53, javax.swing.BoxLayout.Y_AXIS));
+        jPanel53.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel59.setLayout(new javax.swing.BoxLayout(jPanel59, javax.swing.BoxLayout.Y_AXIS));
+        jPanel59.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel81.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel81.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel81.setText("Fréquence de mots (quantité et taux):");
-        jPanel59.add(jLabel81);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Le scénariste choisit quand faire progresser l’intrigue des personnages. Leur évolution suit deux tendances souvent non corrélées : le nombre de \nrépliques et celui de mentions par les autres. Un personnage très bavard mais peu mentionné se développe de lui-même ou avec des personnages\nsecondaires, tandis qu’un personnage souvent mentionné, sans être présent, annonce souvent un événement majeur à venir.");
+        jScrollPane3.setViewportView(jTextArea1);
 
-        jLabel86.setText("102874 mots (22% des 6 personnages principaux)");
-        jLabel86.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel59.add(jLabel86);
+        jPanel59.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
 
-        jPanel53.add(jPanel59);
+        jPanel53.add(jPanel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
 
-        jPanel60.setLayout(new javax.swing.BoxLayout(jPanel60, javax.swing.BoxLayout.Y_AXIS));
+        jPanel60.setMinimumSize(new java.awt.Dimension(740, 30));
+        jPanel60.setPreferredSize(new java.awt.Dimension(0, 500));
+        jPanel60.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel87.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel87.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel87.setText("Tendance de temps de parole :");
-        jPanel60.add(jLabel87);
+        miseEnAvantPersonnageTexte.setColumns(20);
+        miseEnAvantPersonnageTexte.setRows(5);
+        miseEnAvantPersonnageScroll.setViewportView(miseEnAvantPersonnageTexte);
 
-        jPanel23.setLayout(new java.awt.BorderLayout());
-        jPanel60.add(jPanel23);
+        jPanel60.add(miseEnAvantPersonnageScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 800, 120));
 
-        jPanel53.add(jPanel60);
+        miseEnAvantPersonnageImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel69.setLayout(new javax.swing.BoxLayout(jPanel69, javax.swing.BoxLayout.Y_AXIS));
-        jPanel53.add(jPanel69);
+        javax.swing.GroupLayout miseEnAvantPersonnageImageLayout = new javax.swing.GroupLayout(miseEnAvantPersonnageImage);
+        miseEnAvantPersonnageImage.setLayout(miseEnAvantPersonnageImageLayout);
+        miseEnAvantPersonnageImageLayout.setHorizontalGroup(
+            miseEnAvantPersonnageImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 798, Short.MAX_VALUE)
+        );
+        miseEnAvantPersonnageImageLayout.setVerticalGroup(
+            miseEnAvantPersonnageImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 358, Short.MAX_VALUE)
+        );
 
-        jPanel54.setLayout(new javax.swing.BoxLayout(jPanel54, javax.swing.BoxLayout.Y_AXIS));
+        jPanel60.add(miseEnAvantPersonnageImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 360));
 
-        jLabel77.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel77.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel77.setText("Joey interagit le plus avec :");
-        jPanel54.add(jLabel77);
+        miseEnAvantPersonnageTexte1.setColumns(20);
+        miseEnAvantPersonnageTexte1.setRows(5);
+        miseEnAvantPersonnageTexte1.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        miseEnAvantPersonnageScroll1.setViewportView(miseEnAvantPersonnageTexte1);
 
-        jLabel80.setText("Joey a interagit 306 fois avec Ross (meilleur ami)");
-        jLabel80.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel54.add(jLabel80);
+        jPanel60.add(miseEnAvantPersonnageScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 800, 150));
 
-        jButton2.setBackground(new java.awt.Color(242, 242, 242));
-        jButton2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButton2.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        jButton2.setText("Analyse plus détaillée : voir partie analyse relation");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jPanel53.add(jPanel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 840, 480));
+
+        jPanel70.setMinimumSize(new java.awt.Dimension(500, 1460));
+        jPanel70.setPreferredSize(new java.awt.Dimension(0, 150));
+        jPanel70.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imageMentions0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions0Layout = new javax.swing.GroupLayout(imageMentions0);
+        imageMentions0.setLayout(imageMentions0Layout);
+        imageMentions0Layout.setHorizontalGroup(
+            imageMentions0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions0Layout.setVerticalGroup(
+            imageMentions0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions0, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 265, 270));
+
+        imageMentions1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions1Layout = new javax.swing.GroupLayout(imageMentions1);
+        imageMentions1.setLayout(imageMentions1Layout);
+        imageMentions1Layout.setHorizontalGroup(
+            imageMentions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions1Layout.setVerticalGroup(
+            imageMentions1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 10, 265, 270));
+
+        centraliteTexteS2.setColumns(20);
+        centraliteTexteS2.setRows(5);
+        centraliteTexteS2.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS2.setViewportView(centraliteTexteS2);
+
+        jPanel70.add(centraliteScrollS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 280, 265, 120));
+
+        imageMentions2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions2Layout = new javax.swing.GroupLayout(imageMentions2);
+        imageMentions2.setLayout(imageMentions2Layout);
+        imageMentions2Layout.setHorizontalGroup(
+            imageMentions2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions2Layout.setVerticalGroup(
+            imageMentions2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 265, 270));
+
+        centraliteTexteS3.setColumns(20);
+        centraliteTexteS3.setRows(5);
+        centraliteTexteS3.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS3.setViewportView(centraliteTexteS3);
+
+        jPanel70.add(centraliteScrollS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 265, 120));
+
+        imageMentions3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions3Layout = new javax.swing.GroupLayout(imageMentions3);
+        imageMentions3.setLayout(imageMentions3Layout);
+        imageMentions3Layout.setHorizontalGroup(
+            imageMentions3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions3Layout.setVerticalGroup(
+            imageMentions3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 265, 270));
+
+        imageMentions4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions4Layout = new javax.swing.GroupLayout(imageMentions4);
+        imageMentions4.setLayout(imageMentions4Layout);
+        imageMentions4Layout.setHorizontalGroup(
+            imageMentions4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions4Layout.setVerticalGroup(
+            imageMentions4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions4, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 400, 265, 270));
+
+        imageMentions5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions5Layout = new javax.swing.GroupLayout(imageMentions5);
+        imageMentions5.setLayout(imageMentions5Layout);
+        imageMentions5Layout.setHorizontalGroup(
+            imageMentions5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions5Layout.setVerticalGroup(
+            imageMentions5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, 265, 270));
+
+        imageMentions6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions6Layout = new javax.swing.GroupLayout(imageMentions6);
+        imageMentions6.setLayout(imageMentions6Layout);
+        imageMentions6Layout.setHorizontalGroup(
+            imageMentions6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions6Layout.setVerticalGroup(
+            imageMentions6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 790, 265, 270));
+
+        imageMentions7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions7Layout = new javax.swing.GroupLayout(imageMentions7);
+        imageMentions7.setLayout(imageMentions7Layout);
+        imageMentions7Layout.setHorizontalGroup(
+            imageMentions7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions7Layout.setVerticalGroup(
+            imageMentions7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions7, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 790, 265, 270));
+
+        imageMentions8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions8Layout = new javax.swing.GroupLayout(imageMentions8);
+        imageMentions8.setLayout(imageMentions8Layout);
+        imageMentions8Layout.setHorizontalGroup(
+            imageMentions8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions8Layout.setVerticalGroup(
+            imageMentions8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 790, 265, 270));
+
+        imageMentions9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout imageMentions9Layout = new javax.swing.GroupLayout(imageMentions9);
+        imageMentions9.setLayout(imageMentions9Layout);
+        imageMentions9Layout.setHorizontalGroup(
+            imageMentions9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMentions9Layout.setVerticalGroup(
+            imageMentions9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel70.add(imageMentions9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1180, 265, 270));
+
+        jButton6.setBackground(new java.awt.Color(242, 242, 242));
+        jButton6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton6.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        jButton6.setText("Analyse des relations sur toute la série : voir partie analyse relation");
+        jButton6.setBorder(null);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
-        jPanel54.add(jButton2);
+        jPanel70.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 1280, -1, 40));
 
-        jPanel53.add(jPanel54);
+        centraliteTexteS1.setColumns(20);
+        centraliteTexteS1.setRows(5);
+        centraliteTexteS1.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS1.setViewportView(centraliteTexteS1);
 
-        jPanel70.setLayout(new javax.swing.BoxLayout(jPanel70, javax.swing.BoxLayout.Y_AXIS));
+        jPanel70.add(centraliteScrollS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 265, 120));
 
-        jLabel99.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel99.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel99.setText("Graphe de mentions (aller-retour) de Joey :");
-        jPanel70.add(jLabel99);
+        centraliteTexteS6.setColumns(20);
+        centraliteTexteS6.setRows(5);
+        centraliteTexteS6.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS6.setViewportView(centraliteTexteS6);
 
-        javax.swing.GroupLayout imageMentionsLayout = new javax.swing.GroupLayout(imageMentions);
-        imageMentions.setLayout(imageMentionsLayout);
-        imageMentionsLayout.setHorizontalGroup(
-            imageMentionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 807, Short.MAX_VALUE)
-        );
-        imageMentionsLayout.setVerticalGroup(
-            imageMentionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 662, Short.MAX_VALUE)
-        );
+        jPanel70.add(centraliteScrollS6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 670, 265, 120));
 
-        jPanel70.add(imageMentions);
+        centraliteTexteS4.setColumns(20);
+        centraliteTexteS4.setRows(5);
+        centraliteTexteS4.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS4.setViewportView(centraliteTexteS4);
 
-        jPanel53.add(jPanel70);
+        jPanel70.add(centraliteScrollS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 265, 120));
+
+        centraliteTexteS5.setColumns(20);
+        centraliteTexteS5.setRows(5);
+        centraliteTexteS5.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS5.setViewportView(centraliteTexteS5);
+
+        jPanel70.add(centraliteScrollS5, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 670, 265, 120));
+
+        centraliteTexteS8.setColumns(20);
+        centraliteTexteS8.setRows(5);
+        centraliteTexteS8.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS8.setViewportView(centraliteTexteS8);
+
+        jPanel70.add(centraliteScrollS8, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 1060, 265, 120));
+
+        centraliteTexteS10.setColumns(20);
+        centraliteTexteS10.setRows(5);
+        centraliteTexteS10.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS10.setViewportView(centraliteTexteS10);
+
+        jPanel70.add(centraliteScrollS10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1450, 265, 120));
+
+        centraliteTexteS9.setColumns(20);
+        centraliteTexteS9.setRows(5);
+        centraliteTexteS9.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS9.setViewportView(centraliteTexteS9);
+
+        jPanel70.add(centraliteScrollS9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 1060, 265, 120));
+
+        centraliteTexteS7.setColumns(20);
+        centraliteTexteS7.setRows(5);
+        centraliteTexteS7.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
+        centraliteScrollS7.setViewportView(centraliteTexteS7);
+
+        jPanel70.add(centraliteScrollS7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1060, 265, 120));
+
+        jPanel53.add(jPanel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 530, 860, 1580));
 
         jPanel52.add(jPanel53);
 
@@ -1914,14 +1936,14 @@ public class VueStat extends javax.swing.JFrame {
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         Analyse_StatistiqueLayout.setVerticalGroup(
             Analyse_StatistiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(737, Short.MAX_VALUE))
+                .addContainerGap(1949, Short.MAX_VALUE))
         );
 
         SectionRecherche.addTab("Analyse Langagière", Analyse_Statistique);
@@ -2289,7 +2311,7 @@ public class VueStat extends javax.swing.JFrame {
         SourceLayout.setHorizontalGroup(
             SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SourceLayout.createSequentialGroup()
-                .addGap(0, 36, Short.MAX_VALUE)
+                .addGap(0, 59, Short.MAX_VALUE)
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SourceLayout.createSequentialGroup()
                         .addGap(88, 88, 88)
@@ -2298,7 +2320,7 @@ public class VueStat extends javax.swing.JFrame {
                     .addGroup(SourceLayout.createSequentialGroup()
                         .addGap(388, 388, 388)
                         .addComponent(pos_nuage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(SourceLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(sentiment_par_personnage_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2315,7 +2337,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(587, Short.MAX_VALUE))
+                .addContainerGap(1799, Short.MAX_VALUE))
         );
 
         Analyse_Sentiment.addTab("Source", Source);
@@ -2489,7 +2511,7 @@ public class VueStat extends javax.swing.JFrame {
         SourceRelationLayout.setHorizontalGroup(
             SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SourceRelationLayout.createSequentialGroup()
-                .addGap(0, 97, Short.MAX_VALUE)
+                .addGap(0, 140, Short.MAX_VALUE)
                 .addGroup(SourceRelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SourceRelationLayout.createSequentialGroup()
                         .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2505,7 +2527,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addContainerGap(1778, Short.MAX_VALUE))
         );
 
         Relation.addTab("Source", SourceRelation);
@@ -2516,56 +2538,201 @@ public class VueStat extends javax.swing.JFrame {
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
 
-    //NOAH
+    private static final String TEXT_TENDANCE_JOEY = """
+Saison 1 à 3 : Vie de famille compliqué, divorce et enfant proche, choix entre Rachel et Carol puis mise en relation avec Rachel, en saison 2 il a un 
+                      arc plus dans le triangle amoureux Ross-Julie-Rachel, il est donc moins mentionné par le groupe
+Saison 5 : remontée soudaine grâce notamment au rapprochement du groupe (voir Analyse Sentiment) et à son vrai début d'arc amoureux avec
+                Chandler (observé dans les sentiments récurrents).
+                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.
+Saison 7 : Invisibilisé par le mariage de Chandler et Monica, Ross est mis en arrière dans l'intrigue
+                au nombre de mentions qui nous permet d'observer un réel pic contrairement à leur taux de répliques qui n'a pas réellement varié)
+Saison 9 : On apprend que Rachel est enceinte
+
+Ross a moins de pic d'activité, c'est le personnage le plus centrale de la série d'après la recherche par saison, il est régulier et souvent présent 
+avec nos 6 amis.""";
+    private static final String TEXT_TENDANCE_RACHEL = """
+Saison 1 : un des personnages impliqués en saison 1 pour l'introduction de la série
+
+Saison 8 : augmentation évidente : la grossesse de Rachel
+
+Impression globale : Rachel est régulière dans ses apparitions et est intégré depuis le début.""";
+    private static final String TEXT_TENDANCE_ROSS = """
+Saison 1 à 3 : Vie de famille compliqué, divorce et enfant proche, choix entre Rachel et Carol pour finalement finir avec avec Rachel en saison 3, 
+                en saison 2 il se retrouve dans un triangle amoureux (Ross-Julie-Rachel), il est donc moins mentionné par le groupe mais actif
+Saison 5 : remontée soudaine grâce notamment au rapprochement du groupe (voir Analyse Sentiment) et à son vrai début d'arc amoureux avec
+                Chandler (observé dans les sentiments récurrents).
+                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.
+Saison 7 : Invisibilisé par le mariage de Chandler et Monica, Ross est mis en arrière dans l'intrigue
+Saison 9 : On apprend que Rachel est enceinte, Ross s'implique plus dans la relation et l'intrigue met de nouveau en avant sur le couple Rachel-Ross
+
+Ross a moins de pic d'activité, c'est le personnage le plus centrale de la série d'après la recherche par saison, il est régulier et souvent présent 
+avec nos 6 amis.""";
+    private static final String TEXT_TENDANCE_PHOEBE = """
+Saison 1 à 3 : Vie de famille compliqué, divorce et enfant proche, choix entre Rachel et Carol puis mise en relation avec Rachel, en saison 2 il a un 
+                      arc plus dans le triangle amoureux Ross-Julie-Rachel, il est donc moins mentionné par le groupe
+Saison 5 : remontée soudaine grâce notamment au rapprochement du groupe (voir Analyse Sentiment) et à son vrai début d'arc amoureux avec
+                Chandler (observé dans les sentiments récurrents).
+                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.
+Saison 7 : Invisibilisé par le mariage de Chandler et Monica, Ross est mis en arrière dans l'intrigue
+                au nombre de mentions qui nous permet d'observer un réel pic contrairement à leur taux de répliques qui n'a pas réellement varié)
+Saison 9 : On apprend que Rachel est enceinte
+
+Ross a moins de pic d'activité, c'est le personnage le plus centrale de la série d'après la recherche par saison, il est régulier et souvent
+présent avec nos 6 amis.""";
+    private static final String TEXT_TENDANCE_MONICA = """
+Saison 1 : Monica est le centre initial du groupe (soeur de Ross, meilleure amie de Rachel, ami de longue date de Joey et Chandler) et 
+                le début de l'intrigue se passe dans son appartement. On découvre donc principalement la série avec elle.
+Saison 5 : remontée soudaine grâce au rapprochement du groupe d'après l'Analyse Sentiment et au rapprochement avec Chandler (observé 
+                dans les sentiments récurrents : montée d'amour en saison 5).
+Saison 7 : Augmentation prévisible dû au mariage de Monica et Chandler, tout le monde parle de l'évènement (un pic énorme au niveau des
+                mentions qui témoigne d'un réel impact de celles-ci, contrairement à leur taux de répliques qui n'a pas réellement varié)
+Saison 9 : Après une saison 8 moins marquée (pause dans leur intrigue dû à un gros pic dans la saison 7 et à la grossesse de Ross et Rachel)
+                En saison 9 on les revoit après avoir constater qu'ils ne peuvent pas avoir d'enfant, ils envisage l'adoption (Monica parle
+                beaucoup mais peu de mentions : les discussions sont entre les deux)""";
+    private static final String TEXT_TENDANCE_CHANDLER = """
+Saison 7 et 8 : préparatif du mariage avec Monica puis mariage
+
+Saison 9 et 10 : adoption et stabilité dans son métier, observation d'une baisse de négativité dans l'analyse de sentiments
+
+Impression globale : Chandler est toujours relativement impliquant de manière constante""";
+    private static final String[] TEXTS_CENTRALITE_JOEY = {
+        "Ce début, naïf et drôle mais peu de répliques\n, ne montrent pas grand chose.\n Coloc de Chandler, pourtant peu de discussion", 
+        "Développement énorme de l'amitié avec Chandler",
+        "",
+        "",
+        "Intégration au sein du groupe, confirmé dans\nl'analyse sentiment qui évoque une stabilisation\ndu groupe et une positivité grandissante.",
+        "",
+        "Emménagement avec Rachel",
+        "Baisse de discussion avec Chandler, dûe au mariage",
+        "Mise en couple avec Rachel peu remarqué, \npeut vouloir montrer que leur relation\nest bel et bien platonique",
+        "Emménagement chez Chandler"
+    };
+    private static final String[] TEXTS_CENTRALITE_RACHEL = {
+        "test1 Rachel est ...", 
+        "test2TEXTS_CENTRALITE_RACHEL",
+        "test3TEXTS_CENTRALITE_RACHEL",
+        "test4TEXTS_CENTRALITE_RACHEL",
+        "test5TEXTS_CENTRALITE_RACHEL",
+        "test6TEXTS_CENTRALITE_RACHEL",
+        "test7TEXTS_CENTRALITE_RACHEL",
+        "test8TEXTS_CENTRALITE_RACHEL",
+        "test9TEXTS_CENTRALITE_RACHEL",
+        "test10TEXTS_CENTRALITE_RACHEL"
+    };
+    private static final String[] TEXTS_CENTRALITE_ROSS = {
+        "test1 Ross est ...", 
+        "test2 Ross",
+        "test3 Ross",
+        "test4 Ross",
+        "test5 Ross",
+        "test6Ross ",
+        "test7Ross",
+        "test8Ross",
+        "test9Ross",
+        "test10Ross"
+    };
+    private static final String[] TEXTS_CENTRALITE_PHOEBE = {
+        "test1 Phoebe est ...", 
+        "test2P",
+        "test3P",
+        "test4P",
+        "test5P",
+        "test6P",
+        "test7P",
+        "test8P",
+        "test9P",
+        "test10P"
+    };
+    private static final String[] TEXTS_CENTRALITE_MONICA = {
+        "test1 Monica est ...", 
+        "test2Monica",
+        "test3Monica",
+        "test4Monica",
+        "test5Monica",
+        "test6Monica",
+        "test7Monica",
+        "test8Monica",
+        "test9Monica",
+        "test10Monica"
+    };
+    private static final String[] TEXTS_CENTRALITE_CHANDLER = {
+        "test1 Chandler est ...", 
+        "test2C",
+        "test3C",
+        "tesCt4",
+        "tesCt5",
+        "teCst6",
+        "tesCt7",
+        "tesCt8",
+        "tesCCt9",
+        "tesCt10"
+    };
+    
+    //NOAH, Enzo LOUIS
     private void afficherInfosPersonnage(String nom) {
         String lower = nom.toLowerCase();
 
         switch (lower) {
             case "joey" -> setProfil(
                 "Joey Tribbiani", "Matt LeBlanc", "Américain", "57 ans", "25 juillet 1967 (États-Unis)",
-                "audition, actor, fridge", "how you doin', guy, hey", "/les_png/Joey_photo_profile.png"
+                "/les_png/Joey_photo_profile.png", TEXT_TENDANCE_JOEY, TEXTS_CENTRALITE_JOEY
             );
             case "rachel" -> setProfil(
                 "Rachel Green", "Jennifer Aniston", "Américaine", "55 ans", "11 février 1969 (États-Unis)",
-                "A DEFINIR", "A DEFINIR", "/les_png/Rachel_photo_profile.png"
+                "/les_png/Rachel_photo_profile.png", TEXT_TENDANCE_RACHEL, TEXTS_CENTRALITE_RACHEL
             );
             case "ross" -> setProfil(
                 "Ross Geller", "David Schwimmer", "Américain", "57 ans", "2 novembre 1966 (États-Unis)",
-                "paléontologie, dinosaures", "we were on a break, uh", "/les_png/Ross_photo_profile.webp"
+                "/les_png/Ross_photo_profile.webp", TEXT_TENDANCE_ROSS, TEXTS_CENTRALITE_ROSS
             );
             case "phoebe" -> setProfil(
                 "Phoebe Buffay", "Lisa Kudrow", "Américaine", "61 ans", "30 juillet 1963 (États-Unis)",
-                "musique, excentricité", "smelly cat, weird", "/les_png/Phoebe_photo_profile.png"
+                "/les_png/Phoebe_photo_profile.png", TEXT_TENDANCE_PHOEBE, TEXTS_CENTRALITE_PHOEBE
             );
             case "monica" -> setProfil(
                 "Monica Geller", "Courteney Cox", "Américaine", "60 ans", "15 juin 1964 (États-Unis)",
-                "A definir", "clean, okay", "/les_png/Monica_photo_profile.png"
+                "/les_png/Monica_photo_profile.png", TEXT_TENDANCE_MONICA, TEXTS_CENTRALITE_MONICA
             );
             case "chandler" -> setProfil(
                 "Chandler Bing", "Matthew Perry", "Américain", "54 ans", "19 août 1969 – 28 octobre 2023",
-                "A DEFINIR", "A DEFINIR", "/les_png/Chandler_photo_profile.png"
+                "/les_png/Chandler_photo_profile.png", TEXT_TENDANCE_CHANDLER, TEXTS_CENTRALITE_CHANDLER
             );
             default -> setProfil(
-                "Personnage inconnu", "-", "-", "-", "-", "-", "-", "/les_png/default.png"
+                "Personnage inconnu", "-", "-", "-", "-", "/les_png/default.png", "", new String[] {"","","","","","","","","",""}
             );
         }
         
-        imageMentions.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + ".png");
+        imageMentions0.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S01.png");
+        imageMentions1.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S02.png");
+        imageMentions2.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S03.png");
+        imageMentions3.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S04.png");
+        imageMentions4.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S05.png");
+        imageMentions5.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S06.png");
+        imageMentions6.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S07.png");
+        imageMentions7.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S08.png");
+        imageMentions8.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S09.png");
+        imageMentions9.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S10.png");
         imageMotCaracteristique.setImage("/les_png/mots_caracteristiques_par_personnages/mots_caracteristique_" + lower + ".png");
         imageMotPref.setImage("/les_png/mots_preferes_par_personnage/mots_preferes_" + lower + ".png");
+        miseEnAvantPersonnageImage.setImage("/les_png/recherche_personnage/graphe_tendance_mise_en_avant_" + lower + "_par_scenariste.png");
     }
     
     private void setProfil(String nomPerso, String acteur, String nationalite, String age,
-                       String naissance, String interets, String mots, String imagePath) {
+                       String naissance, String imagePath, String remarquePicPopularite, String[] remarquesCentralite) {
         nomPersonnage.setText(nomPerso);
         nomPersonnage2.setText("Relations de " + nomPerso);
         jLabel39.setText(acteur);
         jLabel40.setText(nationalite);
         jLabel41.setText(age);
         jLabel42.setText(naissance);
-        //jLabel44.setText(interets);
-        //jLabel46.setText(mots);
         imagePersonnage.setImage(imagePath);
+        miseEnAvantPersonnageTexte.setText(remarquePicPopularite);
+        int index = 0;
+        for (JTextArea area : new JTextArea[] {centraliteTexteS1, centraliteTexteS2, centraliteTexteS3,centraliteTexteS4, 
+            centraliteTexteS5, centraliteTexteS6, centraliteTexteS7, centraliteTexteS8, centraliteTexteS9, centraliteTexteS10}) {
+            area.setText(remarquesCentralite[index]);
+            index++;
+        }
     }
     //NOAH FIN
     
@@ -2967,15 +3134,17 @@ public class VueStat extends javax.swing.JFrame {
         SectionRecherche.setSelectedComponent(Analyse_Statistique);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        SectionRecherche.setSelectedComponent(Relation);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         SectionRecherche.setSelectedComponent(Analyse_Sentiment);
         Analyse_Sentiment.setSelectedComponent(Sentiment_exprime);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private controller.ImagePanel AnalyseLangagière;
@@ -3046,17 +3215,46 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JTextArea TexteSentimentexprime;
     private javax.swing.JLabel bestEpisode;
     private javax.swing.JLabel bestSeason;
+    private javax.swing.JScrollPane centraliteScrollS1;
+    private javax.swing.JScrollPane centraliteScrollS10;
+    private javax.swing.JScrollPane centraliteScrollS2;
+    private javax.swing.JScrollPane centraliteScrollS3;
+    private javax.swing.JScrollPane centraliteScrollS4;
+    private javax.swing.JScrollPane centraliteScrollS5;
+    private javax.swing.JScrollPane centraliteScrollS6;
+    private javax.swing.JScrollPane centraliteScrollS7;
+    private javax.swing.JScrollPane centraliteScrollS8;
+    private javax.swing.JScrollPane centraliteScrollS9;
+    private javax.swing.JTextArea centraliteTexteS1;
+    private javax.swing.JTextArea centraliteTexteS10;
+    private javax.swing.JTextArea centraliteTexteS2;
+    private javax.swing.JTextArea centraliteTexteS3;
+    private javax.swing.JTextArea centraliteTexteS4;
+    private javax.swing.JTextArea centraliteTexteS5;
+    private javax.swing.JTextArea centraliteTexteS6;
+    private javax.swing.JTextArea centraliteTexteS7;
+    private javax.swing.JTextArea centraliteTexteS8;
+    private javax.swing.JTextArea centraliteTexteS9;
     private javax.swing.JComboBox<String> choixTypeRecherche;
     private javax.swing.JComboBox<String> comboBoxSaison;
     private javax.swing.Box.Filler filler1;
-    private controller.ImagePanel imageMentions;
+    private controller.ImagePanel imageMentions0;
+    private controller.ImagePanel imageMentions1;
+    private controller.ImagePanel imageMentions2;
+    private controller.ImagePanel imageMentions3;
+    private controller.ImagePanel imageMentions4;
+    private controller.ImagePanel imageMentions5;
+    private controller.ImagePanel imageMentions6;
+    private controller.ImagePanel imageMentions7;
+    private controller.ImagePanel imageMentions8;
+    private controller.ImagePanel imageMentions9;
     private controller.ImagePanel imageMotCaracteristique;
     private controller.ImagePanel imageMotPref;
     private controller.ImagePanel imageMotsCaracteristiques;
     private controller.ImagePanel imagePersonnage;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
@@ -3094,20 +3292,14 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel80;
-    private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel86;
-    private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
-    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -3123,7 +3315,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel35;
@@ -3139,7 +3330,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel51;
     private javax.swing.JPanel jPanel52;
     private javax.swing.JPanel jPanel53;
-    private javax.swing.JPanel jPanel54;
     private javax.swing.JPanel jPanel55;
     private javax.swing.JPanel jPanel56;
     private javax.swing.JPanel jPanel57;
@@ -3154,7 +3344,6 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
     private javax.swing.JPanel jPanel67;
-    private javax.swing.JPanel jPanel69;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel70;
     private javax.swing.JPanel jPanel74;
@@ -3176,6 +3365,8 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel92;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelDetailReplique;
     private javax.swing.JLabel labelEpisode;
     private javax.swing.JLabel labelEpisode2;
@@ -3191,6 +3382,11 @@ public class VueStat extends javax.swing.JFrame {
     private javax.swing.JLabel labelSansRechercheSentence;
     private javax.swing.JLabel labelTitre;
     private javax.swing.JLabel labelUtilisationMotParReplique;
+    private controller.ImagePanel miseEnAvantPersonnageImage;
+    private javax.swing.JScrollPane miseEnAvantPersonnageScroll;
+    private javax.swing.JScrollPane miseEnAvantPersonnageScroll1;
+    private javax.swing.JTextArea miseEnAvantPersonnageTexte;
+    private javax.swing.JTextArea miseEnAvantPersonnageTexte1;
     private controller.ImagePanel neg_nuage;
     private javax.swing.JLabel nomPersonnage;
     private javax.swing.JLabel nomPersonnage2;

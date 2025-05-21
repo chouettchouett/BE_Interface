@@ -4,10 +4,13 @@
  */
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.python.util.PythonInterpreter;
 import org.python.core.PyObject;
 import java.util.List;
@@ -33,17 +36,42 @@ public class ControllerRecherche {
     
     public ControllerRecherche(Model model) {
         this.model = model;
-        gateway = new GatewayServer(this);
-        gateway.start(true);
+        //gateway = new GatewayServer(this);
+        //gateway.start(true);
         
-        launchPython();
+        //launchPython();
     }
     
     public Map<String, Object> rechercheMots(String mots) {
         System.out.println("[controller.test]");
-        Map<String, Object> resultats = python.rechercheMots(mots);
-        model.setData(resultats);
-        return resultats;
+        Map<String, Object> data = new HashMap<>();// = python.rechercheMots(mots);
+        try {
+            ProcessBuilder pb = new ProcessBuilder("python", "python/recherche/stats_par_ensemble_de_mots.py", mots);
+            pb.redirectErrorStream(true); // pour avoir erreurs et sortie stdout ensemble
+
+            Process process = pb.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line);
+            }
+
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                System.err.println("Erreur lors de l'exécution du script Python");
+                System.exit(exitCode);
+            }
+
+            String json = output.toString();
+
+            Gson gson = new Gson();
+            data = gson.fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
     
     public void launchPython() {

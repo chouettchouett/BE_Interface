@@ -1,3 +1,7 @@
+# ADAPTATEUR PYTHON-JAVA (pont, passerelle)
+# Permet à l'interface JAVA d'appeler des fonctions python
+# Notamment la recherche d'ensemble de mots qui a besoin d'être dynamique donc lancer du python
+
 from py4j.java_gateway import JavaGateway
 
 from recherche.stats_par_ensemble_de_mots import recherche_par_mots

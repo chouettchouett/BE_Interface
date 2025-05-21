@@ -18,6 +18,11 @@ public class Main {
         AdapterFunctional adapter = new AdapterFunctional(model);
         ControllerDialogRecherche dialog = new ControllerDialogRecherche(adapter);
         
+        //Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        //    System.out.println("Shutdown hook triggered. Closing resources...");
+        //    adapter.properlyCloseWindow(); // Ferme gateway et Python
+        //}));
+        
         dialog.runUI();
     }
 }

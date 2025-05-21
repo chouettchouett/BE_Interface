@@ -1,9 +1,11 @@
+# Téléchargement d'un jeu de données de stopwords avancés
+# pour améliorer la recherche de mots importants
+# NLTK comporte 140 stopwords, ici 1300 stopwords
+# source extérieur : https://www.kaggle.com/datasets/heeraldedhia/stop-words-in-28-languages
+
 import kagglehub
 import os
 
-# stopwords plus avancés pour rendre plus précise la recherche de mot (1300 stopwords)
-# nltk 140 mots, ici 1300
-# source : https://www.kaggle.com/datasets/heeraldedhia/stop-words-in-28-languages
 path = kagglehub.dataset_download("heeraldedhia/stop-words-in-28-languages")
 
 list_files = os.listdir(path)

@@ -1,3 +1,5 @@
+# ANCIENNE VERSION : tout a été transféré dans mentions_characters.ipynb
+
 import pandas as pd
 from collections import Counter
 import re

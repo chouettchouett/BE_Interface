@@ -1,6 +1,15 @@
+# Statistiques dynamiques (en fonction d'un mot ou ensemble de mot précis)
+# Appelé à chaque fois depuis l'interface Java
+# Pour faire de la recherche interactive en plus de l'analyse statique
+# Si la personne sur l'interface veut regarder qui est plus passioné de natation par exemple,
+# l'analyse statique ne lui permettra pas alors que cette option de recherche si.
+# résultats détaillé sous forme de personnages, saison et épisodes
+
 import pandas as pd
 import re
 import os
+import sys
+import json
 
 chemin_csv = os.path.join(os.path.dirname(__file__), "..", "Analyse_Sentiments", "friends_dialogues_final.csv")
 chemin_csv = os.path.abspath(chemin_csv)
@@ -62,3 +71,10 @@ def recherche_par_mots(words: str, case_sensitive=False):
 
 #print(recherche_par_mots("I just feel like someone reached down"))
 #print(recherche_par_mots("Hello"))
+
+def recherche_par_mots_json(words):
+    result = recherche_par_mots(words)
+    return json.dumps(result)
+
+mot = sys.argv[1] if len(sys.argv) > 1 else "I just feel like someone"
+print(recherche_par_mots_json(mot))
