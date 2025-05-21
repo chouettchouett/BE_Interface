@@ -13,6 +13,11 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jRadioButton1"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Analyse des scripts de la s&#xe9;rie Friends"/>
@@ -1720,12 +1725,12 @@
                                       <Layout>
                                         <DimensionLayout dim="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <EmptySpace min="0" pref="428" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="399" max="32767" attributes="0"/>
                                           </Group>
                                         </DimensionLayout>
                                         <DimensionLayout dim="1">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <EmptySpace min="0" pref="2042" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="2050" max="32767" attributes="0"/>
                                           </Group>
                                         </DimensionLayout>
                                       </Layout>
@@ -1747,7 +1752,6 @@
                                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                               <Color blue="ff" green="cc" red="cc" type="rgb"/>
                                             </Property>
-                                            <Property name="alignmentX" type="float" value="0.5"/>
                                           </Properties>
 
                                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -1759,7 +1763,6 @@
                                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="cc" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -1808,7 +1811,6 @@
                                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="cc" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -1824,6 +1826,7 @@
                                                       <Color blue="99" green="99" red="99" type="rgb"/>
                                                     </Property>
                                                     <Property name="text" type="java.lang.String" value="Age:"/>
+                                                    <Property name="alignmentX" type="float" value="0.5"/>
                                                   </Properties>
                                                 </Component>
                                                 <Component class="javax.swing.JLabel" name="jLabel41">
@@ -1832,6 +1835,7 @@
                                                       <Color blue="ff" green="cc" red="cc" type="rgb"/>
                                                     </Property>
                                                     <Property name="text" type="java.lang.String" value="57 ans"/>
+                                                    <Property name="alignmentX" type="float" value="0.5"/>
                                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                                       <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                                                         <EmptyBorder/>
@@ -1882,7 +1886,6 @@
                                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="cc" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -1929,7 +1932,6 @@
                                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                               <Color blue="ff" green="ff" red="cc" type="rgb"/>
                                             </Property>
-                                            <Property name="alignmentX" type="float" value="0.5"/>
                                           </Properties>
 
                                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -1946,12 +1948,32 @@
                                                 <Property name="horizontalTextPosition" type="int" value="0"/>
                                               </Properties>
                                             </Component>
+                                            <Component class="javax.swing.JLabel" name="jLabel14">
+                                              <Properties>
+                                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                                </Property>
+                                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                                  <Font name="Microsoft PhagsPa" size="10" style="1"/>
+                                                </Property>
+                                                <Property name="text" type="java.lang.String" value="Passer la souris ici pour plus d&apos;information sur ces stats"/>
+                                                <Property name="alignmentX" type="float" value="0.5"/>
+                                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                                                    <EtchetBorder/>
+                                                  </Border>
+                                                </Property>
+                                              </Properties>
+                                              <Events>
+                                                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel14MouseEntered"/>
+                                                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel14MouseExited"/>
+                                              </Events>
+                                            </Component>
                                             <Container class="javax.swing.JPanel" name="jPanel23">
                                               <Properties>
                                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="ff" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -1989,7 +2011,6 @@
                                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="ff" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -2027,7 +2048,6 @@
                                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="ff" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -2064,7 +2084,6 @@
                                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                                   <Color blue="ff" green="ff" red="cc" type="rgb"/>
                                                 </Property>
-                                                <Property name="alignmentX" type="float" value="0.5"/>
                                               </Properties>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -2096,6 +2115,47 @@
                                                 </Component>
                                               </SubComponents>
                                             </Container>
+                                            <Component class="javax.swing.JSeparator" name="jSeparator1">
+                                            </Component>
+                                            <Component class="javax.swing.JLabel" name="LiensUtiles">
+                                              <Properties>
+                                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                                  <Font name="Segoe UI" size="18" style="0"/>
+                                                </Property>
+                                                <Property name="text" type="java.lang.String" value="Liens utiles"/>
+                                                <Property name="alignmentX" type="float" value="0.5"/>
+                                              </Properties>
+                                            </Component>
+                                            <Component class="javax.swing.JLabel" name="jLabel18">
+                                              <Properties>
+                                                <Property name="horizontalAlignment" type="int" value="0"/>
+                                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;span style=&apos;color:#0066cc; text-decoration:underline;&apos;&gt;Son analyse languagi&#xe8;re&lt;/span&gt;&lt;/html&gt;&#xa;"/>
+                                                <Property name="alignmentX" type="float" value="0.5"/>
+                                              </Properties>
+                                              <Events>
+                                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel18MouseClicked"/>
+                                              </Events>
+                                            </Component>
+                                            <Component class="javax.swing.JLabel" name="jLabel17">
+                                              <Properties>
+                                                <Property name="horizontalAlignment" type="int" value="0"/>
+                                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;span style=&apos;color:#0066cc; text-decoration:underline;&apos;&gt;Ses relations avec les autres&lt;/span&gt;&lt;/html&gt;&#xa;"/>
+                                                <Property name="alignmentX" type="float" value="0.5"/>
+                                              </Properties>
+                                              <Events>
+                                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel17MouseClicked"/>
+                                              </Events>
+                                            </Component>
+                                            <Component class="javax.swing.JLabel" name="jLabel19">
+                                              <Properties>
+                                                <Property name="horizontalAlignment" type="int" value="0"/>
+                                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;span style=&apos;color:#0066cc; text-decoration:underline;&apos;&gt;Evolution de ses sentiments&lt;/span&gt;&lt;/html&gt;&#xa;"/>
+                                                <Property name="alignmentX" type="float" value="0.5"/>
+                                              </Properties>
+                                              <Events>
+                                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel19MouseClicked"/>
+                                              </Events>
+                                            </Component>
                                           </SubComponents>
                                         </Container>
                                       </SubComponents>
@@ -3803,7 +3863,7 @@
                               <Component id="neg_nuage" max="32767" attributes="0"/>
                               <Component id="pos_nuage" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="1799" max="32767" attributes="0"/>
+                          <EmptySpace pref="1807" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4255,7 +4315,7 @@
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Relation_Mention" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="1778" max="32767" attributes="0"/>
+                          <EmptySpace pref="1786" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

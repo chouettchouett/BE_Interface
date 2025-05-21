@@ -13,10 +13,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ItemEvent;
 import java.io.File;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
@@ -27,9 +30,14 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.CategoryDataset;
+import javax.swing.JOptionPane;
+import javax.swing.JWindow;
+
 
 public class VueStat extends javax.swing.JFrame {
     private ControllerDialogRecherche dialog;
+    private JWindow infoWindow = null;
+
     List<List<Object>> dataStoredForEpisodeStats;
     
     public void setDialog(ControllerDialogRecherche dialog) {
@@ -488,6 +496,7 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel13 = new javax.swing.JLabel();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jRadioButton1 = new javax.swing.JRadioButton();
         labelTitre = new javax.swing.JLabel();
         SectionRecherche = new javax.swing.JTabbedPane();
         panelPageRecherche = new javax.swing.JPanel();
@@ -645,6 +654,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         statsperso = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel23 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
@@ -657,6 +667,11 @@ public class VueStat extends javax.swing.JFrame {
         jPanel27 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        LiensUtiles = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         panelPersonnageRepliqueFavorite = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -791,6 +806,8 @@ public class VueStat extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
 
         jLabel13.setText("jLabel13");
+
+        jRadioButton1.setText("jRadioButton1");
 
         setTitle("Analyse des scripts de la série Friends");
         setMinimumSize(new java.awt.Dimension(845, 630));
@@ -1474,11 +1491,11 @@ public class VueStat extends javax.swing.JFrame {
         imagePersonnage.setLayout(imagePersonnageLayout);
         imagePersonnageLayout.setHorizontalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGap(0, 399, Short.MAX_VALUE)
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2042, Short.MAX_VALUE)
+            .addGap(0, 2050, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1487,11 +1504,9 @@ public class VueStat extends javax.swing.JFrame {
         jPanel17.setLayout(new java.awt.GridLayout(2, 1));
 
         PanelinfoPerso.setBackground(new java.awt.Color(204, 204, 255));
-        PanelinfoPerso.setAlignmentX(0.5F);
         PanelinfoPerso.setLayout(new javax.swing.BoxLayout(PanelinfoPerso, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel21.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel21.setAlignmentX(0.5F);
         jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
@@ -1514,16 +1529,17 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel20.setBackground(new java.awt.Color(204, 204, 255));
         jPanel20.setForeground(new java.awt.Color(204, 204, 255));
-        jPanel20.setAlignmentX(0.5F);
         jPanel20.setLayout(new javax.swing.BoxLayout(jPanel20, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(153, 153, 153));
         jLabel37.setText("Age:");
+        jLabel37.setAlignmentX(0.5F);
         jPanel20.add(jLabel37);
 
         jLabel41.setBackground(new java.awt.Color(204, 204, 255));
         jLabel41.setText("57 ans");
+        jLabel41.setAlignmentX(0.5F);
         jLabel41.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel20.add(jLabel41);
 
@@ -1546,7 +1562,6 @@ public class VueStat extends javax.swing.JFrame {
         PanelinfoPerso.add(jPanel19);
 
         jPanel18.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel18.setAlignmentX(0.5F);
         jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1569,7 +1584,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel17.add(PanelinfoPerso);
 
         statsperso.setBackground(new java.awt.Color(204, 255, 255));
-        statsperso.setAlignmentX(0.5F);
         statsperso.setLayout(new javax.swing.BoxLayout(statsperso, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
@@ -1578,8 +1592,22 @@ public class VueStat extends javax.swing.JFrame {
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         statsperso.add(jLabel3);
 
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Microsoft PhagsPa", 1, 10)); // NOI18N
+        jLabel14.setText("Passer la souris ici pour plus d'information sur ces stats");
+        jLabel14.setAlignmentX(0.5F);
+        jLabel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel14MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel14MouseExited(evt);
+            }
+        });
+        statsperso.add(jLabel14);
+
         jPanel23.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel23.setAlignmentX(0.5F);
         jPanel23.setLayout(new javax.swing.BoxLayout(jPanel23, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1597,7 +1625,6 @@ public class VueStat extends javax.swing.JFrame {
         statsperso.add(jPanel23);
 
         jPanel25.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel25.setAlignmentX(0.5F);
         jPanel25.setLayout(new javax.swing.BoxLayout(jPanel25, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1615,7 +1642,6 @@ public class VueStat extends javax.swing.JFrame {
         statsperso.add(jPanel25);
 
         jPanel26.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel26.setAlignmentX(0.5F);
         jPanel26.setLayout(new javax.swing.BoxLayout(jPanel26, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1632,7 +1658,6 @@ public class VueStat extends javax.swing.JFrame {
         statsperso.add(jPanel26);
 
         jPanel27.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel27.setAlignmentX(0.5F);
         jPanel27.setLayout(new javax.swing.BoxLayout(jPanel27, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1647,6 +1672,42 @@ public class VueStat extends javax.swing.JFrame {
         jPanel27.add(jLabel46);
 
         statsperso.add(jPanel27);
+        statsperso.add(jSeparator1);
+
+        LiensUtiles.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LiensUtiles.setText("Liens utiles");
+        LiensUtiles.setAlignmentX(0.5F);
+        statsperso.add(LiensUtiles);
+
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("<html><span style='color:#0066cc; text-decoration:underline;'>Son analyse languagière</span></html>\n");
+        jLabel18.setAlignmentX(0.5F);
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+        statsperso.add(jLabel18);
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("<html><span style='color:#0066cc; text-decoration:underline;'>Ses relations avec les autres</span></html>\n");
+        jLabel17.setAlignmentX(0.5F);
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
+        statsperso.add(jLabel17);
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("<html><span style='color:#0066cc; text-decoration:underline;'>Evolution de ses sentiments</span></html>\n");
+        jLabel19.setAlignmentX(0.5F);
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
+        statsperso.add(jLabel19);
 
         jPanel17.add(statsperso);
 
@@ -2469,7 +2530,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(1799, Short.MAX_VALUE))
+                .addContainerGap(1807, Short.MAX_VALUE))
         );
 
         Analyse_Sentiment.addTab("Source", Source);
@@ -2659,7 +2720,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1778, Short.MAX_VALUE))
+                .addContainerGap(1786, Short.MAX_VALUE))
         );
 
         Relation.addTab("Source", SourceRelation);
@@ -2869,6 +2930,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         jLabel43.setText("" + nbRepliques);
         jLabel44.setText(String.format("%.2f %%", pourcentage));
         jLabel45.setText(position + " / 6");
+        LiensUtiles.setText("Liens utiles pour l’analyse de " + nomPerso);
         jLabel46.setText(topMots);
 
         
@@ -3289,6 +3351,64 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jLabel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseEntered
+            if (infoWindow == null) {
+            infoWindow = new JWindow();
+            JLabel content = new JLabel(
+                "<html>"
+                    + "<h2>Explication des stats</h2>"
+                    + "<ul>"
+                    + "<li><b>Nombre total de répliques :</b><br>"
+                    + "Le nombre de phrases ou de répliques prononcées par ce personnage tout au long de la série (toutes saisons confondues).</li><br>"
+                    + "<li><b>Pourcentage par rapport aux autres :</b><br>"
+                    + "La proportion de répliques de ce personnage par rapport au total des six personnages principaux. Permet de voir qui parle le plus ou le moins.</li><br>"
+                    + "<li><b>Position du personnage qui parle le plus :</b><br>"
+                    + "Le rang du personnage selon le nombre total de répliques. 1/6 = celui qui parle le plus, 6/6 = celui qui parle le moins parmi les principaux.</li><br>"
+                    + "<li><b>Top 5 mots :</b><br>"
+                    + "Les cinq mots les plus fréquemment utilisés par ce personnage dans la série, hors mots très courants (stop words).</li>"
+                    + "</ul>"
+                + "</html>"
+            );            
+            content.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+            content.setBackground(Color.WHITE);
+            content.setOpaque(true);
+            infoWindow.getContentPane().add(content);
+            infoWindow.pack();
+
+
+            Point labelLocation = evt.getComponent().getLocationOnScreen();
+            int labelWidth = evt.getComponent().getWidth();
+            int infoWidth = infoWindow.getWidth();
+            int infoHeight = infoWindow.getHeight();
+            int x = labelLocation.x + (labelWidth / 2) - (infoWidth / 2);
+            int y = labelLocation.y - infoHeight - 8;
+            infoWindow.setLocation(x, y);
+
+
+        }
+        infoWindow.setVisible(true);
+    }//GEN-LAST:event_jLabel14MouseEntered
+
+    private void jLabel14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseExited
+        if (infoWindow != null) {
+        infoWindow.setVisible(false);
+    }
+    }//GEN-LAST:event_jLabel14MouseExited
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        SectionRecherche.setSelectedIndex(1); 
+    }//GEN-LAST:event_jLabel18MouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        SectionRecherche.setSelectedIndex(3); // Aller à "Relation"
+        Relation.setSelectedIndex(0); 
+    }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        SectionRecherche.setSelectedIndex(2); 
+        Analyse_Sentiment.setSelectedIndex(2);
+    }//GEN-LAST:event_jLabel19MouseClicked
+
     
     
 
@@ -3312,6 +3432,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JPanel Evolution_positivite;
     private javax.swing.JScrollPane Graphique_Relation;
     private javax.swing.JPanel Graphique_Relation_panel;
+    private javax.swing.JLabel LiensUtiles;
     private javax.swing.JPanel PanelinfoPerso;
     private javax.swing.JLabel RelCha;
     private javax.swing.JLabel RelJoe;
@@ -3416,8 +3537,12 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -3526,9 +3651,11 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JPanel jPanel91;
     private javax.swing.JPanel jPanel92;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelDetailReplique;
     private javax.swing.JLabel labelEpisode;
