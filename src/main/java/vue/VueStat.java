@@ -486,6 +486,8 @@ public class VueStat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel13 = new javax.swing.JLabel();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         labelTitre = new javax.swing.JLabel();
         SectionRecherche = new javax.swing.JTabbedPane();
         panelPageRecherche = new javax.swing.JPanel();
@@ -625,20 +627,36 @@ public class VueStat extends javax.swing.JFrame {
         nomPersonnage = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         imagePersonnage = new controller.ImagePanel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 32767));
         jPanel17 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
+        PanelinfoPerso = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jPanel21 = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        statsperso = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
         panelPersonnageRepliqueFavorite = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -771,6 +789,8 @@ public class VueStat extends javax.swing.JFrame {
         SourceRelation = new javax.swing.JPanel();
         Relation_Mention = new controller.ImagePanel();
         jLabel16 = new javax.swing.JLabel();
+
+        jLabel13.setText("jLabel13");
 
         setTitle("Analyse des scripts de la série Friends");
         setMinimumSize(new java.awt.Dimension(845, 630));
@@ -1446,7 +1466,7 @@ public class VueStat extends javax.swing.JFrame {
         panelPersonnageProfil.add(jPanel4, java.awt.BorderLayout.NORTH);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
         imagePersonnage.setPreferredSize(new java.awt.Dimension(309, 308));
 
@@ -1454,7 +1474,7 @@ public class VueStat extends javax.swing.JFrame {
         imagePersonnage.setLayout(imagePersonnageLayout);
         imagePersonnageLayout.setHorizontalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1462,36 +1482,39 @@ public class VueStat extends javax.swing.JFrame {
         );
 
         jPanel5.add(imagePersonnage);
-        jPanel5.add(filler1);
 
-        jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.Y_AXIS));
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel17.setLayout(new java.awt.GridLayout(2, 1));
 
-        jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.Y_AXIS));
+        PanelinfoPerso.setBackground(new java.awt.Color(204, 204, 255));
+        PanelinfoPerso.setAlignmentX(0.5F);
+        PanelinfoPerso.setLayout(new javax.swing.BoxLayout(PanelinfoPerso, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Acteur:");
-        jPanel18.add(jLabel5);
+        jPanel21.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel21.setAlignmentX(0.5F);
+        jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel39.setText("Matt Leblanc");
-        jLabel39.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel18.add(jLabel39);
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel4.setText("Infos");
+        jLabel4.setAlignmentX(0.5F);
+        jPanel21.add(jLabel4);
 
-        jPanel17.add(jPanel18);
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel38.setText("Date de naissance:");
+        jLabel38.setAlignmentX(0.5F);
+        jPanel21.add(jLabel38);
 
-        jPanel19.setLayout(new javax.swing.BoxLayout(jPanel19, javax.swing.BoxLayout.Y_AXIS));
+        jLabel42.setText("25 juillet 1987 (Etats-Unis)");
+        jLabel42.setAlignmentX(0.5F);
+        jLabel42.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel21.add(jLabel42);
 
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel35.setText("Nationalité:");
-        jPanel19.add(jLabel35);
+        PanelinfoPerso.add(jPanel21);
 
-        jLabel40.setText("Américain");
-        jLabel40.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel19.add(jLabel40);
-
-        jPanel17.add(jPanel19);
-
+        jPanel20.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel20.setForeground(new java.awt.Color(204, 204, 255));
+        jPanel20.setAlignmentX(0.5F);
         jPanel20.setLayout(new javax.swing.BoxLayout(jPanel20, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -1499,24 +1522,133 @@ public class VueStat extends javax.swing.JFrame {
         jLabel37.setText("Age:");
         jPanel20.add(jLabel37);
 
+        jLabel41.setBackground(new java.awt.Color(204, 204, 255));
         jLabel41.setText("57 ans");
         jLabel41.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel20.add(jLabel41);
 
-        jPanel17.add(jPanel20);
+        PanelinfoPerso.add(jPanel20);
 
-        jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.Y_AXIS));
+        jPanel19.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel19.setLayout(new javax.swing.BoxLayout(jPanel19, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel38.setText("Date de naissance:");
-        jPanel21.add(jLabel38);
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel35.setText("Nationalité:");
+        jLabel35.setAlignmentX(0.5F);
+        jPanel19.add(jLabel35);
 
-        jLabel42.setText("25 juillet 1987 (Etats-Unis)");
-        jLabel42.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel21.add(jLabel42);
+        jLabel40.setText("Américain");
+        jLabel40.setAlignmentX(0.5F);
+        jLabel40.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel19.add(jLabel40);
 
-        jPanel17.add(jPanel21);
+        PanelinfoPerso.add(jPanel19);
+
+        jPanel18.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel18.setAlignmentX(0.5F);
+        jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("Acteur:");
+        jLabel5.setAlignmentX(0.5F);
+        jPanel18.add(jLabel5);
+
+        jLabel39.setText("Matt Leblanc");
+        jLabel39.setAlignmentX(0.5F);
+        jLabel39.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel18.add(jLabel39);
+
+        PanelinfoPerso.add(jPanel18);
+
+        jLabel12.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel12.setText("effemere");
+        PanelinfoPerso.add(jLabel12);
+
+        jPanel17.add(PanelinfoPerso);
+
+        statsperso.setBackground(new java.awt.Color(204, 255, 255));
+        statsperso.setAlignmentX(0.5F);
+        statsperso.setLayout(new javax.swing.BoxLayout(statsperso, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel3.setText("Stats");
+        jLabel3.setAlignmentX(0.5F);
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        statsperso.add(jLabel3);
+
+        jPanel23.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel23.setAlignmentX(0.5F);
+        jPanel23.setLayout(new javax.swing.BoxLayout(jPanel23, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel8.setText("Nombre total de replique :");
+        jLabel8.setAlignmentX(0.5F);
+        jPanel23.add(jLabel8);
+
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel43.setText("Matt Leblanc");
+        jLabel43.setAlignmentX(0.5F);
+        jLabel43.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel23.add(jLabel43);
+
+        statsperso.add(jPanel23);
+
+        jPanel25.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel25.setAlignmentX(0.5F);
+        jPanel25.setLayout(new javax.swing.BoxLayout(jPanel25, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Pourcentage par rapport au autres :  ");
+        jLabel9.setAlignmentX(0.5F);
+        jPanel25.add(jLabel9);
+
+        jLabel44.setText("Matt Leblanc");
+        jLabel44.setAlignmentX(0.5F);
+        jLabel44.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel25.add(jLabel44);
+
+        statsperso.add(jPanel25);
+
+        jPanel26.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel26.setAlignmentX(0.5F);
+        jPanel26.setLayout(new javax.swing.BoxLayout(jPanel26, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("Postion du personnage qui parle le plus : ");
+        jLabel10.setAlignmentX(0.5F);
+        jPanel26.add(jLabel10);
+
+        jLabel45.setText("Matt Leblanc");
+        jLabel45.setAlignmentX(0.5F);
+        jLabel45.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel26.add(jLabel45);
+
+        statsperso.add(jPanel26);
+
+        jPanel27.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel27.setAlignmentX(0.5F);
+        jPanel27.setLayout(new javax.swing.BoxLayout(jPanel27, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel11.setText("Top 5 mots : ");
+        jLabel11.setAlignmentX(0.5F);
+        jPanel27.add(jLabel11);
+
+        jLabel46.setText("Matt Leblanc");
+        jLabel46.setAlignmentX(0.5F);
+        jLabel46.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel27.add(jLabel46);
+
+        statsperso.add(jPanel27);
+
+        jPanel17.add(statsperso);
 
         jPanel5.add(jPanel17);
 
@@ -2675,32 +2807,40 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         switch (lower) {
             case "joey" -> setProfil(
                 "Joey Tribbiani", "Matt LeBlanc", "Américain", "57 ans", "25 juillet 1967 (États-Unis)",
-                "/les_png/Joey_photo_profile.png", TEXT_TENDANCE_JOEY, TEXTS_CENTRALITE_JOEY
+                "/les_png/Joey_photo_profile.png", TEXT_TENDANCE_JOEY, TEXTS_CENTRALITE_JOEY,
+                8182, 16.25, 5, "hey, know, right, like, out"
             );
             case "rachel" -> setProfil(
                 "Rachel Green", "Jennifer Aniston", "Américaine", "55 ans", "11 février 1969 (États-Unis)",
-                "/les_png/Rachel_photo_profile.png", TEXT_TENDANCE_RACHEL, TEXTS_CENTRALITE_RACHEL
+                "/les_png/Rachel_photo_profile.png", TEXT_TENDANCE_RACHEL, TEXTS_CENTRALITE_RACHEL,
+                9118, 18.11, 1, "know, well, ross, right, gonna"
             );
             case "ross" -> setProfil(
                 "Ross Geller", "David Schwimmer", "Américain", "57 ans", "2 novembre 1966 (États-Unis)",
-                "/les_png/Ross_photo_profile.webp", TEXT_TENDANCE_ROSS, TEXTS_CENTRALITE_ROSS
+                "/les_png/Ross_photo_profile.webp", TEXT_TENDANCE_ROSS, TEXTS_CENTRALITE_ROSS,
+                9063, 18.01, 2, "know, hey, uh, well, right"
             );
             case "phoebe" -> setProfil(
                 "Phoebe Buffay", "Lisa Kudrow", "Américaine", "61 ans", "30 juillet 1963 (États-Unis)",
-                "/les_png/Phoebe_photo_profile.png", TEXT_TENDANCE_PHOEBE, TEXTS_CENTRALITE_PHOEBE
+                "/les_png/Phoebe_photo_profile.png", TEXT_TENDANCE_PHOEBE, TEXTS_CENTRALITE_PHOEBE,
+                7345, 14.59, 6, "know, well, like, hey, right"
             );
             case "monica" -> setProfil(
                 "Monica Geller", "Courteney Cox", "Américaine", "60 ans", "15 juin 1964 (États-Unis)",
-                "/les_png/Monica_photo_profile.png", TEXT_TENDANCE_MONICA, TEXTS_CENTRALITE_MONICA
+                "/les_png/Monica_photo_profile.png", TEXT_TENDANCE_MONICA, TEXTS_CENTRALITE_MONICA,
+                8278, 16.45, 4, "know, chandler, well, right, gonna"
             );
             case "chandler" -> setProfil(
                 "Chandler Bing", "Matthew Perry", "Américain", "54 ans", "19 août 1969 – 28 octobre 2023",
-                "/les_png/Chandler_photo_profile.png", TEXT_TENDANCE_CHANDLER, TEXTS_CENTRALITE_CHANDLER
+                "/les_png/Chandler_photo_profile.png", TEXT_TENDANCE_CHANDLER, TEXTS_CENTRALITE_CHANDLER,
+                8350, 16.59, 3, "well, know, right, hey, out"
             );
             default -> setProfil(
-                "Personnage inconnu", "-", "-", "-", "-", "/les_png/default.png", "", new String[] {"","","","","","","","","",""}
+                "Personnage inconnu", "-", "-", "-", "-", "/les_png/default.png", "", new String[] {"","","","","","","","","",""},
+                0, 0.0, 0, ""
             );
         }
+
         
         imageMentions0.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S01.png");
         imageMentions1.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S02.png");
@@ -2718,7 +2858,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     }
     
     private void setProfil(String nomPerso, String acteur, String nationalite, String age,
-                       String naissance, String imagePath, String remarquePicPopularite, String[] remarquesCentralite) {
+                       String naissance, String imagePath, String remarquePicPopularite, String[] remarquesCentralite,int nbRepliques, double pourcentage, int position, String topMots) {
         nomPersonnage.setText(nomPerso);
         nomPersonnage2.setText("Relations de " + nomPerso);
         jLabel39.setText(acteur);
@@ -2726,6 +2866,12 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         jLabel41.setText(age);
         jLabel42.setText(naissance);
         imagePersonnage.setImage(imagePath);
+        jLabel43.setText("" + nbRepliques);
+        jLabel44.setText(String.format("%.2f %%", pourcentage));
+        jLabel45.setText(position + " / 6");
+        jLabel46.setText(topMots);
+
+        
         miseEnAvantPersonnageTexte.setText(remarquePicPopularite);
         int index = 0;
         for (JTextArea area : new JTextArea[] {centraliteTexteS1, centraliteTexteS2, centraliteTexteS3,centraliteTexteS4, 
@@ -3166,6 +3312,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JPanel Evolution_positivite;
     private javax.swing.JScrollPane Graphique_Relation;
     private javax.swing.JPanel Graphique_Relation_panel;
+    private javax.swing.JPanel PanelinfoPerso;
     private javax.swing.JLabel RelCha;
     private javax.swing.JLabel RelJoe;
     private javax.swing.JLabel RelMon;
@@ -3237,7 +3384,6 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JTextArea centraliteTexteS9;
     private javax.swing.JComboBox<String> choixTypeRecherche;
     private javax.swing.JComboBox<String> comboBoxSaison;
-    private javax.swing.Box.Filler filler1;
     private controller.ImagePanel imageMentions0;
     private controller.ImagePanel imageMentions1;
     private controller.ImagePanel imageMentions2;
@@ -3256,16 +3402,20 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel107;
     private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel118;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
@@ -3273,13 +3423,19 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
@@ -3294,9 +3450,11 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
@@ -3315,7 +3473,11 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel36;
@@ -3363,6 +3525,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JPanel jPanel90;
     private javax.swing.JPanel jPanel91;
     private javax.swing.JPanel jPanel92;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -3430,6 +3593,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     private javax.swing.JPanel resultats;
     private javax.swing.JScrollPane scrollPaneDetailReplique;
     private controller.ImagePanel sentiment_par_personnage_panel;
+    private javax.swing.JPanel statsperso;
     private javax.swing.JTable tableDetailReplique;
     private javax.swing.JLabel titre;
     // End of variables declaration//GEN-END:variables
