@@ -41,7 +41,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-92,0,0,3,120"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,9,-29,0,0,3,120"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -991,7 +991,7 @@
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="684" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="2283" max="32767" attributes="0"/>
                               </Group>
                             </DimensionLayout>
                           </Layout>
@@ -1108,22 +1108,6 @@
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                                   <SubComponents>
-                                    <Component class="javax.swing.JLabel" name="labelDetailReplique">
-                                      <Properties>
-                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                          <Font name="Verdana" size="9" style="1"/>
-                                        </Property>
-                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                          <Color blue="99" green="99" red="99" type="rgb"/>
-                                        </Property>
-                                        <Property name="text" type="java.lang.String" value="D&#xe9;tails des r&#xe9;pliques :"/>
-                                      </Properties>
-                                      <Constraints>
-                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                          <BorderConstraints direction="North"/>
-                                        </Constraint>
-                                      </Constraints>
-                                    </Component>
                                     <Container class="javax.swing.JScrollPane" name="scrollPaneDetailReplique">
                                       <AuxValues>
                                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -1155,18 +1139,8 @@
                                                   <Data value="null"/>
                                                   <Data value="null"/>
                                                 </Column>
-                                                <Column editable="false" title="Saison" type="java.lang.Integer">
-                                                  <Data value="1"/>
-                                                  <Data value="1"/>
-                                                  <Data value="null"/>
-                                                  <Data value="null"/>
-                                                </Column>
-                                                <Column editable="false" title="&#xc9;pisode" type="java.lang.Integer">
-                                                  <Data value="1"/>
-                                                  <Data value="1"/>
-                                                  <Data value="null"/>
-                                                  <Data value="null"/>
-                                                </Column>
+                                                <Column editable="false" title="Saison" type="java.lang.String"/>
+                                                <Column editable="false" title="&#xc9;pisode" type="java.lang.String"/>
                                               </Table>
                                             </Property>
                                             <Property name="rowHeight" type="int" value="25"/>
@@ -1182,64 +1156,84 @@
                                         </Component>
                                       </SubComponents>
                                     </Container>
-                                  </SubComponents>
-                                </Container>
-                                <Container class="javax.swing.JPanel" name="jPanel64">
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                                      <BorderConstraints direction="Last"/>
-                                    </Constraint>
-                                  </Constraints>
+                                    <Container class="javax.swing.JPanel" name="jPanel12">
+                                      <Constraints>
+                                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                                          <BorderConstraints direction="North"/>
+                                        </Constraint>
+                                      </Constraints>
 
-                                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
-                                  <SubComponents>
-                                    <Component class="javax.swing.JLabel" name="jLabel76">
-                                      <Properties>
-                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                          <Font name="Verdana" size="10" style="1"/>
-                                        </Property>
-                                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                          <Color blue="99" green="99" red="99" type="rgb"/>
-                                        </Property>
-                                        <Property name="text" type="java.lang.String" value="* &#xc9;tude approfondie des &#xe9;motions :"/>
-                                      </Properties>
-                                    </Component>
-                                    <Container class="javax.swing.JPanel" name="jPanel24">
-
-                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                                        <Property name="alignment" type="int" value="0"/>
+                                      </Layout>
                                       <SubComponents>
-                                        <Component class="javax.swing.JLabel" name="jLabel83">
+                                        <Component class="javax.swing.JLabel" name="labelDetailReplique">
                                           <Properties>
                                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                              <Font name="Verdana" size="12" style="0"/>
-                                            </Property>
-                                            <Property name="text" type="java.lang.String" value="Voir"/>
-                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                                                <EmptyBorder/>
-                                              </Border>
-                                            </Property>
-                                          </Properties>
-                                        </Component>
-                                        <Component class="javax.swing.JButton" name="jButton3">
-                                          <Properties>
-                                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                              <Color blue="f2" green="f2" red="f2" type="rgb"/>
-                                            </Property>
-                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                              <Font name="Verdana" size="12" style="1"/>
+                                              <Font name="Verdana" size="9" style="1"/>
                                             </Property>
                                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                              <Color blue="d6" green="9f" id="Actions.Blue" palette="3" red="38" type="palette"/>
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
                                             </Property>
-                                            <Property name="text" type="java.lang.String" value="analyse des sentiments &gt; sentiments exprim&#xe9;s"/>
-                                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                              <Border info="null"/>
+                                            <Property name="text" type="java.lang.String" value="D&#xe9;tails des r&#xe9;pliques :"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JLabel" name="nombreResultatFiltre">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Verdana" size="10" style="0"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="x/y r&#xe9;sultats"/>
+                                          </Properties>
+                                        </Component>
+                                        <Component class="javax.swing.JComboBox" name="filtrePerso">
+                                          <Properties>
+                                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                              <StringArray count="2">
+                                                <StringItem index="0" value="Tous les personnages"/>
+                                                <StringItem index="1" value="Chandler"/>
+                                              </StringArray>
                                             </Property>
                                           </Properties>
-                                          <Events>
-                                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
-                                          </Events>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JComboBox" name="filtreSaison">
+                                          <Properties>
+                                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                              <StringArray count="1">
+                                                <StringItem index="0" value="Toutes les saisons"/>
+                                              </StringArray>
+                                            </Property>
+                                          </Properties>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JComboBox" name="filtreEpisode">
+                                          <Properties>
+                                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                              <StringArray count="1">
+                                                <StringItem index="0" value="Tous les &#xe9;pisodes"/>
+                                              </StringArray>
+                                            </Property>
+                                          </Properties>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                                          </AuxValues>
+                                        </Component>
+                                        <Component class="javax.swing.JComboBox" name="filtreSentiment">
+                                          <Properties>
+                                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                              <StringArray count="1">
+                                                <StringItem index="0" value="Toutes les &#xe9;motions"/>
+                                              </StringArray>
+                                            </Property>
+                                          </Properties>
+                                          <AuxValues>
+                                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                                          </AuxValues>
                                         </Component>
                                       </SubComponents>
                                     </Container>
@@ -1730,7 +1724,7 @@
                                         </DimensionLayout>
                                         <DimensionLayout dim="1">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <EmptySpace min="0" pref="651" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="2250" max="32767" attributes="0"/>
                                           </Group>
                                         </DimensionLayout>
                                       </Layout>
@@ -2226,7 +2220,7 @@
                                         <Container class="javax.swing.JPanel" name="jPanel59">
                                           <Constraints>
                                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                              <AbsoluteConstraints x="0" y="0" width="800" height="50"/>
+                                              <AbsoluteConstraints x="0" y="0" width="800" height="90"/>
                                             </Constraint>
                                           </Constraints>
 
@@ -2240,7 +2234,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="0" width="800" height="50"/>
+                                                  <AbsoluteConstraints x="0" y="0" width="800" height="90"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2268,7 +2262,7 @@
                                           </Properties>
                                           <Constraints>
                                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                              <AbsoluteConstraints x="0" y="52" width="840" height="480"/>
+                                              <AbsoluteConstraints x="0" y="52" width="840" height="540"/>
                                             </Constraint>
                                           </Constraints>
 
@@ -2276,26 +2270,6 @@
                                             <Property name="useNullLayout" type="boolean" value="false"/>
                                           </Layout>
                                           <SubComponents>
-                                            <Container class="javax.swing.JScrollPane" name="miseEnAvantPersonnageScroll">
-                                              <AuxValues>
-                                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                                              </AuxValues>
-                                              <Constraints>
-                                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="360" width="800" height="120"/>
-                                                </Constraint>
-                                              </Constraints>
-
-                                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                                              <SubComponents>
-                                                <Component class="javax.swing.JTextArea" name="miseEnAvantPersonnageTexte">
-                                                  <Properties>
-                                                    <Property name="columns" type="int" value="20"/>
-                                                    <Property name="rows" type="int" value="5"/>
-                                                  </Properties>
-                                                </Component>
-                                              </SubComponents>
-                                            </Container>
                                             <Container class="controller.ImagePanel" name="miseEnAvantPersonnageImage">
                                               <Properties>
                                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -2306,7 +2280,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="0" width="800" height="360"/>
+                                                  <AbsoluteConstraints x="0" y="40" width="800" height="370"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2318,28 +2292,27 @@
                                                 </DimensionLayout>
                                                 <DimensionLayout dim="1">
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <EmptySpace min="0" pref="358" max="32767" attributes="0"/>
+                                                      <EmptySpace min="0" pref="368" max="32767" attributes="0"/>
                                                   </Group>
                                                 </DimensionLayout>
                                               </Layout>
                                             </Container>
-                                            <Container class="javax.swing.JScrollPane" name="miseEnAvantPersonnageScroll1">
+                                            <Container class="javax.swing.JScrollPane" name="miseEnAvantPersonnageScroll">
                                               <AuxValues>
                                                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="360" width="800" height="150"/>
+                                                  <AbsoluteConstraints x="0" y="410" width="800" height="130"/>
                                                 </Constraint>
                                               </Constraints>
 
                                               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                               <SubComponents>
-                                                <Component class="javax.swing.JTextArea" name="miseEnAvantPersonnageTexte1">
+                                                <Component class="javax.swing.JTextArea" name="miseEnAvantPersonnageTexte">
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                Chandler et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2357,7 +2330,7 @@
                                           </Properties>
                                           <Constraints>
                                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                              <AbsoluteConstraints x="8" y="530" width="860" height="1580"/>
+                                              <AbsoluteConstraints x="8" y="530" width="860" height="1780"/>
                                             </Constraint>
                                           </Constraints>
 
@@ -2375,7 +2348,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="10" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="0" y="210" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2402,7 +2375,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="265" y="10" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="265" y="210" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2425,7 +2398,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="265" y="280" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="265" y="480" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2435,7 +2408,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                Chandler et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2450,7 +2422,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="530" y="10" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="530" y="210" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2473,7 +2445,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="530" y="280" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="530" y="480" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2483,7 +2455,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                Chandler et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2498,7 +2469,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="400" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="0" y="600" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2525,7 +2496,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="265" y="400" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="265" y="600" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2552,7 +2523,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="530" y="400" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="530" y="600" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2579,7 +2550,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="790" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="0" y="990" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2606,7 +2577,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="265" y="790" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="265" y="990" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2633,7 +2604,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="530" y="790" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="530" y="990" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2660,7 +2631,7 @@
                                               </Properties>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="1180" width="265" height="270"/>
+                                                  <AbsoluteConstraints x="0" y="1380" width="265" height="270"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2698,7 +2669,7 @@
                                               </Events>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="320" y="1280" width="-1" height="40"/>
+                                                  <AbsoluteConstraints x="330" y="1490" width="-1" height="40"/>
                                                 </Constraint>
                                               </Constraints>
                                             </Component>
@@ -2708,7 +2679,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="280" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="0" y="480" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2718,7 +2689,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2729,7 +2699,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="530" y="670" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="530" y="870" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2739,7 +2709,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2750,7 +2719,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="670" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="0" y="870" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2760,7 +2729,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2771,7 +2739,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="265" y="670" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="265" y="870" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2781,7 +2749,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2792,7 +2759,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="265" y="1060" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="265" y="1260" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2802,7 +2769,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2813,7 +2779,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="1450" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="0" y="1650" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2823,7 +2789,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2834,7 +2799,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="530" y="1060" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="530" y="1260" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2844,7 +2809,6 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2855,7 +2819,7 @@
                                               </AuxValues>
                                               <Constraints>
                                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="0" y="1060" width="265" height="120"/>
+                                                  <AbsoluteConstraints x="0" y="1260" width="265" height="120"/>
                                                 </Constraint>
                                               </Constraints>
 
@@ -2865,7 +2829,26 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="Contrairement &#xe0; une tendance lin&#xe9;aire, le graphique r&#xe9;v&#xe8;le des pics distincts de positivit&#xe9; selon les saisons.&#xa;Saison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivit&#xe9;. &#xa;                Phoebe d&#xe9;couvre son demi-fr&#xe8;re, ce qui renforce son cercle familial.&#xa;Saison 5 : hausse g&#xe9;n&#xe9;ralis&#xe9;e &#x2014; le groupe se stabilise &#xe9;motionnellement, malgr&#xe9; quelques tensions.&#xa;                et Monica se rapprochent, et Phoebe commence &#xe0; retrouver un certain &#xe9;quilibre.&#xa;Saison 9 : Regain inattendu de positivit&#xe9; (notamment Monica et Chandler) alors qu&#x2019;ils avancent vers &#xa;                l&#x2019;adoption et une vie commune plus structur&#xe9;e.&#xa;Globalement, la positivit&#xe9; semble r&#xe9;pondre &#xe0; des &#xe9;v&#xe9;nements ponctuels d&apos;accomplissement personnel ou relationnel, &#xa;                plus qu&apos;&#xe0; une logique progressive."/>
+                                                  </Properties>
+                                                </Component>
+                                              </SubComponents>
+                                            </Container>
+                                            <Container class="javax.swing.JScrollPane" name="miseEnAvantPersonnageScroll1">
+                                              <AuxValues>
+                                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                              </AuxValues>
+                                              <Constraints>
+                                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                                  <AbsoluteConstraints x="0" y="80" width="800" height="130"/>
+                                                </Constraint>
+                                              </Constraints>
+
+                                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                              <SubComponents>
+                                                <Component class="javax.swing.JTextArea" name="miseEnAvantPersonnageTexte1">
+                                                  <Properties>
+                                                    <Property name="columns" type="int" value="20"/>
+                                                    <Property name="rows" type="int" value="5"/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>
@@ -2927,50 +2910,6 @@
                                     <Property name="rows" type="int" value="3"/>
                                   </Layout>
                                   <SubComponents>
-                                    <Container class="javax.swing.JPanel" name="jPanel11">
-
-                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-                                        <Property name="useNullLayout" type="boolean" value="false"/>
-                                      </Layout>
-                                      <SubComponents>
-                                        <Container class="controller.ImagePanel" name="imageMotPref">
-                                          <Constraints>
-                                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                              <AbsoluteConstraints x="0" y="20" width="390" height="220"/>
-                                            </Constraint>
-                                          </Constraints>
-
-                                          <Layout>
-                                            <DimensionLayout dim="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <EmptySpace min="0" pref="390" max="32767" attributes="0"/>
-                                              </Group>
-                                            </DimensionLayout>
-                                            <DimensionLayout dim="1">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <EmptySpace min="0" pref="220" max="32767" attributes="0"/>
-                                              </Group>
-                                            </DimensionLayout>
-                                          </Layout>
-                                        </Container>
-                                        <Component class="javax.swing.JLabel" name="jLabel101">
-                                          <Properties>
-                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                              <Font name="Segoe UI" size="10" style="1"/>
-                                            </Property>
-                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                              <Color blue="99" green="99" red="99" type="rgb"/>
-                                            </Property>
-                                            <Property name="text" type="java.lang.String" value="Mots pr&#xe9;f&#xe9;r&#xe9;s :"/>
-                                          </Properties>
-                                          <Constraints>
-                                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                              <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
-                                            </Constraint>
-                                          </Constraints>
-                                        </Component>
-                                      </SubComponents>
-                                    </Container>
                                     <Container class="javax.swing.JPanel" name="jPanel10">
 
                                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -3005,7 +2944,7 @@
                                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                               <Color blue="99" green="99" red="99" type="rgb"/>
                                             </Property>
-                                            <Property name="text" type="java.lang.String" value="Mots caract&#xe9;ristiques :"/>
+                                            <Property name="text" type="java.lang.String" value="Quels sont ces passions/personnage secondaire pr&#xe9;f&#xe9;r&#xe9;/r&#xe9;pliques cultes ?"/>
                                           </Properties>
                                           <Constraints>
                                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -3013,6 +2952,72 @@
                                             </Constraint>
                                           </Constraints>
                                         </Component>
+                                      </SubComponents>
+                                    </Container>
+                                    <Container class="javax.swing.JPanel" name="jPanel11">
+
+                                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                                        <Property name="useNullLayout" type="boolean" value="false"/>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Container class="controller.ImagePanel" name="imageMotPref">
+                                          <Constraints>
+                                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                              <AbsoluteConstraints x="0" y="60" width="370" height="180"/>
+                                            </Constraint>
+                                          </Constraints>
+
+                                          <Layout>
+                                            <DimensionLayout dim="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
+                                            </DimensionLayout>
+                                            <DimensionLayout dim="1">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <EmptySpace min="0" pref="180" max="32767" attributes="0"/>
+                                              </Group>
+                                            </DimensionLayout>
+                                          </Layout>
+                                        </Container>
+                                        <Component class="javax.swing.JLabel" name="jLabel101">
+                                          <Properties>
+                                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                              <Font name="Segoe UI" size="10" style="1"/>
+                                            </Property>
+                                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                              <Color blue="99" green="99" red="99" type="rgb"/>
+                                            </Property>
+                                            <Property name="text" type="java.lang.String" value="Dans quels domaines distinctif le personnage s&apos;&#xe9;panouit-il en joie ?"/>
+                                          </Properties>
+                                          <Constraints>
+                                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                              <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
+                                            </Constraint>
+                                          </Constraints>
+                                        </Component>
+                                        <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                                          <AuxValues>
+                                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                                          </AuxValues>
+                                          <Constraints>
+                                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                              <AbsoluteConstraints x="0" y="15" width="370" height="40"/>
+                                            </Constraint>
+                                          </Constraints>
+
+                                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JTextArea" name="jTextArea2">
+                                              <Properties>
+                                                <Property name="columns" type="int" value="20"/>
+                                                <Property name="rows" type="int" value="5"/>
+                                                <Property name="text" type="java.lang.String" value="La joie est une &#xe9;motion importante de Friends, voyons comment&#xa;elle se manifeste distinctement entre les personnages"/>
+                                                <Property name="enabled" type="boolean" value="false"/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
                                       </SubComponents>
                                     </Container>
                                     <Container class="javax.swing.JPanel" name="jPanel30">
@@ -3228,7 +3233,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Component id="AnalyseLangagière" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="558" max="32767" attributes="0"/>
+                      <EmptySpace pref="2157" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4011,7 +4016,7 @@
                               <Component id="neg_nuage" max="32767" attributes="0"/>
                               <Component id="pos_nuage" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="408" max="32767" attributes="0"/>
+                          <EmptySpace pref="2007" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4463,7 +4468,7 @@
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Relation_Mention" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="387" max="32767" attributes="0"/>
+                          <EmptySpace pref="1986" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

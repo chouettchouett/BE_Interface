@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.BorderFactory;
@@ -32,6 +33,8 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.CategoryDataset;
 import javax.swing.JOptionPane;
 import javax.swing.JWindow;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class VueStat extends javax.swing.JFrame {
@@ -42,6 +45,7 @@ public class VueStat extends javax.swing.JFrame {
     
     public void setDialog(ControllerDialogRecherche dialog) {
         this.dialog = dialog;
+        this.dialog.onUserAction("Example");
     }
 
     public VueStat(ControllerDialogRecherche dialog) {
@@ -155,6 +159,61 @@ public class VueStat extends javax.swing.JFrame {
                 .map(s -> String.format("S%02d", s.getNumeroSaison()))
                 .toArray(String[]::new)
         ));
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableDetailReplique.getModel());
+        tableDetailReplique.setRowSorter(sorter);
+        
+        // Filtres
+        java.awt.event.ActionListener filtreAction = e -> {
+            String personnage = (String) filtrePerso.getSelectedItem();
+            String saison = (String) filtreSaison.getSelectedItem();
+            String episode = (String) filtreEpisode.getSelectedItem();
+
+            javax.swing.RowFilter<TableModel, Integer> filter = new javax.swing.RowFilter<TableModel, Integer>() {
+                public boolean include(javax.swing.RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
+                    if (personnage != null && saison != null && episode != null) {
+                        System.out.println("works");
+                        String personnageValue = entry.getStringValue(1);
+                        String saisonValue = entry.getStringValue(2);
+                        String episodeValue = entry.getStringValue(3);
+                        
+                        System.out.println(personnageValue + "/" + personnage);
+                        System.out.println(saisonValue + "/" + saison);
+                        System.out.println(episodeValue + "/" + episode);
+
+                        boolean matchPerso = personnage.equals("Tous les personnages") || personnage.equals(personnageValue);
+                        boolean matchSaison = saison.equals("Toutes les saisons") || saison.equals(saisonValue);
+                        boolean matchEpisode = episode.equals("Tous les épisodes") || episode.equals(episodeValue);
+                        return matchPerso && matchSaison && matchEpisode;
+                    }
+                    return true;
+                }
+            };
+            sorter.setRowFilter(filter);
+            
+            nombreResultatFiltre.setText("Résultats : " + tableDetailReplique.getRowCount() + "/" + tableDetailReplique.getModel().getRowCount());
+        };
+
+        // Ajouter l’action aux combo box
+        filtrePerso.addActionListener(filtreAction);
+        filtreSaison.addActionListener(filtreAction);
+        filtreEpisode.addActionListener(filtreAction);
+    }
+    
+    public JComboBox getComboMotPerso() {
+        return filtrePerso;
+    }
+    
+    public JComboBox getComboMotSaison() {
+        return filtreSaison;
+    }
+    
+    public JComboBox getComboMotEpisode() {
+        return filtreEpisode;
+    }
+    
+    public JComboBox getComboMotEmotion() {
+        return filtreSentiment;
     }
 
     private void initialiserStyleRechercheMot() {
@@ -588,14 +647,15 @@ public class VueStat extends javax.swing.JFrame {
         labelPersonnageReplique = new javax.swing.JLabel();
         panelPourcentageMotsPerso = new javax.swing.JPanel();
         panelDetailReplique = new javax.swing.JPanel();
-        labelDetailReplique = new javax.swing.JLabel();
         scrollPaneDetailReplique = new javax.swing.JScrollPane();
         tableDetailReplique = new javax.swing.JTable();
-        jPanel64 = new javax.swing.JPanel();
-        jLabel76 = new javax.swing.JLabel();
-        jPanel24 = new javax.swing.JPanel();
-        jLabel83 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        labelDetailReplique = new javax.swing.JLabel();
+        nombreResultatFiltre = new javax.swing.JLabel();
+        filtrePerso = new javax.swing.JComboBox<>();
+        filtreSaison = new javax.swing.JComboBox<>();
+        filtreEpisode = new javax.swing.JComboBox<>();
+        filtreSentiment = new javax.swing.JComboBox<>();
         panelMotRepartitionSerie = new javax.swing.JPanel();
         panelMotCourant2 = new javax.swing.JPanel();
         labelMotCourant2 = new javax.swing.JLabel();
@@ -682,11 +742,9 @@ public class VueStat extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel60 = new javax.swing.JPanel();
+        miseEnAvantPersonnageImage = new controller.ImagePanel();
         miseEnAvantPersonnageScroll = new javax.swing.JScrollPane();
         miseEnAvantPersonnageTexte = new javax.swing.JTextArea();
-        miseEnAvantPersonnageImage = new controller.ImagePanel();
-        miseEnAvantPersonnageScroll1 = new javax.swing.JScrollPane();
-        miseEnAvantPersonnageTexte1 = new javax.swing.JTextArea();
         jPanel70 = new javax.swing.JPanel();
         imageMentions0 = new controller.ImagePanel();
         imageMentions1 = new controller.ImagePanel();
@@ -719,17 +777,21 @@ public class VueStat extends javax.swing.JFrame {
         centraliteTexteS9 = new javax.swing.JTextArea();
         centraliteScrollS7 = new javax.swing.JScrollPane();
         centraliteTexteS7 = new javax.swing.JTextArea();
+        miseEnAvantPersonnageScroll1 = new javax.swing.JScrollPane();
+        miseEnAvantPersonnageTexte1 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         panelPersonnageRepliqueFavorite = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
         nomPersonnage1 = new javax.swing.JLabel();
         jPanel29 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        imageMotPref = new controller.ImagePanel();
-        jLabel101 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         imageMotCaracteristique = new controller.ImagePanel();
         jLabel100 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        imageMotPref = new controller.ImagePanel();
+        jLabel101 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanel30 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX1 = new controller.ImagePanel();
         saisonMarquante1 = new javax.swing.JLabel();
@@ -1229,7 +1291,7 @@ public class VueStat extends javax.swing.JFrame {
         );
         imageMotsCaracteristiquesLayout.setVerticalGroup(
             imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 684, Short.MAX_VALUE)
+            .addGap(0, 2283, Short.MAX_VALUE)
         );
 
         resultSansRecherche.add(imageMotsCaracteristiques);
@@ -1267,16 +1329,11 @@ public class VueStat extends javax.swing.JFrame {
 
         panelDetailReplique.setLayout(new java.awt.BorderLayout());
 
-        labelDetailReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
-        labelDetailReplique.setForeground(new java.awt.Color(153, 153, 153));
-        labelDetailReplique.setText("Détails des répliques :");
-        panelDetailReplique.add(labelDetailReplique, java.awt.BorderLayout.NORTH);
-
         tableDetailReplique.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         tableDetailReplique.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"\"Hello there !\"", "Joey",  new Integer(1),  new Integer(1)},
-                {"\"Hello\"", "Ross",  new Integer(1),  new Integer(1)},
+                {"\"Hello there !\"", "Joey", null, null},
+                {"\"Hello\"", "Ross", null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
@@ -1285,7 +1342,7 @@ public class VueStat extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -1307,33 +1364,32 @@ public class VueStat extends javax.swing.JFrame {
 
         panelDetailReplique.add(scrollPaneDetailReplique, java.awt.BorderLayout.CENTER);
 
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        labelDetailReplique.setFont(new java.awt.Font("Verdana", 1, 9)); // NOI18N
+        labelDetailReplique.setForeground(new java.awt.Color(153, 153, 153));
+        labelDetailReplique.setText("Détails des répliques :");
+        jPanel12.add(labelDetailReplique);
+
+        nombreResultatFiltre.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        nombreResultatFiltre.setText("x/y résultats");
+        jPanel12.add(nombreResultatFiltre);
+
+        filtrePerso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tous les personnages", "Chandler" }));
+        jPanel12.add(filtrePerso);
+
+        filtreSaison.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toutes les saisons" }));
+        jPanel12.add(filtreSaison);
+
+        filtreEpisode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tous les épisodes" }));
+        jPanel12.add(filtreEpisode);
+
+        filtreSentiment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toutes les émotions" }));
+        jPanel12.add(filtreSentiment);
+
+        panelDetailReplique.add(jPanel12, java.awt.BorderLayout.NORTH);
+
         panelResultatMotUtilisation.add(panelDetailReplique, java.awt.BorderLayout.CENTER);
-
-        jLabel76.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
-        jLabel76.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel76.setText("* Étude approfondie des émotions :");
-        jPanel64.add(jLabel76);
-
-        jLabel83.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel83.setText("Voir");
-        jLabel83.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel24.add(jLabel83);
-
-        jButton3.setBackground(new java.awt.Color(242, 242, 242));
-        jButton3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButton3.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        jButton3.setText("analyse des sentiments > sentiments exprimés");
-        jButton3.setBorder(null);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel24.add(jButton3);
-
-        jPanel64.add(jPanel24);
-
-        panelResultatMotUtilisation.add(jPanel64, java.awt.BorderLayout.PAGE_END);
 
         panelMotUtilisation.add(panelResultatMotUtilisation, java.awt.BorderLayout.CENTER);
 
@@ -1505,7 +1561,7 @@ public class VueStat extends javax.swing.JFrame {
         );
         imagePersonnageLayout.setVerticalGroup(
             imagePersonnageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 651, Short.MAX_VALUE)
+            .addGap(0, 2250, Short.MAX_VALUE)
         );
 
         jPanel5.add(imagePersonnage);
@@ -1750,19 +1806,13 @@ public class VueStat extends javax.swing.JFrame {
         jTextArea1.setText("Le scénariste choisit quand faire progresser l’intrigue des personnages. Leur évolution suit deux tendances souvent non corrélées : le nombre de \nrépliques et celui de mentions par les autres. Un personnage très bavard mais peu mentionné se développe de lui-même ou avec des personnages\nsecondaires, tandis qu’un personnage souvent mentionné, sans être présent, annonce souvent un événement majeur à venir.");
         jScrollPane3.setViewportView(jTextArea1);
 
-        jPanel59.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
+        jPanel59.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 90));
 
-        jPanel53.add(jPanel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
+        jPanel53.add(jPanel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 90));
 
         jPanel60.setMinimumSize(new java.awt.Dimension(740, 30));
         jPanel60.setPreferredSize(new java.awt.Dimension(0, 500));
         jPanel60.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        miseEnAvantPersonnageTexte.setColumns(20);
-        miseEnAvantPersonnageTexte.setRows(5);
-        miseEnAvantPersonnageScroll.setViewportView(miseEnAvantPersonnageTexte);
-
-        jPanel60.add(miseEnAvantPersonnageScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 800, 120));
 
         miseEnAvantPersonnageImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1774,19 +1824,18 @@ public class VueStat extends javax.swing.JFrame {
         );
         miseEnAvantPersonnageImageLayout.setVerticalGroup(
             miseEnAvantPersonnageImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 368, Short.MAX_VALUE)
         );
 
-        jPanel60.add(miseEnAvantPersonnageImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 360));
+        jPanel60.add(miseEnAvantPersonnageImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, 370));
 
-        miseEnAvantPersonnageTexte1.setColumns(20);
-        miseEnAvantPersonnageTexte1.setRows(5);
-        miseEnAvantPersonnageTexte1.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
-        miseEnAvantPersonnageScroll1.setViewportView(miseEnAvantPersonnageTexte1);
+        miseEnAvantPersonnageTexte.setColumns(20);
+        miseEnAvantPersonnageTexte.setRows(5);
+        miseEnAvantPersonnageScroll.setViewportView(miseEnAvantPersonnageTexte);
 
-        jPanel60.add(miseEnAvantPersonnageScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 800, 150));
+        jPanel60.add(miseEnAvantPersonnageScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 800, 130));
 
-        jPanel53.add(jPanel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 840, 480));
+        jPanel53.add(jPanel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 840, 540));
 
         jPanel70.setMinimumSize(new java.awt.Dimension(500, 1460));
         jPanel70.setPreferredSize(new java.awt.Dimension(0, 150));
@@ -1805,7 +1854,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions0, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 265, 270));
+        jPanel70.add(imageMentions0, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 265, 270));
 
         imageMentions1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1820,14 +1869,13 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 10, 265, 270));
+        jPanel70.add(imageMentions1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 210, 265, 270));
 
         centraliteTexteS2.setColumns(20);
         centraliteTexteS2.setRows(5);
-        centraliteTexteS2.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS2.setViewportView(centraliteTexteS2);
 
-        jPanel70.add(centraliteScrollS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 280, 265, 120));
+        jPanel70.add(centraliteScrollS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 480, 265, 120));
 
         imageMentions2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1842,14 +1890,13 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 265, 270));
+        jPanel70.add(imageMentions2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 265, 270));
 
         centraliteTexteS3.setColumns(20);
         centraliteTexteS3.setRows(5);
-        centraliteTexteS3.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS3.setViewportView(centraliteTexteS3);
 
-        jPanel70.add(centraliteScrollS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 265, 120));
+        jPanel70.add(centraliteScrollS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, 265, 120));
 
         imageMentions3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1864,7 +1911,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 265, 270));
+        jPanel70.add(imageMentions3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 265, 270));
 
         imageMentions4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1879,7 +1926,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions4, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 400, 265, 270));
+        jPanel70.add(imageMentions4, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 600, 265, 270));
 
         imageMentions5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1894,7 +1941,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, 265, 270));
+        jPanel70.add(imageMentions5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 600, 265, 270));
 
         imageMentions6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1909,7 +1956,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 790, 265, 270));
+        jPanel70.add(imageMentions6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 990, 265, 270));
 
         imageMentions7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1924,7 +1971,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions7, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 790, 265, 270));
+        jPanel70.add(imageMentions7, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 990, 265, 270));
 
         imageMentions8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1939,7 +1986,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 790, 265, 270));
+        jPanel70.add(imageMentions8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 990, 265, 270));
 
         imageMentions9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1954,7 +2001,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGap(0, 268, Short.MAX_VALUE)
         );
 
-        jPanel70.add(imageMentions9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1180, 265, 270));
+        jPanel70.add(imageMentions9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1380, 265, 270));
 
         jButton6.setBackground(new java.awt.Color(242, 242, 242));
         jButton6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -1966,65 +2013,63 @@ public class VueStat extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel70.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 1280, -1, 40));
+        jPanel70.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 1490, -1, 40));
 
         centraliteTexteS1.setColumns(20);
         centraliteTexteS1.setRows(5);
-        centraliteTexteS1.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS1.setViewportView(centraliteTexteS1);
 
-        jPanel70.add(centraliteScrollS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 265, 120));
+        jPanel70.add(centraliteScrollS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 265, 120));
 
         centraliteTexteS6.setColumns(20);
         centraliteTexteS6.setRows(5);
-        centraliteTexteS6.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS6.setViewportView(centraliteTexteS6);
 
-        jPanel70.add(centraliteScrollS6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 670, 265, 120));
+        jPanel70.add(centraliteScrollS6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 870, 265, 120));
 
         centraliteTexteS4.setColumns(20);
         centraliteTexteS4.setRows(5);
-        centraliteTexteS4.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS4.setViewportView(centraliteTexteS4);
 
-        jPanel70.add(centraliteScrollS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 265, 120));
+        jPanel70.add(centraliteScrollS4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 870, 265, 120));
 
         centraliteTexteS5.setColumns(20);
         centraliteTexteS5.setRows(5);
-        centraliteTexteS5.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS5.setViewportView(centraliteTexteS5);
 
-        jPanel70.add(centraliteScrollS5, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 670, 265, 120));
+        jPanel70.add(centraliteScrollS5, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 870, 265, 120));
 
         centraliteTexteS8.setColumns(20);
         centraliteTexteS8.setRows(5);
-        centraliteTexteS8.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS8.setViewportView(centraliteTexteS8);
 
-        jPanel70.add(centraliteScrollS8, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 1060, 265, 120));
+        jPanel70.add(centraliteScrollS8, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 1260, 265, 120));
 
         centraliteTexteS10.setColumns(20);
         centraliteTexteS10.setRows(5);
-        centraliteTexteS10.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS10.setViewportView(centraliteTexteS10);
 
-        jPanel70.add(centraliteScrollS10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1450, 265, 120));
+        jPanel70.add(centraliteScrollS10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1650, 265, 120));
 
         centraliteTexteS9.setColumns(20);
         centraliteTexteS9.setRows(5);
-        centraliteTexteS9.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS9.setViewportView(centraliteTexteS9);
 
-        jPanel70.add(centraliteScrollS9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 1060, 265, 120));
+        jPanel70.add(centraliteScrollS9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 1260, 265, 120));
 
         centraliteTexteS7.setColumns(20);
         centraliteTexteS7.setRows(5);
-        centraliteTexteS7.setText("Contrairement à une tendance linéaire, le graphique révèle des pics distincts de positivité selon les saisons.\nSaison 2 : Monica, vit une rupture douloureuse avec Richard donc baisse de positivité. \n                Phoebe découvre son demi-frère, ce qui renforce son cercle familial.\nSaison 5 : hausse généralisée — le groupe se stabilise émotionnellement, malgré quelques tensions.\n                et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.\nSaison 9 : Regain inattendu de positivité (notamment Monica et Chandler) alors qu’ils avancent vers \n                l’adoption et une vie commune plus structurée.\nGlobalement, la positivité semble répondre à des événements ponctuels d'accomplissement personnel ou relationnel, \n                plus qu'à une logique progressive.");
         centraliteScrollS7.setViewportView(centraliteTexteS7);
 
-        jPanel70.add(centraliteScrollS7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1060, 265, 120));
+        jPanel70.add(centraliteScrollS7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1260, 265, 120));
 
-        jPanel53.add(jPanel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 530, 860, 1580));
+        miseEnAvantPersonnageTexte1.setColumns(20);
+        miseEnAvantPersonnageTexte1.setRows(5);
+        miseEnAvantPersonnageScroll1.setViewportView(miseEnAvantPersonnageTexte1);
+
+        jPanel70.add(miseEnAvantPersonnageScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 130));
+
+        jPanel53.add(jPanel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 530, 860, 1780));
 
         jPanel52.add(jPanel53);
 
@@ -2045,28 +2090,6 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel29.setLayout(new java.awt.GridLayout(3, 2));
 
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout imageMotPrefLayout = new javax.swing.GroupLayout(imageMotPref);
-        imageMotPref.setLayout(imageMotPrefLayout);
-        imageMotPrefLayout.setHorizontalGroup(
-            imageMotPrefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-        imageMotPrefLayout.setVerticalGroup(
-            imageMotPrefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-
-        jPanel11.add(imageMotPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 220));
-
-        jLabel101.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
-        jLabel101.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel101.setText("Mots préférés :");
-        jPanel11.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jPanel29.add(jPanel11);
-
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout imageMotCaracteristiqueLayout = new javax.swing.GroupLayout(imageMotCaracteristique);
@@ -2084,10 +2107,40 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel100.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel100.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel100.setText("Mots caractéristiques :");
+        jLabel100.setText("Quels sont ces passions/personnage secondaire préféré/répliques cultes ?");
         jPanel10.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel29.add(jPanel10);
+
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout imageMotPrefLayout = new javax.swing.GroupLayout(imageMotPref);
+        imageMotPref.setLayout(imageMotPrefLayout);
+        imageMotPrefLayout.setHorizontalGroup(
+            imageMotPrefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        imageMotPrefLayout.setVerticalGroup(
+            imageMotPrefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        jPanel11.add(imageMotPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 370, 180));
+
+        jLabel101.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel101.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel101.setText("Dans quels domaines distinctif le personnage s'épanouit-il en joie ?");
+        jPanel11.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("La joie est une émotion importante de Friends, voyons comment\nelle se manifeste distinctement entre les personnages");
+        jTextArea2.setEnabled(false);
+        jScrollPane5.setViewportView(jTextArea2);
+
+        jPanel11.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 370, 40));
+
+        jPanel29.add(jPanel11);
 
         jPanel30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2213,7 +2266,7 @@ public class VueStat extends javax.swing.JFrame {
             .addGroup(Analyse_StatistiqueLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(AnalyseLangagière, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(558, Short.MAX_VALUE))
+                .addContainerGap(2157, Short.MAX_VALUE))
         );
 
         SectionRecherche.addTab("Analyse Langagière", Analyse_Statistique);
@@ -2607,7 +2660,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addGroup(SourceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(neg_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pos_nuage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(2007, Short.MAX_VALUE))
         );
 
         Analyse_Sentiment.addTab("Source", Source);
@@ -2797,7 +2850,7 @@ public class VueStat extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(Relation_Mention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(387, Short.MAX_VALUE))
+                .addContainerGap(1986, Short.MAX_VALUE))
         );
 
         Relation.addTab("Source", SourceRelation);
@@ -2821,12 +2874,12 @@ Saison 1 à 3 : Vie de famille compliqué, divorce et enfant proche, choix entre
                 en saison 2 il se retrouve dans un triangle amoureux (Ross-Julie-Rachel), il est donc moins mentionné par le groupe mais actif
 Saison 5 : remontée soudaine grâce notamment au rapprochement du groupe (voir Analyse Sentiment) et à son vrai début d'arc amoureux avec
                 Chandler (observé dans les sentiments récurrents).
-                Chandler et Monica se rapprochent, et Phoebe commence à retrouver un certain équilibre.
 Saison 7 : Invisibilisé par le mariage de Chandler et Monica, Ross est mis en arrière dans l'intrigue
 Saison 9 : On apprend que Rachel est enceinte, Ross s'implique plus dans la relation et l'intrigue met de nouveau en avant sur le couple Rachel-Ross
 
-Ross a moins de pic d'activité, c'est le personnage le plus centrale de la série d'après la recherche par saison, il est régulier et souvent présent 
-avec nos 6 amis.""";
+Impression globale : Ross a moins de pic d'activité, c'est le personnage le plus centrale de la série d'après la recherche par saison, il est
+régulier et souvent présent avec nos 6 amis comme en témoigne les graphe ci-dessous ou la centralité est plutôt constantes au alentour de 82%.
+Ross fonctionne beaucoup sur l'amour notamment ses querelles amoureuses au début de la série et son retour à la grossesse de Rachel""";
     private static final String TEXT_TENDANCE_PHOEBE = """
 Saison 1 et 2 : peu intégré, histoire solo, de plus elle habite chez sa grand mère
 Saison 3 : Première hausse de présence dûe principalement à son soutient prononcé à Monica après sa rupture avec Richard.
@@ -2839,15 +2892,16 @@ les personnages
 Impression globale : un profil comme Joey : naïf, décalé, drôle, qui ne s'intègre pas directement. Personnage sous-représenté d'après la recherche
 par saison, qui parle à certains personnages en particulier (voir graphe ci-dessous).""";
     private static final String TEXT_TENDANCE_MONICA = """
-Saison 1 : Monica est le centre initial du groupe (soeur de Ross, meilleure amie de Rachel, ami de longue date de Joey et Chandler) et 
+Saison 1 : Monica est le centre initial du groupe (soeur de Ross, meilleure amie de Rachel, ami de longue date de Joey et Chandler) et
                 le début de l'intrigue se passe dans son appartement. On découvre donc principalement la série avec elle.
-Saison 5 : remontée soudaine grâce au rapprochement du groupe d'après l'Analyse Sentiment et au rapprochement avec Chandler (observé 
-                dans les sentiments récurrents : montée d'amour en saison 5).
+Saison 5 : remontée soudaine grâce au rapprochement du groupe d'après l'Analyse Sentiment (ainsi que les graphes orientés ci-dessous qui ont,
+                 pour chaque personnage, l'une des plus haute valeur de centralité) et au rapprochement avec Chandler (observé dans les sentiments
+                 récurrents : montée d'amour en saison 5).
 Saison 7 : Augmentation prévisible dû au mariage de Monica et Chandler, tout le monde parle de l'évènement (un pic énorme au niveau des
                 mentions qui témoigne d'un réel impact de celles-ci, contrairement à leur taux de répliques qui n'a pas réellement varié)
-Saison 9 : Après une saison 8 moins marquée (pause dans leur intrigue dû à un gros pic dans la saison 7 et à la grossesse de Ross et Rachel)
+Saison 9 : Après une saison 8 moins marquée (pause dans leur intrigue dû à un gros pic dans la saison 7 et à la grossesse de Rachel)
                 En saison 9 on les revoit après avoir constater qu'ils ne peuvent pas avoir d'enfant, ils envisage l'adoption (Monica parle
-                beaucoup mais peu de mentions : les discussions sont entre les deux)""";
+                beaucoup mais peu de mentions : les discussions se passent entre les deux compagnons)""";
     private static final String TEXT_TENDANCE_CHANDLER = """
 Saison 7 et 8 : préparatif du mariage avec Monica puis mariage
 
@@ -2879,7 +2933,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         "test10TEXTS_CENTRALITE_RACHEL"
     };
     private static final String[] TEXTS_CENTRALITE_ROSS = {
-        "test1 Ross est ...", 
+        "Déjà très bien intégré et central,\nRoss en pleine réflexion amoureuse\npar rapport à Rachel,\n reçoit beaucoup de conseil de Joey", 
         "test2 Ross",
         "test3 Ross",
         "test4 Ross",
@@ -2903,7 +2957,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         "test10P"
     };
     private static final String[] TEXTS_CENTRALITE_MONICA = {
-        "test1 Monica est ...", 
+        "Monica connait bien Phoebe (ancienne\ncoloc), et Rachel (meilleur amie)\nJoey et Phoebe sont en retrait ", 
         "test2Monica",
         "test3Monica",
         "test4Monica",
@@ -2979,9 +3033,8 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         imageMentions7.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S08.png");
         imageMentions8.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S09.png");
         imageMentions9.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S10.png");
-        //imageMotCaracteristique.setImage("/les_png/mots_caracteristiques_par_personnages/mots_caracteristique_" + lower + ".png");
         imageMotCaracteristique.setImage("/les_png/recherche_personnage/mot_important_personnage_saison_importante/"  + lower + "_all.png");
-        imageMotPref.setImage("/les_png/mots_preferes_par_personnage/mots_preferes_" + lower + ".png");
+        imageMotPref.setImage("/les_png/recherche_personnage/mot_important_personnage_saison_importante_joy/" + lower + "_all.png");
         miseEnAvantPersonnageImage.setImage("/les_png/recherche_personnage/graphe_tendance_mise_en_avant_" + lower + "_par_scenariste.png");
     }
     
@@ -3005,12 +3058,14 @@ String[] saisonMarquante, String nomLower) {
         JLabel[] saisonMarquanteTexte = {saisonMarquante1, saisonMarquante2, saisonMarquante3, saisonMarquante4};
         ImagePanel[] saisonMarquanteImage = {imageMotCaracteristiqueSaisonX1, imageMotCaracteristiqueSaisonX2, imageMotCaracteristiqueSaisonX3, imageMotCaracteristiqueSaisonX4};
         
-        System.out.println(saisonMarquanteImage.length);
-        System.out.println(saisonMarquante.length);
-        System.out.println(nomLower);
+        for (int i = 0; i < saisonMarquanteImage.length; i++) {
+            saisonMarquanteTexte[i].setText("");
+            saisonMarquanteTexte[i].getParent().setVisible(false);
+        }
         
         for (int i = 0; i < Math.min(saisonMarquanteImage.length, saisonMarquante.length); i++) {
             System.out.println(saisonMarquante[i]);
+            saisonMarquanteTexte[i].getParent().setVisible(true);
             saisonMarquanteTexte[i].setText("Analyse de la saison " + saisonMarquante[i]);
             saisonMarquanteImage[i].setImage("/les_png/recherche_personnage/mot_important_personnage_saison_importante/"  + nomLower + "_saison_" + saisonMarquante[i] + ".png");
         }
@@ -3066,55 +3121,6 @@ String[] saisonMarquante, String nomLower) {
         } catch (Exception e) {
             jLabel73.setText("Erreur: " + e.getMessage());
         }
-        /*
-        try {
-            Object saisonObj = rechercheSaison.getSelectedItem();
-            Object episodeObj = rechercheEpisode.getSelectedItem();
-            
-            //Extraction du numéro de saison (format "S01")
-            String saisonStr = saisonObj.toString();
-            int saison = Integer.parseInt(saisonStr.substring(1));
-            
-            //Extraction du numéro d'épisode (format "S01E02 Titre")
-            String episodeStr = episodeObj.toString();
-            int episode = Integer.parseInt(episodeStr.substring(episodeStr.indexOf('E') + 1, 
-                                                              episodeStr.indexOf(' ')));
-            
-            labelEpisode.setText("Episode " + episode + " de la saison " + saison + " : " + episodeStr.substring(6));
-            labelEpisode2.setText("Episode " + episode + " de la saison " + saison + " : " + episodeStr.substring(6));
-            labelEpisode3.setText("Episode " + episode + " de la saison " + saison + " : " + episodeStr.substring(6));
-            
-            //Appel à la méthode du contrôleur
-            int nbRepliques = dialog.getNombreRepliquesEpisode(saison, episode);
-            
-            //Personnages impliqués
-            String listeReconstruite = "";
-            List<String> personnages = dialog.getPersonnagesEpisode(saison, episode);
-            for(String personnage : personnages){
-                listeReconstruite += personnage;
-                listeReconstruite += ", ";
-            }
-            listeReconstruite = listeReconstruite.substring(0, listeReconstruite.length() - 2);
-            
-            //top 10 mots (cette partie met plusieurs secondes à s'exécuter... à réfléchir)
-            String top10Mots = "";
-            List<String> mots = dialog.getTopMotsEpisode(saison, episode);
-            for(String mot : mots){
-                top10Mots += mot;
-                top10Mots += ", ";
-            }
-            top10Mots = top10Mots.substring(0, top10Mots.length() - 2);
-                
-            //Affichage du résultat
-            jLabel73.setText("" + nbRepliques);
-            jLabel75.setText(listeReconstruite);
-            jLabel79.setText(top10Mots);
-            setGraphEpisodeRepartition();
-        } catch (Exception e) {
-            jLabel73.setText("Erreur: " + e.getMessage());
-            e.printStackTrace();
-        }
-        */
     }//GEN-LAST:event_rechercheEpisodeActionPerformed
 
     private int extraireNumeroSaison() {
@@ -3419,11 +3425,6 @@ String[] saisonMarquante, String nomLower) {
         generateGraphLineMotParEpisode(dataStoredForEpisodeStats, combo.getSelectedItem().toString());
     }//GEN-LAST:event_comboBoxSaisonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        SectionRecherche.setSelectedComponent(Analyse_Sentiment);
-        Analyse_Sentiment.setSelectedComponent(Sentiment_exprime);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -3582,6 +3583,10 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JTextArea centraliteTexteS9;
     private javax.swing.JComboBox<String> choixTypeRecherche;
     private javax.swing.JComboBox<String> comboBoxSaison;
+    private javax.swing.JComboBox<String> filtreEpisode;
+    private javax.swing.JComboBox<String> filtrePerso;
+    private javax.swing.JComboBox<String> filtreSaison;
+    private javax.swing.JComboBox<String> filtreSentiment;
     private controller.ImagePanel imageMentions0;
     private controller.ImagePanel imageMentions1;
     private controller.ImagePanel imageMentions2;
@@ -3600,7 +3605,6 @@ String[] saisonMarquante, String nomLower) {
     private controller.ImagePanel imageMotPref;
     private controller.ImagePanel imageMotsCaracteristiques;
     private controller.ImagePanel imagePersonnage;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -3650,12 +3654,10 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel82;
-    private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel92;
@@ -3664,6 +3666,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -3675,7 +3678,6 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
@@ -3708,7 +3710,6 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel62;
     private javax.swing.JPanel jPanel63;
-    private javax.swing.JPanel jPanel64;
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
     private javax.swing.JPanel jPanel67;
@@ -3737,8 +3738,10 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel labelDetailReplique;
     private javax.swing.JLabel labelEpisode;
     private javax.swing.JLabel labelEpisode2;
@@ -3763,6 +3766,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel nomPersonnage;
     private javax.swing.JLabel nomPersonnage1;
     private javax.swing.JLabel nomPersonnage2;
+    private javax.swing.JLabel nombreResultatFiltre;
     private javax.swing.JPanel panelDetailReplique;
     private javax.swing.JPanel panelEpisodeDialogue;
     private javax.swing.JPanel panelEpisodePresentation;

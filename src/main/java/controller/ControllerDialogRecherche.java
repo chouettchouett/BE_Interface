@@ -8,15 +8,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import model.Episode;
 import model.Personnage;
 import model.Saison;
@@ -88,6 +92,27 @@ public class ControllerDialogRecherche {
         });
     }
     
+    public void remplirComboAvecValeursUniques(JComboBox<String> combo, TableModel model, int columnIndex, String valeurParDéfaut) {
+        Set<String> valeursUniques = new TreeSet<>(); // triées par ordre alphabétique
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object valeur = model.getValueAt(i, columnIndex);
+            if (valeur != null) {
+                valeursUniques.add(valeur.toString());
+            }
+        }
+        
+        if (combo != null) {
+            combo.removeAllItems(); // vider le combo
+            combo.addItem(valeurParDéfaut); // ex: "Toutes" ou "Tous"
+
+            for (String valeur : valeursUniques) {
+                combo.addItem(valeur);
+            }
+        }
+        
+    }
+    
     
     public void onUserAction(String mots) {
         if (!mots.trim().isEmpty()) {
@@ -111,6 +136,11 @@ public class ControllerDialogRecherche {
                         for (List<String> rowData : row) {
                             modelTableau.addRow(rowData.toArray());
                         }
+                        
+                        remplirComboAvecValeursUniques(ui.getComboMotPerso(), ui.getTableDetailReplique().getModel(), 1, "Tous les personnages");
+                        remplirComboAvecValeursUniques(ui.getComboMotSaison(), ui.getTableDetailReplique().getModel(), 2, "Toutes les saisons");
+                        remplirComboAvecValeursUniques(ui.getComboMotEpisode(), ui.getTableDetailReplique().getModel(), 3, "Tous les épisodes");
+                        
                         
                         List<List<Object>> wordCountByCharacter = (List<List<Object>>) result.get("word_count_by_character");
                         ui.generateGraphBarMotParPersonnage(wordCountByCharacter);
@@ -138,40 +168,6 @@ public class ControllerDialogRecherche {
                         
                         List<List<Object>> wordCountByEpisode = (List<List<Object>>) result.get("word_count_by_episode");
                         ui.generateGraphLineMotParEpisode(wordCountByEpisode, "S01");
-                        
-                        /*System.out.println("Nb utilisations du mot : " + data.get("nb_word_used"));
-                        System.out.println("Nombre de lignes contenant le mot : " + data.get("number_lines_with_words"));
-                        System.out.println("Ratio d’usage par réplique : " + data.get("words_usage_ratio_by_line"));
-
-                        List<List<String>> lignes = (List<List<String>>) data.get("lines_with_words");
-                        System.out.println("Extrait de répliques :");
-                        for (int i = 0; i < Math.min(3, lignes.size()); i++) {
-                            System.out.println("  - " + lignes.get(i));
-                        }
-
-                        List<List<Object>> parPerso = (List<List<Object>>) data.get("word_count_by_character");
-                        System.out.println("Stats par personnage :");
-                        for (int i = 0; i < Math.min(3, parPerso.size()); i++) {
-                            System.out.println("  - " + parPerso.get(i));
-                        }
-
-                        List<List<Object>> wordCountByEpisode = (List<List<Object>>) data.get("word_count_by_episode");
-                        System.out.println("word_count_by_episode");
-                        for (int i = 0; i < Math.min(3, parPerso.size()); i++) {
-                            System.out.println("  - " + wordCountByEpisode.get(i));
-                        }
-
-                        List<List<Object>> wordCountBySeason = (List<List<Object>>) data.get("word_count_by_season");
-                        System.out.println("word_count_by_season");
-                        for (int i = 0; i < Math.min(3, parPerso.size()); i++) {
-                            System.out.println("  - " + wordCountBySeason.get(i));
-                        }
-
-                        String bestSeason = (String) data.get("best_season_word_count");
-                        System.out.println(bestSeason);
-
-                        Map<String, Integer> bestEpisode = (Map<String, Integer>) data.get("best_episode_word_count");
-                        System.out.println("Best season-ep" + bestEpisode.get("season") + bestEpisode.get("episode"));*/
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ControllerDialogRecherche.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (ExecutionException ex) {
