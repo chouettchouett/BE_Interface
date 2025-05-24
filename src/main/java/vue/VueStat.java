@@ -12,14 +12,22 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import org.jfree.chart.labels.ItemLabelAnchor;
@@ -32,6 +40,7 @@ import org.jfree.chart.renderer.category.StackedBarRenderer;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.CategoryDataset;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -598,7 +607,7 @@ public class VueStat extends javax.swing.JFrame {
         jPanel87 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel117 = new javax.swing.JLabel();
-        panelSaisonDialogue = new javax.swing.JPanel();
+        panelEvolutionMots = new javax.swing.JPanel();
         jPanel89 = new javax.swing.JPanel();
         labelSaison3 = new javax.swing.JLabel();
         jPanel90 = new javax.swing.JPanel();
@@ -632,7 +641,7 @@ public class VueStat extends javax.swing.JFrame {
         jPanel67 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel94 = new javax.swing.JLabel();
-        panelEpisodeDialogue = new javax.swing.JPanel();
+        panelEvolutionMot = new javax.swing.JPanel();
         jPanel74 = new javax.swing.JPanel();
         labelEpisode3 = new javax.swing.JLabel();
         jPanel75 = new javax.swing.JPanel();
@@ -1136,14 +1145,14 @@ public class VueStat extends javax.swing.JFrame {
 
         resultatSaison.addTab("Répartition de répliques", panelSaisonRepartition);
 
-        panelSaisonDialogue.setLayout(new java.awt.BorderLayout());
+        panelEvolutionMots.setLayout(new java.awt.BorderLayout());
 
         labelSaison3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelSaison3.setText("Saison 1");
         labelSaison3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel89.add(labelSaison3);
 
-        panelSaisonDialogue.add(jPanel89, java.awt.BorderLayout.NORTH);
+        panelEvolutionMots.add(jPanel89, java.awt.BorderLayout.NORTH);
 
         jPanel90.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
         jPanel90.setLayout(new javax.swing.BoxLayout(jPanel90, javax.swing.BoxLayout.LINE_AXIS));
@@ -1165,9 +1174,9 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel90.add(jPanel91);
 
-        panelSaisonDialogue.add(jPanel90, java.awt.BorderLayout.CENTER);
+        panelEvolutionMots.add(jPanel90, java.awt.BorderLayout.CENTER);
 
-        resultatSaison.addTab("Dialogue entre personnages", panelSaisonDialogue);
+        resultatSaison.addTab("Evolution du nombre de mots par réplique", panelEvolutionMots);
 
         resultats.add(resultatSaison, "SAISON");
 
@@ -1284,14 +1293,14 @@ public class VueStat extends javax.swing.JFrame {
 
         resultatEpisode.addTab("Répartition de répliques", panelEpisodeRepartition);
 
-        panelEpisodeDialogue.setLayout(new java.awt.BorderLayout());
+        panelEvolutionMot.setLayout(new java.awt.BorderLayout());
 
         labelEpisode3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelEpisode3.setText("Épisode 1 de la saison 1 : Monica Gets A Roomate");
         labelEpisode3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel74.add(labelEpisode3);
 
-        panelEpisodeDialogue.add(jPanel74, java.awt.BorderLayout.NORTH);
+        panelEvolutionMot.add(jPanel74, java.awt.BorderLayout.NORTH);
 
         jPanel75.setBorder(javax.swing.BorderFactory.createEmptyBorder(40, 40, 40, 40));
         jPanel75.setLayout(new javax.swing.BoxLayout(jPanel75, javax.swing.BoxLayout.LINE_AXIS));
@@ -1313,9 +1322,9 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel75.add(jPanel76);
 
-        panelEpisodeDialogue.add(jPanel75, java.awt.BorderLayout.CENTER);
+        panelEvolutionMot.add(jPanel75, java.awt.BorderLayout.CENTER);
 
-        resultatEpisode.addTab("Dialogue entre personnages", panelEpisodeDialogue);
+        resultatEpisode.addTab("Evolution du nombre de mots par réplique", panelEvolutionMot);
 
         resultats.add(resultatEpisode, "EPISODE");
 
@@ -3223,7 +3232,7 @@ String[] saisonMarquante, String nomLower) {
             afficherTitresEpisodes(saison, episode);
             afficherInfosEpisode(saison, episode);
 
-            setGraphEpisodeRepartition();
+            setGraphsEpisode();
         } catch (Exception e) {
             jLabel73.setText("Erreur: " + e.getMessage());
         }
@@ -3303,7 +3312,7 @@ String[] saisonMarquante, String nomLower) {
                 
                 //Affichage du résultat
                 afficherInfosSaison(saison);
-                setGraphSaisonRepartition();
+                setGraphsSaison();
             } catch (Exception e) {
                 jLabel106.setText("Erreur: " + e.getMessage());
                 e.printStackTrace();
@@ -3338,105 +3347,135 @@ String[] saisonMarquante, String nomLower) {
     private void jPanel85MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel85MouseClicked
         
     }//GEN-LAST:event_jPanel85MouseClicked
-    private void setGraphSaisonRepartition(){
+    private void setGraphsSaison() {
         Object saisonObj = rechercheSaison.getSelectedItem();
-        String saisonStr = saisonObj.toString();
+        String saisonStr = saisonObj.toString(); // "S01"
         int saison = Integer.parseInt(saisonStr.substring(1));
 
-        //Chemin vers l'image png creee
-        String cheminImage = "src/main/resources/les_png/repliques_saison_" + saisonStr + ".png";
+        // Chemins des fichiers images
+        File fichierRepartition = new File("src/main/resources/les_png/repliques_saison_" + saisonStr + ".png");
+        File fichierMots = new File("src/main/resources/les_png/mots_par_replique_" + saisonStr + ".png");
 
-        //Verifie si l'image existe déjà
-        File imageFile = new File(cheminImage);
-        if (!imageFile.exists()) {
-            // Crée le graphique uniquement si le fichier n'existe pas
+        // Générer les graphes si les fichiers n'existent pas
+        if (!fichierRepartition.exists()) {
             dialog.creerGrapheNombreDeRepliquesSaison(saison);
         }
+        if (!fichierMots.exists()) {
+            dialog.creerGrapheEvolutionNombreMotSaison(saison);
+        }
 
-        //Convertit le chemin 
-        String cheminPourRessource = "src/main/resources/les_png/repliques_saison_" + saisonStr + ".png";
-        System.out.println(cheminPourRessource);
-        //Crée et configure le panel image
-        controller.ImagePanel imagePanel = new controller.ImagePanel();
-        imagePanel.setImageV2(cheminPourRessource);
+        // Charger les images
+        ImageIcon iconRepartition = new ImageIcon(fichierRepartition.getAbsolutePath());
+        ImageIcon iconEvolutionMot = new ImageIcon(fichierMots.getAbsolutePath());
 
-        //Rafraîchit le panel contenant l’image
+        // Création des JLabel et assignation des icônes
+        JLabel labelRepartition = new JLabel();
+        JLabel labelEvolutionMot = new JLabel();
+
+        labelRepartition.setIcon(iconRepartition);
+        labelEvolutionMot.setIcon(iconEvolutionMot);
+
+        // Fixer la taille préférée du JLabel à la taille de l'image
+        int width = iconRepartition.getIconWidth();
+        int height = iconRepartition.getIconHeight();
+        labelRepartition.setPreferredSize(new Dimension(width, height));
+
+        width = iconEvolutionMot.getIconWidth();
+        height = iconEvolutionMot.getIconHeight();
+        labelEvolutionMot.setPreferredSize(new Dimension(width, height));
+
+        // Définir le layout en FlowLayout pour respecter la taille préférée des labels
+        jPanel85.setLayout(new FlowLayout());
+        jPanel90.setLayout(new FlowLayout());
+
+        // Mise à jour des panels
         jPanel85.removeAll();
-        jPanel85.add(imagePanel);
+        jPanel85.add(labelRepartition);
         jPanel85.revalidate();
         jPanel85.repaint();
+
+        jPanel90.removeAll();
+        jPanel90.add(labelEvolutionMot);
+        jPanel90.revalidate();
+        jPanel90.repaint();
     }
+
+
+
     
-   private void setGraphEpisodeRepartition() {
-        //Récupère l'objet sélectionné dans le combo box de recherche de saison et épisode
+  
+    
+   
+
+    private void setGraphsEpisode() {
         Object saisonObj = rechercheSaison.getSelectedItem();
         Object episodeObj = rechercheEpisode.getSelectedItem();
 
-        //Extraction du numéro de saison (format "S01")
-        String saisonStr = saisonObj.toString();
-        int saison = Integer.parseInt(saisonStr.substring(1)); // Extrait 1 depuis "S01"
-
-        //Extraction du code épisode (format "S01E02 Titre") → récupère "E02"
+        String saisonStr = saisonObj.toString(); // "S01"
         String episodeStrFull = episodeObj.toString();
-        String episodeCode = episodeStrFull.substring(episodeStrFull.indexOf('E'), episodeStrFull.indexOf(' ')); // "E02"
-        int episode = Integer.parseInt(episodeCode.substring(1)); // Extrait 2 depuis "E02"
+        String episodeCode = episodeStrFull.substring(episodeStrFull.indexOf('E'), episodeStrFull.indexOf(' ')); // "E01"
 
-        //Construction du nom de fichier correct
-        String nomFichier = "repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
-        String cheminImage = "src/main/resources/les_png/" + nomFichier;
+        String cheminImageRepartition = "src/main/resources/les_png/repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
+        String cheminImageEvolutionMots = "src/main/resources/les_png/evolution_mots_replique_" + saisonStr + "_episode_" + episodeCode + ".png";
 
-        //Vérifie si l'image existe déjà
-        File imageFile = new File(cheminImage);
-        if (!imageFile.exists()) {
-            // Crée le graphique uniquement si le fichier n'existe pas
-            dialog.creerGrapheNombreDeRepliquesEpisode(saison, episode);
+        File imageFileRepartition = new File(cheminImageRepartition);
+        if (!imageFileRepartition.exists()) {
+            dialog.creerGrapheNombreDeRepliquesEpisode(
+                Integer.parseInt(saisonStr.substring(1)),
+                Integer.parseInt(episodeCode.substring(1))
+            );
         }
 
-        //Convertit le chemin pour le classpath
-        String cheminPourRessource = "src/main/resources/les_png/" + nomFichier;
+        File imageFileEvolutionMot = new File(cheminImageEvolutionMots);
+        if (!imageFileEvolutionMot.exists()) {
+            dialog.creerGrapheEvolutionNombreMotEpisode(
+                Integer.parseInt(saisonStr.substring(1)),
+                Integer.parseInt(episodeCode.substring(1))
+            );
+        }
 
-        //Charge et affiche l’image
-        controller.ImagePanel imagePanel = new controller.ImagePanel();
-        imagePanel.setImageV2(cheminPourRessource);
+        // Charge les images en ImageIcon
+        ImageIcon iconRepartition = new ImageIcon(imageFileRepartition.getAbsolutePath());
+        ImageIcon iconEvolutionMot = new ImageIcon(imageFileEvolutionMot.getAbsolutePath());
 
+        // Création des JLabel et assignation des icônes
+        JLabel labelRepartition = new JLabel();
+        JLabel labelEvolutionMot = new JLabel();
+
+        labelRepartition.setIcon(iconRepartition);
+        labelEvolutionMot.setIcon(iconEvolutionMot);
+
+        // Fixe la taille préférée du JLabel à la taille de l'image (ici 600x371)
+        labelRepartition.setPreferredSize(new Dimension(600, 371));
+        labelEvolutionMot.setPreferredSize(new Dimension(600, 371));
+
+        // Définit le layout des panels en FlowLayout pour respecter la taille préférée des labels
+        jPanel65.setLayout(new FlowLayout());
+        jPanel75.setLayout(new FlowLayout());
+
+        // Vide les panels et ajoute les labels
         jPanel65.removeAll();
-        jPanel65.add(imagePanel);
+        jPanel65.add(labelRepartition);
         jPanel65.revalidate();
         jPanel65.repaint();
+
+        jPanel75.removeAll();
+        jPanel75.add(labelEvolutionMot);
+        jPanel75.revalidate();
+        jPanel75.repaint();
     }
+
+
+
+
+
+
+
+
+   
     
     private void resultatSaisonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultatSaisonMouseClicked
-
-        //Récupère l'objet sélectionné dans le combo box de recherche de saison 
-        Object saisonObj = rechercheSaison.getSelectedItem();
-
-        //Extraction du numéro de saison (format "S01")
-        String saisonStr = saisonObj.toString();
-        int saison = Integer.parseInt(saisonStr.substring(1)); // Extrait 1 depuis "S01"
-
-       
-
-        String cheminImage = "src/main/resources/les_png/repliques_saison_" + saisonStr + ".png";
-
-        //Vérifie si l'image existe dans le système de fichiers (moins long)
-        File imageFile = new File(cheminImage);
-        if (!imageFile.exists()) {
-            //cree le graphique uniquement si le fichier n'existe pas
-            dialog.creerGrapheNombreDeRepliquesSaison(saison);
-        }
-
-        //Chemin pour accéder à la ressource 
-        String cheminPourRessource = "/les_png/repliques_saison_" + saisonStr + ".png";
-
-        //Crée et configure le panel image
-        controller.ImagePanel imagePanel = new controller.ImagePanel();
-        imagePanel.setImage(cheminPourRessource);
-
-        //Rafraichit le panel
-        jPanel85.removeAll();
-        jPanel85.add(imagePanel);
-        jPanel85.revalidate();
-        jPanel85.repaint();
+        setGraphsSaison();
 
     }//GEN-LAST:event_resultatSaisonMouseClicked
 
@@ -3449,41 +3488,7 @@ String[] saisonMarquante, String nomLower) {
     }//GEN-LAST:event_panelSaisonRepartitionMouseClicked
 
     private void resultatEpisodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultatEpisodeMouseClicked
-        //Récupère l'objet sélectionné dans le combo box de recherche de saison et épisode
-        Object saisonObj = rechercheSaison.getSelectedItem();
-        Object episodeObj = rechercheEpisode.getSelectedItem();
-
-        //Extraction du numéro de saison (format "S01")
-        String saisonStr = saisonObj.toString();
-        int saison = Integer.parseInt(saisonStr.substring(1)); // Extrait 1 depuis "S01"
-
-        //Extraction du code épisode (format "S01E02 Titre") → récupère "E02"
-        String episodeStrFull = episodeObj.toString();
-        String episodeCode = episodeStrFull.substring(episodeStrFull.indexOf('E'), episodeStrFull.indexOf(' ')); // "E02"
-        int episode = Integer.parseInt(episodeCode.substring(1)); // Extrait 2 depuis "E02"
-
-  
-        String cheminImage = "src/main/resources/les_png/repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
-
-        //Vérifie si l'image existe dans le système de fichiers (moins long)
-        File imageFile = new File(cheminImage);
-        if (!imageFile.exists()) {
-            //cree le graphique uniquement si le fichier n'existe pas
-            dialog.creerGrapheNombreDeRepliquesEpisode(saison, episode);
-        }
-
-        //Chemin pour accéder à la ressource 
-        String cheminPourRessource = "/les_png/repliques_saison_" + saisonStr + "_episode_" + episodeCode + ".png";
-
-        //Crée et configure le panel image
-        controller.ImagePanel imagePanel = new controller.ImagePanel();
-        imagePanel.setImage(cheminPourRessource);
-
-        //Rafraichit le panel
-        jPanel65.removeAll();
-        jPanel65.add(imagePanel);
-        jPanel65.revalidate();
-        jPanel65.repaint();
+        setGraphsEpisode();
         
     }//GEN-LAST:event_resultatEpisodeMouseClicked
 
@@ -3885,9 +3890,10 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel nomPersonnage2;
     private javax.swing.JLabel nombreResultatFiltre;
     private javax.swing.JPanel panelDetailReplique;
-    private javax.swing.JPanel panelEpisodeDialogue;
     private javax.swing.JPanel panelEpisodePresentation;
     private javax.swing.JPanel panelEpisodeRepartition;
+    private javax.swing.JPanel panelEvolutionMot;
+    private javax.swing.JPanel panelEvolutionMots;
     private javax.swing.JPanel panelMotCourant1;
     private javax.swing.JPanel panelMotCourant2;
     private javax.swing.JPanel panelMotCourant3;
@@ -3904,7 +3910,6 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel panelRechercheEtIndication;
     private javax.swing.JPanel panelRechercheTitre;
     private javax.swing.JPanel panelResultatMotUtilisation;
-    private javax.swing.JPanel panelSaisonDialogue;
     private javax.swing.JPanel panelSaisonPresentation;
     private javax.swing.JPanel panelSaisonRepartition;
     private javax.swing.JPanel panelTitre;
@@ -3932,6 +3937,10 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JTable tableDetailReplique;
     private javax.swing.JLabel titre;
     // End of variables declaration//GEN-END:variables
+
+    private Image getScaledImage(BufferedImage imgRepartition, int width, int height) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
 

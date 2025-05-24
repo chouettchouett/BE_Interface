@@ -269,4 +269,12 @@ public class ControllerDialogRecherche {
     public int getNombreMotRepliqueSaison(int saison){
         return adapter.getNombreMotRepliqueSaison(saison);
     }
+    
+    public void creerGrapheEvolutionNombreMotSaison(int saison){
+        adapter.creerGrapheEvolutionNombreMotSaison(saison);
+    }
+    
+    public void creerGrapheEvolutionNombreMotEpisode(int saison, int episode){
+        adapter.creerGrapheEvolutionNombreMotEpisode(saison, episode);
+    }
 }
