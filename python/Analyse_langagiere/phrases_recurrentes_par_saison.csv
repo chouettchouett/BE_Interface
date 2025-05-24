@@ -1,0 +1,301 @@
+season,character,phrase,count
+1,Phoebe,oh my god,117
+1,Phoebe,i don't know,45
+1,Phoebe,you know what,19
+1,Phoebe,what is that,10
+1,Phoebe,what's going on,10
+1,Rachel,oh my god,163
+1,Rachel,i don't know,70
+1,Rachel,you know what,52
+1,Rachel,wait a minute,36
+1,Rachel,) oh my god,17
+1,Ross,oh my god,76
+1,Ross,i don't know,58
+1,Ross,you know what,38
+1,Ross,wait a minute,26
+1,Ross,what's going on,19
+1,Chandler,oh my god,44
+1,Chandler,i don't know,37
+1,Chandler,here we go,17
+1,Chandler,you know what,15
+1,Chandler,wait a minute,15
+1,Monica,oh my god,153
+1,Monica,i don't know,35
+1,Monica,what are you doing,27
+1,Monica,wait a minute,27
+1,Monica,you know what,25
+1,Joey,i don't know,62
+1,Joey,oh my god,35
+1,Joey,check it out,29
+1,Joey,wait a minute,17
+1,Joey,what are you doing,14
+2,Phoebe,oh my god,115
+2,Phoebe,i don't know,39
+2,Phoebe,you know what,19
+2,Phoebe,good for you,9
+2,Phoebe,what is that,9
+2,Rachel,oh my god,155
+2,Rachel,i don't know,68
+2,Rachel,you know what,48
+2,Rachel,wait a minute,32
+2,Rachel,) oh my god,16
+2,Ross,oh my god,74
+2,Ross,i don't know,58
+2,Ross,you know what,35
+2,Ross,wait a minute,24
+2,Ross,what's going on,17
+2,Chandler,oh my god,37
+2,Chandler,i don't know,36
+2,Chandler,here we go,17
+2,Chandler,you know what,15
+2,Chandler,wait a minute,15
+2,Monica,oh my god,147
+2,Monica,i don't know,35
+2,Monica,what are you doing,27
+2,Monica,wait a minute,26
+2,Monica,you know what,24
+2,Joey,i don't know,59
+2,Joey,oh my god,33
+2,Joey,check it out,26
+2,Joey,wait a minute,17
+2,Joey,what are you doing,12
+3,Phoebe,oh my god,117
+3,Phoebe,i don't know,47
+3,Phoebe,you know what,19
+3,Phoebe,what is that,10
+3,Phoebe,what's going on,10
+3,Rachel,oh my god,163
+3,Rachel,i don't know,75
+3,Rachel,you know what,52
+3,Rachel,wait a minute,36
+3,Rachel,) oh my god,17
+3,Ross,oh my god,76
+3,Ross,i don't know,58
+3,Ross,you know what,38
+3,Ross,wait a minute,26
+3,Ross,what's going on,19
+3,Chandler,oh my god,44
+3,Chandler,i don't know,38
+3,Chandler,here we go,17
+3,Chandler,you know what,15
+3,Chandler,wait a minute,15
+3,Monica,oh my god,153
+3,Monica,i don't know,35
+3,Monica,what are you doing,27
+3,Monica,wait a minute,27
+3,Monica,you know what,25
+3,Joey,i don't know,62
+3,Joey,oh my god,35
+3,Joey,check it out,29
+3,Joey,wait a minute,17
+3,Joey,what are you doing,14
+4,Phoebe,oh my god,117
+4,Phoebe,i don't know,44
+4,Phoebe,you know what,19
+4,Phoebe,what is that,10
+4,Phoebe,what's going on,10
+4,Rachel,oh my god,161
+4,Rachel,i don't know,63
+4,Rachel,you know what,51
+4,Rachel,wait a minute,36
+4,Rachel,) oh my god,17
+4,Ross,oh my god,76
+4,Ross,i don't know,57
+4,Ross,you know what,38
+4,Ross,wait a minute,25
+4,Ross,what's going on,19
+4,Chandler,oh my god,41
+4,Chandler,i don't know,37
+4,Chandler,here we go,17
+4,Chandler,you know what,15
+4,Chandler,wait a minute,14
+4,Monica,oh my god,149
+4,Monica,i don't know,33
+4,Monica,what are you doing,26
+4,Monica,wait a minute,26
+4,Monica,you know what,24
+4,Joey,i don't know,59
+4,Joey,oh my god,34
+4,Joey,check it out,24
+4,Joey,wait a minute,17
+4,Joey,what are you doing,14
+5,Phoebe,oh my god,117
+5,Phoebe,i don't know,44
+5,Phoebe,you know what,19
+5,Phoebe,what is that,10
+5,Phoebe,what's going on,10
+5,Rachel,oh my god,161
+5,Rachel,i don't know,63
+5,Rachel,you know what,51
+5,Rachel,wait a minute,36
+5,Rachel,) oh my god,17
+5,Ross,oh my god,76
+5,Ross,i don't know,57
+5,Ross,you know what,38
+5,Ross,wait a minute,25
+5,Ross,what's going on,19
+5,Chandler,oh my god,41
+5,Chandler,i don't know,37
+5,Chandler,here we go,17
+5,Chandler,you know what,15
+5,Chandler,wait a minute,14
+5,Monica,oh my god,149
+5,Monica,i don't know,33
+5,Monica,what are you doing,26
+5,Monica,wait a minute,26
+5,Monica,you know what,24
+5,Joey,i don't know,59
+5,Joey,oh my god,34
+5,Joey,check it out,24
+5,Joey,wait a minute,17
+5,Joey,what are you doing,14
+6,Phoebe,oh my god,112
+6,Phoebe,i don't know,42
+6,Phoebe,you know what,19
+6,Phoebe,what is that,10
+6,Phoebe,what's going on,10
+6,Rachel,oh my god,158
+6,Rachel,i don't know,68
+6,Rachel,you know what,50
+6,Rachel,wait a minute,35
+6,Rachel,) oh my god,17
+6,Ross,oh my god,73
+6,Ross,i don't know,54
+6,Ross,you know what,36
+6,Ross,wait a minute,25
+6,Ross,what's going on,19
+6,Chandler,oh my god,41
+6,Chandler,i don't know,37
+6,Chandler,here we go,17
+6,Chandler,wait a minute,15
+6,Chandler,you know what,12
+6,Monica,oh my god,145
+6,Monica,i don't know,35
+6,Monica,wait a minute,27
+6,Monica,what are you doing,25
+6,Monica,you know what,23
+6,Joey,i don't know,60
+6,Joey,oh my god,35
+6,Joey,check it out,29
+6,Joey,wait a minute,16
+6,Joey,what are you doing,14
+7,Phoebe,oh my god,117
+7,Phoebe,i don't know,45
+7,Phoebe,you know what,19
+7,Phoebe,what is that,10
+7,Phoebe,what's going on,10
+7,Rachel,oh my god,163
+7,Rachel,i don't know,70
+7,Rachel,you know what,52
+7,Rachel,wait a minute,36
+7,Rachel,) oh my god,17
+7,Ross,oh my god,76
+7,Ross,i don't know,58
+7,Ross,you know what,38
+7,Ross,wait a minute,26
+7,Ross,what's going on,19
+7,Chandler,oh my god,44
+7,Chandler,i don't know,37
+7,Chandler,here we go,17
+7,Chandler,you know what,15
+7,Chandler,wait a minute,15
+7,Monica,oh my god,153
+7,Monica,i don't know,35
+7,Monica,what are you doing,27
+7,Monica,wait a minute,27
+7,Monica,you know what,25
+7,Joey,i don't know,62
+7,Joey,oh my god,35
+7,Joey,check it out,29
+7,Joey,wait a minute,17
+7,Joey,what are you doing,14
+8,Phoebe,oh my god,117
+8,Phoebe,i don't know,44
+8,Phoebe,you know what,19
+8,Phoebe,what is that,10
+8,Phoebe,what's going on,10
+8,Rachel,oh my god,161
+8,Rachel,i don't know,63
+8,Rachel,you know what,51
+8,Rachel,wait a minute,36
+8,Rachel,) oh my god,17
+8,Ross,oh my god,76
+8,Ross,i don't know,57
+8,Ross,you know what,38
+8,Ross,wait a minute,25
+8,Ross,what's going on,19
+8,Chandler,oh my god,41
+8,Chandler,i don't know,37
+8,Chandler,here we go,17
+8,Chandler,you know what,15
+8,Chandler,wait a minute,14
+8,Monica,oh my god,149
+8,Monica,i don't know,33
+8,Monica,what are you doing,26
+8,Monica,wait a minute,26
+8,Monica,you know what,24
+8,Joey,i don't know,59
+8,Joey,oh my god,34
+8,Joey,check it out,24
+8,Joey,wait a minute,17
+8,Joey,what are you doing,14
+9,Phoebe,oh my god,117
+9,Phoebe,i don't know,44
+9,Phoebe,you know what,19
+9,Phoebe,what is that,10
+9,Phoebe,what's going on,10
+9,Rachel,oh my god,161
+9,Rachel,i don't know,63
+9,Rachel,you know what,51
+9,Rachel,wait a minute,36
+9,Rachel,) oh my god,17
+9,Ross,oh my god,76
+9,Ross,i don't know,57
+9,Ross,you know what,38
+9,Ross,wait a minute,25
+9,Ross,what's going on,19
+9,Chandler,oh my god,41
+9,Chandler,i don't know,37
+9,Chandler,here we go,17
+9,Chandler,you know what,15
+9,Chandler,wait a minute,14
+9,Monica,oh my god,149
+9,Monica,i don't know,33
+9,Monica,what are you doing,26
+9,Monica,wait a minute,26
+9,Monica,you know what,24
+9,Joey,i don't know,59
+9,Joey,oh my god,34
+9,Joey,check it out,24
+9,Joey,wait a minute,17
+9,Joey,what are you doing,14
+10,Phoebe,oh my god,91
+10,Phoebe,i don't know,33
+10,Phoebe,you know what,15
+10,Phoebe,wait a minute,8
+10,Phoebe,what's going on,8
+10,Rachel,oh my god,115
+10,Rachel,i don't know,43
+10,Rachel,you know what,40
+10,Rachel,wait a minute,28
+10,Rachel,i love you,15
+10,Ross,oh my god,57
+10,Ross,i don't know,41
+10,Ross,you know what,30
+10,Ross,wait a minute,16
+10,Ross,what's going on,14
+10,Chandler,oh my god,31
+10,Chandler,i don't know,28
+10,Chandler,you know what,13
+10,Chandler,here we go,13
+10,Chandler,oh come on,8
+10,Monica,oh my god,122
+10,Monica,i don't know,27
+10,Monica,what are you doing,22
+10,Monica,wait a minute,20
+10,Monica,you know what,17
+10,Joey,i don't know,44
+10,Joey,oh my god,28
+10,Joey,check it out,16
+10,Joey,what are you doing,12
+10,Joey,wait a minute,11
