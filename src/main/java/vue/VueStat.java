@@ -787,23 +787,35 @@ public class VueStat extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         imageMotCaracteristique = new controller.ImagePanel();
         jLabel100 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
         jPanel11 = new javax.swing.JPanel();
         imageMotPref = new controller.ImagePanel();
         jLabel101 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         jPanel30 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX1 = new controller.ImagePanel();
         saisonMarquante1 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextArea6 = new javax.swing.JTextArea();
         jPanel31 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX2 = new controller.ImagePanel();
         saisonMarquante2 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
         jPanel32 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX3 = new controller.ImagePanel();
         saisonMarquante3 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextArea8 = new javax.swing.JTextArea();
         jPanel33 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX4 = new controller.ImagePanel();
         saisonMarquante4 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea7 = new javax.swing.JTextArea();
         Analyse_Statistique = new javax.swing.JPanel();
         AnalyseLangagière = new controller.ImagePanel();
         Analyse_Sentiment = new javax.swing.JTabbedPane();
@@ -1696,7 +1708,7 @@ public class VueStat extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(153, 153, 153));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Pourcentage par rapport au autres :  ");
+        jLabel9.setText("Pourcentage par rapport aux autres :  ");
         jLabel9.setAlignmentX(0.5F);
         jPanel25.add(jLabel9);
 
@@ -1712,7 +1724,7 @@ public class VueStat extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel10.setText("Postion du personnage qui parle le plus : ");
+        jLabel10.setText("Position du personnage qui parle le plus : ");
         jLabel10.setAlignmentX(0.5F);
         jPanel26.add(jLabel10);
 
@@ -1803,7 +1815,7 @@ public class VueStat extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Le scénariste choisit quand faire progresser l’intrigue des personnages. Leur évolution suit deux tendances souvent non corrélées : le nombre de \nrépliques et celui de mentions par les autres. Un personnage très bavard mais peu mentionné se développe de lui-même ou avec des personnages\nsecondaires, tandis qu’un personnage souvent mentionné, sans être présent, annonce souvent un événement majeur à venir.");
+        jTextArea1.setText("Le scénariste choisit quand faire progresser l’intrigue des personnages. Leur évolution suit deux tendances souvent assez corrélées : le nombre de \nrépliques et celui de mentions par les autres. Un personnage très bavard mais peu mentionné se développe de lui-même (parle beaucoup) \nou avec des personnages secondaires, tandis qu’un personnage souvent mentionné, sans être présent, annonce souvent un événement majeur à venir.\nLes deux variables permettent d'annuler certains biais : Ross parle beaucoup mais n'est pas au coeur de l'histoire, Ross absent mais souvent \nmentionné. La saison 7 reflète ce phénomème : Rachel parle et aide Monica à développer son intrigue en saison 7, mais elle n'est pas principale.");
         jScrollPane3.setViewportView(jTextArea1);
 
         jPanel59.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 90));
@@ -2065,6 +2077,7 @@ public class VueStat extends javax.swing.JFrame {
 
         miseEnAvantPersonnageTexte1.setColumns(20);
         miseEnAvantPersonnageTexte1.setRows(5);
+        miseEnAvantPersonnageTexte1.setText("L’analyse des graphes de mentions saison par saison apporte un éclairage inédit sur la construction narrative et relationnelle des personnages\nde Friends. En représentant qui parle de qui au fil des saisons, ces 10 visualisations offrent une lecture fine de l’évolution des dynamiques sociales, \ndes priorités scénaristiques et de la centralité affective des six protagonistes. \nCes graphes peuvent être mis en lien avec l'analyse de mise en avant et l'analyse de sentiments, pourquoi il parle plus à un personnage à ce \nmoment là ? comment l'évolution de centralité d'un personnage affectent ses sentiments ? quand est-ce que le groupe est le plus unie ? S5.\nQuels sont les moments où un personnage s’isole du groupe ? Pourquoi ? Y a-t-il corrélation entre des mentions fréquentes et \ndes sentiments positifs ? Le pic de mise en avant correspond-il à une augmentation des liens sociaux ? Quel personnage progresse en social ?");
         miseEnAvantPersonnageScroll1.setViewportView(miseEnAvantPersonnageTexte1);
 
         jPanel70.add(miseEnAvantPersonnageScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 130));
@@ -2077,7 +2090,7 @@ public class VueStat extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel8);
 
-        resultatPersonnage.addTab("Interactions", jScrollPane1);
+        resultatPersonnage.addTab("Mise en scène", jScrollPane1);
 
         panelPersonnageRepliqueFavorite.setLayout(new java.awt.BorderLayout());
 
@@ -2092,27 +2105,37 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        imageMotCaracteristique.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout imageMotCaracteristiqueLayout = new javax.swing.GroupLayout(imageMotCaracteristique);
         imageMotCaracteristique.setLayout(imageMotCaracteristiqueLayout);
         imageMotCaracteristiqueLayout.setHorizontalGroup(
             imageMotCaracteristiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         imageMotCaracteristiqueLayout.setVerticalGroup(
             imageMotCaracteristiqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        jPanel10.add(imageMotCaracteristique, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 220));
+        jPanel10.add(imageMotCaracteristique, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 250));
 
         jLabel100.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel100.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel100.setText("Quels sont ces passions/personnage secondaire préféré/répliques cultes ?");
+        jLabel100.setText("Quels sont ces mots caractéritistiques (passions, haines, ...) ?");
         jPanel10.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane7.setViewportView(jTextArea4);
+
+        jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
         jPanel29.add(jPanel10);
 
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imageMotPref.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout imageMotPrefLayout = new javax.swing.GroupLayout(imageMotPref);
         imageMotPref.setLayout(imageMotPrefLayout);
@@ -2122,107 +2145,145 @@ public class VueStat extends javax.swing.JFrame {
         );
         imageMotPrefLayout.setVerticalGroup(
             imageMotPrefLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel11.add(imageMotPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 370, 180));
+        jPanel11.add(imageMotPref, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 370, 220));
 
         jLabel101.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jLabel101.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel101.setText("Dans quels domaines distinctif le personnage s'épanouit-il en joie ?");
+        jLabel101.setText("Quels domaines/personnages distinctifs lui offre de la joie ? (passions)");
         jPanel11.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jTextArea2.setText("La joie est une émotion importante de Friends, voyons comment\nelle se manifeste distinctement entre les personnages");
+        jTextArea2.setText("La joie est une émotion importante de Friends, voyons comment\nelle se manifeste distinctement entre les personnages.");
         jTextArea2.setEnabled(false);
         jScrollPane5.setViewportView(jTextArea2);
 
         jPanel11.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 370, 40));
 
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane6.setViewportView(jTextArea3);
+
+        jPanel11.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 370, -1));
+
         jPanel29.add(jPanel11);
 
         jPanel30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imageMotCaracteristiqueSaisonX1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout imageMotCaracteristiqueSaisonX1Layout = new javax.swing.GroupLayout(imageMotCaracteristiqueSaisonX1);
         imageMotCaracteristiqueSaisonX1.setLayout(imageMotCaracteristiqueSaisonX1Layout);
         imageMotCaracteristiqueSaisonX1Layout.setHorizontalGroup(
             imageMotCaracteristiqueSaisonX1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         imageMotCaracteristiqueSaisonX1Layout.setVerticalGroup(
             imageMotCaracteristiqueSaisonX1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel30.add(imageMotCaracteristiqueSaisonX1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 340, 220));
+        jPanel30.add(imageMotCaracteristiqueSaisonX1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 250));
 
         saisonMarquante1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         saisonMarquante1.setForeground(new java.awt.Color(153, 153, 153));
-        jPanel30.add(saisonMarquante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel30.add(saisonMarquante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+
+        jTextArea6.setColumns(20);
+        jTextArea6.setRows(5);
+        jScrollPane9.setViewportView(jTextArea6);
+
+        jPanel30.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
         jPanel29.add(jPanel30);
 
         jPanel31.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        imageMotCaracteristiqueSaisonX2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout imageMotCaracteristiqueSaisonX2Layout = new javax.swing.GroupLayout(imageMotCaracteristiqueSaisonX2);
         imageMotCaracteristiqueSaisonX2.setLayout(imageMotCaracteristiqueSaisonX2Layout);
         imageMotCaracteristiqueSaisonX2Layout.setHorizontalGroup(
             imageMotCaracteristiqueSaisonX2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         imageMotCaracteristiqueSaisonX2Layout.setVerticalGroup(
             imageMotCaracteristiqueSaisonX2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel31.add(imageMotCaracteristiqueSaisonX2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 340, 220));
+        jPanel31.add(imageMotCaracteristiqueSaisonX2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 250));
 
         saisonMarquante2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         saisonMarquante2.setForeground(new java.awt.Color(153, 153, 153));
         jPanel31.add(saisonMarquante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jScrollPane8.setViewportView(jTextArea5);
+
+        jPanel31.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
+
         jPanel29.add(jPanel31);
 
         jPanel32.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imageMotCaracteristiqueSaisonX3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout imageMotCaracteristiqueSaisonX3Layout = new javax.swing.GroupLayout(imageMotCaracteristiqueSaisonX3);
         imageMotCaracteristiqueSaisonX3.setLayout(imageMotCaracteristiqueSaisonX3Layout);
         imageMotCaracteristiqueSaisonX3Layout.setHorizontalGroup(
             imageMotCaracteristiqueSaisonX3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         imageMotCaracteristiqueSaisonX3Layout.setVerticalGroup(
             imageMotCaracteristiqueSaisonX3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel32.add(imageMotCaracteristiqueSaisonX3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 340, 220));
+        jPanel32.add(imageMotCaracteristiqueSaisonX3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 250));
 
         saisonMarquante3.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         saisonMarquante3.setForeground(new java.awt.Color(153, 153, 153));
         jPanel32.add(saisonMarquante3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jTextArea8.setColumns(20);
+        jTextArea8.setRows(5);
+        jScrollPane11.setViewportView(jTextArea8);
+
+        jPanel32.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
+
         jPanel29.add(jPanel32);
 
         jPanel33.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imageMotCaracteristiqueSaisonX4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout imageMotCaracteristiqueSaisonX4Layout = new javax.swing.GroupLayout(imageMotCaracteristiqueSaisonX4);
         imageMotCaracteristiqueSaisonX4.setLayout(imageMotCaracteristiqueSaisonX4Layout);
         imageMotCaracteristiqueSaisonX4Layout.setHorizontalGroup(
             imageMotCaracteristiqueSaisonX4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         imageMotCaracteristiqueSaisonX4Layout.setVerticalGroup(
             imageMotCaracteristiqueSaisonX4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel33.add(imageMotCaracteristiqueSaisonX4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 340, 220));
+        jPanel33.add(imageMotCaracteristiqueSaisonX4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 390, 250));
 
         saisonMarquante4.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         saisonMarquante4.setForeground(new java.awt.Color(153, 153, 153));
         jPanel33.add(saisonMarquante4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jTextArea7.setColumns(20);
+        jTextArea7.setRows(5);
+        jScrollPane10.setViewportView(jTextArea7);
+
+        jPanel33.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
         jPanel29.add(jPanel33);
 
@@ -2870,14 +2931,16 @@ Saison 8 : augmentation évidente : la grossesse de Rachel
 
 Impression globale : Rachel est régulière dans ses apparitions et est intégré depuis le début.""";
     private static final String TEXT_TENDANCE_ROSS = """
-Saison 1 à 3 : Vie de famille compliqué, divorce et enfant proche, choix entre Rachel et Carol pour finalement finir avec avec Rachel en saison 3, 
-                en saison 2 il se retrouve dans un triangle amoureux (Ross-Julie-Rachel), il est donc moins mentionné par le groupe mais actif
-Saison 5 : remontée soudaine grâce notamment au rapprochement du groupe (voir Analyse Sentiment) et à son vrai début d'arc amoureux avec
-                Chandler (observé dans les sentiments récurrents).
-Saison 7 : Invisibilisé par le mariage de Chandler et Monica, Ross est mis en arrière dans l'intrigue
-Saison 9 : On apprend que Rachel est enceinte, Ross s'implique plus dans la relation et l'intrigue met de nouveau en avant sur le couple Rachel-Ross
+Saison 1 : Vie de famille compliqué, divorce et enfant proche, personnage très présent dés la saison 1
+Saison 2 : Triangle amoureux (Ross-Julie-Rachel) (beaucoup d'amour (analyse sentiments)), donc moins mentionné par les autres mais actif. 
+Il se met finalement en couple avec Rachel au milieu de la saison, ce qui le rapprochera du groupe
+Saison 3 : Sommet de son intrigue, Ross montre 3 thèmes connus : l'amour, la séparation et Rachel. Il est ainsi beaucoup montré, tout le monde
+parle de son fameux "We were on a break" culte de la série. L'amour moyen malgré le couple chute donc un peu, 
+alors que la tristesse est à son maximum.
+Saison 8 : On apprend que Rachel est enceinte, Ross assume son rôle de père.
+Saison 10 : Assez haut en répliques, cette saison Ross découvre qu'il aime encore Rachel d'après les 2 sentiments tristesse et amour qui augmente.
 
-Impression globale : Ross a moins de pic d'activité, c'est le personnage le plus centrale de la série d'après la recherche par saison, il est
+Impression globale : Ross a moins de pic d'activité, c'est le personnage le plus mis en avant de la série d'après la recherche par saison, il est
 régulier et souvent présent avec nos 6 amis comme en témoigne les graphe ci-dessous ou la centralité est plutôt constantes au alentour de 82%.
 Ross fonctionne beaucoup sur l'amour notamment ses querelles amoureuses au début de la série et son retour à la grossesse de Rachel""";
     private static final String TEXT_TENDANCE_PHOEBE = """
@@ -2933,9 +2996,16 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         "test10TEXTS_CENTRALITE_RACHEL"
     };
     private static final String[] TEXTS_CENTRALITE_ROSS = {
-        "Déjà très bien intégré et central,\nRoss en pleine réflexion amoureuse\npar rapport à Rachel,\n reçoit beaucoup de conseil de Joey", 
-        "test2 Ross",
-        "test3 Ross",
+        "Déjà très bien intégré et central, Ross en pleine\n" +
+"réflexion amoureuse par rapport à Rachel.\n" +
+"Il reçoit beaucoup de conseil de Joey.", 
+        "Toujours conseillé par Joey, la relation se crée\n" +
+"mais n'est pas visible, ils se mettent ensemble\n" +
+"seulement au milieu de la saison.",
+        "Hausse énorme vers Rachel et non pas \n" +
+"uniquement par amour, pour deux raisons :\n" +
+"- Amour (début de saison)\n" +
+"- Tristesse, regret (fin de saison)",
         "test4 Ross",
         "test5 Ross",
         "test6Ross ",
@@ -3043,7 +3113,7 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
 String[] remarquesCentralite,int nbRepliques, double pourcentage, int position, String topMots,
 String[] saisonMarquante, String nomLower) {
         nomPersonnage.setText(nomPerso);
-        nomPersonnage2.setText("Relations de " + nomPerso);
+        nomPersonnage2.setText("Mise en scène de " + nomPerso);
         jLabel39.setText(acteur);
         jLabel40.setText(nationalite);
         jLabel41.setText(age);
@@ -3066,7 +3136,7 @@ String[] saisonMarquante, String nomLower) {
         for (int i = 0; i < Math.min(saisonMarquanteImage.length, saisonMarquante.length); i++) {
             System.out.println(saisonMarquante[i]);
             saisonMarquanteTexte[i].getParent().setVisible(true);
-            saisonMarquanteTexte[i].setText("Analyse de la saison " + saisonMarquante[i]);
+            saisonMarquanteTexte[i].setText("Analyse de la saison " + saisonMarquante[i] + " (" + (i+1) + (i==0 ? "ère" : "ème") + " saison marquante)");
             saisonMarquanteImage[i].setImage("/les_png/recherche_personnage/mot_important_personnage_saison_importante/"  + nomLower + "_saison_" + saisonMarquante[i] + ".png");
         }
         
@@ -3735,13 +3805,25 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JTextArea jTextArea6;
+    private javax.swing.JTextArea jTextArea7;
+    private javax.swing.JTextArea jTextArea8;
     private javax.swing.JLabel labelDetailReplique;
     private javax.swing.JLabel labelEpisode;
     private javax.swing.JLabel labelEpisode2;
