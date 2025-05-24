@@ -262,4 +262,11 @@ public class ControllerDialogRecherche {
     public void creerGrapheNombreDeRepliquesEpisode(int saison, int episode) {
         adapter.creerGrapheNombreDeRepliquesEpisode(saison, episode);
     }
+    
+    public int getNombreMotRepliqueEpisode(int saison, int episode){
+        return adapter.getNombreMotRepliqueEpisode(saison, episode);
+    }
+    public int getNombreMotRepliqueSaison(int saison){
+        return adapter.getNombreMotRepliqueSaison(saison);
+    }
 }

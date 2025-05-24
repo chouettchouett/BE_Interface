@@ -587,6 +587,9 @@ public class VueStat extends javax.swing.JFrame {
         jPanel82 = new javax.swing.JPanel();
         jLabel111 = new javax.swing.JLabel();
         jLabel112 = new javax.swing.JLabel();
+        jPanel83 = new javax.swing.JPanel();
+        jLabel113 = new javax.swing.JLabel();
+        jLabel114 = new javax.swing.JLabel();
         panelSaisonRepartition = new javax.swing.JPanel();
         panelTitre2 = new javax.swing.JPanel();
         labelSaison2 = new javax.swing.JLabel();
@@ -618,6 +621,9 @@ public class VueStat extends javax.swing.JFrame {
         jPanel62 = new javax.swing.JPanel();
         jLabel78 = new javax.swing.JLabel();
         jLabel79 = new javax.swing.JLabel();
+        jPanel64 = new javax.swing.JPanel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
         panelEpisodeRepartition = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         labelEpisode2 = new javax.swing.JLabel();
@@ -1054,6 +1060,21 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel78.add(jPanel82);
 
+        jPanel83.setLayout(new javax.swing.BoxLayout(jPanel83, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel113.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel113.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel113.setText("Nombre moyen de mots par réplique:");
+        jLabel113.setToolTipText("");
+        jPanel83.add(jLabel113);
+
+        jLabel114.setText("11");
+        jLabel114.setToolTipText("");
+        jLabel114.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel83.add(jLabel114);
+
+        jPanel78.add(jPanel83);
+
         jPanel14.add(jPanel78);
 
         panelSaisonPresentation.add(jPanel14, java.awt.BorderLayout.CENTER);
@@ -1196,6 +1217,21 @@ public class VueStat extends javax.swing.JFrame {
         jPanel62.add(jLabel79);
 
         jPanel49.add(jPanel62);
+
+        jPanel64.setLayout(new javax.swing.BoxLayout(jPanel64, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel80.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel80.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel80.setText("Nombre moyen de mots par réplique:");
+        jPanel64.add(jLabel80);
+        jLabel80.getAccessibleContext().setAccessibleName("nombre de mots moyen par réplique");
+
+        jLabel81.setText("12");
+        jLabel81.setToolTipText("");
+        jLabel81.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel64.add(jLabel81);
+
+        jPanel49.add(jPanel64);
 
         jPanel7.add(jPanel49);
 
@@ -3150,26 +3186,16 @@ String[] saisonMarquante, String nomLower) {
         int nbRepliques = dialog.getNombreRepliquesEpisode(saison, episode);
         List<String> personnages = dialog.getPersonnagesEpisode(saison, episode);
         List<String> mots = dialog.getTopMotsEpisode(saison, episode);
-
+        int nombreMots = dialog.getNombreMotRepliqueEpisode(saison, episode);
+        
         jLabel73.setText(String.valueOf(nbRepliques));
         jLabel75.setText(String.join(", ", personnages));
         jLabel79.setText(String.join(", ", mots));
+        jLabel81.setText(String.valueOf(nombreMots));
     }
 
     
     private void rechercheSaisonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        /*
-        if (!rechercheEpisode.isVisible()) {
-            try {
-                int saison = extraireNumeroSaison();
-                afficherTitresSaison(saison);
-                afficherInfosSaison(saison);
-                setGraphSaisonRepartition();
-            } catch (Exception e) {
-                jLabel106.setText("Erreur: " + e.getMessage());
-            }
-        }
-        */
         
         if(!rechercheEpisode.isVisible()){
             try {
@@ -3179,9 +3205,7 @@ String[] saisonMarquante, String nomLower) {
                 String saisonStr = saisonObj.toString();
                 int saison = Integer.parseInt(saisonStr.substring(1));
                 
-                labelSaison.setText("Saison " + saison);
-                labelSaison2.setText("Saison " + saison);
-                labelSaison3.setText("Saison " + saison);
+                afficherTitresSaison(saison);
                 
                 //Nombre de répliques
                 int nbRepliques = dialog.getNombreRepliquesSaison(saison);
@@ -3204,15 +3228,18 @@ String[] saisonMarquante, String nomLower) {
                 }
                 top10Mots = top10Mots.substring(0, top10Mots.length() - 2);
                 
+                
+                
+                
                 //Affichage du résultat
-                jLabel106.setText("" + nbRepliques);
-                jLabel108.setText(listePersonnagesImpliques);
-                jLabel112.setText(top10Mots);
+                afficherInfosSaison(saison);
                 setGraphSaisonRepartition();
             } catch (Exception e) {
                 jLabel106.setText("Erreur: " + e.getMessage());
                 e.printStackTrace();
             }
+        }else{
+            rechercheEpisodeActionPerformed(null);
         }
     }                                               
 
@@ -3227,10 +3254,12 @@ String[] saisonMarquante, String nomLower) {
         int nbRepliques = dialog.getNombreRepliquesSaison(saison);
         List<String> personnages = dialog.getPersonnagesSaison(saison);
         List<String> mots = dialog.getTopMotsSaison(saison);
-
+        int nbMots = dialog.getNombreMotRepliqueSaison(saison);
+        
         jLabel106.setText(String.valueOf(nbRepliques));
         jLabel108.setText(joinAvecVirgules(personnages));
         jLabel112.setText(joinAvecVirgules(mots));
+        jLabel114.setText(String.valueOf(nbMots));
     }
 
     private String joinAvecVirgules(List<String> liste) {
@@ -3617,6 +3646,8 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
+    private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel12;
@@ -3657,6 +3688,8 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel9;
@@ -3710,6 +3743,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel62;
     private javax.swing.JPanel jPanel63;
+    private javax.swing.JPanel jPanel64;
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
     private javax.swing.JPanel jPanel67;
@@ -3724,6 +3758,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel80;
     private javax.swing.JPanel jPanel82;
+    private javax.swing.JPanel jPanel83;
     private javax.swing.JPanel jPanel85;
     private javax.swing.JPanel jPanel86;
     private javax.swing.JPanel jPanel87;

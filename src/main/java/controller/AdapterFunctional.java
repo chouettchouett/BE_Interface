@@ -86,4 +86,11 @@ public class AdapterFunctional {
     public void creerGrapheNombreDeRepliquesEpisode(int saison, int episode) {
         domainController.creerGrapheNombreDeRepliquesEpisode(saison, episode);
     }
+    
+    public int getNombreMotRepliqueEpisode(int saison, int episode){
+        return domainController.getNombreMotRepliqueEpisode(saison, episode);
+    }
+    public int getNombreMotRepliqueSaison(int saison){
+        return domainController.getNombreMotRepliqueSaison(saison);
+    }
 }
