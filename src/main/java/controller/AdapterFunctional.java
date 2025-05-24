@@ -93,4 +93,12 @@ public class AdapterFunctional {
     public int getNombreMotRepliqueSaison(int saison){
         return domainController.getNombreMotRepliqueSaison(saison);
     }
+    
+    public void creerGrapheEvolutionNombreMotSaison(int saison){
+        domainController.creerGrapheEvolutionNombreMotSaison(saison);
+    }
+    
+    public void creerGrapheEvolutionNombreMotEpisode(int saison, int episode){
+        domainController.creerGrapheEvolutionNombreMotEpisode(saison, episode);
+    }
 }

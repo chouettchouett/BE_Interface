@@ -252,6 +252,113 @@ def nombre_mot_replique_episode(saison, episode):
 
     return round(total_mots / total_repliques, 2) if total_repliques > 0 else 0.0
 
+def graph_evolution_mots_par_replique_episode(saison, episode):
+    # Convertir les paramètres en format string standard (accepte int ou string)
+    saison_str = str(saison).upper().replace("S", "").zfill(2)
+    episode_str = str(episode).upper().replace("E", "").zfill(2)
+    
+    # Créer le dataset
+    dataset = DefaultCategoryDataset()
+    
+    # Variables pour le calcul par tranche
+    tranche_size = 10
+    tranche_num = 1
+    mots_tranche = 0
+    repliques_tranche = 0
+    
+    for row in mainData:
+        row_season = str(row['season']).upper().replace("S", "").zfill(2)
+        row_episode = str(row['episode']).upper().replace("E", "").zfill(2)
+        
+        if row_season == saison_str and row_episode == episode_str:
+            texte = row['line'].strip()
+            if texte:
+                texte = re.sub(r"[^\w\s']", " ", texte)
+                mots = texte.split()
+                mots_tranche += len(mots)
+                repliques_tranche += 1
+                
+                if repliques_tranche >= tranche_size:
+                    moyenne = round(float(mots_tranche) / repliques_tranche, 2)
+                    dataset.addValue(moyenne, "Mots par replique", "Tranche " + str(tranche_num))
+                    tranche_num += 1
+                    mots_tranche = 0
+                    repliques_tranche = 0
+    
+    # Dernière tranche incomplète
+    if repliques_tranche > 0:
+        moyenne = round(float(mots_tranche) / repliques_tranche, 2)
+        dataset.addValue(moyenne, "Mots par replique", "Tranche " + str(tranche_num))
+    
+    # Créer le graphique
+    chart = ChartFactory.createLineChart(
+        "Evolution du nombre de mots par replique - Saison " + saison_str + " Episode " + episode_str,
+        "Tranches de repliques (par 10)",
+        "Nombre moyen de mots par replique",
+        dataset,
+        PlotOrientation.VERTICAL,
+        True,
+        True,
+        False
+    )
+    
+    # Sauvegarder le graphique
+    #save_chart_as_png(chart, "evolution_mots_replique_s" + saison_str + "_e" + episode_str + ".png")
+    save_chart_as_png(chart, "evolution_mots_replique_{}_episode_{}.png".format(saison, episode))
+
+def graph_evolution_mots_par_replique_saison(saison):
+    # Convertir le paramètre en format string standard
+    saison_str = str(saison).upper().replace("S", "").zfill(2)
+    
+    # Creer le dataset
+    dataset = DefaultCategoryDataset()
+    
+    # Dictionnaire pour stocker les donnees par episode
+    episodes_data = {}
+    
+    # Remplir le dictionnaire avec les donnees
+    for row in mainData:
+        row_season = str(row['season']).upper().replace("S", "").zfill(2)
+        if row_season == saison_str:
+            episode_num = int(str(row['episode']).upper().replace("E", ""))
+            texte = row['line'].strip()
+            
+            if texte:
+                mots = re.sub(r"[^\w\s']", " ", texte).split()
+                if episode_num not in episodes_data:
+                    episodes_data[episode_num] = {'total_mots': 0, 'total_repliques': 0}
+                
+                episodes_data[episode_num]['total_mots'] += len(mots)
+                episodes_data[episode_num]['total_repliques'] += 1
+    
+    # Trier les episodes par numero et ajouter au dataset
+    for ep_num in sorted(episodes_data.keys()):
+        data = episodes_data[ep_num]
+        moyenne = round(float(data['total_mots']) / data['total_repliques'], 2)
+        dataset.addValue(moyenne, "Mots/replique", str(ep_num))
+    
+    # Creer le graphique
+    chart = ChartFactory.createLineChart(
+        "Evolution du nombre de mots par replique - Saison " + saison_str,
+        "Numero d'episode", 
+        "Moyenne mots par replique",
+        dataset,
+        PlotOrientation.VERTICAL,
+        True,
+        True,
+        False
+    )
+    
+    # Sauvegarder le graphique
+    #save_chart_as_png(chart, "mots_par_replique_s" + saison_str + ".png")
+    save_chart_as_png(chart, "mots_par_replique_{}.png".format(saison))
+    
+    
+    
+
+
+
+
 
 mainData = []
 file_path = os.path.join(os.getcwd(), "src", "main", "python", "friends_dialogues.csv")
@@ -261,3 +368,5 @@ with open(file_path, 'r') as csvfile:
         mainData.append(row)
 
 
+
+    

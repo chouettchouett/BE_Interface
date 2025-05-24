@@ -549,11 +549,11 @@
                             </Container>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="panelSaisonDialogue">
+                        <Container class="javax.swing.JPanel" name="panelEvolutionMots">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="Dialogue entre personnages">
-                                <Property name="tabTitle" type="java.lang.String" value="Dialogue entre personnages"/>
+                              <JTabbedPaneConstraints tabName="Evolution du nombre de mots par r&#xe9;plique">
+                                <Property name="tabTitle" type="java.lang.String" value="Evolution du nombre de mots par r&#xe9;plique"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>
@@ -918,11 +918,11 @@
                             </Container>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="panelEpisodeDialogue">
+                        <Container class="javax.swing.JPanel" name="panelEvolutionMot">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="Dialogue entre personnages">
-                                <Property name="tabTitle" type="java.lang.String" value="Dialogue entre personnages"/>
+                              <JTabbedPaneConstraints tabName="Evolution du nombre de mots par r&#xe9;plique">
+                                <Property name="tabTitle" type="java.lang.String" value="Evolution du nombre de mots par r&#xe9;plique"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>

@@ -612,5 +612,44 @@ public class ControllerRecherche {
         return (int) Math.round(result.asDouble());
     }
     
+    public void creerGrapheEvolutionNombreMotEpisode(int saison, int episode) {
+        PythonInterpreter py = new PythonInterpreter();
+
+        //Préparation de l'environnement Python
+        py.exec("import sys");
+        py.exec("sys.path.append('src/main/python')"); //Adapter si le dossier s'appelle autrement
+        py.exec("# -*- coding: utf-8 -*-");
+
+        //Importer le fichier contenant la fonction
+        py.exec("from stats_saison import graph_evolution_mots_par_replique_episode");
+
+        // Formatage de la saison ("S01""E01")
+        String saisonStr = String.format("S%02d", saison);
+        String episodeStr = String.format("E%02d", episode);
+
+        //Appel de la fonction Python avec la saison et l'épisode
+        String pythonCode = String.format("graph_evolution_mots_par_replique_episode('%s', '%s')", saisonStr, episodeStr);
+        py.exec(pythonCode);
+    }
+    
+    public void creerGrapheEvolutionNombreMotSaison(int saison) {
+        PythonInterpreter py = new PythonInterpreter();
+
+        //Préparation de l'environnement Python
+        py.exec("import sys");
+        py.exec("sys.path.append('src/main/python')"); //Adapter si le dossier s'appelle autrement
+        py.exec("# -*- coding: utf-8 -*-");
+
+        //Importer le fichier contenant la fonction
+        py.exec("from stats_saison import graph_evolution_mots_par_replique_saison");
+
+        //Formatage de la saison ("S01", "S02", etc.)
+        String saisonStr = String.format("S%02d", saison);
+
+        //Appel de la fonction Python avec la saison
+        String pythonCode = String.format("graph_evolution_mots_par_replique_saison('%s')", saisonStr);
+        py.exec(pythonCode);
+    }
+    
 
 }
