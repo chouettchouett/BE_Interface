@@ -211,8 +211,46 @@ def compter_repliques_saison(saison):
 
 
 
+def nombre_mot_replique_saison(saison):
+    total_mots = 0
+    total_repliques = 0
 
+    # Normaliser le format de la saison (accepte "1", "01", "S1", "S01")
+    saison_norm = saison.upper().replace("S", "").zfill(2)
+    
+    for row in mainData:
+        row_season = row['season'].upper().replace("S", "").zfill(2)
+        if row_season == saison_norm:
+            texte = row['line'].strip()
+            if texte:
+                texte = re.sub(r"[^\w\s']", " ", texte)  # Conserver les apostrophes
+                mots = [mot for mot in texte.split() if mot]
+                total_mots += len(mots)
+                total_repliques += 1
 
+    return round(total_mots / total_repliques, 2) if total_repliques > 0 else 0.0
+
+def nombre_mot_replique_episode(saison, episode):
+    total_mots = 0
+    total_repliques = 0
+
+    # Normaliser les formats
+    saison_norm = saison.upper().replace("S", "").zfill(2)
+    episode_norm = episode.upper().replace("E", "").zfill(2)
+    
+    for row in mainData:
+        row_season = row['season'].upper().replace("S", "").zfill(2)
+        row_episode = row['episode'].upper().replace("E", "").zfill(2)
+        
+        if row_season == saison_norm and row_episode == episode_norm:
+            texte = row['line'].strip()
+            if texte:
+                texte = re.sub(r"[^\w\s']", " ", texte)
+                mots = [mot for mot in texte.split() if mot]
+                total_mots += len(mots)
+                total_repliques += 1
+
+    return round(total_mots / total_repliques, 2) if total_repliques > 0 else 0.0
 
 
 mainData = []
@@ -221,3 +259,5 @@ with open(file_path, 'r') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         mainData.append(row)
+
+

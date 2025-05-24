@@ -581,7 +581,36 @@ public class ControllerRecherche {
         py.exec(pythonCode);
     }
    
+    public int getNombreMotRepliqueEpisode(int saison, int episode) {
+        PythonInterpreter py = new PythonInterpreter();
+
+        py.exec("import sys");
+        py.exec("sys.path.append('src/main/python')");
+        py.exec("from stats_saison import nombre_mot_replique_episode");
+
+        String saisonStr = String.valueOf(saison);
+        String episodeStr = String.valueOf(episode);
+
+        PyObject result = py.eval(String.format("nombre_mot_replique_episode('%s', '%s')", saisonStr, episodeStr));
+
+        //Conversion en int (arrondi standard)
+        return (int) Math.round(result.asDouble());
+    }
     
+    public int getNombreMotRepliqueSaison(int saison) {
+        PythonInterpreter py = new PythonInterpreter();
+
+        py.exec("import sys");
+        py.exec("sys.path.append('src/main/python')");
+        py.exec("from stats_saison import nombre_mot_replique_saison");
+
+        String saisonStr = String.valueOf(saison);
+
+        PyObject result = py.eval(String.format("nombre_mot_replique_saison('%s')", saisonStr));
+        
+       
+        return (int) Math.round(result.asDouble());
+    }
     
 
 }
