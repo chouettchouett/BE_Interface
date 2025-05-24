@@ -1,9 +1,9 @@
+# [Enzo LOUIS] [Recherche par mot (et ensemble de mots)]
 # Statistiques dynamiques (en fonction d'un mot ou ensemble de mot précis)
-# Appelé à chaque fois depuis l'interface Java
 # Pour faire de la recherche interactive en plus de l'analyse statique
 # Si la personne sur l'interface veut regarder qui est plus passioné de natation par exemple,
 # l'analyse statique ne lui permettra pas alors que cette option de recherche si.
-# résultats détaillé sous forme de personnages, saison et épisodes
+# résultats détaillé sous forme de personnages, saison et épisodes...
 
 import pandas as pd
 import re
@@ -53,9 +53,6 @@ def recherche_par_mots(words: str, case_sensitive=False):
     # "Ce mot est mentionné le plus de fois dans l'episode X de la saison Y"
     best_episode_word_count = word_count_by_episode.loc[word_count_by_episode['word_count'].idxmax(), ['season', 'episode']]
 
-    # Potentielle stat : 74e mots le plus mentionné (si top10 => 'Parmi les mots les plus mentionnés')
-    # Très lourd comme calcul et déjà fait dans d'autres stats
-
     # convertir les résultat en type python (interprétable par les modèles de la vue)
     return {
         "nb_word_used": int(total_word_used),
@@ -69,12 +66,10 @@ def recherche_par_mots(words: str, case_sensitive=False):
         "best_episode_word_count": best_episode_word_count.to_dict(),
     }
 
-#print(recherche_par_mots("I just feel like someone reached down"))
-#print(recherche_par_mots("Hello"))
-
 def recherche_par_mots_json(words):
     result = recherche_par_mots(words)
     return json.dumps(result)
 
-mot = sys.argv[1] if len(sys.argv) > 1 else "I just feel like someone"
+mot = sys.argv[1] if len(sys.argv) > 1 else "Hello"
+# ne pas supprimer (liaison java-python)
 print(recherche_par_mots_json(mot))
