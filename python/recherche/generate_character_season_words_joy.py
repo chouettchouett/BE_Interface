@@ -91,7 +91,7 @@ def liste_mots_importants_saison(saison, emotion):
     char_docs = [clean_text(doc) for doc in char_docs]
 
     # TF-IDF avec document=personnage
-    vectorizer = TfidfVectorizer(max_df=0.2, stop_words='english', min_df=1, token_pattern=r"(?u)\b\w\w\w+\b")
+    vectorizer = TfidfVectorizer(max_df=0.4, stop_words='english', min_df=1, token_pattern=r"(?u)\b\w\w\w+\b")
     X = vectorizer.fit_transform(char_docs)
     words = vectorizer.get_feature_names_out()
 

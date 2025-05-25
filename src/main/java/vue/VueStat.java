@@ -75,7 +75,7 @@ public class VueStat extends javax.swing.JFrame {
     }
 
     private void initialiserRechercheUI() {
-        imageMotsCaracteristiques.setImage("/les_png/mots_caractéristiques.png");
+        ficheIdentite.setImage("/les_png/recherche_personnage/VIGNETTE.png");
         imagePersonnage.setImage("/les_png/Joey_Test.png");
         imageMentions1.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_monica.png");
         imageMotCaracteristique.setImage("/les_png/mots_caracteristiques_par_personnages/mots_caracteristique_monica.png");
@@ -84,6 +84,7 @@ public class VueStat extends javax.swing.JFrame {
         
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
+        jScrollPane4.getVerticalScrollBar().setUnitIncrement(16);
         
         recherchePersonnage.setVisible(false);
         rechercheSaison.setVisible(false);
@@ -181,15 +182,10 @@ public class VueStat extends javax.swing.JFrame {
             javax.swing.RowFilter<TableModel, Integer> filter = new javax.swing.RowFilter<TableModel, Integer>() {
                 public boolean include(javax.swing.RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
                     if (personnage != null && saison != null && episode != null) {
-                        System.out.println("works");
                         String personnageValue = entry.getStringValue(1);
                         String saisonValue = entry.getStringValue(2);
                         String episodeValue = entry.getStringValue(3);
                         
-                        System.out.println(personnageValue + "/" + personnage);
-                        System.out.println(saisonValue + "/" + saison);
-                        System.out.println(episodeValue + "/" + episode);
-
                         boolean matchPerso = personnage.equals("Tous les personnages") || personnage.equals(personnageValue);
                         boolean matchSaison = saison.equals("Toutes les saisons") || saison.equals(saisonValue);
                         boolean matchEpisode = episode.equals("Tous les épisodes") || episode.equals(episodeValue);
@@ -385,89 +381,12 @@ public class VueStat extends javax.swing.JFrame {
         chartPanel2.setOpaque(false);
         chartPanel2.setBackground(new Color(0, 0, 0, 0));
 
-        // chartPanel2.setPreferredSize(new Dimension(300, 150));
         jPanel13.removeAll();
         jPanel13.add(chartPanel2);
         
         jPanel13.revalidate();
         jPanel13.repaint();
     }
-    /*
-    public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
-        int total = data.stream()
-            .mapToInt(row -> (Integer) row.get(1))
-            .sum();
-        
-        DefaultCategoryDataset percentLine = new DefaultCategoryDataset();
-        
-        for (List<Object> row : data) {
-            String name = (String) row.get(0);
-            Integer value = ((Integer) row.get(1));
-            percentLine.addValue(value, name, "");
-        }
-
-        JFreeChart chartPercentLine = ChartFactory.createStackedBarChart(
-            null, // titre
-            null,
-            null,
-            percentLine,
-            PlotOrientation.HORIZONTAL,
-            false, // légende
-            false,
-            false
-        );
-        
-        CategoryPlot plotPercent = chartPercentLine.getCategoryPlot();
-        // plotPercent.setInsets(new org.jfree.ui.RectangleInsets(0, 0, 0, 0));
-        plotPercent.setOutlineVisible(false);
-        plotPercent.getDomainAxis().setVisible(false);
-        plotPercent.getRangeAxis().setVisible(false);
-        plotPercent.setRangeGridlinesVisible(false);
-        
-        chartPercentLine.setBackgroundPaint(new Color(0, 0, 0, 0));
-        chartPercentLine.getPlot().setBackgroundPaint(new Color(0, 0, 0, 0));
-        
-        StackedBarRenderer renderer = new StackedBarRenderer();
-        
-        renderer.setDefaultToolTipGenerator(new StandardCategoryToolTipGenerator() {
-            @Override
-            public String generateToolTip(CategoryDataset dataset, int row, int column) {
-                String name = (String) dataset.getRowKey(row);
-                Number value = dataset.getValue(row, column);
-                return String.format("%s : %d utilisations", name, value.intValue());
-            }
-        });
-        renderer.setDefaultItemLabelFont(new Font("Verdana", Font.PLAIN, 9));
-            renderer.setDefaultItemLabelsVisible(true);
-            renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator() {
-                @Override
-                public String generateLabel(org.jfree.data.category.CategoryDataset dataset, int row, int column) {
-                    Number value = dataset.getValue(row, column);
-                    String name = dataset.getRowKey(row).toString();
-                    int val = value.intValue();
-                    double percent = total == 0 ? 0 : (100.0 * val / total);
-                    return String.format("%s\n(%d, %.1f%%)", name, val, percent);
-                }
-            });
-            
-        renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
-            ItemLabelAnchor.CENTER, TextAnchor.CENTER
-        ));
-
-        plotPercent.setRenderer(renderer);
-        
-        ChartPanel chartPanelPercent = new ChartPanel(chartPercentLine);
-        chartPanelPercent.setOpaque(false);
-        chartPanelPercent.setBackground(new Color(0, 0, 0, 0));
-
-        chartPanelPercent.setPreferredSize(new Dimension(300, 150));
-        panelPourcentageMotsPerso.removeAll();
-        panelPourcentageMotsPerso.add(chartPanelPercent, java.awt.BorderLayout.NORTH);
-        
-        panelPourcentageMotsPerso.revalidate();
-        panelPourcentageMotsPerso.repaint();
-    }
-    */
 
     public void generateGraphBarMotParPersonnage(List<List<Object>> data) {
         DefaultCategoryDataset dataset = construireDataset(data);
@@ -652,7 +571,9 @@ public class VueStat extends javax.swing.JFrame {
         resultSansRecherche = new javax.swing.JPanel();
         labelSansRechercheSentence = new javax.swing.JLabel();
         labelSansRechercheExemple = new javax.swing.JLabel();
-        imageMotsCaracteristiques = new controller.ImagePanel();
+        labelSansRechercheExemple1 = new javax.swing.JLabel();
+        labelSansRechercheExemple2 = new javax.swing.JLabel();
+        labelSansRechercheExemple3 = new javax.swing.JLabel();
         resultatMot = new javax.swing.JTabbedPane();
         panelMotUtilisation = new javax.swing.JPanel();
         panelMotCourant1 = new javax.swing.JPanel();
@@ -686,7 +607,6 @@ public class VueStat extends javax.swing.JFrame {
         jPanel39 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel64 = new javax.swing.JLabel();
         panelMotRepartitionSaisonEtEpisode = new javax.swing.JPanel();
         panelMotCourant3 = new javax.swing.JPanel();
         labelMotCourant3 = new javax.swing.JLabel();
@@ -803,34 +723,37 @@ public class VueStat extends javax.swing.JFrame {
         imageMotCaracteristique = new controller.ImagePanel();
         jLabel100 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        labelMotCar = new javax.swing.JTextArea();
         jPanel11 = new javax.swing.JPanel();
         imageMotPref = new controller.ImagePanel();
         jLabel101 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        labelMotCarJoie = new javax.swing.JTextArea();
         jPanel30 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX1 = new controller.ImagePanel();
         saisonMarquante1 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
+        labelMotCarX1 = new javax.swing.JTextArea();
         jPanel31 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX2 = new controller.ImagePanel();
         saisonMarquante2 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
+        labelMotCarX2 = new javax.swing.JTextArea();
         jPanel32 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX3 = new controller.ImagePanel();
         saisonMarquante3 = new javax.swing.JLabel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTextArea8 = new javax.swing.JTextArea();
+        labelMotCarX3 = new javax.swing.JTextArea();
         jPanel33 = new javax.swing.JPanel();
         imageMotCaracteristiqueSaisonX4 = new controller.ImagePanel();
         saisonMarquante4 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
+        labelMotCarX4 = new javax.swing.JTextArea();
+        jPanel22 = new javax.swing.JPanel();
+        ficheIdentite = new controller.ImagePanel();
+        jLabel20 = new javax.swing.JLabel();
         Analyse_Statistique = new javax.swing.JPanel();
         AnalyseLangagière = new controller.ImagePanel();
         Analyse_Sentiment = new javax.swing.JTabbedPane();
@@ -1337,21 +1260,20 @@ public class VueStat extends javax.swing.JFrame {
         resultSansRecherche.add(labelSansRechercheSentence);
 
         labelSansRechercheExemple.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        labelSansRechercheExemple.setText("Exemple :");
+        labelSansRechercheExemple.setText("Vous pouvez rechercher parmi tous les mots et ensemble de mots via la recherche par mots");
         resultSansRecherche.add(labelSansRechercheExemple);
 
-        javax.swing.GroupLayout imageMotsCaracteristiquesLayout = new javax.swing.GroupLayout(imageMotsCaracteristiques);
-        imageMotsCaracteristiques.setLayout(imageMotsCaracteristiquesLayout);
-        imageMotsCaracteristiquesLayout.setHorizontalGroup(
-            imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        imageMotsCaracteristiquesLayout.setVerticalGroup(
-            imageMotsCaracteristiquesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2283, Short.MAX_VALUE)
-        );
+        labelSansRechercheExemple1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        labelSansRechercheExemple1.setText("Vous pouvez rechercher parmi les 6 personnages principaux via la recherche par personnage");
+        resultSansRecherche.add(labelSansRechercheExemple1);
 
-        resultSansRecherche.add(imageMotsCaracteristiques);
+        labelSansRechercheExemple2.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        labelSansRechercheExemple2.setText("Vous pouvez rechercher parmi les 10 saisons de Friends via la recherche par saison");
+        resultSansRecherche.add(labelSansRechercheExemple2);
+
+        labelSansRechercheExemple3.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        labelSansRechercheExemple3.setText("Vous pouvez rechercher parmi les 236 épisodes de Friends via la recherche par épisodes");
+        resultSansRecherche.add(labelSansRechercheExemple3);
 
         resultats.add(resultSansRecherche, "SANSRECHERCHE");
 
@@ -1506,11 +1428,6 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel13.setLayout(new javax.swing.BoxLayout(jPanel13, javax.swing.BoxLayout.LINE_AXIS));
         jPanel39.add(jPanel13, java.awt.BorderLayout.CENTER);
-
-        jLabel64.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel64.setText("* Les mots prononcés en même temps par plusieurs personnage sont comptés une seule fois");
-        jLabel64.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel39.add(jLabel64, java.awt.BorderLayout.SOUTH);
 
         jPanel36.add(jPanel39, java.awt.BorderLayout.CENTER);
 
@@ -2170,9 +2087,9 @@ public class VueStat extends javax.swing.JFrame {
         jLabel100.setText("Quels sont ces mots caractéritistiques (passions, haines, ...) ?");
         jPanel10.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane7.setViewportView(jTextArea4);
+        labelMotCar.setColumns(20);
+        labelMotCar.setRows(5);
+        jScrollPane7.setViewportView(labelMotCar);
 
         jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
@@ -2208,9 +2125,9 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel11.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 370, 40));
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane6.setViewportView(jTextArea3);
+        labelMotCarJoie.setColumns(20);
+        labelMotCarJoie.setRows(5);
+        jScrollPane6.setViewportView(labelMotCarJoie);
 
         jPanel11.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 370, -1));
 
@@ -2237,9 +2154,9 @@ public class VueStat extends javax.swing.JFrame {
         saisonMarquante1.setForeground(new java.awt.Color(153, 153, 153));
         jPanel30.add(saisonMarquante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        jScrollPane9.setViewportView(jTextArea6);
+        labelMotCarX1.setColumns(20);
+        labelMotCarX1.setRows(5);
+        jScrollPane9.setViewportView(labelMotCarX1);
 
         jPanel30.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
@@ -2266,9 +2183,9 @@ public class VueStat extends javax.swing.JFrame {
         saisonMarquante2.setForeground(new java.awt.Color(153, 153, 153));
         jPanel31.add(saisonMarquante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane8.setViewportView(jTextArea5);
+        labelMotCarX2.setColumns(20);
+        labelMotCarX2.setRows(5);
+        jScrollPane8.setViewportView(labelMotCarX2);
 
         jPanel31.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
@@ -2295,9 +2212,9 @@ public class VueStat extends javax.swing.JFrame {
         saisonMarquante3.setForeground(new java.awt.Color(153, 153, 153));
         jPanel32.add(saisonMarquante3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTextArea8.setColumns(20);
-        jTextArea8.setRows(5);
-        jScrollPane11.setViewportView(jTextArea8);
+        labelMotCarX3.setColumns(20);
+        labelMotCarX3.setRows(5);
+        jScrollPane11.setViewportView(labelMotCarX3);
 
         jPanel32.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
@@ -2324,9 +2241,9 @@ public class VueStat extends javax.swing.JFrame {
         saisonMarquante4.setForeground(new java.awt.Color(153, 153, 153));
         jPanel33.add(saisonMarquante4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jScrollPane10.setViewportView(jTextArea7);
+        labelMotCarX4.setColumns(20);
+        labelMotCarX4.setRows(5);
+        jScrollPane10.setViewportView(labelMotCarX4);
 
         jPanel33.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 390, -1));
 
@@ -2337,6 +2254,28 @@ public class VueStat extends javax.swing.JFrame {
         jScrollPane4.setViewportView(panelPersonnageRepliqueFavorite);
 
         resultatPersonnage.addTab("Profil de langage", jScrollPane4);
+
+        jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ficheIdentite.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout ficheIdentiteLayout = new javax.swing.GroupLayout(ficheIdentite);
+        ficheIdentite.setLayout(ficheIdentiteLayout);
+        ficheIdentiteLayout.setHorizontalGroup(
+            ficheIdentiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 808, Short.MAX_VALUE)
+        );
+        ficheIdentiteLayout.setVerticalGroup(
+            ficheIdentiteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 368, Short.MAX_VALUE)
+        );
+
+        jPanel22.add(ficheIdentite, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 810, 370));
+
+        jLabel20.setText("Fiche d'identité finale des personnages grâce à la recherche de personnage (* design réalisé grâce la partie analyse relation)");
+        jPanel22.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, -1));
+
+        resultatPersonnage.addTab("Fiche d'identité", jPanel22);
 
         resultats.add(resultatPersonnage, "PERSONNAGE");
         resultatPersonnage.getAccessibleContext().setAccessibleName("tab");
@@ -2966,135 +2905,6 @@ public class VueStat extends javax.swing.JFrame {
         getContentPane().add(SectionRecherche);
         SectionRecherche.getAccessibleContext().setAccessibleName("Recherche");
     }// </editor-fold>//GEN-END:initComponents
-
-    private static final String TEXT_TENDANCE_JOEY = """
-[à compléter]""";
-    private static final String TEXT_TENDANCE_RACHEL = """
-Saison 1 : un des personnages impliqués en saison 1 pour l'introduction de la série
-
-Saison 8 : augmentation évidente : la grossesse de Rachel
-
-Impression globale : Rachel est régulière dans ses apparitions et est intégré depuis le début.""";
-    private static final String TEXT_TENDANCE_ROSS = """
-Saison 1 : Vie de famille compliqué, divorce et enfant proche, personnage très présent dés la saison 1
-Saison 2 : Triangle amoureux (Ross-Julie-Rachel) (beaucoup d'amour (analyse sentiments)), donc moins mentionné par les autres mais actif. 
-Il se met finalement en couple avec Rachel au milieu de la saison, ce qui le rapprochera du groupe
-Saison 3 : Sommet de son intrigue, Ross montre 3 thèmes connus : l'amour, la séparation et Rachel. Il est ainsi beaucoup montré, tout le monde
-parle de son fameux "We were on a break" culte de la série. L'amour moyen malgré le couple chute donc un peu, 
-alors que la tristesse est à son maximum.
-Saison 8 : On apprend que Rachel est enceinte, Ross assume son rôle de père.
-Saison 10 : Assez haut en répliques, cette saison Ross découvre qu'il aime encore Rachel d'après les 2 sentiments tristesse et amour qui augmente.
-
-Impression globale : Ross a moins de pic d'activité, c'est le personnage le plus mis en avant de la série d'après la recherche par saison, il est
-régulier et souvent présent avec nos 6 amis comme en témoigne les graphe ci-dessous ou la centralité est plutôt constantes au alentour de 82%.
-Ross fonctionne beaucoup sur l'amour notamment ses querelles amoureuses au début de la série et son retour à la grossesse de Rachel""";
-    private static final String TEXT_TENDANCE_PHOEBE = """
-Saison 1 et 2 : peu intégré, histoire solo, de plus elle habite chez sa grand mère
-Saison 3 : Première hausse de présence dûe principalement à son soutient prononcé à Monica après sa rupture avec Richard.
-Saison 5 : Deuxième hausse observé pour beaucoup de personnage grâce à l'unification du groupe, Phoebe s'intègre grâce nottament à l'épisode
-               du mariage secret de Monica et Chandler
-Saison 7 : Comme Joey, investissement dans le mariage de Monica et Chandler
-Saison 10 : Mariage avec Mike, beaucoup de répliques mais moins de mentions qui s'explique par l'épisode de fin qui mets en avant la fin de tous
-les personnages
-
-Impression globale : un profil comme Joey : naïf, décalé, drôle, qui ne s'intègre pas directement. Personnage sous-représenté d'après la recherche
-par saison, qui parle à certains personnages en particulier (voir graphe ci-dessous).""";
-    private static final String TEXT_TENDANCE_MONICA = """
-Saison 1 : Monica est le centre initial du groupe (soeur de Ross, meilleure amie de Rachel, ami de longue date de Joey et Chandler) et
-                le début de l'intrigue se passe dans son appartement. On découvre donc principalement la série avec elle.
-Saison 5 : remontée soudaine grâce au rapprochement du groupe d'après l'Analyse Sentiment (ainsi que les graphes orientés ci-dessous qui ont,
-                 pour chaque personnage, l'une des plus haute valeur de centralité) et au rapprochement avec Chandler (observé dans les sentiments
-                 récurrents : montée d'amour en saison 5).
-Saison 7 : Augmentation prévisible dû au mariage de Monica et Chandler, tout le monde parle de l'évènement (un pic énorme au niveau des
-                mentions qui témoigne d'un réel impact de celles-ci, contrairement à leur taux de répliques qui n'a pas réellement varié)
-Saison 9 : Après une saison 8 moins marquée (pause dans leur intrigue dû à un gros pic dans la saison 7 et à la grossesse de Rachel)
-                En saison 9 on les revoit après avoir constater qu'ils ne peuvent pas avoir d'enfant, ils envisage l'adoption (Monica parle
-                beaucoup mais peu de mentions : les discussions se passent entre les deux compagnons)""";
-    private static final String TEXT_TENDANCE_CHANDLER = """
-Saison 7 et 8 : préparatif du mariage avec Monica puis mariage
-
-Saison 9 et 10 : adoption et stabilité dans son métier, observation d'une baisse de négativité dans l'analyse de sentiments
-
-Impression globale : Chandler est toujours relativement impliquant de manière constante""";
-    private static final String[] TEXTS_CENTRALITE_JOEY = {
-        "Ce début, naïf et drôle mais peu de répliques\n, ne montrent pas grand chose.\n Coloc de Chandler, pourtant peu de discussion", 
-        "Développement énorme de l'amitié avec Chandler",
-        "",
-        "",
-        "Intégration au sein du groupe, confirmé dans\nl'analyse sentiment qui évoque une stabilisation\ndu groupe et une positivité grandissante.",
-        "",
-        "Emménagement avec Rachel",
-        "Baisse de discussion avec Chandler, dûe au mariage",
-        "Mise en couple avec Rachel peu remarqué, \npeut vouloir montrer que leur relation\nest bel et bien platonique",
-        "Emménagement chez Chandler"
-    };
-    private static final String[] TEXTS_CENTRALITE_RACHEL = {
-        "test1 Rachel est ...", 
-        "test2TEXTS_CENTRALITE_RACHEL",
-        "test3TEXTS_CENTRALITE_RACHEL",
-        "test4TEXTS_CENTRALITE_RACHEL",
-        "test5TEXTS_CENTRALITE_RACHEL",
-        "test6TEXTS_CENTRALITE_RACHEL",
-        "test7TEXTS_CENTRALITE_RACHEL",
-        "test8TEXTS_CENTRALITE_RACHEL",
-        "test9TEXTS_CENTRALITE_RACHEL",
-        "test10TEXTS_CENTRALITE_RACHEL"
-    };
-    private static final String[] TEXTS_CENTRALITE_ROSS = {
-        "Déjà très bien intégré et central, Ross en pleine\n" +
-"réflexion amoureuse par rapport à Rachel.\n" +
-"Il reçoit beaucoup de conseil de Joey.", 
-        "Toujours conseillé par Joey, la relation se crée\n" +
-"mais n'est pas visible, ils se mettent ensemble\n" +
-"seulement au milieu de la saison.",
-        "Hausse énorme vers Rachel et non pas \n" +
-"uniquement par amour, pour deux raisons :\n" +
-"- Amour (début de saison)\n" +
-"- Tristesse, regret (fin de saison)",
-        "test4 Ross",
-        "test5 Ross",
-        "test6Ross ",
-        "test7Ross",
-        "test8Ross",
-        "test9Ross",
-        "test10Ross"
-    };
-    private static final String[] TEXTS_CENTRALITE_PHOEBE = {
-        "test1 Phoebe est ...", 
-        "test2P",
-        "test3P",
-        "test4P",
-        "test5P",
-        "test6P",
-        "test7P",
-        "test8P",
-        "test9P",
-        "test10P"
-    };
-    private static final String[] TEXTS_CENTRALITE_MONICA = {
-        "Monica connait bien Phoebe (ancienne\ncoloc), et Rachel (meilleur amie)\nJoey et Phoebe sont en retrait ", 
-        "test2Monica",
-        "test3Monica",
-        "test4Monica",
-        "test5Monica",
-        "test6Monica",
-        "test7Monica",
-        "test8Monica",
-        "test9Monica",
-        "test10Monica"
-    };
-    private static final String[] TEXTS_CENTRALITE_CHANDLER = {
-        "test1 Chandler est ...", 
-        "test2C",
-        "test3C",
-        "tesCt4",
-        "tesCt5",
-        "teCst6",
-        "tesCt7",
-        "tesCt8",
-        "tesCCt9",
-        "tesCt10"
-    };
     
     //NOAH, Enzo LOUIS
     private void afficherInfosPersonnage(String nom) {
@@ -3103,40 +2913,39 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
         switch (lower) {
             case "joey" -> setProfil(
                 "Joey Tribbiani", "Matt LeBlanc", "Américain", "57 ans", "25 juillet 1967 (États-Unis)",
-                "/les_png/Joey_photo_profile.png", TEXT_TENDANCE_JOEY, TEXTS_CENTRALITE_JOEY,
-                8182, 16.25, 5, "hey, know, right, like, out", new String[] { "S01", "S02", "S03" }, "joey"
+                "/les_png/Joey_photo_profile.png",
+                8182, 16.25, 5, "hey, know, right, like, out", new String[] { "S05", "S07", "S08", "S09", "S04" }, "joey"
             );
             case "rachel" -> setProfil(
                 "Rachel Green", "Jennifer Aniston", "Américaine", "55 ans", "11 février 1969 (États-Unis)",
-                "/les_png/Rachel_photo_profile.png", TEXT_TENDANCE_RACHEL, TEXTS_CENTRALITE_RACHEL,
-                9118, 18.11, 1, "know, well, ross, right, gonna", new String[] { "S01", "S02", "S03" }, "rachel"
+                "/les_png/Rachel_photo_profile.png",
+                9118, 18.11, 1, "know, well, ross, right, gonna", new String[] { "S01", "S07", "S08" }, "rachel"
             );
             case "ross" -> setProfil(
                 "Ross Geller", "David Schwimmer", "Américain", "57 ans", "2 novembre 1966 (États-Unis)",
-                "/les_png/Ross_photo_profile.webp", TEXT_TENDANCE_ROSS, TEXTS_CENTRALITE_ROSS,
+                "/les_png/Ross_photo_profile.webp",
                 9063, 18.01, 2, "know, hey, uh, well, right", new String[] { "S01", "S02", "S03" }, "ross"
             );
             case "phoebe" -> setProfil(
                 "Phoebe Buffay", "Lisa Kudrow", "Américaine", "61 ans", "30 juillet 1963 (États-Unis)",
-                "/les_png/Phoebe_photo_profile.png", TEXT_TENDANCE_PHOEBE, TEXTS_CENTRALITE_PHOEBE,
-                7345, 14.59, 6, "know, well, like, hey, right", new String[] { "S01", "S02", "S03" }, "phoebe"
+                "/les_png/Phoebe_photo_profile.png",
+                7345, 14.59, 6, "know, well, like, hey, right", new String[] { "S05", "S07", "S09", "S10" }, "phoebe"
             );
             case "monica" -> setProfil(
                 "Monica Geller", "Courteney Cox", "Américaine", "60 ans", "15 juin 1964 (États-Unis)",
-                "/les_png/Monica_photo_profile.png", TEXT_TENDANCE_MONICA, TEXTS_CENTRALITE_MONICA,
-                8278, 16.45, 4, "know, chandler, well, right, gonna", new String[] { "S01", "S02", "S03", "S04" }, "monica"
+                "/les_png/Monica_photo_profile.png",
+                8278, 16.45, 4, "know, chandler, well, right, gonna", new String[] { "S01", "S07", "S09" }, "monica"
             );
             case "chandler" -> setProfil(
                 "Chandler Bing", "Matthew Perry", "Américain", "54 ans", "19 août 1969 – 28 octobre 2023",
-                "/les_png/Chandler_photo_profile.png", TEXT_TENDANCE_CHANDLER, TEXTS_CENTRALITE_CHANDLER,
-                8350, 16.59, 3, "well, know, right, hey, out", new String[] { "S01", "S02", "S03" }, "chandler"
+                "/les_png/Chandler_photo_profile.png",
+                8350, 16.59, 3, "well, know, right, hey, out", new String[] { "S04", "S06", "S07" }, "chandler"
             );
             default -> setProfil(
-                "Personnage inconnu", "-", "-", "-", "-", "/les_png/default.png", "", new String[] {"","","","","","","","","",""},
+                "Personnage inconnu", "-", "-", "-", "-", "/les_png/default.png",
                 0, 0.0, 0, "", new String[] {}, ""
             );
         }
-
         
         imageMentions0.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S01.png");
         imageMentions1.setImage("/les_png/graphe_orienté_mentions_entre_personnages/mentions_" + lower + "_S02.png");
@@ -3154,11 +2963,11 @@ Impression globale : Chandler est toujours relativement impliquant de manière c
     }
     
     private void setProfil(String nomPerso, String acteur, String nationalite, String age,
-                       String naissance, String imagePath, String remarquePicPopularite, 
-String[] remarquesCentralite,int nbRepliques, double pourcentage, int position, String topMots,
+                       String naissance, String imagePath,int nbRepliques, double pourcentage, int position, String topMots,
 String[] saisonMarquante, String nomLower) {
         nomPersonnage.setText(nomPerso);
         nomPersonnage2.setText("Mise en scène de " + nomPerso);
+        nomPersonnage1.setText("Recherche langage de " + nomPerso);
         jLabel39.setText(acteur);
         jLabel40.setText(nationalite);
         jLabel41.setText(age);
@@ -3172,6 +2981,7 @@ String[] saisonMarquante, String nomLower) {
         
         JLabel[] saisonMarquanteTexte = {saisonMarquante1, saisonMarquante2, saisonMarquante3, saisonMarquante4};
         ImagePanel[] saisonMarquanteImage = {imageMotCaracteristiqueSaisonX1, imageMotCaracteristiqueSaisonX2, imageMotCaracteristiqueSaisonX3, imageMotCaracteristiqueSaisonX4};
+        JTextArea[] saisonMarquanteInterpret = {labelMotCarX1, labelMotCarX2, labelMotCarX3, labelMotCarX4};
         
         for (int i = 0; i < saisonMarquanteImage.length; i++) {
             saisonMarquanteTexte[i].setText("");
@@ -3179,19 +2989,22 @@ String[] saisonMarquante, String nomLower) {
         }
         
         for (int i = 0; i < Math.min(saisonMarquanteImage.length, saisonMarquante.length); i++) {
-            System.out.println(saisonMarquante[i]);
             saisonMarquanteTexte[i].getParent().setVisible(true);
             saisonMarquanteTexte[i].setText("Analyse de la saison " + saisonMarquante[i] + " (" + (i+1) + (i==0 ? "ère" : "ème") + " saison marquante)");
             saisonMarquanteImage[i].setImage("/les_png/recherche_personnage/mot_important_personnage_saison_importante/"  + nomLower + "_saison_" + saisonMarquante[i] + ".png");
+            saisonMarquanteInterpret[i].setText(RechercheInterpretations.getPersoFromNom(nomLower).get("TEXTS_MOT_SAISON_IMPORTANTE").get(i));
         }
         
-        miseEnAvantPersonnageTexte.setText(remarquePicPopularite);
+        miseEnAvantPersonnageTexte.setText(RechercheInterpretations.getPersoFromNom(nomLower).get("TEXT_TENDANCE").get(0));
         int index = 0;
         for (JTextArea area : new JTextArea[] {centraliteTexteS1, centraliteTexteS2, centraliteTexteS3,centraliteTexteS4, 
             centraliteTexteS5, centraliteTexteS6, centraliteTexteS7, centraliteTexteS8, centraliteTexteS9, centraliteTexteS10}) {
-            area.setText(remarquesCentralite[index]);
+            area.setText(RechercheInterpretations.getPersoFromNom(nomLower).get("TEXTS_CENTRALITE").get(index));
             index++;
         }
+        
+        labelMotCar.setText(RechercheInterpretations.getPersoFromNom(nomLower).get("TEXT_MOT_GLOBAL").get(0));
+        labelMotCarJoie.setText(RechercheInterpretations.getPersoFromNom(nomLower).get("TEXT_MOT_GLOBAL_JOIE").get(0));
     }
     //NOAH FIN
     
@@ -3687,6 +3500,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JTextArea centraliteTexteS9;
     private javax.swing.JComboBox<String> choixTypeRecherche;
     private javax.swing.JComboBox<String> comboBoxSaison;
+    private controller.ImagePanel ficheIdentite;
     private javax.swing.JComboBox<String> filtreEpisode;
     private javax.swing.JComboBox<String> filtrePerso;
     private javax.swing.JComboBox<String> filtreSaison;
@@ -3707,7 +3521,6 @@ String[] saisonMarquante, String nomLower) {
     private controller.ImagePanel imageMotCaracteristiqueSaisonX3;
     private controller.ImagePanel imageMotCaracteristiqueSaisonX4;
     private controller.ImagePanel imageMotPref;
-    private controller.ImagePanel imageMotsCaracteristiques;
     private controller.ImagePanel imagePersonnage;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -3734,6 +3547,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel25;
@@ -3755,7 +3569,6 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
@@ -3785,6 +3598,7 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
@@ -3858,16 +3672,16 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
-    private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextArea jTextArea8;
     private javax.swing.JLabel labelDetailReplique;
     private javax.swing.JLabel labelEpisode;
     private javax.swing.JLabel labelEpisode2;
     private javax.swing.JLabel labelEpisode3;
+    private javax.swing.JTextArea labelMotCar;
+    private javax.swing.JTextArea labelMotCarJoie;
+    private javax.swing.JTextArea labelMotCarX1;
+    private javax.swing.JTextArea labelMotCarX2;
+    private javax.swing.JTextArea labelMotCarX3;
+    private javax.swing.JTextArea labelMotCarX4;
     private javax.swing.JLabel labelMotCourant1;
     private javax.swing.JLabel labelMotCourant2;
     private javax.swing.JLabel labelMotCourant3;
@@ -3876,6 +3690,9 @@ String[] saisonMarquante, String nomLower) {
     private javax.swing.JLabel labelSaison2;
     private javax.swing.JLabel labelSaison3;
     private javax.swing.JLabel labelSansRechercheExemple;
+    private javax.swing.JLabel labelSansRechercheExemple1;
+    private javax.swing.JLabel labelSansRechercheExemple2;
+    private javax.swing.JLabel labelSansRechercheExemple3;
     private javax.swing.JLabel labelSansRechercheSentence;
     private javax.swing.JLabel labelTitre;
     private javax.swing.JLabel labelUtilisationMotParReplique;

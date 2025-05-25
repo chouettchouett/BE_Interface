@@ -98,10 +98,12 @@ def liste_mots_importants_saison(saison, stopwords_extended_=False):
             'susan', 'joe', 'janice', 'nina', 'tailor', 'owen', 'wayne', 'maurice', 'sergei', 'minsk', 'adelman', 'eddie', 'estelle', 'joseph', 'elizabeth', 'marcel', 'mona',
             'joshua', 'tag', 'barry', 'paolo', 'gavin', 'amy', 'ursula', 'buffay', 'phoebe', 'buffay', 'monica', 'geller', 'chandler', 'bing', 'ross', 'geller', 'rachel', 'green',
             'zack', 'doug', 'brian', 'kate', 'carols', 'joanna', 'melissa', 'zelner', 'wiener', 'wendy', 'matthews', 'leslie', 'ree', 'lily', 'mikes', 'mindy', 'kim',
-            'pete', 'michel', 'erica', 'michelle', 'nana'
+            'pete', 'michel', 'erica', 'michelle', 'nana', 'kathy', 'tulsa', 'jessica', 'joey', 'rach', 'pheebs', 'paul', 'alan', 'frank', 'david','alice', 'jason', 'bob', 'ben', 'carol', 'julie', 'mark',
+            'vince', 'angela'
+        
         ]
 
-    def clean_text(doc, min_freq=0 if saison else 7):
+    def clean_text(doc, min_freq=4):
         tokens = doc.lower().split()
         counts = Counter(tokens)
         return " ".join([t for t in tokens if counts[t] >= min_freq])
@@ -112,7 +114,7 @@ def liste_mots_importants_saison(saison, stopwords_extended_=False):
     full_stopwords = list(ENGLISH_STOP_WORDS.union(custom_stopwords))
 
     # TF-IDF avec chaque personnage = un document
-    vectorizer = TfidfVectorizer(max_df=0.2, stop_words=full_stopwords, min_df=1, token_pattern=r"(?u)\b\w\w\w+\b")
+    vectorizer = TfidfVectorizer(max_df=0.6, stop_words=full_stopwords, min_df=1, token_pattern=r"(?u)\b\w\w\w+\b")
     X = vectorizer.fit_transform(char_docs)
     words = vectorizer.get_feature_names_out()
 
@@ -155,3 +157,4 @@ df_result = pd.DataFrame(liste_mots_importants(), columns=columns)
 
 # Sauvegarder en CSV
 df_result.to_csv("top_10_mots_important_par_personnage_et_saison.csv", index=False)
+
