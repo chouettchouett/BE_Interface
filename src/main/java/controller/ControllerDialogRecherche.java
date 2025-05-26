@@ -183,7 +183,6 @@ public class ControllerDialogRecherche {
         ui.dispose();
     }
     
-    // à déplacer ECB (les 3 suivantes)
     public Personnage getPersonnageFromString(String stringRepr) {
         return personnages.stream().filter(p -> p.toString().equals(stringRepr)).findFirst().orElse(null);
     }

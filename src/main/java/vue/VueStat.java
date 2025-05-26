@@ -89,7 +89,6 @@ public class VueStat extends javax.swing.JFrame {
         recherchePersonnage.setVisible(false);
         rechercheSaison.setVisible(false);
         rechercheEpisode.setVisible(false);
-        rechercheMotButton.setVisible(false);
 
         rechercheMot.setColumns(10);
         rechercheMot.setBorder(new javax.swing.border.EmptyBorder(4, 4, 4, 4));
@@ -695,7 +694,6 @@ public class VueStat extends javax.swing.JFrame {
         imageMentions7 = new controller.ImagePanel();
         imageMentions8 = new controller.ImagePanel();
         imageMentions9 = new controller.ImagePanel();
-        jButton6 = new javax.swing.JButton();
         centraliteScrollS1 = new javax.swing.JScrollPane();
         centraliteTexteS1 = new javax.swing.JTextArea();
         centraliteScrollS6 = new javax.swing.JScrollPane();
@@ -1977,18 +1975,6 @@ public class VueStat extends javax.swing.JFrame {
 
         jPanel70.add(imageMentions9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1380, 265, 270));
 
-        jButton6.setBackground(new java.awt.Color(242, 242, 242));
-        jButton6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButton6.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        jButton6.setText("Analyse des relations sur toute la série : voir partie analyse relation");
-        jButton6.setBorder(null);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jPanel70.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 1490, -1, 40));
-
         centraliteTexteS1.setColumns(20);
         centraliteTexteS1.setRows(5);
         centraliteScrollS1.setViewportView(centraliteTexteS1);
@@ -2039,7 +2025,7 @@ public class VueStat extends javax.swing.JFrame {
 
         miseEnAvantPersonnageTexte1.setColumns(20);
         miseEnAvantPersonnageTexte1.setRows(5);
-        miseEnAvantPersonnageTexte1.setText("L’analyse des graphes de mentions saison par saison apporte un éclairage inédit sur la construction narrative et relationnelle des personnages\nde Friends. En représentant qui parle de qui au fil des saisons, ces 10 visualisations offrent une lecture fine de l’évolution des dynamiques sociales, \ndes priorités scénaristiques et de la centralité affective des six protagonistes. \nCes graphes peuvent être mis en lien avec l'analyse de mise en avant et l'analyse de sentiments, pourquoi il parle plus à un personnage à ce \nmoment là ? comment l'évolution de centralité d'un personnage affectent ses sentiments ? quand est-ce que le groupe est le plus unie ? S5.\nQuels sont les moments où un personnage s’isole du groupe ? Pourquoi ? Y a-t-il corrélation entre des mentions fréquentes et \ndes sentiments positifs ? Le pic de mise en avant correspond-il à une augmentation des liens sociaux ? Quel personnage progresse en social ?");
+        miseEnAvantPersonnageTexte1.setText("L’analyse des graphes de mentions saison par saison apporte un éclairage inédit sur la construction narrative et relationnelle des personnages\nde Friends. En représentant qui parle de qui au fil des saisons, ces 10 visualisations offrent une lecture fine de l’évolution des dynamiques sociales, \ndes priorités scénaristiques et de la centralité affective des six protagonistes. La centralité mets en avant la répartition équilibrée dans ses mentions.\nCes graphes peuvent être mis en lien avec l'analyse de mise en avant et l'analyse de sentiments, pourquoi il parle plus à un personnage à ce \nmoment là ? comment l'évolution de centralité d'un personnage affectent ses sentiments ? quand est-ce que le groupe est le plus unie ? S5.\nQuels sont les moments où un personnage s’isole du groupe ? Pourquoi ? Y a-t-il corrélation entre des mentions fréquentes et \ndes sentiments positifs ? Le pic de mise en avant correspond-il à une augmentation des liens sociaux ? Quel personnage progresse en social ?");
         miseEnAvantPersonnageScroll1.setViewportView(miseEnAvantPersonnageTexte1);
 
         jPanel70.add(miseEnAvantPersonnageScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 130));
@@ -2914,7 +2900,7 @@ public class VueStat extends javax.swing.JFrame {
             case "joey" -> setProfil(
                 "Joey Tribbiani", "Matt LeBlanc", "Américain", "57 ans", "25 juillet 1967 (États-Unis)",
                 "/les_png/Joey_photo_profile.png",
-                8182, 16.25, 5, "hey, know, right, like, out", new String[] { "S05", "S07", "S08", "S09", "S04" }, "joey"
+                8182, 16.25, 5, "hey, know, right, like, out", new String[] { "S05", "S07", "S08", "S09" }, "joey"
             );
             case "rachel" -> setProfil(
                 "Rachel Green", "Jennifer Aniston", "Américaine", "55 ans", "11 février 1969 (États-Unis)",
@@ -3019,6 +3005,7 @@ String[] saisonMarquante, String nomLower) {
 
     private void rechercheMotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheMotActionPerformed
         if (dialog != null) {
+            ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "MOT");
             dialog.onUserAction(rechercheMot.getText());
         }
     }//GEN-LAST:event_rechercheMotActionPerformed
@@ -3342,10 +3329,6 @@ String[] saisonMarquante, String nomLower) {
         generateGraphLineMotParEpisode(dataStoredForEpisodeStats, combo.getSelectedItem().toString());
     }//GEN-LAST:event_comboBoxSaisonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jLabel14MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseEntered
             if (infoWindow == null) {
             infoWindow = new JWindow();
@@ -3522,7 +3505,6 @@ String[] saisonMarquante, String nomLower) {
     private controller.ImagePanel imageMotCaracteristiqueSaisonX4;
     private controller.ImagePanel imageMotPref;
     private controller.ImagePanel imagePersonnage;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;

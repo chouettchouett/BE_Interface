@@ -59,8 +59,10 @@ paléontologie.
 """)),
             
             entry("TEXT_MOT_GLOBAL_JOIE", List.of("""
-Joie Ross
-""")),
+On remarque beaucoup ses actes très solo,
+comme en saison 1 avec Susan et Carol.
+Rappel du mot "correct", de son rôle de
+professeur.""")),
             
             entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("""
 Thème : l'enfant de Ross et de son ex petite amie Carol, avec Susan la
@@ -85,7 +87,7 @@ seulement au milieu de la saison.""", """
 Hausse énorme vers Rachel et non pas 
 uniquement par amour, pour deux raisons :
 - Amour (début de saison)
-- Tristesse, regret (fin de saison)""", "Début de ses saisons en baisse de mise en avant", "", """
+- Tristesse, regret (fin de saison)""", "Début de ses saisons en baisse de mise en avant", """
 Taux de centralité bas par rapport à 
 l'observation du rapprochement du groupe""", "", "", """
 Relance de sa mise en scène : rapprochement
@@ -122,6 +124,8 @@ Son métier et sa passion le long de la série.
 Thème de l'adoption très évoqué à la fin de la série""")),
             
             entry("TEXT_MOT_GLOBAL_JOIE", List.of("""
+Comme le graphe à gauche, on nous confirme sa 
+passion pour la cuisine. Peu de personnage distinctif.
 """)),
             
             entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("""
@@ -182,7 +186,9 @@ qui représente aussi sa passion de la mode.
 """)),
             
             entry("TEXT_MOT_GLOBAL_JOIE", List.of("""
-""")),
+On remarque principalement ses amours (joshua, barry),
+avec qui elle a beaucoup de moment en solo (distinctif)
+mais aussi son métier/passion : Ralph Lauren (la mode)""")),
             
             entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("""
 Peu de mots très similaire et utiles""", """
@@ -232,9 +238,12 @@ jamais quel jour on est, montrant sa naïveté intellectuelle.
 """)),
             
             entry("TEXT_MOT_GLOBAL_JOIE", List.of("""
-""")),
+Encore une fois, comme le graphe à gauche, la passion
+d'acteur est confirmé, peu de personnage secondaire ici
+par rapport aux autres personnages""")),
             
-            entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("", """
+            entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("""
+Mots peu intéressants""", """
 Retour de la carrière de Joey, 
 - audition, jessica (actrice avec lui)
 Il commence à parler rapidement de truc
@@ -251,10 +260,10 @@ Début, naïf et drôle mais peu de répliques,
 ne montrent pas grand chose.
 Coloc de Chandler, pourtant peu de discussion""", """
 Développement énorme de 
-l'amitié avec Chandler""", "", "", "",  """
+l'amitié avec Chandler""", "", "",  """
 Intégration au sein du groupe, confirmé dans
 l'analyse sentiment qui évoque une stabilisation
-du groupe et une positivité grandissante.""", """
+du groupe et une positivité grandissante.""", "", """
 Emménagement avec Rachel""", """
 Baisse de discussion avec Chandler, dûe
 au mariage, centrage sur Rachel-Ross
@@ -285,7 +294,10 @@ sur ça.
 """)),
             
             entry("TEXT_MOT_GLOBAL_JOIE", List.of("""
-""")),
+On retrouve des amours comme Janice, Tulsa, 
+mais aussi Richard innatendu alors qu'il sortait
+avec Monica, et le mot 'ring' en TOP 1
+référence au mariage""")),
             
             entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("""
 Peu de mots révélateurs.
@@ -304,8 +316,7 @@ avec le rapprochement avec Kathy""", """
 Chandler se met en couple avec Monica et
 parle beaucoup moins de Joey.""", "", """
 Peu de changements, préparatif du mariage.""", """
-""", """
-Mariage, hausse avec monica""", "", "", ""
+""", "", "", "", ""
 )));
     
     public static final Map<String, List<String>> PHOEBE = Map.ofEntries(
@@ -330,15 +341,15 @@ ainsi que sa musique phare : "Smelly cat"
 """)),
             
             entry("TEXT_MOT_GLOBAL_JOIE", List.of("""
-""")),
+On voit des personnages distinctif, David et Frank, 
+dont elle parle peu au groupe.""")),
             
             entry("TEXTS_MOT_SAISON_IMPORTANTE", List.of("""
 Difficiles à interpréter, on retrouve "selfness", un grand
 épisode de dilemme morale, où Phoebe parle de son acte
 de porter le futur enfant de son frère
 """, """
-Phoebe rencontre Mike dans cette saison (non trouvé
-dans les mots), elle revoit David son amoureux en
+Phoebe revoit David son amoureux en
 saison 1.""", """
 Le mot "married" arrive...""", """
 Phoebe marie mike hannigan, elle utilise

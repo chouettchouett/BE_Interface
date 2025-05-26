@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import model.Episode;
-import model.Model;
 import model.Personnage;
 import model.Saison;
 
@@ -19,8 +18,8 @@ import model.Saison;
 public class AdapterFunctional {
     private final ControllerRecherche domainController;
 
-    public AdapterFunctional(Model model) {
-        this.domainController = new ControllerRecherche(model);
+    public AdapterFunctional() {
+        this.domainController = new ControllerRecherche();
     }
 
     public Map<String, Object> rechercheMots(String mots) {

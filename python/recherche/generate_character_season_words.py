@@ -1,5 +1,6 @@
 # [Enzo LOUIS] [Recherche personnage)]
 # Stockage des mots les plus fréquents pour chaque personnage au global et pour chaque saison
+# (Utilisé par la partie analyse langagière)
 # top_10_mots_par_personnage_et_saison.csv
 # Stockage des mots les plus importants pour chaque personnage (TF-IDF) au global et pour chaque saison
 # top_10_mots_important_par_personnage_et_saison.csv
@@ -7,6 +8,7 @@
 import pandas as pd
 from collections import Counter
 import re
+from sklearn.feature_extraction.text import TfidfVectorizer, ENGLISH_STOP_WORDS
 
 df = pd.read_csv("../Analyse_Sentiments/friends_dialogues_final.csv")
 
@@ -58,8 +60,6 @@ result_df.to_csv("top_10_mots_par_personnage_et_saison.csv", index=False)
 
 ### Sauvegarde du top 10 des mots par personnage en terme de rareté par rapport aux autres (TF-IDF)
 
-from collections import Counter
-from sklearn.feature_extraction.text import TfidfVectorizer, ENGLISH_STOP_WORDS
 def clean_line(line):
     """
     Enlève les annotations/didascalies, les ensemble de mots entre parenthèses
@@ -69,9 +69,6 @@ def clean_line(line):
     :return: 
     """
     line = re.sub(r'\([^)]*\)', '', line)
-    
-    # Supprimer les mots avec majuscules (type "Joey", "Monica", etc.)
-    # line = ' '.join([word for word in line.split() if not word[0].isupper()])
     
     # lower + clean special char + split
     line = re.sub(r'[^\w\s]', ' ', line.lower())

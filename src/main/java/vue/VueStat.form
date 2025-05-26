@@ -2703,31 +2703,6 @@
                                                 </DimensionLayout>
                                               </Layout>
                                             </Container>
-                                            <Component class="javax.swing.JButton" name="jButton6">
-                                              <Properties>
-                                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                                  <Color blue="f2" green="f2" red="f2" type="rgb"/>
-                                                </Property>
-                                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                                  <Font name="Verdana" size="12" style="1"/>
-                                                </Property>
-                                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                                  <Color blue="d6" green="9f" id="Actions.Blue" palette="3" red="38" type="palette"/>
-                                                </Property>
-                                                <Property name="text" type="java.lang.String" value="Analyse des relations sur toute la s&#xe9;rie : voir partie analyse relation"/>
-                                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                                  <Border info="null"/>
-                                                </Property>
-                                              </Properties>
-                                              <Events>
-                                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
-                                              </Events>
-                                              <Constraints>
-                                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                                  <AbsoluteConstraints x="330" y="1490" width="-1" height="40"/>
-                                                </Constraint>
-                                              </Constraints>
-                                            </Component>
                                             <Container class="javax.swing.JScrollPane" name="centraliteScrollS1">
                                               <AuxValues>
                                                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -2904,7 +2879,7 @@
                                                   <Properties>
                                                     <Property name="columns" type="int" value="20"/>
                                                     <Property name="rows" type="int" value="5"/>
-                                                    <Property name="text" type="java.lang.String" value="L&#x2019;analyse des graphes de mentions saison par saison apporte un &#xe9;clairage in&#xe9;dit sur la construction narrative et relationnelle des personnages&#xa;de Friends. En repr&#xe9;sentant qui parle de qui au fil des saisons, ces 10 visualisations offrent une lecture fine de l&#x2019;&#xe9;volution des dynamiques sociales, &#xa;des priorit&#xe9;s sc&#xe9;naristiques et de la centralit&#xe9; affective des six protagonistes. &#xa;Ces graphes peuvent &#xea;tre mis en lien avec l&apos;analyse de mise en avant et l&apos;analyse de sentiments, pourquoi il parle plus &#xe0; un personnage &#xe0; ce &#xa;moment l&#xe0; ? comment l&apos;&#xe9;volution de centralit&#xe9; d&apos;un personnage affectent ses sentiments ? quand est-ce que le groupe est le plus unie ? S5.&#xa;Quels sont les moments o&#xf9; un personnage s&#x2019;isole du groupe ? Pourquoi ? Y a-t-il corr&#xe9;lation entre des mentions fr&#xe9;quentes et &#xa;des sentiments positifs ? Le pic de mise en avant correspond-il &#xe0; une augmentation des liens sociaux ? Quel personnage progresse en social ?"/>
+                                                    <Property name="text" type="java.lang.String" value="L&#x2019;analyse des graphes de mentions saison par saison apporte un &#xe9;clairage in&#xe9;dit sur la construction narrative et relationnelle des personnages&#xa;de Friends. En repr&#xe9;sentant qui parle de qui au fil des saisons, ces 10 visualisations offrent une lecture fine de l&#x2019;&#xe9;volution des dynamiques sociales, &#xa;des priorit&#xe9;s sc&#xe9;naristiques et de la centralit&#xe9; affective des six protagonistes. La centralit&#xe9; mets en avant la r&#xe9;partition &#xe9;quilibr&#xe9;e dans ses mentions.&#xa;Ces graphes peuvent &#xea;tre mis en lien avec l&apos;analyse de mise en avant et l&apos;analyse de sentiments, pourquoi il parle plus &#xe0; un personnage &#xe0; ce &#xa;moment l&#xe0; ? comment l&apos;&#xe9;volution de centralit&#xe9; d&apos;un personnage affectent ses sentiments ? quand est-ce que le groupe est le plus unie ? S5.&#xa;Quels sont les moments o&#xf9; un personnage s&#x2019;isole du groupe ? Pourquoi ? Y a-t-il corr&#xe9;lation entre des mentions fr&#xe9;quentes et &#xa;des sentiments positifs ? Le pic de mise en avant correspond-il &#xe0; une augmentation des liens sociaux ? Quel personnage progresse en social ?"/>
                                                   </Properties>
                                                 </Component>
                                               </SubComponents>

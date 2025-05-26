@@ -18,33 +18,19 @@ import java.util.Map;
 import org.python.core.*;
 
 import model.Episode;
-import model.Model;
 import model.Personnage;
 import model.Saison;
-import py4j.GatewayServer;
 
 /**
  *
  * @author ember
  */
-public class ControllerRecherche {
-    private final Model model;
-    private PythonProcessor python;
-    private static GatewayServer gateway;
-    Thread pythonThread;
-    Process pythonProcess;
-    
-    public ControllerRecherche(Model model) {
-        this.model = model;
-        //gateway = new GatewayServer(this);
-        //gateway.start(true);
-        
-        //launchPython();
+public class ControllerRecherche {    
+    public ControllerRecherche() {
     }
     
     public Map<String, Object> rechercheMots(String mots) {
-        System.out.println("[controller.test]");
-        Map<String, Object> data = new HashMap<>();// = python.rechercheMots(mots);
+        Map<String, Object> data = new HashMap<>();
         try {
             ProcessBuilder pb = new ProcessBuilder("python", "python/recherche/stats_par_ensemble_de_mots.py", mots);
             pb.redirectErrorStream(true); // pour avoir erreurs et sortie stdout ensemble
@@ -74,57 +60,8 @@ public class ControllerRecherche {
         return data;
     }
     
-    public void launchPython() {
-        String pythonScriptPath = "python\\gateway_adapter_python_java.py";
-
-        System.out.println("[before thread python run]");
-        pythonThread = new Thread(() -> {
-            try {
-                ProcessBuilder processBuilder = new ProcessBuilder("py", pythonScriptPath);
-                processBuilder.redirectErrorStream(true);
-                pythonProcess = processBuilder.start();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(pythonProcess.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
-
-                int exitCode = pythonProcess.waitFor();
-                System.out.println("Script terminé avec code : " + exitCode);
-
-            } catch (IOException | InterruptedException e) {
-                //e.printStackTrace();
-            }
-        });
-
-        pythonThread.start(); // Lancer Python dans un thread séparé
-        System.out.println("[thread python run]");
-    }
-    
     public void properlyCloseWindow() {
-        // Fermer Py4J gateway
-        if (gateway != null) {
-            System.out.println("Fermeture du gateway...");
-            gateway.shutdown();
-        }
-
-        // Tuer le processus Python
-        if (pythonProcess != null && pythonProcess.isAlive()) {
-            System.out.println("Destruction du process Python...");
-            pythonProcess.destroy();
-        }
-
-        // Arrêter le thread Python
-        if (pythonThread != null && pythonThread.isAlive()) {
-            System.out.println("Interruption du thread Python...");
-            pythonThread.interrupt();
-        }
-    }
-    
-    public void register(PythonProcessor p) {
-        System.out.println("[register]");
-        python = p;
+        
     }
    
     public List<Saison> getSaisons() {

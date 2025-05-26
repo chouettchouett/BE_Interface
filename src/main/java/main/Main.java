@@ -6,7 +6,6 @@ package main;
 
 import controller.AdapterFunctional;
 import controller.ControllerDialogRecherche;
-import model.Model;
 
 /**
  *
@@ -14,14 +13,8 @@ import model.Model;
  */
 public class Main {
     public static void main(String[] args) {
-        Model model = new Model();
-        AdapterFunctional adapter = new AdapterFunctional(model);
+        AdapterFunctional adapter = new AdapterFunctional();
         ControllerDialogRecherche dialog = new ControllerDialogRecherche(adapter);
-        
-        //Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-        //    System.out.println("Shutdown hook triggered. Closing resources...");
-        //    adapter.properlyCloseWindow(); // Ferme gateway et Python
-        //}));
         
         dialog.runUI();
     }
