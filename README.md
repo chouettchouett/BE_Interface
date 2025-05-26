@@ -7,5 +7,5 @@ Projet fait en deux section.
 Il n'y a qu'a exécuter la classe VueStat pour afficher l'interface graphique.
 
 Travail de la section analyse langagiere:
-
+(Travail rendu trop tard pour finir l'implémentation dans le projet principal)
 https://github.com/chouettchouett/Be-interface_Langagiere
