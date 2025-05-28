@@ -4,11 +4,11 @@ import re
 from collections import Counter
 import csv
 
-# Chemin vers le CSV d'entrée
+
 chemin_csv = os.path.join(os.path.dirname(__file__), "..", "Analyse_Sentiments", "friends_dialogues_final.csv")
 chemin_csv = os.path.abspath(chemin_csv)
 
-# Chemin vers le CSV de sortie (adapter si besoin)
+
 csv_path = os.path.join(
     os.path.dirname(__file__),
     "..", "..", "src", "main", "resources", "csv", "csv_personnage.csv"
@@ -70,7 +70,7 @@ def get_top_mots_personnage(nom_personnage, n=5):
     compteur = Counter(mots)
     return [mot for mot, count in compteur.most_common(n)]
 
-# ------ Génération du CSV final ------
+# ------ Génération du CSV final ------ (ne plus l'execucter , juste une fois )
 with open(csv_path, "w", newline='', encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerow(["character", "nb_repliques", "pourcentage", "position", "top_mots"])
@@ -79,10 +79,9 @@ with open(csv_path, "w", newline='', encoding="utf-8") as f:
         pourcentage = get_pourcentage(character)
         position, _ = get_position_parmi_les_personnages(character)
         top_mots = get_top_mots_personnage(character, 5)
-        # Si jamais moins de 5 mots (rare), on complète avec vide
         while len(top_mots) < 5:
             top_mots.append("")
-        mots_ensemble = ", ".join(top_mots)  # ou " ".join(top_mots) si tu préfères
+        mots_ensemble = ", ".join(top_mots)  
         writer.writerow([character, nb_repliques, f"{pourcentage:.2f}", position, mots_ensemble])
 
 print("csv_personnage.csv généré dans le dossier resources/csv !")

@@ -3317,9 +3317,10 @@ String[] saisonMarquante, String nomLower) {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         dialog.properlyCloseWindow();
     }//GEN-LAST:event_formWindowClosing
-
+//NOAH
     private void rechercheMotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercheMotButtonActionPerformed
         if (dialog != null) {
+            ((java.awt.CardLayout) resultats.getLayout()).show(resultats, "MOT");
             dialog.onUserAction(rechercheMot.getText());
         }
     }//GEN-LAST:event_rechercheMotButtonActionPerformed
